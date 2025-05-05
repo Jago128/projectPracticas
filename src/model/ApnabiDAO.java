@@ -19,8 +19,7 @@ public interface ApnabiDAO {
 
 	public boolean añadirEmpresa(Empresa emp);
 	
-	//Parametros por poner en este
-	public boolean modificarEmpresa(String nom);
+	public boolean modificarEmpresa(String datos, String contactoE, String personaC, String estado, String contacto1, String contacto2, String contacto3, String contacto4, String observaciones);
 	
 	public boolean eliminarEmpresa(String nom);
 }

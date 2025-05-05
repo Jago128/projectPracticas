@@ -42,8 +42,8 @@ public class LoginController {
 	}
 	
 	//Parametros por poner en este
-	public boolean modificarEmpresa(String nom) {
-		return dao.modificarEmpresa(nom);
+	public boolean modificarEmpresa(String datos, String contactoE, String personaC, String estado, String contacto1, String contacto2, String contacto3, String contacto4, String observaciones) {
+		return dao.modificarEmpresa(datos, contactoE, personaC, estado, contacto1, contacto2, contacto3, contacto4, observaciones);
 	}
 	
 	public boolean eliminarEmpresa(String nom) {

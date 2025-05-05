@@ -1,6 +1,6 @@
 package model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Empresa {
 	private Sector sector;
@@ -10,10 +10,10 @@ public class Empresa {
 	private String contactoEmpresa;
 	private String contactoApnabi;
 	private Estado estado;
-	private LocalDate contacto1;
-	private LocalDate contacto2;
-	private LocalDate contacto3;
-	private LocalDate contacto4;
+	private Date contacto1;
+	private Date contacto2;
+	private Date contacto3;
+	private Date contacto4;
 	private String observaciones;
 	
 	public Empresa() {
@@ -27,7 +27,7 @@ public class Empresa {
 	}
 
 	public Empresa(Sector sector, String nom_empresa, String puesto, String datosContacto, String contactoEmpresa,
-			String contactoApnabi, Estado estado, LocalDate contacto1, String observaciones) {
+			String contactoApnabi, Estado estado, Date contacto1, String observaciones) {
 		this.sector = sector;
 		this.nom_empresa = nom_empresa;
 		this.puesto = puesto;
@@ -94,35 +94,35 @@ public class Empresa {
 		this.estado = estado;
 	}
 
-	public LocalDate getContacto1() {
+	public Date getContacto1() {
 		return contacto1;
 	}
 
-	public void setContacto1(LocalDate contacto1) {
+	public void setContacto1(Date contacto1) {
 		this.contacto1 = contacto1;
 	}
 
-	public LocalDate getContacto2() {
+	public Date getContacto2() {
 		return contacto2;
 	}
 
-	public void setContacto2(LocalDate contacto2) {
+	public void setContacto2(Date contacto2) {
 		this.contacto2 = contacto2;
 	}
 
-	public LocalDate getContacto3() {
+	public Date getContacto3() {
 		return contacto3;
 	}
 
-	public void setContacto3(LocalDate contacto3) {
+	public void setContacto3(Date contacto3) {
 		this.contacto3 = contacto3;
 	}
 
-	public LocalDate getContacto4() {
+	public Date getContacto4() {
 		return contacto4;
 	}
 
-	public void setContacto4(LocalDate contacto4) {
+	public void setContacto4(Date contacto4) {
 		this.contacto4 = contacto4;
 	}
 

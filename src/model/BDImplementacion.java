@@ -27,7 +27,15 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLEMPRESAS = "SELECT * FROM EMPRESA";
 	final String SQLSELECTEMPRESA = "SELECT * FROM EMPRESA WHERE NOM_EMPRESA = ?";
 	final String SQLINSERTEMPRESA = "INSERT INTO USUARIO VALUES (?,?,?,?,?,?,?)";
-	final String SQLUPDATEEMPRESA = "UPDATE EMPRESA SET [TBD]=? WHERE NOM_EMPRESA=?";
+	final String SQLUPDATEDATOS = "UPDATE EMPRESA SET DATOSCONTACTO=? WHERE NOM_EMPRESA=?";
+	final String SQLUPDATECONTACTOEMPRESA = "UPDATE EMPRESA SET CONTACTOEMPRESA=? WHERE NOM_EMPRESA=?";
+	final String SQLUPDATECONTACTOAPNABI = "UPDATE EMPRESA SET CONTACTOAPNABI=? WHERE NOM_EMPRESA=?";
+	final String SQLUPDATEESTADO = "UPDATE EMPRESA SET ESTADO=? WHERE NOM_EMPRESA=?";
+	final String SQLUPDATECONTACTO1 = "UPDATE EMPRESA SET CONTACTO1=? WHERE NOM_EMPRESA=?";
+	final String SQLUPDATECONTACTO2 = "UPDATE EMPRESA SET CONTACTO2=? WHERE NOM_EMPRESA=?";
+	final String SQLUPDATECONTACTO3 = "UPDATE EMPRESA SET CONTACTO3=? WHERE NOM_EMPRESA=?";
+	final String SQLUPDATECONTACTO4 = "UPDATE EMPRESA SET CONTACTO4=? WHERE NOM_EMPRESA=?";
+	final String SQLUPDATEOBSERVACIONES = "UPDATE EMPRESA SET OBSERVACIONES=? WHERE NOM_EMPRESA=?";
 	final String SQLDELETE_EMPRESA = "DELETE FROM EMPRESA WHERE NOM_EMPRESA = ?";
 
 	public BDImplementacion() {
@@ -145,28 +153,31 @@ public class BDImplementacion implements ApnabiDAO {
 		Empresa empresa;
 		Map<String, Empresa> empresas = new TreeMap<>();
 
-		// Opens the connection
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLEMPRESAS);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				empresa = new Empresa();
-				empresa.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
 				empresa.setNom_empresa(rs.getString("NOM_EMPRESA"));
+				empresa.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
 				empresa.setPuesto(rs.getString("PUESTO"));
 				empresa.setDatosContacto(rs.getString("DATOSCONTACTO"));
 				empresa.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
 				empresa.setContactoApnabi(rs.getString("CONTACTOAPNABI"));
 				empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
-				
+				empresa.setContacto1(rs.getDate("CONTACTO1"));
+				empresa.setContacto2(rs.getDate("CONTACTO2"));
+				empresa.setContacto3(rs.getDate("CONTACTO3"));
+				empresa.setContacto4(rs.getDate("CONTACTO4"));
+				empresa.setObservaciones(rs.getString("OBSERVACIONES"));
 				empresas.put(empresa.getNom_empresa(), empresa);
 			}
 			rs.close();
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
-			System.out.println("Un error ha occurrido al intentar ver las empresas.");
+			System.out.println("Un error ha occurrido al intentar recoger las empresas.");
 			e.printStackTrace();
 		}
 		return empresas;
@@ -177,26 +188,30 @@ public class BDImplementacion implements ApnabiDAO {
 		ResultSet rs = null;
 		Empresa empresa = new Empresa();
 
-		// Opens the connection
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLSELECTEMPRESA);
 			stmt.setString(1, nom);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
-				empresa.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
 				empresa.setNom_empresa(rs.getString("NOM_EMPRESA"));
+				empresa.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
 				empresa.setPuesto(rs.getString("PUESTO"));
 				empresa.setDatosContacto(rs.getString("DATOSCONTACTO"));
 				empresa.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
 				empresa.setContactoApnabi(rs.getString("CONTACTOAPNABI"));
 				empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
+				empresa.setContacto1(rs.getDate("CONTACTO1"));
+				empresa.setContacto2(rs.getDate("CONTACTO2"));
+				empresa.setContacto3(rs.getDate("CONTACTO3"));
+				empresa.setContacto4(rs.getDate("CONTACTO4"));
+				empresa.setObservaciones(rs.getString("OBSERVACIONES"));
 			}
 			rs.close();
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
-			System.out.println("Un error ha occurrido al intentar recoger las empresa.");
+			System.out.println("Un error ha occurrido al intentar recoger la empresa.");
 			e.printStackTrace();
 		}
 		return empresa;
@@ -204,13 +219,10 @@ public class BDImplementacion implements ApnabiDAO {
 
 	@Override
 	public boolean añadirEmpresa(Empresa emp) {
-		// Open connection and declare a boolean to check if the update is properly
-		// executed
 		boolean check = false;
 		this.openConnection();
 
 		try {
-			// Prepares the SQL query
 			stmt = con.prepareStatement(SQLINSERTEMPRESA);
 			switch (emp.getSector()) {
 			case AGRICULTURA_GANADERIA:
@@ -334,18 +346,14 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarEmpresa(String nom) {
-		// Parametros por poner
+	public boolean modificarEmpresa(String datos, String contactoE, String personaC, String estado, String contacto1, String contacto2, String contacto3, String contacto4, String observaciones) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLDELETE_EMPRESA);
-			// stmt.setString(1, [TBD]);
-			// Datos contacto, contacto empresa, persona de contacto, estado, contactos 1 a
-			// 4, observaciones
-			stmt.setString(2, nom);
-			if (stmt.executeUpdate() > 0) {
+			stmt.setString(1, datos);
+			if (stmt.executeUpdate()>0) {
 				check = true;
 			}
 			stmt.close();
