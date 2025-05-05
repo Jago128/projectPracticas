@@ -30,7 +30,6 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUPDATEEMPRESA = "UPDATE EMPRESA SET [TBD]=? WHERE NOM_EMPRESA=?";
 	final String SQLDELETE_EMPRESA = "DELETE FROM EMPRESA WHERE NOM_EMPRESA = ?";
 
-
 	public BDImplementacion() {
 		this.configFile = ResourceBundle.getBundle("model.classConfig");
 		this.driverBD = this.configFile.getString("Driver");
@@ -119,7 +118,7 @@ public class BDImplementacion implements ApnabiDAO {
 
 	@Override
 	public boolean registrarUsuario(Usuario user) {
-		boolean register = false;
+		boolean registro = false;
 
 		if (!verificarUsuario(user)) {
 			this.openConnection();
@@ -127,8 +126,8 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt = con.prepareStatement(SQLINSERTUSUARIO);
 				stmt.setString(1, user.getNombre());
 				stmt.setString(2, user.getContraseña());
-				if (stmt.executeUpdate()>0) {
-					register = true;
+				if (stmt.executeUpdate() > 0) {
+					registro = true;
 				}
 				stmt.close();
 				con.close();
@@ -137,7 +136,7 @@ public class BDImplementacion implements ApnabiDAO {
 				e.printStackTrace();
 			}
 		}
-		return register;
+		return registro;
 	}
 
 	@Override
@@ -153,101 +152,14 @@ public class BDImplementacion implements ApnabiDAO {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				empresa = new Empresa();
-				switch (rs.getString("SECTOR")) {
-				case "Actividades deportivas":
-					empresa.setSector(Sector.ACTIVIDADES_DEPORTIVAS);
-					break;
-
-				case "Administracion":
-					empresa.setSector(Sector.ADMINISTRACION);
-					break;
-
-				case "Almacen logistica":
-					empresa.setSector(Sector.ALMACEN_LOGISTICA);
-					break;
-
-				case "Artes graficas":
-					empresa.setSector(Sector.ARTES_GRAFICAS);
-					break;
-
-				case "Comercio":
-					empresa.setSector(Sector.COMERCIO);
-					break;
-
-				case "Docencia":
-					empresa.setSector(Sector.DOCENCIA);
-					break;
-
-				case "Industrial":
-					empresa.setSector(Sector.INDUSTRIAL);
-					break;
-
-				case "Informatica":
-					empresa.setSector(Sector.INFORMATICA);
-					break;
-
-				case "Limpieza":
-					empresa.setSector(Sector.LIMPIEZA);
-					break;
-
-				case "Restauracion":
-					empresa.setSector(Sector.RESTAURACION);
-					break;
-
-				case "Sanidad":
-					empresa.setSector(Sector.SANIDAD);
-					break;
-
-				case "Turismo":
-					empresa.setSector(Sector.TURISMO);
-					break;
-
-				case "Transporte":
-					empresa.setSector(Sector.TRANSPORTE);
-					break;
-
-				case "IT":
-					empresa.setSector(Sector.IT);
-					break;
-
-				case "Automovilistico":
-					empresa.setSector(Sector.AUTOMOVILISTICO);
-					break;
-
-				case "Mantenimiento":
-					empresa.setSector(Sector.MANTENIMIENTO);
-					break;
-
-				case "Marketing":
-					empresa.setSector(Sector.MARKETING);
-					break;
-				}
+				empresa.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
 				empresa.setNom_empresa(rs.getString("NOM_EMPRESA"));
 				empresa.setPuesto(rs.getString("PUESTO"));
 				empresa.setDatosContacto(rs.getString("DATOSCONTACTO"));
 				empresa.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
 				empresa.setContactoApnabi(rs.getString("CONTACTOAPNABI"));
-				switch (rs.getString("ESTADO")) {
-				case "Informado":
-					empresa.setEstado(Estado.INFORMADO);
-					break;
-
-				case "Valorando/interesado":
-					empresa.setEstado(Estado.VALORANDO_INTERESADO);
-					break;
-
-				case "Planificando inserciones":
-					empresa.setEstado(Estado.PLANIFICANDO_INSERCIONES);
-					break;
-
-				case "Proximo año":
-					empresa.setEstado(Estado.PROXIMO_AÑO);
-					break;
-
-				case "No interesado":
-					empresa.setEstado(Estado.NO_INTERESADO);
-					break;
-				}
+				empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
+				
 				empresas.put(empresa.getNom_empresa(), empresa);
 			}
 			rs.close();
@@ -272,101 +184,13 @@ public class BDImplementacion implements ApnabiDAO {
 			stmt.setString(1, nom);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
-				switch (rs.getString("SECTOR")) {
-				case "Actividades deportivas":
-					empresa.setSector(Sector.ACTIVIDADES_DEPORTIVAS);
-					break;
-
-				case "Administracion":
-					empresa.setSector(Sector.ADMINISTRACION);
-					break;
-
-				case "Almacen logistica":
-					empresa.setSector(Sector.ALMACEN_LOGISTICA);
-					break;
-
-				case "Artes graficas":
-					empresa.setSector(Sector.ARTES_GRAFICAS);
-					break;
-
-				case "Automovilistico":
-					empresa.setSector(Sector.AUTOMOVILISTICO);
-					break;
-
-				case "Comercio":
-					empresa.setSector(Sector.COMERCIO);
-					break;
-
-				case "Docencia":
-					empresa.setSector(Sector.DOCENCIA);
-					break;
-
-				case "Industrial":
-					empresa.setSector(Sector.INDUSTRIAL);
-					break;
-
-				case "Informatica":
-					empresa.setSector(Sector.INFORMATICA);
-					break;
-
-				case "IT":
-					empresa.setSector(Sector.IT);
-					break;
-
-				case "Limpieza":
-					empresa.setSector(Sector.LIMPIEZA);
-					break;
-
-				case "Mantenimiento":
-					empresa.setSector(Sector.MANTENIMIENTO);
-					break;
-
-				case "Marketing":
-					empresa.setSector(Sector.MARKETING);
-					break;
-
-				case "Restauracion":
-					empresa.setSector(Sector.RESTAURACION);
-					break;
-
-				case "Sanidad":
-					empresa.setSector(Sector.SANIDAD);
-					break;
-
-				case "Transporte":
-					empresa.setSector(Sector.TRANSPORTE);
-					break;
-
-				case "Turismo":
-					empresa.setSector(Sector.TURISMO);
-					break;
-				}
+				empresa.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
 				empresa.setNom_empresa(rs.getString("NOM_EMPRESA"));
 				empresa.setPuesto(rs.getString("PUESTO"));
 				empresa.setDatosContacto(rs.getString("DATOSCONTACTO"));
 				empresa.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
 				empresa.setContactoApnabi(rs.getString("CONTACTOAPNABI"));
-				switch (rs.getString("ESTADO")) {
-				case "Informado":
-					empresa.setEstado(Estado.INFORMADO);
-					break;
-
-				case "No interesado":
-					empresa.setEstado(Estado.NO_INTERESADO);
-					break;
-
-				case "Planificando inserciones":
-					empresa.setEstado(Estado.PLANIFICANDO_INSERCIONES);
-					break;
-
-				case "Proximo año":
-					empresa.setEstado(Estado.PROXIMO_AÑO);
-					break;
-
-				case "Valorando/interesado":
-					empresa.setEstado(Estado.VALORANDO_INTERESADO);
-					break;
-				}
+				empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
 			}
 			rs.close();
 			stmt.close();
@@ -380,7 +204,8 @@ public class BDImplementacion implements ApnabiDAO {
 
 	@Override
 	public boolean añadirEmpresa(Empresa emp) {
-		// Open connection and declare a boolean to check if the update is properly executed
+		// Open connection and declare a boolean to check if the update is properly
+		// executed
 		boolean check = false;
 		this.openConnection();
 
@@ -388,75 +213,82 @@ public class BDImplementacion implements ApnabiDAO {
 			// Prepares the SQL query
 			stmt = con.prepareStatement(SQLINSERTEMPRESA);
 			switch (emp.getSector()) {
-			case ACTIVIDADES_DEPORTIVAS:
-				stmt.setString(1, "Actividades deportivas");
+			case AGRICULTURA_GANADERIA:
+				stmt.setString(1, "Agricultura_Ganaderia");
 				break;
 
-			case ADMINISTRACION:
-				stmt.setString(1, "Administracion");
+			case BIENESCONSUMO:
+				stmt.setString(1, "BienesConsumo");
 				break;
 
-			case ALMACEN_LOGISTICA:
-				stmt.setString(1, "Almacen logistica");
+			case COMERCIO_ESTABLECIMIENTOS:
+				stmt.setString(1, "Comercio_Establecimientos");
 				break;
 
-			case ARTES_GRAFICAS:
-				stmt.setString(1, "Artes graficas");
+			case COMERCIOELECTRONICO:
+				stmt.setString(1, "ComercioElectronico");
 				break;
 
-			case AUTOMOVILISTICO:
-				stmt.setString(1, "Automovilistico");
+			case CONSTRUCCION:
+				stmt.setString(1, "Construccion");
 				break;
 
-			case COMERCIO:
-				stmt.setString(1, "Comercio");
+			case DEPORTE_OCIO:
+				stmt.setString(1, "Deporte_Ocio");
 				break;
 
-			case DOCENCIA:
-				stmt.setString(1, "Docencia");
+			case ENERGIA_MEDIOAMBIENTE:
+				stmt.setString(1, "Energia_MedioAmbiente");
 				break;
 
-			case INDUSTRIAL:
-				stmt.setString(1, "Industrial");
+			case FINANZAS_SEGUROS_BIENESINMUEBLES:
+				stmt.setString(1, "Finanzas_Seguros_BienesInmuebles");
 				break;
 
-			case INFORMATICA:
-				stmt.setString(1, "Informatica");
+			case INTERNET:
+				stmt.setString(1, "Internet");
 				break;
 
-			case IT:
-				stmt.setString(1, "IT");
+			case LOGISTICA_TRANSPORTE:
+				stmt.setString(1, "Logistica_Transporte");
 				break;
 
-			case LIMPIEZA:
-				stmt.setString(1, "Limpieza");
+			case MEDIOSCOMUNICACION_MARKETING:
+				stmt.setString(1, "MediosComunicacion_Marketing");
 				break;
 
-			case MANTENIMIENTO:
-				stmt.setString(1, "Mantenimiento");
+			case METALURGIA_ELECTRONICA:
+				stmt.setString(1, "Metalurgia_Electronica");
 				break;
 
-			case MARKETING:
-				stmt.setString(1, "Marketing");
+			case PRODUCTOSQUIMICOS_MATERIASPRIMAS:
+				stmt.setString(1, "ProductosQuimicos_MateriasPrimas");
 				break;
 
-
-			case RESTAURACION:
-				stmt.setString(1, "Restauracion");
+			case SALUD_INDUSTRIAFARMACEUTICA:
+				stmt.setString(1, "Salud_IndustriaFarmaceutica");
 				break;
 
-			case SANIDAD:
-				stmt.setString(1, "Sanidad");
+			case SERVICIOS:
+				stmt.setString(1, "Servicios");
 				break;
 
-			case TRANSPORTE:
-				stmt.setString(1, "Transporte");
+			case SOCIEDAD:
+				stmt.setString(1, "Sociedad");
 				break;
 
-			case TURISMO:
-				stmt.setString(1, "Turismo");
+			case TECNOLOGIA_TELECOMUNICACIONES:
+				stmt.setString(1, "Tecnologia_Telecomunicaciones");
 				break;
 
+			case TURISMO_HOSTELERIA:
+				stmt.setString(1, "Turismo_Hosteleria");
+				break;
+
+			case VIDA:
+				stmt.setString(1, "Vida");
+				break;
+				
 			default:
 				System.out.println("Tipo invalido.");
 			}
@@ -470,32 +302,32 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt.setString(7, "Informado");
 				break;
 
-			case NO_INTERESADO:
-				stmt.setString(7, "Valorando/interesado");
+			case NOINTERESADO:
+				stmt.setString(7, "NoInteresado");
 				break;
 
-			case PLANIFICANDO_INSERCIONES:
-				stmt.setString(7, "Planificando inserciones");
+			case PLANIFICANDOINSERCIONES:
+				stmt.setString(7, "PlanificandoInserciones");
 				break;
 
-			case PROXIMO_AÑO:
-				stmt.setString(7, "Proximo año");
+			case PROXIMOAÑO:
+				stmt.setString(7, "ProximoAño");
 				break;
 
 			case VALORANDO_INTERESADO:
-				stmt.setString(7, "No interesado");
+				stmt.setString(7, "Valorando_Interesado");
 				break;
 
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			if (stmt.executeUpdate()>0) {
+			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
-			System.out.println("There was a problem trying to add the new product.");
+			System.out.println("Ha habido un error al intentar añadir la empresa.");
 			e.printStackTrace();
 		}
 		return check;
@@ -503,15 +335,17 @@ public class BDImplementacion implements ApnabiDAO {
 
 	@Override
 	public boolean modificarEmpresa(String nom) {
-		//Parametros por poner
+		// Parametros por poner
 		boolean check = false;
-		
+
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLDELETE_EMPRESA);
-			//stmt.setString(1, [TBD]);
+			// stmt.setString(1, [TBD]);
+			// Datos contacto, contacto empresa, persona de contacto, estado, contactos 1 a
+			// 4, observaciones
 			stmt.setString(2, nom);
-			if (stmt.executeUpdate()>0) {
+			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
 			stmt.close();
@@ -531,7 +365,7 @@ public class BDImplementacion implements ApnabiDAO {
 		try {
 			stmt = con.prepareStatement(SQLDELETE_EMPRESA);
 			stmt.setString(1, nom);
-			if (stmt.executeUpdate()>0) {
+			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
 			stmt.close();

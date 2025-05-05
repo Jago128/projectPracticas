@@ -10,6 +10,12 @@ public class Usuario {
 		this.contraseña = "";
 		this.tipo = Tipo.TRABAJADOR;
 	}
+	
+	public Usuario(String nombre, String contraseña) {
+		this.nombre = nombre;
+		this.contraseña = contraseña;
+		this.tipo = Tipo.TRABAJADOR;
+	}
 
 	public Usuario(String nombre, String contraseña, Tipo tipo) {
 		this.nombre = nombre;
