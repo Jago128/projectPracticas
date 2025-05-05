@@ -1,0 +1,73 @@
+package windows;
+
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+
+import controller.LoginController;
+import model.Usuario;
+
+public class WindowRegistro extends JDialog implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private JTextField textFieldNombre;
+	private JPasswordField passwordField;
+	private JButton btnRegistro;
+	private LoginController cont;
+
+	public WindowRegistro(LoginController cont) {
+		this.cont = cont;
+		setBounds(100, 100, 380, 230);
+		getContentPane().setLayout(null);
+
+		JLabel lblRegistro = new JLabel("Registro de nuevo usuario");
+		lblRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblRegistro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRegistro.setBounds(96, 10, 156, 41);
+		getContentPane().add(lblRegistro);
+
+		JLabel lblNewLabel = new JLabel("Nombre:");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel.setBounds(75, 61, 79, 29);
+		getContentPane().add(lblNewLabel);
+
+		JLabel lblContraseña = new JLabel("Contraseña:");
+		lblContraseña.setHorizontalAlignment(SwingConstants.CENTER);
+		lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblContraseña.setBounds(64, 94, 90, 29);
+		getContentPane().add(lblContraseña);
+
+		textFieldNombre = new JTextField();
+		textFieldNombre.setBounds(164, 67, 96, 19);
+		getContentPane().add(textFieldNombre);
+		textFieldNombre.setColumns(10);
+
+		passwordField = new JPasswordField();
+		passwordField.setBounds(164, 100, 96, 19);
+		getContentPane().add(passwordField);
+
+		btnRegistro = new JButton("Registrarse");
+		btnRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnRegistro.setBounds(112, 133, 110, 29);
+		getContentPane().add(btnRegistro);
+		btnRegistro.addActionListener(this);
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==btnRegistro) {
+			if (!textFieldNombre.getText().isEmpty()&& new String(passwordField.getPassword()).isEmpty()) {
+				if (cont.registrarUsuario(new Usuario(textFieldNombre.getText(), new String(passwordField.getPassword())))) {
+					JOptionPane.showConfirmDialog(null, "Se ha registrado el usuario correctamente.", "Registro correcto", JOptionPane.INFORMATION_MESSAGE);
+					LoginController cont = new LoginController();
+					cont.showWindow();
+					this.dispose();
+				}
+			}
+		}
+	}
+
+}

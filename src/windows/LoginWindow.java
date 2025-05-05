@@ -14,10 +14,10 @@ public class LoginWindow extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private JPasswordField passwordField;
-	private JTextField textField;
+	private JTextField textFieldNombre;
 	private JButton btnIniciarSesion, btnRegistro;
 	private LoginController cont;
-	private JLabel lblMensa;
+	private JLabel lblMensaje;
 
 	public LoginWindow() {
 		setBounds(100, 100, 410, 290);
@@ -36,10 +36,10 @@ public class LoginWindow extends JDialog implements ActionListener {
 		passwordField.setBounds(203, 98, 96, 19);
 		contentPanel.add(passwordField);
 
-		textField = new JTextField();
-		textField.setBounds(203, 57, 96, 19);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+		textFieldNombre = new JTextField();
+		textFieldNombre.setBounds(203, 57, 96, 19);
+		contentPanel.add(textFieldNombre);
+		textFieldNombre.setColumns(10);
 
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
@@ -62,32 +62,42 @@ public class LoginWindow extends JDialog implements ActionListener {
 		btnRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnRegistro.setBounds(213, 146, 126, 30);
 		contentPanel.add(btnRegistro);
+
+		lblMensaje = new JLabel("");
+		lblMensaje.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensaje.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblMensaje.setBounds(54, 198, 308, 30);
+		contentPanel.add(lblMensaje);
 		
-		lblMensa = new JLabel("Inicio de sesion");
-		lblMensa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensa.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblMensa.setBounds(54, 198, 308, 30);
-		contentPanel.add(lblMensa);
+		btnIniciarSesion.addActionListener(this);
+		btnRegistro.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
 		if (e.getSource()==btnIniciarSesion) {
-			Usuario user = new Usuario(textField.getText(), new String(passwordField.getPassword()));
+			Usuario user = new Usuario(textFieldNombre.getText(), new String(passwordField.getPassword()));
 			if (cont.verificarUsuario(user)) {
 				if (cont.verificarContraseñaUsuario(user)) {
-					
+					user = cont.getUsuario(user);
+					lblMensaje.setText("Se ha iniciado sesion correctamente.");
+					JOptionPane.showMessageDialog(null, "Bienvenido, "+user.getNombre());
+					MainWindow frame = new MainWindow(cont, user);
+					frame.setVisible(true);
+					this.dispose();
 				} else {
-					
+					lblMensaje.setText("Contraseña incorrecta.");
+					JOptionPane.showMessageDialog(null, "ERROR", "La contraseña es incorrecta.", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				
+				lblMensaje.setText("No existe el usuario introducido.");
+				JOptionPane.showMessageDialog(null, "ERROR", "No existe el usuario "+user.getNombre()+". Registrase para iniciar sesion.", JOptionPane.ERROR_MESSAGE);
 			}
-			
-			MainWindow frame = new MainWindow();
-			frame.setVisible(true);
 		}
-
+		
+		if (e.getSource()==btnRegistro) {
+			WindowRegistro dialog = new WindowRegistro(cont);
+			dialog.setVisible(true);
+		}
 	}
 }

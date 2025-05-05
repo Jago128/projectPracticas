@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import java.util.TreeMap;
 public class BDImplementacion implements ApnabiDAO {
 	private Connection con;
 	private PreparedStatement stmt;
+	
 	private ResourceBundle configFile;
 	@SuppressWarnings("unused")
 	private String driverBD;
@@ -127,7 +129,8 @@ public class BDImplementacion implements ApnabiDAO {
 	@Override
 	public boolean registrarUsuario(Usuario user) {
 		boolean registro = false;
-
+		this.openConnection();
+		
 		if (!verificarUsuario(user)) {
 			this.openConnection();
 			try {
@@ -145,6 +148,35 @@ public class BDImplementacion implements ApnabiDAO {
 			}
 		}
 		return registro;
+	}
+	
+	@Override
+	public Usuario getUsuario(Usuario user) {
+		this.openConnection();
+		
+		if (!verificarUsuario(user)) {
+			this.openConnection();
+			try {
+				stmt = con.prepareStatement(SQLUSUARIO);
+				stmt.setString(1, user.getNombre());
+				ResultSet rs = stmt.executeQuery();
+				if (rs.next()) {
+					user.setNombre(rs.getString("NOMBRE"));
+					user.setContraseña(rs.getString("CONTRASEÑA"));
+					if (verificarTipoUsuario(user)) {
+						user.setTipo(Tipo.ADMIN);
+					} else {
+						user.setTipo(Tipo.TRABAJADOR);
+					}
+				}
+				stmt.close();
+				con.close();
+			} catch (SQLException e) {
+				System.out.println("Un error ha ocurrido al intentar registrar el usuario.");
+				e.printStackTrace();
+			}
+		}
+		return user;
 	}
 
 	@Override
@@ -300,7 +332,7 @@ public class BDImplementacion implements ApnabiDAO {
 			case VIDA:
 				stmt.setString(1, "Vida");
 				break;
-				
+
 			default:
 				System.out.println("Tipo invalido.");
 			}
@@ -346,17 +378,114 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarEmpresa(String datos, String contactoE, String personaC, String estado, String contacto1, String contacto2, String contacto3, String contacto4, String observaciones) {
+	public boolean modificarEmpresa(String datos, String contactoE, String personaC, Estado estado, Date contacto1, Date contacto2, Date contacto3, Date contacto4, String observaciones) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLDELETE_EMPRESA);
-			stmt.setString(1, datos);
-			if (stmt.executeUpdate()>0) {
-				check = true;
+			if (!datos.isEmpty()) {
+				stmt = con.prepareStatement(SQLUPDATEDATOS);
+				stmt.setString(1, datos);
+				if (stmt.executeUpdate()>0) {
+					check = true;
+				}
+				stmt.close();
 			}
-			stmt.close();
+
+			if (!contactoE.isEmpty()) {
+				stmt = con.prepareStatement(SQLUPDATECONTACTOEMPRESA);
+				stmt.setString(1, contactoE);
+				if (stmt.executeUpdate()>0) {
+					check = true;
+				}
+				stmt.close();
+			}
+			
+			if (!personaC.isEmpty()) {
+				stmt = con.prepareStatement(SQLUPDATECONTACTOAPNABI);
+				stmt.setString(1, personaC);
+				if (stmt.executeUpdate()>0) {
+					check = true;
+				}
+				stmt.close();
+			}
+			
+			if (estado!=null) {
+				stmt = con.prepareStatement(SQLUPDATEESTADO);
+				switch (estado) {
+				case INFORMADO:
+					stmt.setString(1, "Informado");
+					break;
+
+				case NOINTERESADO:
+					stmt.setString(1, "NoInteresado");
+					break;
+
+				case PLANIFICANDOINSERCIONES:
+					stmt.setString(1, "PlanificandoInserciones");
+					break;
+
+				case PROXIMOAÑO:
+					stmt.setString(1, "ProximoAño");
+					break;
+
+				case VALORANDO_INTERESADO:
+					stmt.setString(1, "Valorando_Interesado");
+					break;
+
+				default:
+					System.out.println("Tipo invalido.");
+				}
+				if (stmt.executeUpdate()>0) {
+					check = true;
+				}
+				stmt.close();
+			}
+			
+			if (contacto1!=null) {
+				stmt = con.prepareStatement(SQLUPDATECONTACTO1);
+				stmt.setDate(1, contacto1);
+				if (stmt.executeUpdate()>0) {
+					check = true;
+				}
+				stmt.close();
+			}
+			
+			if (contacto2!=null) {
+				stmt = con.prepareStatement(SQLUPDATECONTACTO2);
+				stmt.setDate(1, contacto2);
+				if (stmt.executeUpdate()>0) {
+					check = true;
+				}
+				stmt.close();
+			}
+			
+			if (contacto3!=null) {
+				stmt = con.prepareStatement(SQLUPDATECONTACTO3);
+				stmt.setDate(1, contacto3);
+				if (stmt.executeUpdate()>0) {
+					check = true;
+				}
+				stmt.close();
+			}
+			
+			if (contacto4!=null) {
+				stmt = con.prepareStatement(SQLUPDATECONTACTO4);
+				stmt.setDate(1, contacto4);
+				if (stmt.executeUpdate()>0) {
+					check = true;
+				}
+				stmt.close();
+			}
+			
+			if (!observaciones.isEmpty()) {
+				stmt = con.prepareStatement(SQLUPDATEOBSERVACIONES);
+				stmt.setString(1, observaciones);
+				if (stmt.executeUpdate()>0) {
+					check = true;
+				}
+				stmt.close();
+			}
 			con.close();
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");

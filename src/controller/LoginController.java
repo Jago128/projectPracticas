@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.Date;
 import java.util.Map;
 
 import model.*;
@@ -29,6 +30,10 @@ public class LoginController {
 		return dao.registrarUsuario(user);
 	}
 	
+	public Usuario getUsuario(Usuario user) {
+		return dao.getUsuario(user);
+	}
+	
 	public Map<String, Empresa> mostrarEmpresas() {
 		return dao.mostrarEmpresas();
 	}
@@ -42,7 +47,7 @@ public class LoginController {
 	}
 	
 	//Parametros por poner en este
-	public boolean modificarEmpresa(String datos, String contactoE, String personaC, String estado, String contacto1, String contacto2, String contacto3, String contacto4, String observaciones) {
+	public boolean modificarEmpresa(String datos, String contactoE, String personaC, Estado estado, Date contacto1, Date contacto2, Date contacto3, Date contacto4, String observaciones) {
 		return dao.modificarEmpresa(datos, contactoE, personaC, estado, contacto1, contacto2, contacto3, contacto4, observaciones);
 	}
 	
