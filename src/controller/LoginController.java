@@ -4,13 +4,13 @@ import java.sql.Date;
 import java.util.Map;
 
 import model.*;
-import windows.LoginWindow;
+import windows.VentanaLogin;
 
 public class LoginController {
 	ApnabiDAO dao = new BDImplementacion();
 	
 	public void showWindow() {
-		LoginWindow dialog = new LoginWindow();
+		VentanaLogin dialog = new VentanaLogin();
 		dialog.setVisible(true);
 	}
 	

@@ -9,7 +9,7 @@ import javax.swing.border.*;
 import controller.LoginController;
 import model.Usuario;
 
-public class LoginWindow extends JDialog implements ActionListener {
+public class VentanaLogin extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private final JPanel contentPanel = new JPanel();
@@ -19,17 +19,18 @@ public class LoginWindow extends JDialog implements ActionListener {
 	private LoginController cont;
 	private JLabel lblMensaje;
 
-	public LoginWindow() {
+	public VentanaLogin() {
+		setTitle("Inicio de sesion");
 		setBounds(100, 100, 410, 290);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		JLabel lblTitulo = new JLabel("Inicio de sesion");
+		JLabel lblTitulo = new JLabel("Base de datos Apnabi");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblTitulo.setBounds(126, 10, 126, 30);
+		lblTitulo.setBounds(126, 10, 138, 30);
 		contentPanel.add(lblTitulo);
 
 		passwordField = new JPasswordField();
@@ -82,7 +83,7 @@ public class LoginWindow extends JDialog implements ActionListener {
 					user = cont.getUsuario(user);
 					lblMensaje.setText("Se ha iniciado sesion correctamente.");
 					JOptionPane.showMessageDialog(null, "Bienvenido, "+user.getNombre());
-					MainWindow frame = new MainWindow(cont, user);
+					VentanaPrincipal frame = new VentanaPrincipal(cont, user);
 					frame.setVisible(true);
 					this.dispose();
 				} else {
@@ -96,7 +97,7 @@ public class LoginWindow extends JDialog implements ActionListener {
 		}
 		
 		if (e.getSource()==btnRegistro) {
-			WindowRegistro dialog = new WindowRegistro(cont);
+			VentanaRegistro dialog = new VentanaRegistro(cont);
 			dialog.setVisible(true);
 		}
 	}

@@ -8,7 +8,7 @@ import javax.swing.*;
 import controller.LoginController;
 import model.Usuario;
 
-public class WindowRegistro extends JDialog implements ActionListener {
+public class VentanaRegistro extends JDialog implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField textFieldNombre;
@@ -16,15 +16,16 @@ public class WindowRegistro extends JDialog implements ActionListener {
 	private JButton btnRegistro;
 	private LoginController cont;
 
-	public WindowRegistro(LoginController cont) {
+	public VentanaRegistro(LoginController cont) {
+		setTitle("Registro de nuevo usuario");
 		this.cont = cont;
 		setBounds(100, 100, 380, 230);
 		getContentPane().setLayout(null);
 
-		JLabel lblRegistro = new JLabel("Registro de nuevo usuario");
+		JLabel lblRegistro = new JLabel("Introduzca la informacion para registrarse");
 		lblRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblRegistro.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRegistro.setBounds(96, 10, 156, 41);
+		lblRegistro.setBounds(64, 10, 266, 41);
 		getContentPane().add(lblRegistro);
 
 		JLabel lblNewLabel = new JLabel("Nombre:");
