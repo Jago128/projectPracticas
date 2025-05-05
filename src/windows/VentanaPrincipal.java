@@ -66,11 +66,14 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==btnAñadir) {
-			
+			VentanaAñadir dialog = new VentanaAñadir();
+			dialog.setVisible(true);
 		} else if (e.getSource()==btnBorrarempresas) {
-			
+			VentanaBorrar dialog = new VentanaBorrar();
+			dialog.setVisible(true);
 		} else if (e.getSource()==btnModificarEmpresas) {
-			
+			VentanaModificar dialog = new VentanaModificar();
+			dialog.setVisible(true);
 		} else if (e.getSource()==btnMostrar) {
 			VentanaMostrar dialog = new VentanaMostrar(this, cont, user);
 			dialog.setVisible(true);

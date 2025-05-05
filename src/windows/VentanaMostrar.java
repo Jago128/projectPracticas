@@ -13,6 +13,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	
 	private LoginController cont;
+	private Usuario user;
 	private JList<String> listSectores, listEmpresas;
 	private JList<String> listPuestos;
 	private JList<String> listDatosContacto;
@@ -24,8 +25,9 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 
 	public VentanaMostrar(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
-		setTitle("Mostrar Empresas");
 		this.cont = cont;
+		this.user = user;
+		setTitle("Mostrar Empresas");
 		setBounds(100, 100, 920, 600);
 		getContentPane().setLayout(null);
 
@@ -63,6 +65,8 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		listEstados.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		listEstados.setBounds(790, 56, 106, 417);
 		getContentPane().add(listEstados);
+		
+		addEmpresas();
 		
 		JLabel lblSectores = new JLabel("Sectores");
 		lblSectores.setHorizontalAlignment(SwingConstants.CENTER);
@@ -110,6 +114,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		btnContactos.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnContactos.setBounds(184, 483, 536, 59);
 		getContentPane().add(btnContactos);
+		btnContactos.addActionListener(this);
 	}
 
 	public void addEmpresas() {
@@ -249,7 +254,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==btnContactos) {
 			if (!listEmpresas.isSelectionEmpty()) {
-				VentanaContactosYObservaciones dialog = new VentanaContactosYObservaciones(this, cont, listEmpresas.getSelectedValue());
+				VentanaContactosYObservaciones dialog = new VentanaContactosYObservaciones(this, cont, listEmpresas.getSelectedValue(), user);
 				dialog.setVisible(true);
 			} else {
 				JOptionPane.showMessageDialog(null, "[ERROR] Elija una empresa de la lista de empresas");
