@@ -28,7 +28,6 @@ INSERT INTO USUARIO VALUES
 ("Test", "e");
 
 INSERT INTO EMPRESA VALUES
-("Deportes Urbanos de Exterior S.L", "Deporte_Ocio", "Almacen", "info@deportesurbanos.com", "???", "Selene", "Informado", "2024/10/23", null, null, null, null),
-("Grupo Cofares", "Logistica_Transporte", "Almacen","vcuesta@cofares.es", "Virginia", "Alba", "Valorando_Interesado", "16/09/2024", "24/09/2024", "18/10/2024", null, null),
-("SEIDOR", "Internet", null, "LinkedIn", "Aida Morales Sedano", "Selene", "Informado", "23/10/2024", null, null, null, "Propuesta de prácticas");
-
+("Deportes Urbanos de Exterior S.L", "Deporte_Ocio", "Almacen", "info@deportesurbanos.com", "???", "Selene", "Informado", "2024-10-23", null, null, null, null),
+("Grupo Cofares", "Logistica_Transporte", "Almacen","vcuesta@cofares.es", "Virginia", "Alba", "Valorando_Interesado", "2024-09-16", "2024-09-24", "2024-10-18", null, null),
+("SEIDOR", "Internet", null, "LinkedIn", "Aida Morales Sedano", "Selene", "Informado", "2024-10-23", null, null, null, "Propuesta de prácticas");

@@ -36,7 +36,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		JLabel lblObligatorio = new JLabel("* Obligatorio. Fechas de contacto son en DD/MM/AAAA");
+		JLabel lblObligatorio = new JLabel("* Obligatorio. Formato de fechas: AAAA-MM-DD");
 		lblObligatorio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblObligatorio.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblObligatorio.setBounds(10, 6, 366, 19);
@@ -190,7 +190,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 
 	public boolean dateFormatErrorCheck() {
 		boolean error = false;
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("DD/MM/YYYY");
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("YYYY-MM-DD");
 		try {
 			LocalDate.parse(textFieldContacto1.getText(), format);
 			if (!textFieldContacto2.getText().isBlank()) {
@@ -221,7 +221,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 						"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				if (dateFormatErrorCheck()) {
-					JOptionPane.showMessageDialog(null, "El formato de una de las fechas es incorrecta.", "ERROR",
+					JOptionPane.showMessageDialog(null, "El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
 					Sector sector = null;

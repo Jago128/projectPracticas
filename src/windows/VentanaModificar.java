@@ -24,6 +24,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 	private JButton btnModificar;
 	private JLabel lblDatosEmpresa;
 	private JTextArea textAreaObservaciones;
+	private JLabel lblNewLabel;
 
 	public VentanaModificar(JDialog parent, LoginController cont, Empresa emp) {
 		super(parent, true);
@@ -158,7 +159,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		JLabel lblNota = new JLabel("No hace falta rellenar toda la informacion.");
 		lblNota.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNota.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNota.setBounds(10, 10, 377, 38);
+		lblNota.setBounds(10, 7, 377, 38);
 		getContentPane().add(lblNota);
 
 		lblDatosEmpresa = new JLabel("Informacion de la empresa seleccionada:");
@@ -166,6 +167,11 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		lblDatosEmpresa.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblDatosEmpresa.setBounds(378, 10, 506, 38);
 		getContentPane().add(lblDatosEmpresa);
+		
+		lblNewLabel = new JLabel("Formato de fechas: AAAA-MM-DD");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel.setBounds(42, 38, 275, 16);
+		getContentPane().add(lblNewLabel);
 
 		loadEmpresa();
 	}
@@ -296,7 +302,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 
 	public boolean dateFormatErrorCheck() {
 		boolean error = false;
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("DD/MM/YYYY");
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("YYYY-MM-DD");
 		try {
 			LocalDate.parse(textFieldContacto1.getText(), format);
 			if (!textFieldContacto2.getText().isBlank()) {
@@ -320,7 +326,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnModificar) {
 			if (dateFormatErrorCheck()) {
-				JOptionPane.showMessageDialog(null, "El formato de una de las fechas es incorrecta.", "ERROR",
+				JOptionPane.showMessageDialog(null, "El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD", "ERROR",
 						JOptionPane.ERROR_MESSAGE);
 			} else {
 				Estado estado = null;

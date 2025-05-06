@@ -52,6 +52,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		contentPane.add(lblEmpresas);
 
 		JTextArea textAreaModify = new JTextArea();
+		textAreaModify.setEditable(false);
 		textAreaModify.setBackground(UIManager.getColor("Button.background"));
 		textAreaModify.setLineWrap(true);
 		textAreaModify.setText("Se modifican las empresas desde esta ventana.");
