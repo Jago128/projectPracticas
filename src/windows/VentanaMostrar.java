@@ -22,7 +22,6 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 	private JList<String> listEstados;
 	private JButton btnContactos;
 
-
 	public VentanaMostrar(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
 		this.cont = cont;

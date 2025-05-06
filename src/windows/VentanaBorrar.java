@@ -39,7 +39,7 @@ public class VentanaBorrar extends JDialog implements ActionListener {
 		getContentPane().add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(20, 56, 237, 19);
+		textField.setBounds(33, 56, 237, 19);
 		getContentPane().add(textField);
 		textField.setColumns(10);
 	
