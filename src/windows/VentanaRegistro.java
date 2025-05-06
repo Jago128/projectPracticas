@@ -60,13 +60,17 @@ public class VentanaRegistro extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==btnRegistro) {
-			if (!textFieldNombre.getText().isEmpty()&& new String(passwordField.getPassword()).isEmpty()) {
+			if (!textFieldNombre.getText().isBlank()&&!new String(passwordField.getPassword()).isBlank()) {
 				if (cont.registrarUsuario(new Usuario(textFieldNombre.getText(), new String(passwordField.getPassword())))) {
-					JOptionPane.showConfirmDialog(null, "Se ha registrado el usuario correctamente.", "Registro correcto", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Se ha registrado el usuario correctamente.");
 					LoginController cont = new LoginController();
 					cont.showWindow();
 					this.dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "Ha occurrido un error al registarse.");
 				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Rellena todos los campos para porder registarse.");
 			}
 		}
 	}

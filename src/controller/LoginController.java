@@ -2,6 +2,8 @@ package controller;
 
 import java.util.Map;
 
+import javax.swing.JDialog;
+
 import model.*;
 import windows.VentanaLogin;
 
@@ -9,7 +11,8 @@ public class LoginController {
 	ApnabiDAO dao = new BDImplementacion();
 	
 	public void showWindow() {
-		VentanaLogin dialog = new VentanaLogin();
+		VentanaLogin dialog = new VentanaLogin(new LoginController());
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
 	}
 	

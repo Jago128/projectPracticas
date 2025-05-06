@@ -261,6 +261,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		if (e.getSource()==btnContactos) {
 			if (!listEmpresas.isSelectionEmpty()) {
 				VentanaContactosYObservaciones dialog = new VentanaContactosYObservaciones(this, cont, listEmpresas.getSelectedValue(), user);
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
 			} else {
 				JOptionPane.showMessageDialog(null, "[ERROR] Elija una empresa de la lista de nombres de empresas.");
@@ -268,6 +269,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		} else {
 			if (!listEmpresas.isSelectionEmpty()) {
 				VentanaModificar dialog = new VentanaModificar(this, cont, cont.getEmpresa(listEmpresas.getSelectedValue()));
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
 			} else {
 				JOptionPane.showMessageDialog(null, "[ERROR] Elija una empresa de la lista de nombres de empresas.");

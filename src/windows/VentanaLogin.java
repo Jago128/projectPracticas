@@ -19,7 +19,9 @@ public class VentanaLogin extends JDialog implements ActionListener {
 	private LoginController cont;
 	private JLabel lblMensaje;
 
-	public VentanaLogin() {
+	public VentanaLogin(LoginController cont) {
+		this.cont = cont;
+		
 		setTitle("Inicio de sesion");
 		setBounds(100, 100, 410, 290);
 		getContentPane().setLayout(new BorderLayout());
@@ -84,6 +86,7 @@ public class VentanaLogin extends JDialog implements ActionListener {
 					lblMensaje.setText("Se ha iniciado sesion correctamente.");
 					JOptionPane.showMessageDialog(null, "Bienvenido, "+user.getNombre());
 					VentanaPrincipal frame = new VentanaPrincipal(cont, user);
+					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 					frame.setVisible(true);
 					this.dispose();
 				} else {
@@ -92,13 +95,15 @@ public class VentanaLogin extends JDialog implements ActionListener {
 				}
 			} else {
 				lblMensaje.setText("No existe el usuario introducido.");
-				JOptionPane.showMessageDialog(null, "ERROR", "No existe el usuario "+user.getNombre()+". Registrase para iniciar sesion.", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "No existe el usuario "+user.getNombre()+". Registrase para iniciar sesion.", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		
 		if (e.getSource()==btnRegistro) {
 			VentanaRegistro dialog = new VentanaRegistro(cont);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			this.dispose();
 		}
 	}
 }
