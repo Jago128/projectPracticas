@@ -28,8 +28,12 @@ public class VentanaBorrar extends JDialog implements ActionListener {
 		getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnNewButton.setBounds(76, 102, 101, 21);
+		btnNewButton.setBounds(94, 85, 101, 21);
 		getContentPane().add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Introduce el nombre de la empresa a borrar:");
