@@ -23,7 +23,7 @@ public class VentanaLogin extends JDialog implements ActionListener {
 		this.cont = cont;
 		
 		setTitle("Inicio de sesion");
-		setBounds(100, 100, 410, 290);
+		setBounds(100, 100, 410, 260);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -69,7 +69,7 @@ public class VentanaLogin extends JDialog implements ActionListener {
 		lblMensaje = new JLabel("");
 		lblMensaje.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMensaje.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblMensaje.setBounds(54, 198, 308, 30);
+		lblMensaje.setBounds(39, 186, 308, 30);
 		contentPanel.add(lblMensaje);
 		
 		btnIniciarSesion.addActionListener(this);

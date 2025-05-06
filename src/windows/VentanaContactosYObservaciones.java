@@ -1,21 +1,18 @@
 package windows;
 
 import java.awt.*;
-import java.sql.Date;
 import java.util.Map;
 
 import javax.swing.*;
 
 import controller.LoginController;
-import model.Empresa;
-import model.Usuario;
+import model.*;
 
 public class VentanaContactosYObservaciones extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
-	private JList<Date> listContacto1, listContacto2, listContacto3, listContacto4;
-	private JList<String> listObservaciones;
+	private JList<String> listContacto1, listContacto2, listContacto3, listContacto4, listObservaciones;
 
 	public VentanaContactosYObservaciones(JDialog parent, LoginController cont, String nomEmp, Usuario user) {
 		super(parent, true);
@@ -27,7 +24,7 @@ public class VentanaContactosYObservaciones extends JDialog {
 
 		listContacto1 = new JList<>();
 		listContacto1.setBounds(25, 94, 132, 286);
-		
+
 		listContacto2 = new JList<>();
 		listContacto2.setBounds(157, 94, 132, 286);
 
@@ -54,7 +51,7 @@ public class VentanaContactosYObservaciones extends JDialog {
 		JScrollPane scrollPane = new JScrollPane(panel);
 		scrollPane.setBounds(25, 94, 689, 286);
 		getContentPane().add(scrollPane);
-		
+
 		JLabel lblContactos1 = new JLabel("Contacto 1");
 		lblContactos1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContactos1.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -94,20 +91,42 @@ public class VentanaContactosYObservaciones extends JDialog {
 
 	public void loadContactosObservaciones() {
 		Map<String, Empresa> empresas = cont.mostrarEmpresas();
-		DefaultListModel<Date> modelContactos1 = new DefaultListModel<>();
-		DefaultListModel<Date> modelContactos2 = new DefaultListModel<>();
-		DefaultListModel<Date> modelContactos3 = new DefaultListModel<>();
-		DefaultListModel<Date> modelContactos4 = new DefaultListModel<>();
-		DefaultListModel<String> modelObservaciones = new DefaultListModel<>();
+		DefaultListModel<String> modelContactos1 = new DefaultListModel<>(), modelContactos2 = new DefaultListModel<>(),
+				modelContactos3 = new DefaultListModel<>(), modelContactos4 = new DefaultListModel<>(), modelObservaciones = new DefaultListModel<>();
 
 		if (!empresas.isEmpty()) {
 			for (Empresa emp:empresas.values()) {
 				modelContactos1.addElement(emp.getContacto1());
-				modelContactos2.addElement(emp.getContacto2());
-				modelContactos3.addElement(emp.getContacto3());
-				modelContactos4.addElement(emp.getContacto4());
-				modelObservaciones.addElement(emp.getObservaciones());
+				
+				if (emp.getObservaciones()==null) {
+					modelContactos2.addElement("");
+				} else {
+					modelContactos2.addElement(emp.getContacto2());
+				}
+				
+				if (emp.getObservaciones()==null) {
+					modelContactos3.addElement("");
+				} else {
+					modelContactos3.addElement(emp.getContacto3());
+				}
+				
+				if (emp.getObservaciones()==null) {
+					modelContactos4.addElement("");
+				} else {
+					modelContactos4.addElement(emp.getContacto4());
+				}
+				
+				if (emp.getObservaciones()==null) {
+					modelObservaciones.addElement("");
+				} else {
+					modelObservaciones.addElement(emp.getObservaciones());
+				}
 			}
+			listContacto1.setModel(modelContactos1);
+			listContacto2.setModel(modelContactos2);
+			listContacto3.setModel(modelContactos3);
+			listContacto4.setModel(modelContactos4);
+			listObservaciones.setModel(modelObservaciones);
 		}
 	}
 }

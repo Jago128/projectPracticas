@@ -1,8 +1,5 @@
 package model;
 
-import java.sql.Date;
-import java.time.LocalDate;
-
 public class Empresa {
 	private String nom_empresa;
 	private Sector sector;
@@ -11,10 +8,10 @@ public class Empresa {
 	private String contactoEmpresa;
 	private String contactoApnabi;
 	private Estado estado;
-	private Date contacto1;
-	private Date contacto2;
-	private Date contacto3;
-	private Date contacto4;
+	private String contacto1;
+	private String contacto2;
+	private String contacto3;
+	private String contacto4;
 	private String observaciones;
 
 	public Empresa() {
@@ -25,15 +22,15 @@ public class Empresa {
 		this.contactoEmpresa = "";
 		this.contactoApnabi = "";
 		this.estado = Estado.UNSET;
-		this.contacto1 = Date.valueOf(LocalDate.now());
-		this.contacto2 = Date.valueOf(LocalDate.now());
-		this.contacto3 = Date.valueOf(LocalDate.now());
-		this.contacto4 = Date.valueOf(LocalDate.now());
+		this.contacto1 = "";
+		this.contacto2 = "";
+		this.contacto3 = "";
+		this.contacto4 = "";
 		this.observaciones = "";
 	}
 
 	public Empresa(String nom_empresa, Sector sector, String puesto, String datosContacto, String contactoEmpresa,
-			String contactoApnabi, Estado estado, Date contacto1) {
+			String contactoApnabi, Estado estado, String contacto1) {
 		this.nom_empresa = nom_empresa;
 		this.sector = sector;
 		this.puesto = puesto;
@@ -45,7 +42,7 @@ public class Empresa {
 	}
 
 	public Empresa(String nom_empresa, Sector sector, String puesto, String datosContacto, String contactoEmpresa,
-			String contactoApnabi, Estado estado, Date contacto1, Date contacto2, Date contacto3, Date contacto4,
+			String contactoApnabi, Estado estado, String contacto1, String contacto2, String contacto3, String contacto4,
 			String observaciones) {
 		this.nom_empresa = nom_empresa;
 		this.sector = sector;
@@ -117,35 +114,35 @@ public class Empresa {
 		this.estado = estado;
 	}
 
-	public Date getContacto1() {
+	public String getContacto1() {
 		return contacto1;
 	}
 
-	public void setContacto1(Date contacto1) {
+	public void setContacto1(String contacto1) {
 		this.contacto1 = contacto1;
 	}
 
-	public Date getContacto2() {
+	public String getContacto2() {
 		return contacto2;
 	}
 
-	public void setContacto2(Date contacto2) {
+	public void setContacto2(String contacto2) {
 		this.contacto2 = contacto2;
 	}
 
-	public Date getContacto3() {
+	public String getContacto3() {
 		return contacto3;
 	}
 
-	public void setContacto3(Date contacto3) {
+	public void setContacto3(String contacto3) {
 		this.contacto3 = contacto3;
 	}
 
-	public Date getContacto4() {
+	public String getContacto4() {
 		return contacto4;
 	}
 
-	public void setContacto4(Date contacto4) {
+	public void setContacto4(String contacto4) {
 		this.contacto4 = contacto4;
 	}
 

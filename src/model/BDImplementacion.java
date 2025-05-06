@@ -28,7 +28,7 @@ public class BDImplementacion implements ApnabiDAO {
 
 	final String SQLEMPRESAS = "SELECT * FROM EMPRESA";
 	final String SQLSELECTEMPRESA = "SELECT * FROM EMPRESA WHERE NOM_EMPRESA = ?";
-	final String SQLINSERTEMPRESA = "INSERT INTO USUARIO VALUES (?,?,?,?,?,?,?)";
+	final String SQLINSERTEMPRESA = "INSERT INTO EMPRESA VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 	final String SQLUPDATEDATOS = "UPDATE EMPRESA SET DATOSCONTACTO=? WHERE NOM_EMPRESA=?";
 	final String SQLUPDATECONTACTOEMPRESA = "UPDATE EMPRESA SET CONTACTOEMPRESA=? WHERE NOM_EMPRESA=?";
 	final String SQLUPDATECONTACTOAPNABI = "UPDATE EMPRESA SET CONTACTOAPNABI=? WHERE NOM_EMPRESA=?";
@@ -171,10 +171,10 @@ public class BDImplementacion implements ApnabiDAO {
 				empresa.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
 				empresa.setContactoApnabi(rs.getString("CONTACTOAPNABI"));
 				empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
-				empresa.setContacto1(rs.getDate("CONTACTO1"));
-				empresa.setContacto2(rs.getDate("CONTACTO2"));
-				empresa.setContacto3(rs.getDate("CONTACTO3"));
-				empresa.setContacto4(rs.getDate("CONTACTO4"));
+				empresa.setContacto1(rs.getDate("CONTACTO1").toString());
+				empresa.setContacto2(rs.getDate("CONTACTO2").toString());
+				empresa.setContacto3(rs.getDate("CONTACTO3").toString());
+				empresa.setContacto4(rs.getDate("CONTACTO4").toString());
 				empresa.setObservaciones(rs.getString("OBSERVACIONES"));
 				empresas.put(empresa.getNom_empresa(), empresa);
 			}
@@ -206,10 +206,10 @@ public class BDImplementacion implements ApnabiDAO {
 				empresa.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
 				empresa.setContactoApnabi(rs.getString("CONTACTOAPNABI"));
 				empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
-				empresa.setContacto1(rs.getDate("CONTACTO1"));
-				empresa.setContacto2(rs.getDate("CONTACTO2"));
-				empresa.setContacto3(rs.getDate("CONTACTO3"));
-				empresa.setContacto4(rs.getDate("CONTACTO4"));
+				empresa.setContacto1(rs.getDate("CONTACTO1").toString());
+				empresa.setContacto2(rs.getDate("CONTACTO2").toString());
+				empresa.setContacto3(rs.getDate("CONTACTO3").toString());
+				empresa.setContacto4(rs.getDate("CONTACTO4").toString());
 				empresa.setObservaciones(rs.getString("OBSERVACIONES"));
 			}
 			rs.close();
@@ -229,91 +229,93 @@ public class BDImplementacion implements ApnabiDAO {
 
 		try {
 			stmt = con.prepareStatement(SQLINSERTEMPRESA);
+			stmt.setString(1, emp.getNom_empresa());
 			switch (emp.getSector()) {
 			case AGRICULTURA_GANADERIA:
-				stmt.setString(1, "Agricultura_Ganaderia");
+				stmt.setString(2, "Agricultura_Ganaderia");
 				break;
 
 			case BIENESCONSUMO:
-				stmt.setString(1, "BienesConsumo");
+				stmt.setString(2, "BienesConsumo");
 				break;
 
 			case COMERCIO_ESTABLECIMIENTOS:
-				stmt.setString(1, "Comercio_Establecimientos");
+				stmt.setString(2, "Comercio_Establecimientos");
 				break;
 
 			case COMERCIOELECTRONICO:
-				stmt.setString(1, "ComercioElectronico");
+				stmt.setString(2, "ComercioElectronico");
 				break;
 
 			case CONSTRUCCION:
-				stmt.setString(1, "Construccion");
+				stmt.setString(2, "Construccion");
 				break;
 
 			case DEPORTE_OCIO:
-				stmt.setString(1, "Deporte_Ocio");
+				stmt.setString(2, "Deporte_Ocio");
 				break;
 
 			case ENERGIA_MEDIOAMBIENTE:
-				stmt.setString(1, "Energia_MedioAmbiente");
+				stmt.setString(2, "Energia_MedioAmbiente");
 				break;
 
 			case FINANZAS_SEGUROS_BIENESINMUEBLES:
-				stmt.setString(1, "Finanzas_Seguros_BienesInmuebles");
+				stmt.setString(2, "Finanzas_Seguros_BienesInmuebles");
 				break;
 
 			case INTERNET:
-				stmt.setString(1, "Internet");
+				stmt.setString(2, "Internet");
 				break;
 
 			case LOGISTICA_TRANSPORTE:
-				stmt.setString(1, "Logistica_Transporte");
+				stmt.setString(2, "Logistica_Transporte");
 				break;
 
 			case MEDIOSCOMUNICACION_MARKETING:
-				stmt.setString(1, "MediosComunicacion_Marketing");
+				stmt.setString(2, "MediosComunicacion_Marketing");
 				break;
 
 			case METALURGIA_ELECTRONICA:
-				stmt.setString(1, "Metalurgia_Electronica");
+				stmt.setString(2, "Metalurgia_Electronica");
 				break;
 
 			case PRODUCTOSQUIMICOS_MATERIASPRIMAS:
-				stmt.setString(1, "ProductosQuimicos_MateriasPrimas");
+				stmt.setString(2, "ProductosQuimicos_MateriasPrimas");
 				break;
 
 			case SALUD_INDUSTRIAFARMACEUTICA:
-				stmt.setString(1, "Salud_IndustriaFarmaceutica");
+				stmt.setString(2, "Salud_IndustriaFarmaceutica");
 				break;
 
 			case SERVICIOS:
-				stmt.setString(1, "Servicios");
+				stmt.setString(2, "Servicios");
 				break;
 
 			case SOCIEDAD:
-				stmt.setString(1, "Sociedad");
+				stmt.setString(2, "Sociedad");
 				break;
 
 			case TECNOLOGIA_TELECOMUNICACIONES:
-				stmt.setString(1, "Tecnologia_Telecomunicaciones");
+				stmt.setString(2, "Tecnologia_Telecomunicaciones");
 				break;
 
 			case TURISMO_HOSTELERIA:
-				stmt.setString(1, "Turismo_Hosteleria");
+				stmt.setString(2, "Turismo_Hosteleria");
 				break;
 
 			case VIDA:
-				stmt.setString(1, "Vida");
+				stmt.setString(2, "Vida");
 				break;
 
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			stmt.setString(2, emp.getNom_empresa());
+			
 			stmt.setString(3, emp.getPuesto());
 			stmt.setString(4, emp.getDatosContacto());
 			stmt.setString(5, emp.getContactoEmpresa());
 			stmt.setString(6, emp.getContactoApnabi());
+			
 			switch (emp.getEstado()) {
 			case INFORMADO:
 				stmt.setString(7, "Informado");
@@ -338,6 +340,33 @@ public class BDImplementacion implements ApnabiDAO {
 			default:
 				System.out.println("Tipo invalido.");
 			}
+			
+			stmt.setString(8, emp.getContacto1());
+			
+			if (emp.getContacto2()==null) {
+				stmt.setString(9, null);
+			} else {
+				stmt.setString(9, emp.getContacto2());
+			}
+
+			if (emp.getContacto3()==null) {
+				stmt.setString(10, null);
+			} else {
+				stmt.setString(10, emp.getContacto3());
+			}
+
+			if (emp.getContacto4()==null) {
+				stmt.setString(11, null);
+			} else {
+				stmt.setString(11, emp.getContacto4());
+			}
+
+			if (emp.getObservaciones()==null) {
+				stmt.setString(12, null);
+			} else {
+				stmt.setString(12, emp.getObservaciones());
+			}
+
 			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}

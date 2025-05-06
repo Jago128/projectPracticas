@@ -127,9 +127,9 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 
 	public void addEmpresas() {
 		Map<String, Empresa> empresas = cont.mostrarEmpresas();
-		DefaultListModel<String> modelSector = new DefaultListModel<>(), modelNom = new DefaultListModel<>(), modelPuesto = new DefaultListModel<>(),
+		DefaultListModel<String> modelSectores = new DefaultListModel<>(), modelEmpresas = new DefaultListModel<>(), modelPuestos = new DefaultListModel<>(),
 				modelDatosContacto = new DefaultListModel<>(), modelContactosEmpresa = new DefaultListModel<>(), modelContactosApnabi = new DefaultListModel<>(),
-				modelEstado = new DefaultListModel<>();
+				modelEstados = new DefaultListModel<>();
 
 		listSectores.removeAll();
 		listEmpresas.removeAll();
@@ -143,116 +143,127 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 			for (Empresa emp:empresas.values()) {
 				switch (emp.getSector()) {
 				case AGRICULTURA_GANADERIA:
-					modelSector.addElement("Agricultura y ganadería");
+					modelSectores.addElement("Agricultura y ganadería");
 					break;
 
 				case BIENESCONSUMO:
-					modelSector.addElement("Bienes de consumo");
+					modelSectores.addElement("Bienes de consumo");
 					break;
 
 				case COMERCIOELECTRONICO:
-					modelSector.addElement("Comercio electrónico");
+					modelSectores.addElement("Comercio electrónico");
 					break;
 
 				case COMERCIO_ESTABLECIMIENTOS:
-					modelSector.addElement("Comercio y establecimientos");
+					modelSectores.addElement("Comercio y establecimientos");
 					break;
 
 				case CONSTRUCCION:
-					modelSector.addElement("Construcción");
+					modelSectores.addElement("Construcción");
 					break;
 
 				case DEPORTE_OCIO:
-					modelSector.addElement("Deporte y ocio");
+					modelSectores.addElement("Deporte y ocio");
 					break;
 
 				case ENERGIA_MEDIOAMBIENTE:
-					modelSector.addElement("Energía y medio ambiente");
+					modelSectores.addElement("Energía y medio ambiente");
 					break;
 
 				case FINANZAS_SEGUROS_BIENESINMUEBLES:
-					modelSector.addElement("Finanzas, seguros y bienes inmuebles");
+					modelSectores.addElement("Finanzas, seguros y bienes inmuebles");
 					break;
 
 				case INTERNET:
-					modelSector.addElement("Internet");
+					modelSectores.addElement("Internet");
 					break;
 
 				case LOGISTICA_TRANSPORTE:
-					modelSector.addElement("Logística y transporte");
+					modelSectores.addElement("Logística y transporte");
 					break;
 
 				case MEDIOSCOMUNICACION_MARKETING:
-					modelSector.addElement("Medios de comunicación y marketing");
+					modelSectores.addElement("Medios de comunicación y marketing");
 					break;
 
 				case METALURGIA_ELECTRONICA:
-					modelSector.addElement("Metalurgia y electrónica");
+					modelSectores.addElement("Metalurgia y electrónica");
 					break;
 
 				case PRODUCTOSQUIMICOS_MATERIASPRIMAS:
-					modelSector.addElement("Productos químicos y materias primas");
+					modelSectores.addElement("Productos químicos y materias primas");
 					break;
 
 				case SALUD_INDUSTRIAFARMACEUTICA:
-					modelSector.addElement("Salud e industria farmacéutica");
+					modelSectores.addElement("Salud e industria farmacéutica");
 					break;
 
 				case SERVICIOS:
-					modelSector.addElement("Servicios");
+					modelSectores.addElement("Servicios");
 					break;
 
 				case SOCIEDAD:
-					modelSector.addElement("Sociedad");
+					modelSectores.addElement("Sociedad");
 					break;
 
 				case TECNOLOGIA_TELECOMUNICACIONES:
-					modelSector.addElement("Tecnología y telecomunicaciones");
+					modelSectores.addElement("Tecnología y telecomunicaciones");
 					break;
 
 				case TURISMO_HOSTELERIA:
-					modelSector.addElement("Turismo y hostelería");
+					modelSectores.addElement("Turismo y hostelería");
 					break;
 
 				case VIDA:
-					modelSector.addElement("Vida");
+					modelSectores.addElement("Vida");
 					break;
 
 				default:
 					System.out.println("Tipo incorrecto");
 				}
-				
+
 				switch (emp.getEstado()) {
 				case INFORMADO:
-					modelEstado.addElement("Informado");
+					modelEstados.addElement("Informado");
 					break;
 
 				case NOINTERESADO:
-					modelEstado.addElement("No interesado");
+					modelEstados.addElement("No interesado");
 					break;
 
 				case PLANIFICANDOINSERCIONES:
-					modelEstado.addElement("Planificando inserciones");
+					modelEstados.addElement("Planificando inserciones");
 					break;
 
 				case PROXIMOAÑO:
-					modelEstado.addElement("Proximo año");
+					modelEstados.addElement("Proximo año");
 					break;
 
 				case VALORANDO_INTERESADO:
-					modelEstado.addElement("Valorando/interesado");
+					modelEstados.addElement("Valorando/interesado");
 					break;
 
 				default:
 					System.out.println("Tipo invalido.");
 				}
-				
-				modelNom.addElement(emp.getNom_empresa());
-				modelPuesto.addElement(emp.getPuesto());
+
+				modelEmpresas.addElement(emp.getNom_empresa());
+				if (emp.getPuesto()==null) {
+					modelPuestos.addElement("");
+				} else {
+					modelPuestos.addElement(emp.getPuesto());
+				}
 				modelDatosContacto.addElement(emp.getDatosContacto());
 				modelContactosEmpresa.addElement(emp.getContactoEmpresa());
 				modelContactosApnabi.addElement(emp.getContactoApnabi());
 			}
+			listSectores.setModel(modelSectores);
+			listEmpresas.setModel(modelEmpresas);
+			listPuestos.setModel(modelPuestos);
+			listDatosContacto.setModel(modelDatosContacto);
+			listContactosEmpresa.setModel(modelContactosEmpresa);
+			listContactosApnabi.setModel(modelContactosApnabi);
+			listEstados.setModel(modelEstados);
 		}
 	}
 
