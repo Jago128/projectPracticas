@@ -18,7 +18,8 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private LoginController cont;
-	private JTextField textFieldNombre, textFieldPuesto, textFieldDatosContacto, textFieldContactoEmpresa, textFieldContacto1, textFieldContacto2;
+	private JTextField textFieldNombre, textFieldPuesto, textFieldDatosContacto, textFieldContactoEmpresa,
+	textFieldContacto1, textFieldContacto2;
 	private JTextField textFieldContacto3, textFieldContacto4, textFieldPersonaContacto;
 	private JTextArea textAreaObservaciones;
 	private JComboBox<String> comboBoxSector, comboBoxEstado;
@@ -59,10 +60,12 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		contentPanel.add(lblSector);
 
 		comboBoxSector = new JComboBox<>();
-		comboBoxSector.setModel(new DefaultComboBoxModel<>(new String[] {"Agricultura y Ganaderia", "Bienes de Consumo", "Comercio electronico",
-				"Comercio y establecimientos", "Construccion", "Deporte y ocio", "Energia y medio ambiente", "Finanzas, Seguros y bienes inmuebles",
-				"Internet", "Logistica y Transporte", "Medios de comunicacion y marketing", "Metalurgia y electronica", "Productos quimicos y materias primas",
-				"Salud e industria farmaceutica", "Servicios", "Sociedad", "Tecnologia y telecomunicaciones", "Turismo y hosteleria", "Vida"}));
+		comboBoxSector.setModel(new DefaultComboBoxModel<>(new String[] { "Agricultura y Ganaderia",
+				"Bienes de Consumo", "Comercio electronico", "Comercio y establecimientos", "Construccion",
+				"Deporte y ocio", "Energia y medio ambiente", "Finanzas, Seguros y bienes inmuebles", "Internet",
+				"Logistica y Transporte", "Medios de comunicacion y marketing", "Metalurgia y electronica",
+				"Productos quimicos y materias primas", "Salud e industria farmaceutica", "Servicios", "Sociedad",
+				"Tecnologia y telecomunicaciones", "Turismo y hosteleria", "Vida" }));
 		comboBoxSector.setBounds(191, 74, 163, 21);
 		contentPanel.add(comboBoxSector);
 
@@ -117,8 +120,8 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		contentPanel.add(lblEstado);
 
 		comboBoxEstado = new JComboBox<>();
-		comboBoxEstado.setModel(new DefaultComboBoxModel<>(new String[] {"Informado", "Valorando/interesado", "Planificando inserciones",
-				"Proximo año", "No interesado"}));
+		comboBoxEstado.setModel(new DefaultComboBoxModel<>(new String[] { "Informado", "Valorando/interesado",
+				"Planificando inserciones", "Proximo año", "No interesado" }));
 		comboBoxEstado.setBounds(191, 277, 163, 21);
 		contentPanel.add(comboBoxEstado);
 
@@ -215,17 +218,21 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (textFieldContacto1.getText().isBlank()||textFieldContactoEmpresa.getText().isBlank()||textFieldDatosContacto.getText().isEmpty()
-				||textFieldNombre.getText().isBlank()||textFieldPersonaContacto.getText().isBlank()||textFieldPuesto.getText().isBlank()
-				||comboBoxEstado.getSelectedIndex()==-1||comboBoxSector.getSelectedIndex()==-1) {
-			JOptionPane.showMessageDialog(null, "Por favor, rellena toda la informacion obligatoria.", "Falta informacion", JOptionPane.INFORMATION_MESSAGE);
+		if (textFieldContacto1.getText().isBlank() || textFieldContactoEmpresa.getText().isBlank()
+				|| textFieldDatosContacto.getText().isEmpty() || textFieldNombre.getText().isBlank()
+				|| textFieldPersonaContacto.getText().isBlank() || textFieldPuesto.getText().isBlank()
+				|| comboBoxEstado.getSelectedIndex() == -1 || comboBoxSector.getSelectedIndex() == -1) {
+			JOptionPane.showMessageDialog(null, "Por favor, rellena toda la informacion obligatoria.",
+					"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			if (dateFormatErrorCheck()) {
-				JOptionPane.showMessageDialog(null, "El formato de una de las fechas es incorrecta.", "ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "El formato de una de las fechas es incorrecta.", "ERROR",
+						JOptionPane.ERROR_MESSAGE);
 			} else {
 				Sector sector = null;
 				Estado estado = null;
-				switch ((String)comboBoxSector.getSelectedItem()) {
+				int result = 0;
+				switch ((String) comboBoxSector.getSelectedItem()) {
 				case "Agricultura y Ganaderia":
 					sector = Sector.AGRICULTURA_GANADERIA;
 					break;
@@ -244,7 +251,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 
 				case "Construccion":
 					sector = Sector.CONSTRUCCION;
-					break; 
+					break;
 
 				case "Deporte y ocio":
 					sector = Sector.DEPORTE_OCIO;
@@ -302,7 +309,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 					break;
 				}
 
-				switch ((String)comboBoxEstado.getSelectedItem()) {
+				switch ((String) comboBoxEstado.getSelectedItem()) {
 				case "Informado":
 					estado = Estado.INFORMADO;
 					break;
@@ -321,11 +328,13 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 
 				case "No interesado":
 					estado = Estado.NOINTERESADO;
-					break; 
+					break;
 
 				}
-				Empresa emp = new Empresa(textFieldNombre.getText(), sector, textFieldPuesto.getText(), textFieldDatosContacto.getText(),
-						textFieldContactoEmpresa.getText(), textFieldPersonaContacto.getText(), estado, Date.valueOf(textFieldContacto1.getText()));
+				Empresa emp = new Empresa(textFieldNombre.getText(), sector, textFieldPuesto.getText(),
+						textFieldDatosContacto.getText(), textFieldContactoEmpresa.getText(),
+						textFieldPersonaContacto.getText(), estado, Date.valueOf(textFieldContacto1.getText()));
+
 				if (!textFieldContacto2.getText().isBlank()) {
 					emp.setContacto2(Date.valueOf(textFieldContacto2.getText()));
 				}
@@ -333,15 +342,39 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 				if (!textFieldContacto3.getText().isBlank()) {
 					emp.setContacto3(Date.valueOf(textFieldContacto3.getText()));
 				}
-				
+
 				if (!textFieldContacto4.getText().isBlank()) {
 					emp.setContacto4(Date.valueOf(textFieldContacto4.getText()));
 				}
-				
+
 				if (!textAreaObservaciones.getText().isBlank()) {
 					emp.setObservaciones(textAreaObservaciones.getText());
 				}
-				cont.añadirEmpresa(emp);
+
+				if (cont.añadirEmpresa(emp)) {
+					result = JOptionPane.showConfirmDialog(null,
+							"La empresa ha sido añadida correctamente. Quiere añadir mas empresas?", "",
+							JOptionPane.YES_NO_OPTION);
+					if (result == JOptionPane.NO_OPTION) {
+						this.dispose();
+					} else if (result == JOptionPane.YES_OPTION) {
+						textAreaObservaciones.setText("");
+						textFieldContacto1.setText("");
+						textFieldContacto2.setText("");
+						textFieldContacto3.setText("");
+						textFieldContacto4.setText("");
+						textFieldContactoEmpresa.setText("");
+						textFieldDatosContacto.setText("");
+						textFieldNombre.setText("");
+						textFieldPersonaContacto.setText("");
+						textFieldPuesto.setText("");
+						comboBoxEstado.setSelectedIndex(-1);
+						comboBoxSector.setSelectedIndex(-1);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Ha habido un error al intentar añadir la empresa.", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 	}
