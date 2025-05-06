@@ -5,7 +5,6 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -24,6 +23,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 	private JComboBox<String> comboBoxEstado;
 	private JButton btnModificar;
 	private JLabel lblDatosEmpresa;
+	private JTextArea textAreaObservaciones;
 
 	public VentanaModificar(JDialog parent, LoginController cont, Empresa emp) {
 		super(parent, true);
@@ -143,7 +143,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		lblMaxChars.setBounds(21, 394, 126, 31);
 		getContentPane().add(lblMaxChars);
 
-		JTextArea textAreaObservaciones = new JTextArea();
+		textAreaObservaciones = new JTextArea();
 		textAreaObservaciones.setLineWrap(true);
 		textAreaObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textAreaObservaciones.setBounds(157, 364, 230, 61);
@@ -324,6 +324,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 						JOptionPane.ERROR_MESSAGE);
 			} else {
 				Estado estado = null;
+				
 				switch ((String) comboBoxEstado.getSelectedItem()) {
 				case "Informado":
 					estado = Estado.INFORMADO;
@@ -344,17 +345,45 @@ public class VentanaModificar extends JDialog implements ActionListener {
 				case "No interesado":
 					estado = Estado.NOINTERESADO;
 					break;
-				}
 
-				if (cont.modificarEmpresa(textFieldDatosContacto.getText(), textFieldContactoEmpresa.getText(), textFieldPersonaContacto.getText(),
-						estado, Date.valueOf(textFieldContacto1.getText()), Date.valueOf(textFieldContacto2.getText()), Date.valueOf(textFieldContacto3.getText()),
-						Date.valueOf(textFieldContacto4.getText()), textareaEmpresa.getText())) {
-					emp=cont.getEmpresa(emp.getNom_empresa());
-					lblDatosEmpresa.setText("Informacion actualizada de la empresa:");
-					loadEmpresa();
-					JOptionPane.showMessageDialog(null, "La informacion de la empresa ha sido actualizada correctamente.");
-				} else {
-					JOptionPane.showMessageDialog(btnModificar, "No se ha podido actualizar la informacion de la empresa.", "ERROR", JOptionPane.ERROR_MESSAGE);
+				default:
+					estado = null;
+					break;
+				}
+				if (!textFieldDatosContacto.getText().isBlank()) {
+					cont.modificarDatosContacto(textFieldDatosContacto.getText());
+				}
+				
+				if (!textFieldContactoEmpresa.getText().isBlank()) {
+					cont.modificarContactoEmpresa(textFieldContactoEmpresa.getText());
+				}
+				
+				if (!textFieldPersonaContacto.getText().isBlank()) {
+					cont.modificarPersonaContacto(textFieldPersonaContacto.getText());
+				}
+				
+				if (comboBoxEstado.getSelectedIndex() != -1) {
+					cont.modificarEstado(estado);
+				}
+				
+				if (!textFieldContacto1.getText().isBlank()) {
+					cont.modificarContacto1(textFieldContacto1.getText());
+				}
+				
+				if (!textFieldContacto2.getText().isBlank()) {
+					cont.modificarContacto2(textFieldContacto2.getText());
+				}
+				
+				if (!textFieldContacto3.getText().isBlank()) {
+					cont.modificarContacto3(textFieldContacto3.getText());
+				}
+				
+				if (!textFieldContacto4.getText().isBlank()) {
+					cont.modificarContacto4(textFieldContacto4.getText());
+				}
+				
+				if (!textAreaObservaciones.getText().isBlank()) {
+					cont.modificarObservaciones(textAreaObservaciones.getText());
 				}
 			}
 		}

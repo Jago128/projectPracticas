@@ -13,7 +13,7 @@ import java.util.TreeMap;
 public class BDImplementacion implements ApnabiDAO {
 	private Connection con;
 	private PreparedStatement stmt;
-	
+
 	private ResourceBundle configFile;
 	@SuppressWarnings("unused")
 	private String driverBD;
@@ -130,7 +130,7 @@ public class BDImplementacion implements ApnabiDAO {
 	public boolean registrarUsuario(Usuario user) {
 		boolean registro = false;
 		this.openConnection();
-		
+
 		if (!verificarUsuario(user)) {
 			this.openConnection();
 			try {
@@ -149,11 +149,11 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return registro;
 	}
-	
+
 	@Override
 	public Usuario getUsuario(Usuario user) {
 		this.openConnection();
-		
+
 		if (!verificarUsuario(user)) {
 			this.openConnection();
 			try {
@@ -378,12 +378,12 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarEmpresa(String datos, String contactoE, String personaC, Estado estado, Date contacto1, Date contacto2, Date contacto3, Date contacto4, String observaciones) {
+	public boolean modificarDatosContacto(String datos) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
-			if (!datos.isEmpty()) {
+			if (!datos.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATEDATOS);
 				stmt.setString(1, datos);
 				if (stmt.executeUpdate()>0) {
@@ -391,8 +391,21 @@ public class BDImplementacion implements ApnabiDAO {
 				}
 				stmt.close();
 			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
+			e.printStackTrace();
+		}
+		return check;
+	}
 
-			if (!contactoE.isEmpty()) {
+	@Override
+	public boolean modificarContactoEmpresa(String contactoE) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!contactoE.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTOEMPRESA);
 				stmt.setString(1, contactoE);
 				if (stmt.executeUpdate()>0) {
@@ -400,8 +413,21 @@ public class BDImplementacion implements ApnabiDAO {
 				}
 				stmt.close();
 			}
-			
-			if (!personaC.isEmpty()) {
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarPersonaContacto(String personaC) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!personaC.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTOAPNABI);
 				stmt.setString(1, personaC);
 				if (stmt.executeUpdate()>0) {
@@ -409,7 +435,20 @@ public class BDImplementacion implements ApnabiDAO {
 				}
 				stmt.close();
 			}
-			
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarEstado(Estado estado) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
 			if (estado!=null) {
 				stmt = con.prepareStatement(SQLUPDATEESTADO);
 				switch (estado) {
@@ -441,44 +480,109 @@ public class BDImplementacion implements ApnabiDAO {
 				}
 				stmt.close();
 			}
-			
-			if (contacto1!=null) {
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarContacto1(String contacto1) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!contacto1.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO1);
-				stmt.setDate(1, contacto1);
+				stmt.setDate(1, Date.valueOf(contacto1));
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
 				stmt.close();
 			}
-			
-			if (contacto2!=null) {
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarContacto2(String contacto2) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!contacto2.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO2);
-				stmt.setDate(1, contacto2);
+				stmt.setDate(1, Date.valueOf(contacto2));
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
 				stmt.close();
 			}
-			
-			if (contacto3!=null) {
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarContacto3(String contacto3) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!contacto3.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO3);
-				stmt.setDate(1, contacto3);
+				stmt.setDate(1, Date.valueOf(contacto3));
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
 				stmt.close();
 			}
-			
-			if (contacto4!=null) {
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarContacto4(String contacto4) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!contacto4.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO4);
-				stmt.setDate(1, contacto4);
+				stmt.setDate(1, Date.valueOf(contacto4));
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
 				stmt.close();
 			}
-			
-			if (!observaciones.isEmpty()) {
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarObservaciones(String observaciones) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!observaciones.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATEOBSERVACIONES);
 				stmt.setString(1, observaciones);
 				if (stmt.executeUpdate()>0) {

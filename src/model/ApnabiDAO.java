@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.Date;
 import java.util.Map;
 
 public interface ApnabiDAO {
@@ -22,7 +21,23 @@ public interface ApnabiDAO {
 
 	public boolean añadirEmpresa(Empresa emp);
 	
-	public boolean modificarEmpresa(String datos, String contactoE, String personaC, Estado estado, Date contacto1, Date contacto2, Date contacto3, Date contacto4, String observaciones);
+	public boolean modificarDatosContacto(String datos);
+	
+	public boolean modificarContactoEmpresa(String contactoE);
+	
+	public boolean modificarPersonaContacto(String personaC);
+	
+	public boolean modificarEstado(Estado estado);
+	
+	public boolean modificarContacto1(String contacto1);
+	
+	public boolean modificarContacto2(String contacto2);
+	
+	public boolean modificarContacto3(String contacto3);
+	
+	public boolean modificarContacto4(String contacto4);
+	
+	public boolean modificarObservaciones(String observaciones);
 	
 	public boolean eliminarEmpresa(String nom);
 }
