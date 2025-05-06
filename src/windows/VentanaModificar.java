@@ -324,6 +324,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 						JOptionPane.ERROR_MESSAGE);
 			} else {
 				Estado estado = null;
+				boolean error = false;
 				
 				switch ((String) comboBoxEstado.getSelectedItem()) {
 				case "Informado":
@@ -351,39 +352,47 @@ public class VentanaModificar extends JDialog implements ActionListener {
 					break;
 				}
 				if (!textFieldDatosContacto.getText().isBlank()) {
-					cont.modificarDatosContacto(textFieldDatosContacto.getText());
+					error = cont.modificarDatosContacto(textFieldDatosContacto.getText());
 				}
 				
 				if (!textFieldContactoEmpresa.getText().isBlank()) {
-					cont.modificarContactoEmpresa(textFieldContactoEmpresa.getText());
+					error = cont.modificarContactoEmpresa(textFieldContactoEmpresa.getText());
 				}
 				
 				if (!textFieldPersonaContacto.getText().isBlank()) {
-					cont.modificarPersonaContacto(textFieldPersonaContacto.getText());
+					error = cont.modificarPersonaContacto(textFieldPersonaContacto.getText());
 				}
 				
 				if (comboBoxEstado.getSelectedIndex() != -1) {
-					cont.modificarEstado(estado);
+					error = cont.modificarEstado(estado);
 				}
 				
 				if (!textFieldContacto1.getText().isBlank()) {
-					cont.modificarContacto1(textFieldContacto1.getText());
+					error = cont.modificarContacto1(textFieldContacto1.getText());
 				}
 				
 				if (!textFieldContacto2.getText().isBlank()) {
-					cont.modificarContacto2(textFieldContacto2.getText());
+					error = cont.modificarContacto2(textFieldContacto2.getText());
 				}
 				
 				if (!textFieldContacto3.getText().isBlank()) {
-					cont.modificarContacto3(textFieldContacto3.getText());
+					error = cont.modificarContacto3(textFieldContacto3.getText());
 				}
 				
 				if (!textFieldContacto4.getText().isBlank()) {
-					cont.modificarContacto4(textFieldContacto4.getText());
+					error = cont.modificarContacto4(textFieldContacto4.getText());
 				}
 				
 				if (!textAreaObservaciones.getText().isBlank()) {
-					cont.modificarObservaciones(textAreaObservaciones.getText());
+					error = cont.modificarObservaciones(textAreaObservaciones.getText());
+				}
+				
+				if (error) {
+					JOptionPane.showMessageDialog(null, "Ha occurrido un error al modificar la empresa.", "ERROR", JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "La empresa ha sido modificada correctamente.");
+					emp = cont.getEmpresa(emp.getNom_empresa());
+					loadEmpresa();
 				}
 			}
 		}
