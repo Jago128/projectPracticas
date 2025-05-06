@@ -25,7 +25,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		this.cont = cont;
 		// this.user = user;
 		setTitle("Mostrar Empresas");
-		setBounds(100, 100, 550, 390);
+		setBounds(100, 100, 920, 390);
 		getContentPane().setLayout(null);
 
 		listSectores = new JList<>();
@@ -67,7 +67,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		addEmpresas();
 
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 10, 512, 246);
+		panel.setBounds(10, 10, 886, 246);
 		panel.add(listSectores);
 		panel.add(listEmpresas);
 		panel.add(listPuestos);
@@ -83,12 +83,12 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		getContentPane().add(panel);
 
 		JScrollPane scrollPane = new JScrollPane(panel);
-		scrollPane.setBounds(10, 56, 886, 417);
+		scrollPane.setBounds(10, 10, 886, 246);
 		getContentPane().add(scrollPane);
 
 		btnModificarEmpresa = new JButton("Modificar empresa");
 		btnModificarEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnModificarEmpresa.setBounds(42, 271, 431, 59);
+		btnModificarEmpresa.setBounds(254, 271, 431, 59);
 		getContentPane().add(btnModificarEmpresa);
 		btnModificarEmpresa.addActionListener(this);
 	}
@@ -233,19 +233,19 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 				modelContactosApnabi.addElement(emp.getContactoApnabi());
 				modelContactos1.addElement(emp.getContacto1());
 
-				if (emp.getObservaciones() == null) {
+				if (emp.getContacto2() == "") {
 					modelContactos2.addElement("---");
 				} else {
 					modelContactos2.addElement(emp.getContacto2());
 				}
 
-				if (emp.getObservaciones() == null) {
+				if (emp.getContacto3() == "") {
 					modelContactos3.addElement("---");
 				} else {
 					modelContactos3.addElement(emp.getContacto3());
 				}
 
-				if (emp.getObservaciones() == null) {
+				if (emp.getContacto4() == "") {
 					modelContactos4.addElement("---");
 				} else {
 					modelContactos4.addElement(emp.getContacto4());
@@ -274,5 +274,14 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnModificarEmpresa) {
+			if (!listEmpresas.isSelectionEmpty()) {
+				VentanaModificar dialog = new VentanaModificar(this, cont, cont.getEmpresa(listEmpresas.getSelectedValue()));
+				dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			} else {
+				JOptionPane.showMessageDialog(null, "[ERROR] Elija una empresa de la lista de empresas.");
+			}
+		}
 	}
 }

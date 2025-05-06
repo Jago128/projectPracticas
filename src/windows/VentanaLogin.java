@@ -86,7 +86,7 @@ public class VentanaLogin extends JDialog implements ActionListener {
 					lblMensaje.setText("Se ha iniciado sesion correctamente.");
 					JOptionPane.showMessageDialog(null, "Bienvenido, "+user.getNombre());
 					VentanaPrincipal frame = new VentanaPrincipal(cont, user);
-					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 					frame.setVisible(true);
 					this.dispose();
 				} else {
@@ -101,7 +101,7 @@ public class VentanaLogin extends JDialog implements ActionListener {
 		
 		if (e.getSource()==btnRegistro) {
 			VentanaRegistro dialog = new VentanaRegistro(cont);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			this.dispose();
 		}
