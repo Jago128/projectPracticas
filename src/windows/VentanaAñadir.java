@@ -324,8 +324,8 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 					case "No interesado":
 						estado = Estado.NOINTERESADO;
 						break;
-
 					}
+					
 					Empresa emp = new Empresa(textFieldNombre.getText(), sector, textFieldPuesto.getText(),
 							textFieldDatosContacto.getText(), textFieldContactoEmpresa.getText(),
 							textFieldPersonaContacto.getText(), estado, Date.valueOf(textFieldContacto1.getText()));

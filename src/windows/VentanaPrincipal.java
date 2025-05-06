@@ -15,7 +15,6 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JButton btnMostrar;
 	private JButton btnAñadir;
-	private JButton btnModificarEmpresas;
 	private JButton btnBorrarempresas;
 	private LoginController cont;
 	private Usuario user;
@@ -33,22 +32,17 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		
 		btnAñadir = new JButton("Añadir empresas");
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAñadir.setBounds(209, 48, 145, 45);
+		btnAñadir.setBounds(213, 103, 145, 45);
 		contentPane.add(btnAñadir);
-		
-		btnModificarEmpresas = new JButton("Modificar empresas");
-		btnModificarEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnModificarEmpresas.setBounds(30, 103, 145, 45);
-		contentPane.add(btnModificarEmpresas);
 		
 		btnBorrarempresas = new JButton("Borrar empresas");
 		btnBorrarempresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrarempresas.setBounds(209, 103, 145, 45);
+		btnBorrarempresas.setBounds(30, 103, 145, 45);
 		contentPane.add(btnBorrarempresas);
 		
-		btnMostrar = new JButton("Mostrar empresas");
+		btnMostrar = new JButton("Mostrar empresas (y Modificar empresas)");
 		btnMostrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnMostrar.setBounds(30, 48, 145, 45);
+		btnMostrar.setBounds(22, 48, 348, 45);
 		contentPane.add(btnMostrar);
 		
 		JLabel lblEmpresas = new JLabel("Empresas:");
@@ -59,7 +53,6 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		
 		btnAñadir.addActionListener(this);
 		btnBorrarempresas.addActionListener(this);
-		btnModificarEmpresas.addActionListener(this);
 		btnMostrar.addActionListener(this);
 	}
 
@@ -69,10 +62,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 			VentanaAñadir dialog = new VentanaAñadir(this, cont);
 			dialog.setVisible(true);
 		} else if (e.getSource()==btnBorrarempresas) {
-			VentanaBorrar dialog = new VentanaBorrar(this, cont);
-			dialog.setVisible(true);
-		} else if (e.getSource()==btnModificarEmpresas) {
-			VentanaModificar dialog = new VentanaModificar(this, cont);
+			VentanaBorrar dialog = new VentanaBorrar(this, cont, user);
 			dialog.setVisible(true);
 		} else if (e.getSource()==btnMostrar) {
 			VentanaMostrar dialog = new VentanaMostrar(this, cont, user);

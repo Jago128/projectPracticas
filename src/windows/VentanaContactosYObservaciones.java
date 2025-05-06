@@ -27,26 +27,34 @@ public class VentanaContactosYObservaciones extends JDialog {
 
 		listContacto1 = new JList<>();
 		listContacto1.setBounds(25, 94, 132, 286);
-		getContentPane().add(listContacto1);
-
+		
 		listContacto2 = new JList<>();
 		listContacto2.setBounds(157, 94, 132, 286);
-		getContentPane().add(listContacto2);
 
 		listContacto3 = new JList<>();
 		listContacto3.setBounds(288, 94, 132, 286);
-		getContentPane().add(listContacto3);
 
 		listContacto4 = new JList<>();
 		listContacto4.setBounds(420, 94, 132, 286);
-		getContentPane().add(listContacto4);
 
 		listObservaciones = new JList<>();
 		listObservaciones.setBounds(552, 94, 162, 286);
-		getContentPane().add(listObservaciones);
 
 		loadContactosObservaciones();
 
+		JPanel panel = new JPanel();
+		panel.setBounds(25, 94, 689, 286);
+		panel.add(listContacto1);
+		panel.add(listContacto2);
+		panel.add(listContacto3);
+		panel.add(listContacto4);
+		panel.add(listObservaciones);
+		getContentPane().add(panel);
+
+		JScrollPane scrollPane = new JScrollPane(panel);
+		scrollPane.setBounds(25, 94, 689, 286);
+		getContentPane().add(scrollPane);
+		
 		JLabel lblContactos1 = new JLabel("Contacto 1");
 		lblContactos1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContactos1.setFont(new Font("Tahoma", Font.PLAIN, 12));

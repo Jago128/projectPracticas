@@ -11,16 +11,11 @@ import model.*;
 
 public class VentanaMostrar extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	
+
 	private LoginController cont;
 	private Usuario user;
-	private JList<String> listSectores, listEmpresas;
-	private JList<String> listPuestos;
-	private JList<String> listDatosContacto;
-	private JList<String> listContactosEmpresa;
-	private JList<String> listContactosApnabi;
-	private JList<String> listEstados;
-	private JButton btnContactos;
+	private JList<String> listSectores, listEmpresas, listPuestos, listDatosContacto, listContactosEmpresa, listContactosApnabi, listEstados;
+	private JButton btnContactos, btnModificarEmpresa;
 
 	public VentanaMostrar(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
@@ -33,98 +28,108 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		listSectores = new JList<>();
 		listSectores.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		listSectores.setBounds(10, 56, 123, 417);
-		getContentPane().add(listSectores);
 
 		listEmpresas = new JList<String>();
 		listEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		listEmpresas.setBounds(130, 56, 130, 417);
-		getContentPane().add(listEmpresas);
-		
+
 		listPuestos = new JList<String>();
 		listPuestos.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		listPuestos.setBounds(258, 56, 116, 417);
-		getContentPane().add(listPuestos);
-		
+
 		listDatosContacto = new JList<String>();
 		listDatosContacto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		listDatosContacto.setBounds(370, 56, 138, 417);
-		getContentPane().add(listDatosContacto);
-		
+
 		listContactosEmpresa = new JList<String>();
 		listContactosEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		listContactosEmpresa.setBounds(503, 56, 143, 417);
-		getContentPane().add(listContactosEmpresa);
-		
+
 		listContactosApnabi = new JList<String>();
 		listContactosApnabi.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		listContactosApnabi.setBounds(640, 56, 150, 417);
-		getContentPane().add(listContactosApnabi);
-		
+
 		listEstados = new JList<String>();
 		listEstados.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		listEstados.setBounds(790, 56, 106, 417);
-		getContentPane().add(listEstados);
-		
+
 		addEmpresas();
-		
+
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 56, 886, 417);
+		panel.add(listSectores);
+		panel.add(listEmpresas);
+		panel.add(listPuestos);
+		panel.add(listDatosContacto);
+		panel.add(listContactosEmpresa);
+		panel.add(listContactosApnabi);
+		panel.add(listEstados);
+		getContentPane().add(panel);
+
+		JScrollPane scrollPane = new JScrollPane(panel);
+		scrollPane.setBounds(10, 56, 886, 417);
+		getContentPane().add(scrollPane);
+
 		JLabel lblSectores = new JLabel("Sectores");
 		lblSectores.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSectores.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSectores.setBounds(30, 20, 90, 26);
 		getContentPane().add(lblSectores);
-		
+
 		JLabel lblEmpresas = new JLabel("Empresas");
 		lblEmpresas.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblEmpresas.setBounds(142, 20, 90, 26);
 		getContentPane().add(lblEmpresas);
-		
+
 		JLabel lblPuestos = new JLabel("Puestos");
 		lblPuestos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPuestos.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblPuestos.setBounds(258, 20, 90, 26);
 		getContentPane().add(lblPuestos);
-		
+
 		JLabel lblDatosContacto = new JLabel("Datos de contacto");
 		lblDatosContacto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatosContacto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblDatosContacto.setBounds(374, 20, 123, 26);
 		getContentPane().add(lblDatosContacto);
-		
+
 		JLabel lblContactosEmpresa = new JLabel("Contacto en la empresa");
 		lblContactosEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContactosEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblContactosEmpresa.setBounds(495, 20, 151, 26);
 		getContentPane().add(lblContactosEmpresa);
-		
+
 		JLabel lblPersonasContacto = new JLabel("Persona de Contacto");
 		lblPersonasContacto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPersonasContacto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblPersonasContacto.setBounds(651, 20, 130, 26);
 		getContentPane().add(lblPersonasContacto);
-		
+
 		JLabel lblEstado = new JLabel("Estado");
 		lblEstado.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblEstado.setBounds(803, 20, 80, 26);
 		getContentPane().add(lblEstado);
-		
+
 		btnContactos = new JButton("Ver contactos y Observaciones");
 		btnContactos.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnContactos.setBounds(184, 483, 536, 59);
+		btnContactos.setBounds(465, 483, 431, 59);
 		getContentPane().add(btnContactos);
+
+		btnModificarEmpresa = new JButton("Modificar empresa");
+		btnModificarEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		btnModificarEmpresa.setBounds(20, 483, 431, 59);
+		getContentPane().add(btnModificarEmpresa);
+
 		btnContactos.addActionListener(this);
 	}
 
 	public void addEmpresas() {
 		Map<String, Empresa> empresas = cont.mostrarEmpresas();
-		DefaultListModel<String> modelSector = new DefaultListModel<>();
-		DefaultListModel<String> modelNom = new DefaultListModel<>();
-		DefaultListModel<String> modelPuesto = new DefaultListModel<>();
-		DefaultListModel<String> modelDatosContacto = new DefaultListModel<>();
-		DefaultListModel<String> modelContactosEmpresa = new DefaultListModel<>();
-		DefaultListModel<String> modelContactosApnabi = new DefaultListModel<>();
-		DefaultListModel<String> modelEstado = new DefaultListModel<>();
+		DefaultListModel<String> modelSector = new DefaultListModel<>(), modelNom = new DefaultListModel<>(), modelPuesto = new DefaultListModel<>(),
+				modelDatosContacto = new DefaultListModel<>(), modelContactosEmpresa = new DefaultListModel<>(), modelContactosApnabi = new DefaultListModel<>(),
+				modelEstado = new DefaultListModel<>();
 
 		listSectores.removeAll();
 		listEmpresas.removeAll();
@@ -133,7 +138,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		listContactosEmpresa.removeAll();
 		listContactosApnabi.removeAll();
 		listEstados.removeAll();
-		
+
 		if (!empresas.isEmpty()) {
 			for (Empresa emp:empresas.values()) {
 				switch (emp.getSector()) {
@@ -210,41 +215,43 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 					break;
 
 				case VIDA:
-					modelSector.addElement("Agricultura y ganadería");
+					modelSector.addElement("Vida");
 					break;
 
 				default:
-					System.out.println("Vida");
+					System.out.println("Tipo incorrecto");
 				}
+				
+				switch (emp.getEstado()) {
+				case INFORMADO:
+					modelEstado.addElement("Informado");
+					break;
+
+				case NOINTERESADO:
+					modelEstado.addElement("No interesado");
+					break;
+
+				case PLANIFICANDOINSERCIONES:
+					modelEstado.addElement("Planificando inserciones");
+					break;
+
+				case PROXIMOAÑO:
+					modelEstado.addElement("Proximo año");
+					break;
+
+				case VALORANDO_INTERESADO:
+					modelEstado.addElement("Valorando/interesado");
+					break;
+
+				default:
+					System.out.println("Tipo invalido.");
+				}
+				
 				modelNom.addElement(emp.getNom_empresa());
 				modelPuesto.addElement(emp.getPuesto());
 				modelDatosContacto.addElement(emp.getDatosContacto());
 				modelContactosEmpresa.addElement(emp.getContactoEmpresa());
 				modelContactosApnabi.addElement(emp.getContactoApnabi());
-				switch (emp.getEstado()) {
-				case INFORMADO:
-					modelEstado.addElement("Informado");
-					break;
-					
-				case NOINTERESADO:
-					modelEstado.addElement("No interesado");
-					break;
-					
-				case PLANIFICANDOINSERCIONES:
-					modelEstado.addElement("Planificando inserciones");
-					break;
-					
-				case PROXIMOAÑO:
-					modelEstado.addElement("Proximo año");
-					break;
-					
-				case VALORANDO_INTERESADO:
-					modelEstado.addElement("Valorando/interesado");
-					break;
-					
-				default:
-					System.out.println("Tipo invalido.");
-				}
 			}
 		}
 	}
@@ -256,7 +263,14 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 				VentanaContactosYObservaciones dialog = new VentanaContactosYObservaciones(this, cont, listEmpresas.getSelectedValue(), user);
 				dialog.setVisible(true);
 			} else {
-				JOptionPane.showMessageDialog(null, "[ERROR] Elija una empresa de la lista de empresas");
+				JOptionPane.showMessageDialog(null, "[ERROR] Elija una empresa de la lista de nombres de empresas.");
+			}
+		} else {
+			if (!listEmpresas.isSelectionEmpty()) {
+				VentanaModificar dialog = new VentanaModificar(this, cont, cont.getEmpresa(listEmpresas.getSelectedValue()));
+				dialog.setVisible(true);
+			} else {
+				JOptionPane.showMessageDialog(null, "[ERROR] Elija una empresa de la lista de nombres de empresas.");
 			}
 		}
 	}
