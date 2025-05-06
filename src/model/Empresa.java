@@ -1,10 +1,11 @@
 package model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Empresa {
-	private Sector sector;
 	private String nom_empresa;
+	private Sector sector;
 	private String puesto;
 	private String datosContacto;
 	private String contactoEmpresa;
@@ -15,21 +16,26 @@ public class Empresa {
 	private Date contacto3;
 	private Date contacto4;
 	private String observaciones;
-	
+
 	public Empresa() {
-		this.sector = Sector.UNSET;
 		this.nom_empresa = "";
+		this.sector = Sector.UNSET;
 		this.puesto = "";
 		this.datosContacto = "";
 		this.contactoEmpresa = "";
 		this.contactoApnabi = "";
 		this.estado = Estado.UNSET;
+		this.contacto1 = Date.valueOf(LocalDate.now());
+		this.contacto2 = Date.valueOf(LocalDate.now());
+		this.contacto3 = Date.valueOf(LocalDate.now());
+		this.contacto4 = Date.valueOf(LocalDate.now());
+		this.observaciones = "";
 	}
 
-	public Empresa(Sector sector, String nom_empresa, String puesto, String datosContacto, String contactoEmpresa,
-			String contactoApnabi, Estado estado, Date contacto1, String observaciones) {
-		this.sector = sector;
+	public Empresa(String nom_empresa, Sector sector, String puesto, String datosContacto, String contactoEmpresa,
+			String contactoApnabi, Estado estado, Date contacto1) {
 		this.nom_empresa = nom_empresa;
+		this.sector = sector;
 		this.puesto = puesto;
 		this.datosContacto = datosContacto;
 		this.contactoEmpresa = contactoEmpresa;
@@ -37,13 +43,22 @@ public class Empresa {
 		this.estado = estado;
 		this.contacto1 = contacto1;
 	}
-	
-	public Sector getSector() {
-		return sector;
-	}
 
-	public void setSector(Sector sector) {
+	public Empresa(String nom_empresa, Sector sector, String puesto, String datosContacto, String contactoEmpresa,
+			String contactoApnabi, Estado estado, Date contacto1, Date contacto2, Date contacto3, Date contacto4,
+			String observaciones) {
+		this.nom_empresa = nom_empresa;
 		this.sector = sector;
+		this.puesto = puesto;
+		this.datosContacto = datosContacto;
+		this.contactoEmpresa = contactoEmpresa;
+		this.contactoApnabi = contactoApnabi;
+		this.estado = estado;
+		this.contacto1 = contacto1;
+		this.contacto2 = contacto2;
+		this.contacto3 = contacto3;
+		this.contacto4 = contacto4;
+		this.observaciones = observaciones;
 	}
 
 	public String getNom_empresa() {
@@ -52,6 +67,14 @@ public class Empresa {
 
 	public void setNom_empresa(String nom_empresa) {
 		this.nom_empresa = nom_empresa;
+	}
+
+	public Sector getSector() {
+		return sector;
+	}
+
+	public void setSector(Sector sector) {
+		this.sector = sector;
 	}
 
 	public String getPuesto() {
@@ -136,6 +159,10 @@ public class Empresa {
 
 	@Override
 	public String toString() {
-		return "Sector: "+sector+", Empresa: "+nom_empresa+", Puesto en la empresa: "+puesto+", Datos de contacto: "+datosContacto+", Contacto en la empresa: "+contactoEmpresa+", Persona de Contacto: "+contactoApnabi+", Estado: "+estado;
+		return "Empresa=" +nom_empresa+", Sector: "+sector+", puesto=" + puesto + ", datosContacto="
+				+ datosContacto + ", contactoEmpresa=" + contactoEmpresa + ", contactoApnabi=" + contactoApnabi
+				+ ", estado=" + estado + ", contacto1=" + contacto1 + ", contacto2=" + contacto2 + ", contacto3="
+				+ contacto3 + ", contacto4=" + contacto4 + ", observaciones=" + observaciones + "]";
 	}
+
 }
