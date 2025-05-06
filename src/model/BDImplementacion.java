@@ -172,9 +172,17 @@ public class BDImplementacion implements ApnabiDAO {
 				empresa.setContactoApnabi(rs.getString("CONTACTOAPNABI"));
 				empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
 				empresa.setContacto1(rs.getDate("CONTACTO1").toString());
-				empresa.setContacto2(rs.getDate("CONTACTO2").toString());
-				empresa.setContacto3(rs.getDate("CONTACTO3").toString());
-				empresa.setContacto4(rs.getDate("CONTACTO4").toString());
+				if (rs.getDate("CONTACTO2")!=null) {
+					empresa.setContacto2(rs.getDate("CONTACTO2").toString());
+				}
+				
+				if (rs.getDate("CONTACTO3")!=null) {
+					empresa.setContacto3(rs.getDate("CONTACTO3").toString());
+				}
+				
+				if (rs.getDate("CONTACTO4")!=null) {
+					empresa.setContacto4(rs.getDate("CONTACTO4").toString());
+				}
 				empresa.setObservaciones(rs.getString("OBSERVACIONES"));
 				empresas.put(empresa.getNom_empresa(), empresa);
 			}
