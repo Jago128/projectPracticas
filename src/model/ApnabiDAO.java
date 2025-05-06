@@ -7,9 +7,7 @@ public interface ApnabiDAO {
 	public boolean verificarUsuario(Usuario user);
 	
 	public boolean verificarContraseñaUsuario(Usuario user);
-	
-	public boolean verificarTipoUsuario(Usuario user);
-	
+		
 	public Usuario getUsuario(Usuario user);
 	
 	public boolean registrarUsuario(Usuario user);

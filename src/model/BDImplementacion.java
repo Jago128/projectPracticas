@@ -24,7 +24,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUSUARIO = "SELECT * FROM USUARIO WHERE NOMBRE = ?";
 	final String SQLUSUARIOCONTRASEÑA = "SELECT * FROM USUARIO WHERE NOMBRE=? AND CONTRASEÑA = ?";
 	final String SQLTIPO = "SELECT TIPO FROM USUARIO WHERE NOMBRE = ?";
-	final String SQLINSERTUSUARIO = "INSERT INTO USUARIO VALUES (?,?,'Trabajador')";
+	final String SQLINSERTUSUARIO = "INSERT INTO USUARIO VALUES (?,?)";
 
 	final String SQLEMPRESAS = "SELECT * FROM EMPRESA";
 	final String SQLSELECTEMPRESA = "SELECT * FROM EMPRESA WHERE NOM_EMPRESA = ?";
@@ -105,28 +105,6 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean verificarTipoUsuario(Usuario user) {
-		boolean admin = false;
-		this.openConnection();
-
-		try {
-			stmt = con.prepareStatement(SQLTIPO);
-			stmt.setString(1, user.getNombre());
-			ResultSet rs = stmt.executeQuery();
-			if (rs.next() && rs.getString(1).equals("Admin")) {
-				admin = true;
-			}
-			rs.close();
-			stmt.close();
-			con.close();
-		} catch (SQLException e) {
-			System.out.println("El usuario no se pudo verificar correctamente.");
-			e.printStackTrace();
-		}
-		return admin;
-	}
-
-	@Override
 	public boolean registrarUsuario(Usuario user) {
 		boolean registro = false;
 		this.openConnection();
@@ -163,11 +141,6 @@ public class BDImplementacion implements ApnabiDAO {
 				if (rs.next()) {
 					user.setNombre(rs.getString("NOMBRE"));
 					user.setContraseña(rs.getString("CONTRASEÑA"));
-					if (verificarTipoUsuario(user)) {
-						user.setTipo(Tipo.ADMIN);
-					} else {
-						user.setTipo(Tipo.TRABAJADOR);
-					}
 				}
 				stmt.close();
 				con.close();

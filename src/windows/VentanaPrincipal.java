@@ -11,7 +11,7 @@ import model.Usuario;
 
 public class VentanaPrincipal extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	
+
 	private JPanel contentPane;
 	private JButton btnMostrar;
 	private JButton btnAñadir;
@@ -29,28 +29,36 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		btnAñadir = new JButton("Añadir empresas");
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAñadir.setBounds(213, 103, 145, 45);
 		contentPane.add(btnAñadir);
-		
+
 		btnBorrarempresas = new JButton("Borrar empresas");
 		btnBorrarempresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrarempresas.setBounds(30, 103, 145, 45);
+		btnBorrarempresas.setBounds(213, 48, 145, 45);
 		contentPane.add(btnBorrarempresas);
-		
-		btnMostrar = new JButton("Mostrar empresas (y Modificar empresas)");
+
+		btnMostrar = new JButton("Mostrar empresas");
 		btnMostrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnMostrar.setBounds(22, 48, 348, 45);
+		btnMostrar.setBounds(28, 48, 145, 45);
 		contentPane.add(btnMostrar);
-		
+
 		JLabel lblEmpresas = new JLabel("Empresas:");
 		lblEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblEmpresas.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEmpresas.setBounds(115, 10, 138, 28);
 		contentPane.add(lblEmpresas);
-		
+
+		JTextArea textAreaModify = new JTextArea();
+		textAreaModify.setBackground(UIManager.getColor("Button.background"));
+		textAreaModify.setLineWrap(true);
+		textAreaModify.setText("Se modifican las empresas desde esta ventana.");
+		textAreaModify.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaModify.setBounds(28, 94, 145, 34);
+		contentPane.add(textAreaModify);
+
 		btnAñadir.addActionListener(this);
 		btnBorrarempresas.addActionListener(this);
 		btnMostrar.addActionListener(this);

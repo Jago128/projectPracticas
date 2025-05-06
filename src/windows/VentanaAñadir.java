@@ -36,10 +36,10 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		JLabel lblObligatorio = new JLabel("* Obligatorio. Fechas en DD/MM/AAAA");
+		JLabel lblObligatorio = new JLabel("* Obligatorio. Fechas de contacto son en DD/MM/AAAA");
 		lblObligatorio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblObligatorio.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblObligatorio.setBounds(76, 6, 242, 19);
+		lblObligatorio.setBounds(10, 6, 366, 19);
 		contentPanel.add(lblObligatorio);
 
 		JLabel lblNombre = new JLabel("Nombre: *");
@@ -64,7 +64,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		comboBoxSector.setBounds(191, 74, 163, 21);
 		contentPanel.add(comboBoxSector);
 
-		JLabel lblPuesto = new JLabel("Puesto: *");
+		JLabel lblPuesto = new JLabel("Puesto:");
 		lblPuesto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblPuesto.setBounds(28, 109, 108, 31);

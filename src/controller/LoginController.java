@@ -21,10 +21,6 @@ public class LoginController {
 		return dao.verificarContraseñaUsuario(user);
 	}
 	
-	public boolean verificarTipoUsuario(Usuario user) {
-		return dao.verificarTipoUsuario(user);
-	}
-	
 	public boolean registrarUsuario(Usuario user) {
 		return dao.registrarUsuario(user);
 	}
