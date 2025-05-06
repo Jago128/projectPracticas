@@ -288,15 +288,41 @@ public class VentanaModificar extends JDialog implements ActionListener {
 
 		infoEmpresa.append("Nombre: "+emp.getNom_empresa()).append("\n");
 		infoEmpresa.append("Sector: "+sector).append("\n");
-		infoEmpresa.append("Nombre: "+emp.getPuesto()).append("\n");
-		infoEmpresa.append("Nombre: "+emp.getContactoEmpresa()).append("\n");
-		infoEmpresa.append("Nombre: "+emp.getContactoApnabi()).append("\n");
-		infoEmpresa.append("Nombre: "+estado).append("\n");
-		infoEmpresa.append("Nombre: "+emp.getContacto1()).append("\n");
-		infoEmpresa.append("Nombre: "+emp.getContacto2()).append("\n");
-		infoEmpresa.append("Nombre: "+emp.getContacto3()).append("\n");
-		infoEmpresa.append("Nombre: "+emp.getContacto4()).append("\n");
-		infoEmpresa.append("Nombre: "+emp.getObservaciones());
+		if (emp.getPuesto().equals(null)) {
+			infoEmpresa.append("Puesto: ---").append("\n");
+		} else {
+			infoEmpresa.append("Puesto: "+emp.getPuesto()).append("\n");
+		}
+		
+		infoEmpresa.append("Contacto en la empresa: "+emp.getContactoEmpresa()).append("\n");
+		infoEmpresa.append("Persona de contacto: "+emp.getContactoApnabi()).append("\n");
+		infoEmpresa.append("Estado: "+estado).append("\n");
+		infoEmpresa.append("1. contacto: "+emp.getContacto1()).append("\n");
+		if (emp.getContacto2().equals("")) {
+			infoEmpresa.append("2. contacto: ---").append("\n");
+		} else {
+			infoEmpresa.append("2. contacto: "+emp.getContacto2()).append("\n");
+		}
+		
+		if (emp.getContacto3().equals("")) {
+			infoEmpresa.append("3. contacto: ---").append("\n");
+		} else {
+			infoEmpresa.append("3. contacto: "+emp.getContacto3()).append("\n");
+		}
+		
+		if (emp.getContacto4().equals("")) {
+			infoEmpresa.append("4. contacto: ---").append("\n");
+		} else {
+			infoEmpresa.append("4. contacto: "+emp.getContacto4()).append("\n");
+		}
+		
+		
+		if (emp.getObservaciones().equals(null)) {
+			infoEmpresa.append("Observaciones: ---");
+		} else {
+			infoEmpresa.append("Observaciones: "+emp.getObservaciones());
+		}
+		
 		textareaEmpresa.setText(infoEmpresa.toString());
 	}
 

@@ -223,7 +223,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 				}
 
 				modelEmpresas.addElement(emp.getNom_empresa());
-				if (emp.getPuesto() == null) {
+				if (emp.getPuesto().equals(null)) {
 					modelPuestos.addElement("---");
 				} else {
 					modelPuestos.addElement(emp.getPuesto());
@@ -233,25 +233,25 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 				modelContactosApnabi.addElement(emp.getContactoApnabi());
 				modelContactos1.addElement(emp.getContacto1());
 
-				if (emp.getContacto2() == "") {
+				if (emp.getContacto2().equals("")) {
 					modelContactos2.addElement("---");
 				} else {
 					modelContactos2.addElement(emp.getContacto2());
 				}
 
-				if (emp.getContacto3() == "") {
+				if (emp.getContacto3().equals("")) {
 					modelContactos3.addElement("---");
 				} else {
 					modelContactos3.addElement(emp.getContacto3());
 				}
 
-				if (emp.getContacto4() == "") {
+				if (emp.getContacto4().equals("")) {
 					modelContactos4.addElement("---");
 				} else {
 					modelContactos4.addElement(emp.getContacto4());
 				}
 
-				if (emp.getObservaciones() == null) {
+				if (emp.getObservaciones().equals(null)) {
 					modelObservaciones.addElement("---");
 				} else {
 					modelObservaciones.addElement(emp.getObservaciones());
@@ -275,10 +275,12 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnModificarEmpresa) {
-			if (!listEmpresas.isSelectionEmpty()) {
+			if (!listEmpresas.isSelectionEmpty()&&!listEmpresas.getSelectedValue().equals("Empresas")) {
 				VentanaModificar dialog = new VentanaModificar(this, cont, cont.getEmpresa(listEmpresas.getSelectedValue()));
 				dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
+			} else if (listEmpresas.getSelectedValue().equals("Empresas")) {
+				JOptionPane.showMessageDialog(null, "[ERROR] No se puede modificar el titulo de la columna.");
 			} else {
 				JOptionPane.showMessageDialog(null, "[ERROR] Elija una empresa de la lista de empresas.");
 			}
