@@ -1,6 +1,7 @@
 package model;
 
 public class Empresa {
+	private int codEmpresa;
 	private String nom_empresa;
 	private Sector sector;
 	private String puesto;
@@ -8,7 +9,6 @@ public class Empresa {
 	private String contactoEmpresa;
 	private String contactoApnabi;
 	private Estado estado;
-	private int idContacto;
 
 	public Empresa() {
 		this.nom_empresa = "";
@@ -18,11 +18,10 @@ public class Empresa {
 		this.contactoEmpresa = "";
 		this.contactoApnabi = "";
 		this.estado = Estado.UNSET;
-		this.idContacto = 0;
 	}
 
 	public Empresa(String nom_empresa, Sector sector, String puesto, String datosContacto, String contactoEmpresa,
-			String contactoApnabi, Estado estado, int idContacto) {
+			String contactoApnabi, Estado estado) {
 		this.nom_empresa = nom_empresa;
 		this.sector = sector;
 		this.puesto = puesto;
@@ -30,7 +29,14 @@ public class Empresa {
 		this.contactoEmpresa = contactoEmpresa;
 		this.contactoApnabi = contactoApnabi;
 		this.estado = estado;
-		this.idContacto = idContacto;
+	}
+
+	public int getCodEmpresa() {
+		return codEmpresa;
+	}
+
+	public void setCodEmpresa(int codEmpresa) {
+		this.codEmpresa = codEmpresa;
 	}
 
 	public String getNom_empresa() {
@@ -87,13 +93,5 @@ public class Empresa {
 
 	public void setEstado(Estado estado) {
 		this.estado = estado;
-	}
-
-	public int getIdContacto() {
-		return idContacto;
-	}
-
-	public void setIdContacto(int idContacto) {
-		this.idContacto = idContacto;
 	}
 }

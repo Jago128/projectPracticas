@@ -16,6 +16,7 @@ public class LoginController {
 		dialog.setVisible(true);
 	}
 
+	// Usuarios
 	public boolean verificarUsuario(Usuario user) {
 		return dao.verificarUsuario(user);
 	}
@@ -24,14 +25,15 @@ public class LoginController {
 		return dao.verificarContraseñaUsuario(user);
 	}
 
-	public boolean registrarUsuario(Usuario user) {
-		return dao.registrarUsuario(user);
-	}
-
 	public Usuario getUsuario(Usuario user) {
 		return dao.getUsuario(user);
 	}
 
+	public boolean registrarUsuario(Usuario user) {
+		return dao.registrarUsuario(user);
+	}
+	
+	// Empresas
 	public Map<String, Empresa> mostrarEmpresas() {
 		return dao.mostrarEmpresas();
 	}
@@ -42,6 +44,10 @@ public class LoginController {
 
 	public Empresa getEmpresa(String nom) {
 		return dao.getEmpresa(nom);
+	}
+	
+	public int getCodEmpresa(String nom) {
+		return getCodEmpresa(nom);
 	}
 
 	public boolean añadirEmpresa(Empresa emp) {
@@ -66,6 +72,19 @@ public class LoginController {
 
 	public boolean eliminarEmpresa(String nom) {
 		return dao.eliminarEmpresa(nom);
+	}
+	
+	// Contactos
+	public Map<Integer, Contacto> mostrarContactos() {
+		return mostrarContactos();
+	}
+	
+	public boolean getContacto(int id) {
+		return getContacto(id);
+	}
+	
+	public boolean añadirContacto(Contacto con) {
+		return añadirContacto(con);
 	}
 
 	public boolean modificarContacto1(String contacto1, int id) {

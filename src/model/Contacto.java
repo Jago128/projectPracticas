@@ -1,7 +1,6 @@
 package model;
 
 public class Contacto {
-	private int idContacto;
 	private String contacto1;
 	private String contacto2;
 	private String contacto3;
@@ -11,9 +10,9 @@ public class Contacto {
 	private String infoUltimo;
 	private ResultadoFinal resultadoFinal;
 	private String fechaResolucion;
-	
+	private int codEmpresa;
+
 	public Contacto() {
-		this.idContacto = 0;
 		this.contacto1 = "";
 		this.contacto2 = "";
 		this.contacto3 = "";
@@ -23,12 +22,12 @@ public class Contacto {
 		this.infoUltimo = "";
 		this.resultadoFinal = ResultadoFinal.UNSET;
 		this.fechaResolucion = "";
+		this.codEmpresa = 0;
 	}
 	
-	public Contacto(int idContacto, String contacto1, String contacto2, String contacto3, String contacto4, String observaciones,
+	public Contacto(String contacto1, String contacto2, String contacto3, String contacto4, String observaciones,
 			ResultadoUltimoContacto resultadoUltimoContacto, String infoUltimo, ResultadoFinal resultadoFinal,
-			String fechaResolucion) {
-		this.idContacto = idContacto;
+			String fechaResolucion, int codEmpresa) {
 		this.contacto1 = contacto1;
 		this.contacto2 = contacto2;
 		this.contacto3 = contacto3;
@@ -38,14 +37,7 @@ public class Contacto {
 		this.infoUltimo = infoUltimo;
 		this.resultadoFinal = resultadoFinal;
 		this.fechaResolucion = fechaResolucion;
-	}
-
-	public int getIdContacto() {
-		return idContacto;
-	}
-
-	public void setIdContacto(int idContacto) {
-		this.idContacto = idContacto;
+		this.codEmpresa = codEmpresa;
 	}
 
 	public String getContacto1() {
@@ -118,5 +110,13 @@ public class Contacto {
 
 	public void setFechaResolucion(String fechaResolucion) {
 		this.fechaResolucion = fechaResolucion;
+	}
+
+	public int getCodEmpresa() {
+		return codEmpresa;
+	}
+
+	public void setCodEmpresa(int codEmpresa) {
+		this.codEmpresa = codEmpresa;
 	}
 }

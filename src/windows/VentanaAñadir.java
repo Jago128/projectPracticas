@@ -365,7 +365,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 
 						Empresa emp = new Empresa(textFieldNombre.getText(), sector, textFieldPuesto.getText(),
 								textFieldDatosContacto.getText(), textFieldContactoEmpresa.getText(),
-								textFieldPersonaContacto.getText(), estado, textFieldContacto1.getText());
+								textFieldPersonaContacto.getText(), estado);
 						if (!textFieldContacto2.getText().isBlank()) {
 							emp.setContacto2(textFieldContacto2.getText());
 						}

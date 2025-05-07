@@ -103,30 +103,6 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean registrarUsuario(Usuario user) {
-		boolean registro = false;
-		this.openConnection();
-
-		if (!verificarUsuario(user)) {
-			this.openConnection();
-			try {
-				stmt = con.prepareStatement(SQLINSERTUSUARIO);
-				stmt.setString(1, user.getNombre());
-				stmt.setString(2, user.getContraseña());
-				if (stmt.executeUpdate()>0) {
-					registro = true;
-				}
-				stmt.close();
-				con.close();
-			} catch (SQLException e) {
-				System.out.println("Un error ha ocurrido al intentar registrar el usuario.");
-				e.printStackTrace();
-			}
-		}
-		return registro;
-	}
-
-	@Override
 	public Usuario getUsuario(Usuario user) {
 		this.openConnection();
 
@@ -151,6 +127,30 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
+	public boolean registrarUsuario(Usuario user) {
+		boolean registro = false;
+		this.openConnection();
+
+		if (!verificarUsuario(user)) {
+			this.openConnection();
+			try {
+				stmt = con.prepareStatement(SQLINSERTUSUARIO);
+				stmt.setString(1, user.getNombre());
+				stmt.setString(2, user.getContraseña());
+				if (stmt.executeUpdate()>0) {
+					registro = true;
+				}
+				stmt.close();
+				con.close();
+			} catch (SQLException e) {
+				System.out.println("Un error ha ocurrido al intentar registrar el usuario.");
+				e.printStackTrace();
+			}
+		}
+		return registro;
+	}
+
+	@Override
 	public Map<String, Empresa> mostrarEmpresas() {
 		ResultSet rs = null;
 		Empresa empresa;
@@ -169,19 +169,6 @@ public class BDImplementacion implements ApnabiDAO {
 				empresa.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
 				empresa.setContactoApnabi(rs.getString("CONTACTOAPNABI"));
 				empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
-				empresa.setContacto1(rs.getDate("CONTACTO1").toString());
-				if (rs.getDate("CONTACTO2") != null) {
-					empresa.setContacto2(rs.getDate("CONTACTO2").toString());
-				}
-
-				if (rs.getDate("CONTACTO3") != null) {
-					empresa.setContacto3(rs.getDate("CONTACTO3").toString());
-				}
-
-				if (rs.getDate("CONTACTO4") != null) {
-					empresa.setContacto4(rs.getDate("CONTACTO4").toString());
-				}
-				empresa.setObservaciones(rs.getString("OBSERVACIONES"));
 				empresas.put(empresa.getNom_empresa(), empresa);
 			}
 			rs.close();
@@ -237,19 +224,6 @@ public class BDImplementacion implements ApnabiDAO {
 				empresa.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
 				empresa.setContactoApnabi(rs.getString("CONTACTOAPNABI"));
 				empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
-				empresa.setContacto1(rs.getDate("CONTACTO1").toString());
-				if (rs.getDate("CONTACTO2") != null) {
-					empresa.setContacto2(rs.getDate("CONTACTO2").toString());
-				}
-
-				if (rs.getDate("CONTACTO3") != null) {
-					empresa.setContacto3(rs.getDate("CONTACTO3").toString());
-				}
-
-				if (rs.getDate("CONTACTO4") != null) {
-					empresa.setContacto4(rs.getDate("CONTACTO4").toString());
-				}
-				empresa.setObservaciones(rs.getString("OBSERVACIONES"));
 			}
 			rs.close();
 			stmt.close();
@@ -259,6 +233,12 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		}
 		return empresa;
+	}
+	
+	@Override
+	public int getCodEmpresa(String nom) {
+		
+		return 0;
 	}
 
 	@Override
@@ -513,6 +493,45 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
+	
+	@Override
+	public boolean eliminarEmpresa(String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLDELETE_EMPRESA);
+			stmt.setString(1, nom);
+			if (stmt.executeUpdate()>0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("La empresa no se pudo borrar.");
+			e.printStackTrace();
+		}
+		return check;
+	}
+	
+
+	@Override
+	public Map<Integer, Contacto> mostrarContactos() {
+		
+		return null;
+	}
+
+	@Override
+	public boolean getContacto(int id) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean añadirContacto(Contacto con) {
+		
+		return false;
+	}
 
 	@Override
 	public boolean modificarContacto1(String contacto1, int id) {
@@ -640,46 +659,26 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean eliminarEmpresa(String nom) {
-		boolean check = false;
-
-		this.openConnection();
-		try {
-			stmt = con.prepareStatement(SQLDELETE_EMPRESA);
-			stmt.setString(1, nom);
-			if (stmt.executeUpdate()>0) {
-				check = true;
-			}
-			stmt.close();
-			con.close();
-		} catch (SQLException e) {
-			System.out.println("La empresa no se pudo borrar.");
-			e.printStackTrace();
-		}
-		return check;
-	}
-
-	@Override
 	public boolean modificarResultadoUltimoContacto(String resultadoU, int id) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public boolean modificarInformacionUltimoContacto(String infoU, int id) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public boolean modificarResultadoFinal(String resultadoF, int id) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public boolean modificarFechaResolucion(String fecResolucion, int id) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 }

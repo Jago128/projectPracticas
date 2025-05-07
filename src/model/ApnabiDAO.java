@@ -18,6 +18,8 @@ public interface ApnabiDAO {
 	public Map<String, Empresa> mostrarNomEmpresas();
 
 	public Empresa getEmpresa(String nom);
+	
+	public int getCodEmpresa(String nom);
 
 	public boolean añadirEmpresa(Empresa emp);
 
