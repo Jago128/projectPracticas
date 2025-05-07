@@ -71,7 +71,7 @@ public class VentanaRegistro extends JDialog implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Ha occurrido un error al registarse.");
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "Rellena todos los campos para porder registarse.");
+				JOptionPane.showMessageDialog(null, "No estan rellenados los campos necesarios.");
 			}
 		}
 	}

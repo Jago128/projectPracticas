@@ -29,7 +29,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 	public VentanaAñadir(JFrame parent, LoginController cont) {
 		super(parent, true);
 		this.cont = cont;
-		
+
 		setResizable(false);
 		setTitle("Añadir empresa");
 		setBounds(100, 100, 400, 660);
@@ -232,11 +232,11 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == btnAñadir) {
-			if (textFieldContacto1.getText().isBlank() || textFieldContactoEmpresa.getText().isBlank()
-					|| textFieldDatosContacto.getText().isEmpty() || textFieldNombre.getText().isBlank()
-					|| textFieldPersonaContacto.getText().isBlank() || textFieldPuesto.getText().isBlank()
-					|| comboBoxEstado.getSelectedIndex() == -1 || comboBoxSector.getSelectedIndex() == -1) {
-				JOptionPane.showMessageDialog(null, "Por favor, rellena toda la informacion obligatoria.",
+			if (textFieldNombre.getText().isBlank() || comboBoxSector.getSelectedIndex() == -1
+					|| textFieldDatosContacto.getText().isBlank() || textFieldContactoEmpresa.getText().isBlank()
+					|| textFieldPersonaContacto.getText().isBlank() || comboBoxEstado.getSelectedIndex() == -1
+					|| textFieldContacto1.getText().isBlank()) {
+				JOptionPane.showMessageDialog(null, "Por favor, rellena toda todos los campos obligatorios.",
 						"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				try {

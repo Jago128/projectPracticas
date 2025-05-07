@@ -22,7 +22,7 @@ public class VentanaLogin extends JDialog implements ActionListener {
 	public VentanaLogin(LoginController cont) {
 		setResizable(false);
 		this.cont = cont;
-		
+
 		setTitle("Inicio de sesion");
 		setBounds(100, 100, 410, 260);
 		getContentPane().setLayout(new BorderLayout());
@@ -72,35 +72,45 @@ public class VentanaLogin extends JDialog implements ActionListener {
 		lblMensaje.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblMensaje.setBounds(39, 186, 308, 30);
 		contentPanel.add(lblMensaje);
-		
+
 		btnIniciarSesion.addActionListener(this);
 		btnRegistro.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==btnIniciarSesion) {
-			Usuario user = new Usuario(textFieldNombre.getText(), new String(passwordField.getPassword()));
-			if (cont.verificarUsuario(user)) {
-				if (cont.verificarContraseñaUsuario(user)) {
-					user = cont.getUsuario(user);
-					lblMensaje.setText("Se ha iniciado sesion correctamente.");
-					JOptionPane.showMessageDialog(null, "Bienvenido, "+user.getNombre());
-					VentanaPrincipal frame = new VentanaPrincipal(cont, user);
-					frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-					frame.setVisible(true);
-					this.dispose();
-				} else {
-					lblMensaje.setText("Contraseña incorrecta.");
-					JOptionPane.showMessageDialog(null, "ERROR", "La contraseña es incorrecta.", JOptionPane.ERROR_MESSAGE);
-				}
+		if (e.getSource() == btnIniciarSesion) {
+			if (textFieldNombre.getText().isBlank() && new String(passwordField.getPassword()).isBlank()) {
+				lblMensaje.setText("Los campos estan vacios.");
+				JOptionPane.showMessageDialog(null, "Por favor, rellena los campos.", "ERROR",
+						JOptionPane.ERROR_MESSAGE);
+				
 			} else {
-				lblMensaje.setText("No existe el usuario introducido.");
-				JOptionPane.showMessageDialog(null, "No existe el usuario "+user.getNombre()+". Registrase para iniciar sesion.", "ERROR", JOptionPane.ERROR_MESSAGE);
+				Usuario user = new Usuario(textFieldNombre.getText(), new String(passwordField.getPassword()));
+				if (cont.verificarUsuario(user)) {
+					if (cont.verificarContraseñaUsuario(user)) {
+						user = cont.getUsuario(user);
+						lblMensaje.setText("Se ha iniciado sesion correctamente.");
+						JOptionPane.showMessageDialog(null, "Bienvenido, " + user.getNombre());
+						VentanaPrincipal frame = new VentanaPrincipal(cont, user);
+						frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+						frame.setVisible(true);
+						this.dispose();
+					} else {
+						lblMensaje.setText("Contraseña incorrecta.");
+						JOptionPane.showMessageDialog(null, "La contraseña introducida es incorrecta.", "ERROR",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					lblMensaje.setText("No existe el usuario introducido.");
+					JOptionPane.showMessageDialog(null,
+							"No existe el usuario " + user.getNombre() + ". Registrase para iniciar sesion.", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
-		
-		if (e.getSource()==btnRegistro) {
+
+		if (e.getSource() == btnRegistro) {
 			VentanaRegistro dialog = new VentanaRegistro(cont);
 			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
