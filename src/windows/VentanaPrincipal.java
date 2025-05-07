@@ -20,9 +20,10 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	private Usuario user;
 
 	public VentanaPrincipal(LoginController cont, Usuario user) {
-		setResizable(false);
 		this.cont = cont;
 		this.user = user;
+		
+		setResizable(false);
 		setTitle("Base de datos Apnabi");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 300);

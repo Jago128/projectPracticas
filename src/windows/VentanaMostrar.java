@@ -21,9 +21,10 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 
 	public VentanaMostrar(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
-		setResizable(false);
 		this.cont = cont;
 		// this.user = user;
+
+		setResizable(false);
 		setTitle("Mostrar Empresas");
 		setBounds(100, 100, 920, 390);
 		getContentPane().setLayout(null);

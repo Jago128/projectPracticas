@@ -22,10 +22,10 @@ public class VentanaBorrar extends JDialog implements ActionListener {
 
 	public VentanaBorrar(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
-		setResizable(false);
 		this.cont = cont;
 		// this.user = user;
 
+		setResizable(false);
 		setTitle("Borrar empresa");
 		setBounds(100, 100, 310, 300);
 		getContentPane().setLayout(null);

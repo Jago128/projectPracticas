@@ -33,10 +33,10 @@ public class VentanaModificar extends JDialog implements ActionListener {
 
 	public VentanaModificar(JDialog parent, LoginController cont, Empresa emp) {
 		super(parent, true);
-		setResizable(false);
 		this.cont = cont;
 		this.emp = emp;
 
+		setResizable(false);
 		setTitle("Modificar empresa");
 		setBounds(100, 100, 920, 480);
 		getContentPane().setLayout(null);

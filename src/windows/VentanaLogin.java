@@ -20,9 +20,9 @@ public class VentanaLogin extends JDialog implements ActionListener {
 	private JLabel lblMensaje;
 
 	public VentanaLogin(LoginController cont) {
-		setResizable(false);
 		this.cont = cont;
 
+		setResizable(false);
 		setTitle("Inicio de sesion");
 		setBounds(100, 100, 410, 260);
 		getContentPane().setLayout(new BorderLayout());
