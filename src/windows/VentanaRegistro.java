@@ -17,6 +17,7 @@ public class VentanaRegistro extends JDialog implements ActionListener {
 	private LoginController cont;
 
 	public VentanaRegistro(LoginController cont) {
+		setResizable(false);
 		setTitle("Registro de nuevo usuario");
 		this.cont = cont;
 		setBounds(100, 100, 380, 230);

@@ -15,6 +15,8 @@ public interface ApnabiDAO {
 	//Empresas
 	public Map<String, Empresa> mostrarEmpresas();
 	
+	public Map<String, Empresa> mostrarNomEmpresas();
+	
 	public Empresa getEmpresa(String nom);
 
 	public boolean añadirEmpresa(Empresa emp);

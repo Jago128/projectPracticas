@@ -5,11 +5,13 @@ import java.awt.event.*;
 import java.time.LocalDate;
 import java.time.format.*;
 import java.time.temporal.ChronoField;
+import java.util.regex.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
 
 import controller.LoginController;
+import exceptions.EmailFormatException;
 import model.*;
 
 public class VentanaAñadir extends JDialog implements ActionListener {
@@ -26,9 +28,10 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 
 	public VentanaAñadir(JFrame parent, LoginController cont) {
 		super(parent, true);
-		setTitle("Añadir empresa");
 		this.cont = cont;
-
+		
+		setResizable(false);
+		setTitle("Añadir empresa");
 		setBounds(100, 100, 400, 660);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -193,15 +196,20 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		btnAñadir.addActionListener(this);
 	}
 
+	public void emailFormatCheck(String email) throws EmailFormatException {
+		Pattern modelo = Pattern.compile(
+				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{3,})$");
+		Matcher matcher = modelo.matcher(email);
+		if (!matcher.matches()) {
+			throw new EmailFormatException();
+		}
+	}
+
 	public boolean dateFormatErrorCheck() {
 		boolean error = false;
-		DateTimeFormatter format = new DateTimeFormatterBuilder()
-		        .appendValue(ChronoField.YEAR, 4)
-		        .appendLiteral('-')
-		        .appendValue(ChronoField.MONTH_OF_YEAR)
-		        .appendLiteral('-')
-		        .appendValue(ChronoField.DAY_OF_MONTH)
-		        .toFormatter();
+		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
+				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
+				.toFormatter();
 		try {
 			LocalDate.parse(textFieldContacto1.getText(), format);
 			if (!textFieldContacto2.getText().isBlank()) {
@@ -222,8 +230,8 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnAñadir) {
+	public void actionPerformed(ActionEvent event) {
+		if (event.getSource() == btnAñadir) {
 			if (textFieldContacto1.getText().isBlank() || textFieldContactoEmpresa.getText().isBlank()
 					|| textFieldDatosContacto.getText().isEmpty() || textFieldNombre.getText().isBlank()
 					|| textFieldPersonaContacto.getText().isBlank() || textFieldPuesto.getText().isBlank()
@@ -231,157 +239,167 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Por favor, rellena toda la informacion obligatoria.",
 						"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				if (dateFormatErrorCheck()) {
-					JOptionPane.showMessageDialog(null,
-							"El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD", "ERROR",
-							JOptionPane.ERROR_MESSAGE);
-				} else {
-					Sector sector = null;
-					Estado estado = null;
-					int result = 0;
-					switch ((String) comboBoxSector.getSelectedItem()) {
-					case "Agricultura y Ganaderia":
-						sector = Sector.AGRICULTURA_GANADERIA;
-						break;
-
-					case "Bienes de Consumo":
-						sector = Sector.BIENESCONSUMO;
-						break;
-
-					case "Comercio electronico":
-						sector = Sector.COMERCIOELECTRONICO;
-						break;
-
-					case "Comercio y establecimientos":
-						sector = Sector.COMERCIO_ESTABLECIMIENTOS;
-						break;
-
-					case "Construccion":
-						sector = Sector.CONSTRUCCION;
-						break;
-
-					case "Deporte y ocio":
-						sector = Sector.DEPORTE_OCIO;
-						break;
-
-					case "Energia y medio ambiente":
-						sector = Sector.ENERGIA_MEDIOAMBIENTE;
-						break;
-
-					case "Finanzas, Seguros y bienes inmuebles":
-						sector = Sector.FINANZAS_SEGUROS_BIENESINMUEBLES;
-						break;
-
-					case "Internet":
-						sector = Sector.INTERNET;
-						break;
-
-					case "Logistica y Transporte":
-						sector = Sector.LOGISTICA_TRANSPORTE;
-						break;
-
-					case "Medios de comunicacion y marketing":
-						sector = Sector.MEDIOSCOMUNICACION_MARKETING;
-						break;
-
-					case "Metalurgia y electronica":
-						sector = Sector.METALURGIA_ELECTRONICA;
-						break;
-
-					case "Productos quimicos y materias primas":
-						sector = Sector.PRODUCTOSQUIMICOS_MATERIASPRIMAS;
-						break;
-
-					case "Salud e industria farmaceutica":
-						sector = Sector.SALUD_INDUSTRIAFARMACEUTICA;
-						break;
-					case "Servicios":
-						sector = Sector.SERVICIOS;
-						break;
-
-					case "Sociedad":
-						sector = Sector.SOCIEDAD;
-						break;
-
-					case "Tecnologia y telecomunicaciones":
-						sector = Sector.TECNOLOGIA_TELECOMUNICACIONES;
-						break;
-
-					case "Turismo y hosteleria":
-						sector = Sector.TURISMO_HOSTELERIA;
-						break;
-
-					case "Vida":
-						sector = Sector.VIDA;
-						break;
+				try {
+					if (textFieldDatosContacto.getText().contains("@")
+							&& (textFieldDatosContacto.getText().contains(".com")
+									|| textFieldDatosContacto.getText().contains(".es")
+									|| textFieldDatosContacto.getText().contains(".eus"))) {
+						emailFormatCheck(textFieldDatosContacto.getText());
 					}
-
-					switch ((String) comboBoxEstado.getSelectedItem()) {
-					case "Informado":
-						estado = Estado.INFORMADO;
-						break;
-
-					case "Valorando/interesado":
-						estado = Estado.VALORANDO_INTERESADO;
-						break;
-
-					case "Planificando inserciones":
-						estado = Estado.PLANIFICANDOINSERCIONES;
-						break;
-
-					case "Proximo año":
-						estado = Estado.PROXIMOAÑO;
-						break;
-
-					case "No interesado":
-						estado = Estado.NOINTERESADO;
-						break;
-					}
-
-					Empresa emp = new Empresa(textFieldNombre.getText(), sector, textFieldPuesto.getText(),
-							textFieldDatosContacto.getText(), textFieldContactoEmpresa.getText(),
-							textFieldPersonaContacto.getText(), estado, textFieldContacto1.getText());
-
-					if (!textFieldContacto2.getText().isBlank()) {
-						emp.setContacto2(textFieldContacto2.getText());
-					}
-
-					if (!textFieldContacto3.getText().isBlank()) {
-						emp.setContacto3(textFieldContacto3.getText());
-					}
-
-					if (!textFieldContacto4.getText().isBlank()) {
-						emp.setContacto4(textFieldContacto4.getText());
-					}
-
-					if (!textAreaObservaciones.getText().isBlank()) {
-						emp.setObservaciones(textAreaObservaciones.getText());
-					}
-
-					if (cont.añadirEmpresa(emp)) {
-						result = JOptionPane.showConfirmDialog(null,
-								"La empresa ha sido añadida correctamente. Quiere añadir mas empresas?", "",
-								JOptionPane.YES_NO_OPTION);
-						if (result == JOptionPane.NO_OPTION) {
-							this.dispose();
-						} else if (result == JOptionPane.YES_OPTION) {
-							textAreaObservaciones.setText("");
-							textFieldContacto1.setText("");
-							textFieldContacto2.setText("");
-							textFieldContacto3.setText("");
-							textFieldContacto4.setText("");
-							textFieldContactoEmpresa.setText("");
-							textFieldDatosContacto.setText("");
-							textFieldNombre.setText("");
-							textFieldPersonaContacto.setText("");
-							textFieldPuesto.setText("");
-							comboBoxEstado.setSelectedIndex(-1);
-							comboBoxSector.setSelectedIndex(-1);
-						}
-					} else {
-						JOptionPane.showMessageDialog(null, "Ha habido un error al intentar añadir la empresa.",
+					if (dateFormatErrorCheck()) {
+						JOptionPane.showMessageDialog(null,
+								"El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD",
 								"ERROR", JOptionPane.ERROR_MESSAGE);
+					} else {
+						Sector sector = null;
+						Estado estado = null;
+						int result = 0;
+						switch ((String) comboBoxSector.getSelectedItem()) {
+						case "Agricultura y Ganaderia":
+							sector = Sector.AGRICULTURA_GANADERIA;
+							break;
+
+						case "Bienes de Consumo":
+							sector = Sector.BIENESCONSUMO;
+							break;
+
+						case "Comercio electronico":
+							sector = Sector.COMERCIOELECTRONICO;
+							break;
+
+						case "Comercio y establecimientos":
+							sector = Sector.COMERCIO_ESTABLECIMIENTOS;
+							break;
+
+						case "Construccion":
+							sector = Sector.CONSTRUCCION;
+							break;
+
+						case "Deporte y ocio":
+							sector = Sector.DEPORTE_OCIO;
+							break;
+
+						case "Energia y medio ambiente":
+							sector = Sector.ENERGIA_MEDIOAMBIENTE;
+							break;
+
+						case "Finanzas, Seguros y bienes inmuebles":
+							sector = Sector.FINANZAS_SEGUROS_BIENESINMUEBLES;
+							break;
+
+						case "Internet":
+							sector = Sector.INTERNET;
+							break;
+
+						case "Logistica y Transporte":
+							sector = Sector.LOGISTICA_TRANSPORTE;
+							break;
+
+						case "Medios de comunicacion y marketing":
+							sector = Sector.MEDIOSCOMUNICACION_MARKETING;
+							break;
+
+						case "Metalurgia y electronica":
+							sector = Sector.METALURGIA_ELECTRONICA;
+							break;
+
+						case "Productos quimicos y materias primas":
+							sector = Sector.PRODUCTOSQUIMICOS_MATERIASPRIMAS;
+							break;
+
+						case "Salud e industria farmaceutica":
+							sector = Sector.SALUD_INDUSTRIAFARMACEUTICA;
+							break;
+						case "Servicios":
+							sector = Sector.SERVICIOS;
+							break;
+
+						case "Sociedad":
+							sector = Sector.SOCIEDAD;
+							break;
+
+						case "Tecnologia y telecomunicaciones":
+							sector = Sector.TECNOLOGIA_TELECOMUNICACIONES;
+							break;
+
+						case "Turismo y hosteleria":
+							sector = Sector.TURISMO_HOSTELERIA;
+							break;
+
+						case "Vida":
+							sector = Sector.VIDA;
+							break;
+						}
+
+						switch ((String) comboBoxEstado.getSelectedItem()) {
+						case "Informado":
+							estado = Estado.INFORMADO;
+							break;
+
+						case "Valorando/interesado":
+							estado = Estado.VALORANDO_INTERESADO;
+							break;
+
+						case "Planificando inserciones":
+							estado = Estado.PLANIFICANDOINSERCIONES;
+							break;
+
+						case "Proximo año":
+							estado = Estado.PROXIMOAÑO;
+							break;
+
+						case "No interesado":
+							estado = Estado.NOINTERESADO;
+							break;
+						}
+
+						Empresa emp = new Empresa(textFieldNombre.getText(), sector, textFieldPuesto.getText(),
+								textFieldDatosContacto.getText(), textFieldContactoEmpresa.getText(),
+								textFieldPersonaContacto.getText(), estado, textFieldContacto1.getText());
+
+						if (!textFieldContacto2.getText().isBlank()) {
+							emp.setContacto2(textFieldContacto2.getText());
+						}
+
+						if (!textFieldContacto3.getText().isBlank()) {
+							emp.setContacto3(textFieldContacto3.getText());
+						}
+
+						if (!textFieldContacto4.getText().isBlank()) {
+							emp.setContacto4(textFieldContacto4.getText());
+						}
+
+						if (!textAreaObservaciones.getText().isBlank()) {
+							emp.setObservaciones(textAreaObservaciones.getText());
+						}
+
+						if (cont.añadirEmpresa(emp)) {
+							result = JOptionPane.showConfirmDialog(null,
+									"La empresa ha sido añadida correctamente. Quiere añadir mas empresas?", "",
+									JOptionPane.YES_NO_OPTION);
+							if (result == JOptionPane.NO_OPTION) {
+								this.dispose();
+							} else if (result == JOptionPane.YES_OPTION) {
+								textAreaObservaciones.setText("");
+								textFieldContacto1.setText("");
+								textFieldContacto2.setText("");
+								textFieldContacto3.setText("");
+								textFieldContacto4.setText("");
+								textFieldContactoEmpresa.setText("");
+								textFieldDatosContacto.setText("");
+								textFieldNombre.setText("");
+								textFieldPersonaContacto.setText("");
+								textFieldPuesto.setText("");
+								comboBoxEstado.setSelectedIndex(-1);
+								comboBoxSector.setSelectedIndex(-1);
+							}
+						} else {
+							JOptionPane.showMessageDialog(null, "Ha habido un error al intentar añadir la empresa.",
+									"ERROR", JOptionPane.ERROR_MESSAGE);
+						}
 					}
+				} catch (EmailFormatException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}

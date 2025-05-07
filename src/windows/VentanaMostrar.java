@@ -17,11 +17,11 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 	private JList<String> listSectores, listEmpresas, listPuestos, listDatosContacto, listContactosEmpresa,
 	listContactosApnabi, listEstados, listContacto1, listContacto2, listContacto3, listContacto4,
 	listObservaciones;
-
 	private JButton btnModificarEmpresa;
 
 	public VentanaMostrar(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
+		setResizable(false);
 		this.cont = cont;
 		// this.user = user;
 		setTitle("Mostrar Empresas");
@@ -29,39 +29,51 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		getContentPane().setLayout(null);
 
 		listSectores = new JList<>();
+		listSectores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listSectores.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listEmpresas = new JList<String>();
+		listEmpresas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listPuestos = new JList<String>();
+		listPuestos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listPuestos.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listDatosContacto = new JList<String>();
+		listDatosContacto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listDatosContacto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContactosEmpresa = new JList<String>();
+		listContactosEmpresa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listContactosEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContactosApnabi = new JList<String>();
+		listContactosApnabi.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listContactosApnabi.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listEstados = new JList<String>();
+		listEstados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEstados.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContacto1 = new JList<>();
+		listContacto1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listContacto1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContacto2 = new JList<>();
+		listContacto2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listContacto2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContacto3 = new JList<>();
+		listContacto3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listContacto3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContacto4 = new JList<>();
+		listContacto4.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listContacto4.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listObservaciones = new JList<>();
+		listObservaciones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		addEmpresas();
@@ -273,14 +285,16 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnModificarEmpresa) {
-			if (!listEmpresas.isSelectionEmpty()&&!listEmpresas.getSelectedValue().equals("Empresas")) {
-				VentanaModificar dialog = new VentanaModificar(this, cont, cont.getEmpresa(listEmpresas.getSelectedValue()));
-				dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-				dialog.setVisible(true);
-			} else if (listEmpresas.getSelectedValue().equals("Empresas")) {
-				JOptionPane.showMessageDialog(null, "[ERROR] No se puede modificar el titulo de la columna.");
+	public void actionPerformed(ActionEvent event) {
+		if (event.getSource() == btnModificarEmpresa) {
+			if (!listEmpresas.isSelectionEmpty()) {
+				if (!listEmpresas.getSelectedValue().equals("Empresas")) {
+					VentanaModificar dialog = new VentanaModificar(this, cont, cont.getEmpresa(listEmpresas.getSelectedValue()));
+					dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null, "[ERROR] No se puede modificar el titulo de la columna.");
+				}
 			} else {
 				JOptionPane.showMessageDialog(null, "[ERROR] Elija una empresa de la lista de empresas.");
 			}

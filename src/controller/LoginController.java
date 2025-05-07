@@ -36,6 +36,10 @@ public class LoginController {
 		return dao.mostrarEmpresas();
 	}
 	
+	public Map<String, Empresa> mostrarNomEmpresas() {
+		return dao.mostrarNomEmpresas();
+	}
+	
 	public Empresa getEmpresa(String nom) {
 		return dao.getEmpresa(nom);
 	}

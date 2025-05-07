@@ -10,8 +10,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import controller.LoginController;
+import exceptions.EmailFormatException;
 import model.*;
 
 public class VentanaModificar extends JDialog implements ActionListener {
@@ -20,8 +23,8 @@ public class VentanaModificar extends JDialog implements ActionListener {
 	private LoginController cont;
 	private Empresa emp;
 	private JTextArea textareaEmpresa;
-	private JTextField textFieldDatosContacto, textFieldContactoEmpresa, textFieldPersonaContacto,
-	textFieldContacto1, textFieldContacto2, textFieldContacto3, textFieldContacto4;
+	private JTextField textFieldDatosContacto, textFieldContactoEmpresa, textFieldPersonaContacto, textFieldContacto1,
+			textFieldContacto2, textFieldContacto3, textFieldContacto4;
 	private JComboBox<String> comboBoxEstado;
 	private JButton btnModificar;
 	private JLabel lblDatosEmpresa;
@@ -30,6 +33,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 
 	public VentanaModificar(JDialog parent, LoginController cont, Empresa emp) {
 		super(parent, true);
+		setResizable(false);
 		this.cont = cont;
 		this.emp = emp;
 
@@ -39,7 +43,8 @@ public class VentanaModificar extends JDialog implements ActionListener {
 
 		textareaEmpresa = new JTextArea();
 		textareaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textareaEmpresa.setText("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+		textareaEmpresa.setText(
+				"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 		textareaEmpresa.setBackground(new Color(255, 255, 255));
 		textareaEmpresa.setLineWrap(true);
 		textareaEmpresa.setEditable(false);
@@ -86,7 +91,8 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		getContentPane().add(lblEstado);
 
 		comboBoxEstado = new JComboBox<String>();
-		comboBoxEstado.setModel(new DefaultComboBoxModel<>(new String[] {"", "Informado", "Valorando/interesado", "Planificando inserciones", "Proximo año", "No interesado"}));
+		comboBoxEstado.setModel(new DefaultComboBoxModel<>(new String[] { "", "Informado", "Valorando/interesado",
+				"Planificando inserciones", "Proximo año", "No interesado" }));
 		comboBoxEstado.setBounds(187, 179, 163, 21);
 		getContentPane().add(comboBoxEstado);
 
@@ -169,7 +175,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		lblDatosEmpresa.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblDatosEmpresa.setBounds(378, 10, 506, 38);
 		getContentPane().add(lblDatosEmpresa);
-		
+
 		lblNewLabel = new JLabel("Formato de fechas: AAAA-MM-DD");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel.setBounds(42, 38, 275, 16);
@@ -184,79 +190,79 @@ public class VentanaModificar extends JDialog implements ActionListener {
 
 		switch (emp.getSector()) {
 		case AGRICULTURA_GANADERIA:
-			sector="Agricultura y ganadería";
+			sector = "Agricultura y ganadería";
 			break;
 
 		case BIENESCONSUMO:
-			sector="Bienes de consumo";
+			sector = "Bienes de consumo";
 			break;
 
 		case COMERCIOELECTRONICO:
-			sector="Comercio electrónico";
+			sector = "Comercio electrónico";
 			break;
 
 		case COMERCIO_ESTABLECIMIENTOS:
-			sector="Comercio y establecimientos";
+			sector = "Comercio y establecimientos";
 			break;
 
 		case CONSTRUCCION:
-			sector="Construcción";
+			sector = "Construcción";
 			break;
 
 		case DEPORTE_OCIO:
-			sector="Deporte y ocio";
+			sector = "Deporte y ocio";
 			break;
 
 		case ENERGIA_MEDIOAMBIENTE:
-			sector="Energía y medio ambiente";
+			sector = "Energía y medio ambiente";
 			break;
 
 		case FINANZAS_SEGUROS_BIENESINMUEBLES:
-			sector="Finanzas, seguros y bienes inmuebles";
+			sector = "Finanzas, seguros y bienes inmuebles";
 			break;
 
 		case INTERNET:
-			sector="Internet";
+			sector = "Internet";
 			break;
 
 		case LOGISTICA_TRANSPORTE:
-			sector="Logística y transporte";
+			sector = "Logística y transporte";
 			break;
 
 		case MEDIOSCOMUNICACION_MARKETING:
-			sector="Medios de comunicación y marketing";
+			sector = "Medios de comunicación y marketing";
 			break;
 
 		case METALURGIA_ELECTRONICA:
-			sector="Metalurgia y electrónica";
+			sector = "Metalurgia y electrónica";
 			break;
 
 		case PRODUCTOSQUIMICOS_MATERIASPRIMAS:
-			sector="Productos químicos y materias primas";
+			sector = "Productos químicos y materias primas";
 			break;
 
 		case SALUD_INDUSTRIAFARMACEUTICA:
-			sector="Salud e industria farmacéutica";
+			sector = "Salud e industria farmacéutica";
 			break;
 
 		case SERVICIOS:
-			sector="Servicios";
+			sector = "Servicios";
 			break;
 
 		case SOCIEDAD:
-			sector="Sociedad";
+			sector = "Sociedad";
 			break;
 
 		case TECNOLOGIA_TELECOMUNICACIONES:
-			sector="Tecnología y telecomunicaciones";
+			sector = "Tecnología y telecomunicaciones";
 			break;
 
 		case TURISMO_HOSTELERIA:
-			sector="Turismo y hostelería";
+			sector = "Turismo y hostelería";
 			break;
 
 		case VIDA:
-			sector="Vida";
+			sector = "Vida";
 			break;
 
 		default:
@@ -265,78 +271,82 @@ public class VentanaModificar extends JDialog implements ActionListener {
 
 		switch (emp.getEstado()) {
 		case INFORMADO:
-			estado="Informado";
+			estado = "Informado";
 			break;
 
 		case NOINTERESADO:
-			estado="No interesado";
+			estado = "No interesado";
 			break;
 
 		case PLANIFICANDOINSERCIONES:
-			estado="Planificando inserciones";
+			estado = "Planificando inserciones";
 			break;
 
 		case PROXIMOAÑO:
-			estado="Proximo año";
+			estado = "Proximo año";
 			break;
 
 		case VALORANDO_INTERESADO:
-			estado="Valorando/interesado";
+			estado = "Valorando/interesado";
 			break;
 
 		default:
 			System.out.println("Tipo invalido.");
 		}
 
-		infoEmpresa.append("Nombre: "+emp.getNom_empresa()).append("\n");
-		infoEmpresa.append("Sector: "+sector).append("\n");
-		if (emp.getPuesto()==null) {
+		infoEmpresa.append("Nombre: " + emp.getNom_empresa()).append("\n");
+		infoEmpresa.append("Sector: " + sector).append("\n");
+		if (emp.getPuesto() == null) {
 			infoEmpresa.append("Puesto: ---").append("\n");
 		} else {
-			infoEmpresa.append("Puesto: "+emp.getPuesto()).append("\n");
+			infoEmpresa.append("Puesto: " + emp.getPuesto()).append("\n");
 		}
-		
-		infoEmpresa.append("Contacto en la empresa: "+emp.getContactoEmpresa()).append("\n");
-		infoEmpresa.append("Persona de contacto: "+emp.getContactoApnabi()).append("\n");
-		infoEmpresa.append("Estado: "+estado).append("\n");
-		infoEmpresa.append("1. contacto: "+emp.getContacto1()).append("\n");
+		infoEmpresa.append("Datos de contacto: " + emp.getDatosContacto()).append("\n");
+		infoEmpresa.append("Contacto en la empresa: " + emp.getContactoEmpresa()).append("\n");
+		infoEmpresa.append("Persona de contacto: " + emp.getContactoApnabi()).append("\n");
+		infoEmpresa.append("Estado: " + estado).append("\n");
+		infoEmpresa.append("1. contacto: " + emp.getContacto1()).append("\n");
 		if (emp.getContacto2().equals("")) {
 			infoEmpresa.append("2. contacto: ---").append("\n");
 		} else {
-			infoEmpresa.append("2. contacto: "+emp.getContacto2()).append("\n");
+			infoEmpresa.append("2. contacto: " + emp.getContacto2()).append("\n");
 		}
-		
+
 		if (emp.getContacto3().equals("")) {
 			infoEmpresa.append("3. contacto: ---").append("\n");
 		} else {
-			infoEmpresa.append("3. contacto: "+emp.getContacto3()).append("\n");
+			infoEmpresa.append("3. contacto: " + emp.getContacto3()).append("\n");
 		}
-		
+
 		if (emp.getContacto4().equals("")) {
 			infoEmpresa.append("4. contacto: ---").append("\n");
 		} else {
-			infoEmpresa.append("4. contacto: "+emp.getContacto4()).append("\n");
+			infoEmpresa.append("4. contacto: " + emp.getContacto4()).append("\n");
 		}
-		
-		
-		if (emp.getObservaciones()==null) {
+
+		if (emp.getObservaciones() == null) {
 			infoEmpresa.append("Observaciones: ---");
 		} else {
-			infoEmpresa.append("Observaciones: "+emp.getObservaciones());
+			infoEmpresa.append("Observaciones: " + emp.getObservaciones());
 		}
-		
+
 		textareaEmpresa.setText(infoEmpresa.toString());
+	}
+
+	public void emailFormatCheck(String email) throws EmailFormatException {
+		Pattern modelo = Pattern.compile(
+				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		Matcher matcher = modelo.matcher(email);
+		if (!matcher.matches()) {
+			throw new EmailFormatException();
+		}
 	}
 
 	public boolean dateFormatErrorCheck() {
 		boolean error = false;
-		DateTimeFormatter format = new DateTimeFormatterBuilder()
-		        .appendValue(ChronoField.YEAR, 4)
-		        .appendLiteral('-')
-		        .appendValue(ChronoField.MONTH_OF_YEAR)
-		        .appendLiteral('-')
-		        .appendValue(ChronoField.DAY_OF_MONTH)
-		        .toFormatter();
+		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
+				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
+				.toFormatter();
 		try {
 			if (!textFieldContacto1.getText().isBlank()) {
 				LocalDate.parse(textFieldContacto1.getText(), format);
@@ -359,82 +369,91 @@ public class VentanaModificar extends JDialog implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnModificar) {
+	public void actionPerformed(ActionEvent event) {
+		if (event.getSource() == btnModificar) {
 			if (dateFormatErrorCheck()) {
-				JOptionPane.showMessageDialog(null, "El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD", "ERROR",
+				JOptionPane.showMessageDialog(null,
+						"El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD", "ERROR",
 						JOptionPane.ERROR_MESSAGE);
 			} else {
-				Estado estado = null;
-				boolean check = false;
-				
-				switch ((String) comboBoxEstado.getSelectedItem()) {
-				case "Informado":
-					estado = Estado.INFORMADO;
-					break;
+				try {
+					if (textFieldDatosContacto.getText().contains("@")) {
+						emailFormatCheck(textFieldDatosContacto.getText());
+					}
+					Estado estado = null;
+					boolean check = false;
 
-				case "Valorando/interesado":
-					estado = Estado.VALORANDO_INTERESADO;
-					break;
+					switch ((String) comboBoxEstado.getSelectedItem()) {
+					case "Informado":
+						estado = Estado.INFORMADO;
+						break;
 
-				case "Planificando inserciones":
-					estado = Estado.PLANIFICANDOINSERCIONES;
-					break;
+					case "Valorando/interesado":
+						estado = Estado.VALORANDO_INTERESADO;
+						break;
 
-				case "Proximo año":
-					estado = Estado.PROXIMOAÑO;
-					break;
+					case "Planificando inserciones":
+						estado = Estado.PLANIFICANDOINSERCIONES;
+						break;
 
-				case "No interesado":
-					estado = Estado.NOINTERESADO;
-					break;
+					case "Proximo año":
+						estado = Estado.PROXIMOAÑO;
+						break;
 
-				default:
-					estado = null;
-					break;
-				}
-				if (!textFieldDatosContacto.getText().isBlank()) {
-					check = cont.modificarDatosContacto(textFieldDatosContacto.getText(), emp.getNom_empresa());
-				}
-				
-				if (!textFieldContactoEmpresa.getText().isBlank()) {
-					check = cont.modificarContactoEmpresa(textFieldContactoEmpresa.getText(), emp.getNom_empresa());
-				}
-				
-				if (!textFieldPersonaContacto.getText().isBlank()) {
-					check = cont.modificarPersonaContacto(textFieldPersonaContacto.getText(), emp.getNom_empresa());
-				}
-				
-				if (comboBoxEstado.getSelectedIndex() != -1) {
-					check = cont.modificarEstado(estado, emp.getNom_empresa());
-				}
-				
-				if (!textFieldContacto1.getText().isBlank()) {
-					check = cont.modificarContacto1(textFieldContacto1.getText(), emp.getNom_empresa());
-				}
-				
-				if (!textFieldContacto2.getText().isBlank()) {
-					check = cont.modificarContacto2(textFieldContacto2.getText(), emp.getNom_empresa());
-				}
-				
-				if (!textFieldContacto3.getText().isBlank()) {
-					check = cont.modificarContacto3(textFieldContacto3.getText(), emp.getNom_empresa());
-				}
-				
-				if (!textFieldContacto4.getText().isBlank()) {
-					check = cont.modificarContacto4(textFieldContacto4.getText(), emp.getNom_empresa());
-				}
-				
-				if (!textAreaObservaciones.getText().isBlank()) {
-					check = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getNom_empresa());
-				}
-				
-				if (!check) {
-					JOptionPane.showMessageDialog(null, "Ha occurrido un error al modificar la empresa.", "ERROR", JOptionPane.ERROR_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "La empresa ha sido modificada correctamente.");
-					emp = cont.getEmpresa(emp.getNom_empresa());
-					loadEmpresa();
+					case "No interesado":
+						estado = Estado.NOINTERESADO;
+						break;
+
+					default:
+						estado = null;
+						break;
+					}
+					if (!textFieldDatosContacto.getText().isBlank()) {
+						check = cont.modificarDatosContacto(textFieldDatosContacto.getText(), emp.getNom_empresa());
+					}
+
+					if (!textFieldContactoEmpresa.getText().isBlank()) {
+						check = cont.modificarContactoEmpresa(textFieldContactoEmpresa.getText(), emp.getNom_empresa());
+					}
+
+					if (!textFieldPersonaContacto.getText().isBlank()) {
+						check = cont.modificarPersonaContacto(textFieldPersonaContacto.getText(), emp.getNom_empresa());
+					}
+
+					if (comboBoxEstado.getSelectedIndex() != -1) {
+						check = cont.modificarEstado(estado, emp.getNom_empresa());
+					}
+
+					if (!textFieldContacto1.getText().isBlank()) {
+						check = cont.modificarContacto1(textFieldContacto1.getText(), emp.getNom_empresa());
+					}
+
+					if (!textFieldContacto2.getText().isBlank()) {
+						check = cont.modificarContacto2(textFieldContacto2.getText(), emp.getNom_empresa());
+					}
+
+					if (!textFieldContacto3.getText().isBlank()) {
+						check = cont.modificarContacto3(textFieldContacto3.getText(), emp.getNom_empresa());
+					}
+
+					if (!textFieldContacto4.getText().isBlank()) {
+						check = cont.modificarContacto4(textFieldContacto4.getText(), emp.getNom_empresa());
+					}
+
+					if (!textAreaObservaciones.getText().isBlank()) {
+						check = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getNom_empresa());
+					}
+
+					if (!check) {
+						JOptionPane.showMessageDialog(null, "Ha occurrido un error al modificar la empresa.", "ERROR",
+								JOptionPane.ERROR_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "La empresa ha sido modificada correctamente.");
+						emp = cont.getEmpresa(emp.getNom_empresa());
+						loadEmpresa();
+					}
+				} catch (EmailFormatException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}

@@ -27,6 +27,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLINSERTUSUARIO = "INSERT INTO USUARIO VALUES (?,?)";
 
 	final String SQLEMPRESAS = "SELECT * FROM EMPRESA";
+	final String SQLNOMEMPRESAS = "SELECT NOM_EMPRESA FROM EMPRESA";
 	final String SQLSELECTEMPRESA = "SELECT * FROM EMPRESA WHERE NOM_EMPRESA = ?";
 	final String SQLINSERTEMPRESA = "INSERT INTO EMPRESA VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 	final String SQLUPDATEDATOS = "UPDATE EMPRESA SET DATOSCONTACTO=? WHERE NOM_EMPRESA=?";
@@ -191,6 +192,31 @@ public class BDImplementacion implements ApnabiDAO {
 			con.close();
 		} catch (SQLException e) {
 			System.out.println("Un error ha occurrido al intentar recoger las empresas.");
+			e.printStackTrace();
+		}
+		return empresas;
+	}
+	
+	@Override
+	public Map<String, Empresa> mostrarNomEmpresas() {
+		ResultSet rs = null;
+		Empresa empresa;
+		Map<String, Empresa> empresas = new TreeMap<>();
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLEMPRESAS);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				empresa = new Empresa();
+				empresa.setNom_empresa(rs.getString("NOM_EMPRESA"));
+				empresas.put(empresa.getNom_empresa(), empresa);
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger los nombres de las empresas.");
 			e.printStackTrace();
 		}
 		return empresas;
