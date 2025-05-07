@@ -8,7 +8,6 @@ import java.time.temporal.ChronoField;
 import java.util.regex.*;
 
 import javax.swing.*;
-import javax.swing.border.*;
 
 import controller.LoginController;
 import exceptions.EmailFormatException;
@@ -17,11 +16,9 @@ import model.*;
 public class VentanaAñadir extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
-	private final JPanel contentPanel = new JPanel();
 	private LoginController cont;
 	private JTextField textFieldNombre, textFieldPuesto, textFieldDatosContacto, textFieldContactoEmpresa,
-			textFieldContacto1, textFieldContacto2;
-	private JTextField textFieldContacto3, textFieldContacto4, textFieldPersonaContacto;
+			textFieldContacto1, textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldPersonaContacto;
 	private JTextArea textAreaObservaciones;
 	private JComboBox<String> comboBoxSector, comboBoxEstado;
 	private JButton btnAñadir;
@@ -33,33 +30,30 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		setResizable(false);
 		setTitle("Añadir empresa");
 		setBounds(100, 100, 400, 660);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		getContentPane().setLayout(null);
 
 		JLabel lblObligatorio = new JLabel("* Obligatorio. Formato de fechas: AAAA-MM-DD");
 		lblObligatorio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblObligatorio.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblObligatorio.setBounds(10, 6, 366, 19);
-		contentPanel.add(lblObligatorio);
+		getContentPane().add(lblObligatorio);
 
 		JLabel lblNombre = new JLabel("Nombre: *");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombre.setBounds(28, 28, 108, 31);
-		contentPanel.add(lblNombre);
+		getContentPane().add(lblNombre);
 
 		textFieldNombre = new JTextField();
 		textFieldNombre.setBounds(191, 35, 163, 19);
-		contentPanel.add(textFieldNombre);
+		getContentPane().add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 
 		JLabel lblSector = new JLabel("Sector: *");
 		lblSector.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSector.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSector.setBounds(28, 68, 108, 31);
-		contentPanel.add(lblSector);
+		getContentPane().add(lblSector);
 
 		comboBoxSector = new JComboBox<>();
 		comboBoxSector.setModel(new DefaultComboBoxModel<>(new String[] {"", "Agricultura y Ganaderia",
@@ -69,130 +63,130 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 				"Productos quimicos y materias primas", "Salud e industria farmaceutica", "Servicios", "Sociedad",
 				"Tecnologia y telecomunicaciones", "Turismo y hosteleria", "Vida"}));
 		comboBoxSector.setBounds(191, 74, 163, 21);
-		contentPanel.add(comboBoxSector);
+		getContentPane().add(comboBoxSector);
 
 		JLabel lblPuesto = new JLabel("Puesto:");
 		lblPuesto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblPuesto.setBounds(28, 109, 108, 31);
-		contentPanel.add(lblPuesto);
+		getContentPane().add(lblPuesto);
 
 		textFieldPuesto = new JTextField();
 		textFieldPuesto.setColumns(10);
 		textFieldPuesto.setBounds(191, 116, 163, 19);
-		contentPanel.add(textFieldPuesto);
+		getContentPane().add(textFieldPuesto);
 
 		JLabel lblDatosContacto = new JLabel("Datos de contacto: *");
 		lblDatosContacto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatosContacto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblDatosContacto.setBounds(28, 145, 129, 31);
-		contentPanel.add(lblDatosContacto);
+		getContentPane().add(lblDatosContacto);
 
 		textFieldDatosContacto = new JTextField();
 		textFieldDatosContacto.setColumns(10);
 		textFieldDatosContacto.setBounds(191, 152, 163, 19);
-		contentPanel.add(textFieldDatosContacto);
+		getContentPane().add(textFieldDatosContacto);
 
 		JLabel lblContactoEmpresa = new JLabel("Contacto en la empresa: *");
 		lblContactoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContactoEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblContactoEmpresa.setBounds(10, 187, 147, 31);
-		contentPanel.add(lblContactoEmpresa);
+		getContentPane().add(lblContactoEmpresa);
 
 		textFieldContactoEmpresa = new JTextField();
 		textFieldContactoEmpresa.setColumns(10);
 		textFieldContactoEmpresa.setBounds(191, 194, 163, 19);
-		contentPanel.add(textFieldContactoEmpresa);
+		getContentPane().add(textFieldContactoEmpresa);
 
 		JLabel lblPersonaContacto = new JLabel("Persona de contacto: *");
 		lblPersonaContacto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPersonaContacto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblPersonaContacto.setBounds(10, 230, 153, 31);
-		contentPanel.add(lblPersonaContacto);
+		getContentPane().add(lblPersonaContacto);
 
 		textFieldPersonaContacto = new JTextField();
 		textFieldPersonaContacto.setColumns(10);
 		textFieldPersonaContacto.setBounds(191, 237, 163, 19);
-		contentPanel.add(textFieldPersonaContacto);
+		getContentPane().add(textFieldPersonaContacto);
 
 		JLabel lblEstado = new JLabel("Estado: *");
 		lblEstado.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblEstado.setBounds(28, 271, 108, 31);
-		contentPanel.add(lblEstado);
+		getContentPane().add(lblEstado);
 
 		comboBoxEstado = new JComboBox<>();
 		comboBoxEstado.setModel(new DefaultComboBoxModel<>(new String[] {"", "Informado", "Valorando/interesado",
 				"Planificando inserciones", "Proximo año", "No interesado"}));
 		comboBoxEstado.setBounds(191, 277, 163, 21);
-		contentPanel.add(comboBoxEstado);
+		getContentPane().add(comboBoxEstado);
 
 		JLabel lblContacto1 = new JLabel("1. contacto: *");
 		lblContacto1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContacto1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblContacto1.setBounds(28, 312, 108, 31);
-		contentPanel.add(lblContacto1);
+		getContentPane().add(lblContacto1);
 
 		textFieldContacto1 = new JTextField();
 		textFieldContacto1.setColumns(10);
 		textFieldContacto1.setBounds(191, 319, 163, 19);
-		contentPanel.add(textFieldContacto1);
+		getContentPane().add(textFieldContacto1);
 
 		JLabel lblContacto2 = new JLabel("2. contacto:");
 		lblContacto2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContacto2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblContacto2.setBounds(28, 348, 108, 31);
-		contentPanel.add(lblContacto2);
+		getContentPane().add(lblContacto2);
 
 		textFieldContacto2 = new JTextField();
 		textFieldContacto2.setColumns(10);
 		textFieldContacto2.setBounds(191, 355, 163, 19);
-		contentPanel.add(textFieldContacto2);
+		getContentPane().add(textFieldContacto2);
 
 		JLabel lblContacto3 = new JLabel("3. contacto:");
 		lblContacto3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContacto3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblContacto3.setBounds(28, 393, 108, 31);
-		contentPanel.add(lblContacto3);
+		getContentPane().add(lblContacto3);
 
 		textFieldContacto3 = new JTextField();
 		textFieldContacto3.setColumns(10);
 		textFieldContacto3.setBounds(191, 400, 163, 19);
-		contentPanel.add(textFieldContacto3);
+		getContentPane().add(textFieldContacto3);
 
 		JLabel lblContacto4 = new JLabel("4. contacto:");
 		lblContacto4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContacto4.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblContacto4.setBounds(28, 437, 108, 31);
-		contentPanel.add(lblContacto4);
+		getContentPane().add(lblContacto4);
 
 		textFieldContacto4 = new JTextField();
 		textFieldContacto4.setColumns(10);
 		textFieldContacto4.setBounds(191, 444, 163, 19);
-		contentPanel.add(textFieldContacto4);
+		getContentPane().add(textFieldContacto4);
 
 		JLabel lblObservaciones = new JLabel("Observaciones:");
 		lblObservaciones.setHorizontalAlignment(SwingConstants.CENTER);
 		lblObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblObservaciones.setBounds(20, 489, 108, 31);
-		contentPanel.add(lblObservaciones);
+		getContentPane().add(lblObservaciones);
 
 		JLabel lblMaxChars = new JLabel("(Max 100 caracteres)");
 		lblMaxChars.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMaxChars.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblMaxChars.setBounds(10, 517, 126, 31);
-		contentPanel.add(lblMaxChars);
+		getContentPane().add(lblMaxChars);
 
 		textAreaObservaciones = new JTextArea();
 		textAreaObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textAreaObservaciones.setLineWrap(true);
 		textAreaObservaciones.setBounds(146, 487, 230, 61);
-		contentPanel.add(textAreaObservaciones);
+		getContentPane().add(textAreaObservaciones);
 
 		btnAñadir = new JButton("Añadir empresa");
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAñadir.setBounds(107, 569, 147, 37);
-		contentPanel.add(btnAñadir);
+		getContentPane().add(btnAñadir);
 		btnAñadir.addActionListener(this);
 	}
 

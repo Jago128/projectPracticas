@@ -9,8 +9,8 @@ import controller.LoginController;
 import model.Usuario;
 
 public class VentanaRegistro extends JDialog implements ActionListener {
-
 	private static final long serialVersionUID = 1L;
+	
 	private JTextField textFieldNombre;
 	private JPasswordField passwordField;
 	private JButton btnRegistro;
@@ -24,17 +24,17 @@ public class VentanaRegistro extends JDialog implements ActionListener {
 		setBounds(100, 100, 380, 230);
 		getContentPane().setLayout(null);
 
-		JLabel lblRegistro = new JLabel("Introduzca la informacion para registrarse");
+		JLabel lblRegistro = new JLabel("Introduzca la informacion para registrarse:");
 		lblRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblRegistro.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRegistro.setBounds(64, 10, 266, 41);
+		lblRegistro.setBounds(52, 10, 266, 41);
 		getContentPane().add(lblRegistro);
 
-		JLabel lblNewLabel = new JLabel("Nombre:");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel.setBounds(75, 61, 79, 29);
-		getContentPane().add(lblNewLabel);
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNombre.setBounds(75, 61, 79, 29);
+		getContentPane().add(lblNombre);
 
 		JLabel lblContraseña = new JLabel("Contraseña:");
 		lblContraseña.setHorizontalAlignment(SwingConstants.CENTER);

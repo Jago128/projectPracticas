@@ -6,12 +6,9 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.DateTimeParseException;
+import java.time.format.*;
 import java.time.temporal.ChronoField;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 import controller.LoginController;
 import exceptions.EmailFormatException;
@@ -22,14 +19,13 @@ public class VentanaModificar extends JDialog implements ActionListener {
 
 	private LoginController cont;
 	private Empresa emp;
-	private JTextArea textareaEmpresa;
+	private JTextArea textareaEmpresa, textAreaObservaciones;
 	private JTextField textFieldDatosContacto, textFieldContactoEmpresa, textFieldPersonaContacto, textFieldContacto1,
 	textFieldContacto2, textFieldContacto3, textFieldContacto4;
 	private JComboBox<String> comboBoxEstado;
 	private JButton btnModificar;
-	private JLabel lblDatosEmpresa;
-	private JTextArea textAreaObservaciones;
-	private JLabel lblNewLabel;
+	private JLabel lblDatosEmpresa, lblFechaFormato;
+
 
 	public VentanaModificar(JDialog parent, LoginController cont, Empresa emp) {
 		super(parent, true);
@@ -175,10 +171,10 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		lblDatosEmpresa.setBounds(378, 10, 506, 38);
 		getContentPane().add(lblDatosEmpresa);
 
-		lblNewLabel = new JLabel("Formato de fechas: AAAA-MM-DD");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel.setBounds(42, 38, 275, 16);
-		getContentPane().add(lblNewLabel);
+		lblFechaFormato = new JLabel("Formato de fechas: AAAA-MM-DD");
+		lblFechaFormato.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblFechaFormato.setBounds(42, 38, 275, 16);
+		getContentPane().add(lblFechaFormato);
 
 		loadEmpresa();
 	}

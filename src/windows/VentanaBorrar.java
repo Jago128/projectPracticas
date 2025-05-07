@@ -5,16 +5,13 @@ import java.awt.event.*;
 import java.util.Map;
 
 import javax.swing.*;
-import javax.swing.border.*;
 
 import controller.LoginController;
-import model.Empresa;
-import model.Usuario;
+import model.*;
 
 public class VentanaBorrar extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
-	private final JPanel contentPanel = new JPanel();
 	private LoginController cont;
 	// private Usuario user;
 	private JButton btnBorrar;
@@ -28,10 +25,6 @@ public class VentanaBorrar extends JDialog implements ActionListener {
 		setResizable(false);
 		setTitle("Borrar empresa");
 		setBounds(100, 100, 310, 300);
-		getContentPane().setLayout(null);
-		contentPanel.setBounds(0, 0, 0, 0);
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel);
 		getContentPane().setLayout(null);
 
 		listEmpresas = new JList<String>();

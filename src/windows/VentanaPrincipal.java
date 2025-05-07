@@ -53,14 +53,14 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		lblEmpresas.setBounds(115, 10, 138, 28);
 		contentPane.add(lblEmpresas);
 
-		JTextArea textAreaModify = new JTextArea();
-		textAreaModify.setEditable(false);
-		textAreaModify.setBackground(UIManager.getColor("Button.background"));
-		textAreaModify.setLineWrap(true);
-		textAreaModify.setText("Se modifican las empresas desde esta ventana.");
-		textAreaModify.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaModify.setBounds(28, 94, 145, 34);
-		contentPane.add(textAreaModify);
+		JTextArea textAreaInfoModificar = new JTextArea();
+		textAreaInfoModificar.setEditable(false);
+		textAreaInfoModificar.setBackground(UIManager.getColor("Button.background"));
+		textAreaInfoModificar.setLineWrap(true);
+		textAreaInfoModificar.setText("Se modifican las empresas desde esta ventana.");
+		textAreaInfoModificar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaInfoModificar.setBounds(28, 94, 145, 34);
+		contentPane.add(textAreaInfoModificar);
 
 		btnAñadir.addActionListener(this);
 		btnBorrarempresas.addActionListener(this);
