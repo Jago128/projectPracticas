@@ -15,28 +15,33 @@ public class BDImplementacion implements ApnabiDAO {
 	private String userBD;
 	private String passwordBD;
 
-	final String SQLUSUARIO = "SELECT * FROM USUARIO WHERE NOMBRE = ?";
-	final String SQLUSUARIOCONTRASEÑA = "SELECT * FROM USUARIO WHERE NOMBRE=? AND CONTRASEÑA = ?";
-	final String SQLTIPO = "SELECT TIPO FROM USUARIO WHERE NOMBRE = ?";
+	final String SQLUSUARIO = "SELECT * FROM USUARIO WHERE NOMBRE=?";
+	final String SQLUSUARIOCONTRASEÑA = "SELECT * FROM USUARIO WHERE NOMBRE=? AND CONTRASEÑA=?";
+	final String SQLTIPO = "SELECT TIPO FROM USUARIO WHERE NOMBRE=?";
 	final String SQLINSERTUSUARIO = "INSERT INTO USUARIO VALUES (?,?)";
 
 	final String SQLEMPRESAS = "SELECT * FROM EMPRESA";
 	final String SQLNOMEMPRESAS = "SELECT NOM_EMPRESA FROM EMPRESA";
-	final String SQLSELECTEMPRESA = "SELECT * FROM EMPRESA WHERE NOM_EMPRESA = ?";
-	final String SQLINSERTEMPRESA = "INSERT INTO EMPRESA VALUES (?,?,?,?,?,?,?)";
+	final String SQLCODEMPRESA = "SELECT COD_EMPRESA FROM EMPRESA WHERE NOM_EMPRESA=?";
+	final String SQLSELECTEMPRESA = "SELECT * FROM EMPRESA WHERE NOM_EMPRESA=?";
+	final String SQLINSERTEMPRESA = "INSERT INTO EMPRESA (NOM_EMPRESA, SECTOR, PUESTO, DATOSCONTACTO, CONTACTOEMPRESA, CONTACTOAPNABI, ESTADO) VALUES (?,?,?,?,?,?,?)";
 	final String SQLUPDATEDATOS = "UPDATE EMPRESA SET DATOSCONTACTO=? WHERE NOM_EMPRESA=?";
 	final String SQLUPDATECONTACTOEMPRESA = "UPDATE EMPRESA SET CONTACTOEMPRESA=? WHERE NOM_EMPRESA=?";
 	final String SQLUPDATECONTACTOAPNABI = "UPDATE EMPRESA SET CONTACTOAPNABI=? WHERE NOM_EMPRESA=?";
 	final String SQLUPDATEESTADO = "UPDATE EMPRESA SET ESTADO=? WHERE NOM_EMPRESA=?";
 	final String SQLDELETE_EMPRESA = "DELETE FROM EMPRESA WHERE NOM_EMPRESA = ?";
 
-	final String SQLINSERTCONTACTO = "INSERT INTO CONTACTO (CONTACTO1, CONTACTO2, CONTACTO3, CONTACTO4, OBSERVACIONES, RESULTADOULTIMO, INFOULTIMO,"
-			+ "RESULTADOFINAL, FECHARESOLUCION) VALUES (?,?,?,?,?,?,?,?,?)";
+	final String SQLSELECTCONTACTO = "SELECT * FROM CONTACTO WHERE COD_EMPRESA=?";
+	final String SQLINSERTCONTACTO = "INSERT INTO CONTACTO (CONTACTO1, CONTACTO2, CONTACTO3, CONTACTO4, OBSERVACIONES, RESULTADOULTIMO, INFOULTIMO, RESULTADOFINAL, FECHARESOLUCION, COD_EMPRESA) VALUES (?,?,?,?,?,?,?,?,?,?)";
 	final String SQLUPDATECONTACTO1 = "UPDATE CONTACTO SET CONTACTO1=? WHERE IDCONTACTO=?";
 	final String SQLUPDATECONTACTO2 = "UPDATE CONTACTO SET CONTACTO2=? WHERE IDCONTACTO=?";
 	final String SQLUPDATECONTACTO3 = "UPDATE CONTACTO SET CONTACTO3=? WHERE IDCONTACTO=?";
 	final String SQLUPDATECONTACTO4 = "UPDATE CONTACTO SET CONTACTO4=? WHERE IDCONTACTO=?";
 	final String SQLUPDATEOBSERVACIONES = "UPDATE CONTACTO SET OBSERVACIONES=? WHERE IDCONTACTO=?";
+	final String SQLUPDATERESULTADOULTIMO = "UPDATE CONTACTO SET RESULTADOULTIMO=? WHERE IDCONTACTO=?";
+	final String SQLUPDATEINFOULTIMO = "UPDATE CONTACTO SET INFOULTIMO=? WHERE IDCONTACTO=?";
+	final String SQLUPDATERESULTADOFINAL = "UPDATE CONTACTO SET RESULTADOFINAL=? WHERE IDCONTACTO=?";
+	final String SQLUPDATEFECHARESOLUCION = "UPDATE CONTACTO SET FECHARESOLUCION=? WHERE IDCONTACTO=?";
 
 	public BDImplementacion() {
 		this.configFile = ResourceBundle.getBundle("model.classConfig");
@@ -137,7 +142,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt = con.prepareStatement(SQLINSERTUSUARIO);
 				stmt.setString(1, user.getNombre());
 				stmt.setString(2, user.getContraseña());
-				if (stmt.executeUpdate()>0) {
+				if (stmt.executeUpdate() > 0) {
 					registro = true;
 				}
 				stmt.close();
@@ -234,11 +239,28 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return empresa;
 	}
-	
+
 	@Override
 	public int getCodEmpresa(String nom) {
-		
-		return 0;
+		ResultSet rs = null;
+		int cod = 0;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLCODEMPRESA);
+			stmt.setString(1, nom);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				cod = rs.getInt("COD_EMPRESA");
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger el codigo de la empresa.");
+			e.printStackTrace();
+		}
+		return cod;
 	}
 
 	@Override
@@ -359,7 +381,7 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			if (stmt.executeUpdate()>0) {
+			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
 			stmt.close();
@@ -381,7 +403,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt = con.prepareStatement(SQLUPDATEDATOS);
 				stmt.setString(1, datos);
 				stmt.setString(2, nom);
-				if (stmt.executeUpdate()>0) {
+				if (stmt.executeUpdate() > 0) {
 					check = true;
 				}
 				stmt.close();
@@ -406,7 +428,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt = con.prepareStatement(SQLUPDATECONTACTOEMPRESA);
 				stmt.setString(1, contactoE);
 				stmt.setString(2, nom);
-				if (stmt.executeUpdate()>0) {
+				if (stmt.executeUpdate() > 0) {
 					check = true;
 				}
 				stmt.close();
@@ -431,7 +453,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt = con.prepareStatement(SQLUPDATECONTACTOAPNABI);
 				stmt.setString(1, personaC);
 				stmt.setString(2, nom);
-				if (stmt.executeUpdate()>0) {
+				if (stmt.executeUpdate() > 0) {
 					check = true;
 				}
 				stmt.close();
@@ -479,7 +501,7 @@ public class BDImplementacion implements ApnabiDAO {
 					System.out.println("Tipo invalido.");
 				}
 				stmt.setString(2, nom);
-				if (stmt.executeUpdate()>0) {
+				if (stmt.executeUpdate() > 0) {
 					check = true;
 				}
 				stmt.close();
@@ -493,7 +515,7 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
-	
+
 	@Override
 	public boolean eliminarEmpresa(String nom) {
 		boolean check = false;
@@ -502,7 +524,7 @@ public class BDImplementacion implements ApnabiDAO {
 		try {
 			stmt = con.prepareStatement(SQLDELETE_EMPRESA);
 			stmt.setString(1, nom);
-			if (stmt.executeUpdate()>0) {
+			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
 			stmt.close();
@@ -513,24 +535,198 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
-	
 
 	@Override
 	public Map<Integer, Contacto> mostrarContactos() {
-		
-		return null;
+		ResultSet rs = null;
+		Contacto cont;
+		Map<Integer, Contacto> contactos = new TreeMap<>();
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLEMPRESAS);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				cont = new Contacto();
+				cont.setCodContacto(rs.getInt("COD_CONTACTO"));
+				cont.setContacto1(rs.getDate("CONTACTO1").toString());
+				if (rs.getDate("CONTACTO2")==null) {
+					cont.setContacto2(null);
+				} else {
+					cont.setContacto2(rs.getDate("CONTACTO2").toString());
+				}
+
+				if (rs.getDate("CONTACTO3")==null) {
+					cont.setContacto3(null);
+				} else {
+					cont.setContacto3(rs.getDate("CONTACTO3").toString());
+				}
+
+				if (rs.getDate("CONTACTO4")==null) {
+					cont.setContacto4(null);
+				} else {
+					cont.setContacto4(rs.getDate("CONTACTO4").toString());
+				}
+				cont.setObservaciones(rs.getString("OBSERVACIONES"));
+				cont.setResultadoUltimoContacto(ResultadoUltimoContacto.valueOf(rs.getString("RESULTADOULTIMO").toUpperCase()));
+				cont.setInfoUltimo(rs.getString("INFOULTIMO"));
+				cont.setResultadoFinal(ResultadoFinal.valueOf(rs.getString("RESULTADOFINAL").toUpperCase()));
+				if (rs.getDate("FECHARESOLUCION")==null) {
+					cont.setFechaResolucion(null);
+				} else {
+					cont.setFechaResolucion(rs.getDate("FECHARESOLUCION").toString());
+				}
+				cont.setCodEmpresa(rs.getInt("COD_EMPRESA"));
+				contactos.put(cont.getCodContacto(), cont);
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger las empresas.");
+			e.printStackTrace();
+		}
+		return contactos;
 	}
 
 	@Override
-	public boolean getContacto(int id) {
-		
-		return false;
+	public Contacto getContacto(int empId) {
+		ResultSet rs = null;
+		Contacto cont = new Contacto();
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLSELECTEMPRESA);
+			stmt.setInt(1, empId);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				cont.setCodContacto(rs.getInt("COD_CONTACTO"));
+				cont.setContacto1(rs.getDate("CONTACTO1").toString());
+				if (rs.getDate("CONTACTO2")==null) {
+					cont.setContacto2(null);
+				} else {
+					cont.setContacto2(rs.getDate("CONTACTO2").toString());
+				}
+
+				if (rs.getDate("CONTACTO3")==null) {
+					cont.setContacto3(null);
+				} else {
+					cont.setContacto3(rs.getDate("CONTACTO3").toString());
+				}
+
+				if (rs.getDate("CONTACTO4")==null) {
+					cont.setContacto4(null);
+				} else {
+					cont.setContacto4(rs.getDate("CONTACTO4").toString());
+				}
+				cont.setObservaciones(rs.getString("OBSERVACIONES"));
+				if (rs.getString("RESULTADOULTIMO")!=null) {
+					cont.setResultadoUltimoContacto(ResultadoUltimoContacto.valueOf(rs.getString("RESULTADOULTIMO").toUpperCase()));
+				} else {
+					cont.setResultadoUltimoContacto(null);
+				}
+				cont.setInfoUltimo(rs.getString("INFOULTIMO"));
+				
+				if (rs.getString("RESULTADOULTIMO")!=null) {
+					cont.setResultadoFinal(ResultadoFinal.valueOf(rs.getString("RESULTADOFINAL").toUpperCase()));
+				} else {
+					cont.setResultadoFinal(null);
+				}
+				if (rs.getDate("FECHARESOLUCION")==null) {
+					cont.setFechaResolucion(null);
+				} else {
+					cont.setFechaResolucion(rs.getDate("FECHARESOLUCION").toString());
+				}
+				cont.setCodEmpresa(rs.getInt("COD_EMPRESA"));
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger la empresa.");
+			e.printStackTrace();
+		}
+		return cont;
 	}
 
 	@Override
-	public boolean añadirContacto(Contacto con) {
-		
-		return false;
+	public boolean añadirContacto(Contacto cont) {
+		boolean check = false;
+		this.openConnection();
+
+		try {
+			stmt = con.prepareStatement(SQLINSERTEMPRESA);
+			stmt.setString(1, cont.getContacto1());
+			stmt.setString(2, cont.getContacto2());
+			stmt.setString(3, cont.getContacto3());
+			stmt.setString(4, cont.getContacto4());
+			stmt.setString(5, cont.getObservaciones());
+			switch (cont.getResultadoUltimoContacto()) {
+			case COMUNICACION_SINRESPUESTA:
+				stmt.setString(6, "Comunicacion_SinRespuesta");
+				break;
+				
+			case INICIO_VALORACIONOFERTA:
+				stmt.setString(6, "Inicio_ValoracionOferta");
+				break;
+				
+			case RESPUESTA_NOCONCLUYENTE:
+				stmt.setString(6, "Respuesta_NoConcluyente");
+				break;
+				
+			case RESPUESTA_POSPUESTA:
+				stmt.setString(6, "Respuesta_Pospuesta");
+				break;
+				
+			case REUNION_PROGRAMADA:
+				stmt.setString(6, "Reunion_Programada");
+				break;
+
+			case UNSET:
+				stmt.setString(6, null);
+				break;
+			}
+			
+			stmt.setString(7, cont.getInfoUltimo());
+			switch (cont.getResultadoFinal()) {
+			case CONVENIO_COLABORACION:
+				stmt.setString(8, "Convenio_Colaboracion");
+				break;
+
+			case MEDIDAS_ALTERNATIVAS:
+				stmt.setString(8, "Medidas_Alternativas");
+				break;
+
+			case OFERTA_EMPLEO:
+				stmt.setString(8, "Oferta_Empleo");
+				break;
+
+			case RELACION_CONCLUIDA:
+				stmt.setString(8, "Relacion_Concluida");
+				break;
+
+			case RELACION_POSPUESTA:
+				stmt.setString(8, "Relacion_Pospuesta");
+				break;
+
+			case UNSET:
+				stmt.setString(8, null);
+				break;
+			}
+
+			stmt.setDate(9, Date.valueOf(cont.getFechaResolucion()));
+			stmt.setInt(10, cont.getCodEmpresa());
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha habido un error al intentar añadir la empresa.");
+			e.printStackTrace();
+		}
+		return check;
 	}
 
 	@Override
@@ -543,7 +739,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO1);
 				stmt.setDate(1, Date.valueOf(contacto1));
 				stmt.setInt(2, id);
-				if (stmt.executeUpdate()>0) {
+				if (stmt.executeUpdate() > 0) {
 					check = true;
 				}
 				stmt.close();
@@ -568,7 +764,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO2);
 				stmt.setDate(1, Date.valueOf(contacto2));
 				stmt.setInt(2, id);
-				if (stmt.executeUpdate()>0) {
+				if (stmt.executeUpdate() > 0) {
 					check = true;
 				}
 				stmt.close();
@@ -593,7 +789,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO3);
 				stmt.setDate(1, Date.valueOf(contacto3));
 				stmt.setInt(2, id);
-				if (stmt.executeUpdate()>0) {
+				if (stmt.executeUpdate() > 0) {
 					check = true;
 				}
 				stmt.close();
@@ -618,7 +814,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO4);
 				stmt.setDate(1, Date.valueOf(contacto4));
 				stmt.setInt(2, id);
-				if (stmt.executeUpdate()>0) {
+				if (stmt.executeUpdate() > 0) {
 					check = true;
 				}
 				stmt.close();
@@ -643,7 +839,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt = con.prepareStatement(SQLUPDATEOBSERVACIONES);
 				stmt.setString(1, observaciones);
 				stmt.setInt(2, id);
-				if (stmt.executeUpdate()>0) {
+				if (stmt.executeUpdate() > 0) {
 					check = true;
 				}
 				stmt.close();
@@ -660,25 +856,101 @@ public class BDImplementacion implements ApnabiDAO {
 
 	@Override
 	public boolean modificarResultadoUltimoContacto(String resultadoU, int id) {
-		
-		return false;
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!resultadoU.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATERESULTADOULTIMO);
+				stmt.setString(1, resultadoU);
+				stmt.setInt(2, id);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
+			e.printStackTrace();
+		}
+		return check;
 	}
 
 	@Override
 	public boolean modificarInformacionUltimoContacto(String infoU, int id) {
-		
-		return false;
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!infoU.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEINFOULTIMO);
+				stmt.setString(1, infoU);
+				stmt.setInt(2, id);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
+			e.printStackTrace();
+		}
+		return check;
 	}
 
 	@Override
 	public boolean modificarResultadoFinal(String resultadoF, int id) {
-		
-		return false;
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!resultadoF.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATERESULTADOFINAL);
+				stmt.setString(1, resultadoF);
+				stmt.setInt(2, id);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
+			e.printStackTrace();
+		}
+		return check;
 	}
 
 	@Override
 	public boolean modificarFechaResolucion(String fecResolucion, int id) {
-		
-		return false;
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!fecResolucion.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEFECHARESOLUCION);
+				stmt.setDate(1, Date.valueOf(fecResolucion));
+				stmt.setInt(2, id);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
+			e.printStackTrace();
+		}
+		return check;
 	}
 }

@@ -79,12 +79,12 @@ public class LoginController {
 		return mostrarContactos();
 	}
 	
-	public boolean getContacto(int id) {
-		return getContacto(id);
+	public Contacto getContacto(int empId) {
+		return getContacto(empId);
 	}
 	
-	public boolean añadirContacto(Contacto con) {
-		return añadirContacto(con);
+	public boolean añadirContacto(Contacto cont) {
+		return añadirContacto(cont);
 	}
 
 	public boolean modificarContacto1(String contacto1, int id) {

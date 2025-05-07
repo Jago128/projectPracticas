@@ -21,17 +21,19 @@ CREATE TABLE EMPRESA (
 );
 
 CREATE TABLE CONTACTO (
+    COD_CONTACTO INT PRIMARY KEY AUTO_INCREMENT,
     CONTACTO1 DATE NOT NULL,
     CONTACTO2 DATE,
     CONTACTO3 DATE,
     CONTACTO4 DATE,
     OBSERVACIONES VARCHAR(100),
-    RESULTADOULTIMO ENUM("Comunicacion_SinRespuesta", "Respuesta_Pospuesta", "Reunion_Programada", "Respuesta_NoConcluyente", "Inicio_ValoracionOferta"),
+    RESULTADOULTIMO ENUM('Comunicacion_SinRespuesta', 'Respuesta_Pospuesta', 'Reunion_Programada', 'Respuesta_NoConcluyente', 'Inicio_ValoracionOferta'),
     INFOULTIMO VARCHAR(200),
-    RESULTADOFINAL ENUM("Oferta_Empleo", "Convenio_Colaboracion", "Medidas_Alternativas", "Relacion_Concluida", "Relacion_Pospuesta"),
+    RESULTADOFINAL ENUM('Oferta_Empleo', 'Convenio_Colaboracion', 'Medidas_Alternativas', 'Relacion_Concluida', 'Relacion_Pospuesta'),
     FECHARESOLUCION DATE,
     COD_EMPRESA INT,
-    FOREIGN KEY (COD_EMPRESA) REFERENCES EMPRESA (COD_EMPRESA)
+    FOREIGN KEY (COD_EMPRESA)
+        REFERENCES EMPRESA (COD_EMPRESA)
 );
 
 INSERT INTO USUARIO VALUES
@@ -43,7 +45,7 @@ INSERT INTO EMPRESA (NOM_EMPRESA, SECTOR, PUESTO, DATOSCONTACTO, CONTACTOEMPRESA
 ("Grupo Cofares", "Logistica_Transporte", "Almacen","vcuesta@cofares.es", "Virginia", "Alba", "Valorando_Interesado"),
 ("SEIDOR", "Internet", null, "LinkedIn", "Aida Morales Sedano", "Selene", "Informado");
 
-INSERT INTO CONTACTO VALUES
+INSERT INTO CONTACTO (CONTACTO1, CONTACTO2, CONTACTO3, CONTACTO4, OBSERVACIONES, RESULTADOULTIMO, INFOULTIMO, RESULTADOFINAL, FECHARESOLUCION, COD_EMPRESA) VALUES
 ("2024-10-23", null, null, null, null, "Comunicacion_SinRespuesta", "Reunión el 08/05/2025", null, null, 1),
 ("2024-09-16", "2024-09-24", "2024-10-18", null, null, "Respuesta_Pospuesta", "Tras reunión y presentación se les envía correo y responden que están valorando próximo contacto en mayo.", null, "2023-10-11", 2),
 ("2024-10-23", null, null, null, "Propuesta de prácticas","Reunion_Programada","5 de mayo firma de convenio en oficinas de apnabi.","Convenio_Colaboracion", "2023-10-6", 3);

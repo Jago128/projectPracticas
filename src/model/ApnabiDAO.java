@@ -36,9 +36,9 @@ public interface ApnabiDAO {
 	// Contactos
 	public Map<Integer, Contacto> mostrarContactos();
 	
-	public boolean getContacto(int id);
+	public Contacto getContacto(int empId);
 	
-	public boolean añadirContacto(Contacto con);
+	public boolean añadirContacto(Contacto cont);
 	
 	public boolean modificarContacto1(String contacto1, int id);
 

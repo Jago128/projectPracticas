@@ -18,9 +18,10 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 
 	private LoginController cont;
 	private JTextField textFieldNombre, textFieldPuesto, textFieldDatosContacto, textFieldContactoEmpresa,
-			textFieldContacto1, textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldPersonaContacto;
-	private JTextArea textAreaObservaciones;
-	private JComboBox<String> comboBoxSector, comboBoxEstado;
+	textFieldContacto1, textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldPersonaContacto,
+	textFieldFechaResolucion;
+	private JTextArea textAreaObservaciones, textAreaInfoUltimoCont;
+	private JComboBox<String> comboBoxSector, comboBoxResultadoUltimoContacto, comboBoxEstado, comboBoxResultadoFinal;
 	private JButton btnAñadir;
 
 	public VentanaAñadir(JFrame parent, LoginController cont) {
@@ -29,13 +30,13 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 
 		setResizable(false);
 		setTitle("Añadir empresa");
-		setBounds(100, 100, 800, 660);
+		setBounds(100, 100, 800, 480);
 		getContentPane().setLayout(null);
 
-		JLabel lblObligatorio = new JLabel("* Obligatorio. Formato de fechas: AAAA-MM-DD");
+		JLabel lblObligatorio = new JLabel("Los campos con * son obligatorias. Formato de fechas: AAAA-MM-DD");
 		lblObligatorio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblObligatorio.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblObligatorio.setBounds(189, 10, 366, 19);
+		lblObligatorio.setBounds(20, 10, 721, 19);
 		getContentPane().add(lblObligatorio);
 
 		JLabel lblNombre = new JLabel("Nombre: *");
@@ -56,12 +57,12 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		getContentPane().add(lblSector);
 
 		comboBoxSector = new JComboBox<>();
-		comboBoxSector.setModel(new DefaultComboBoxModel<>(new String[] {"", "Agricultura y Ganaderia",
+		comboBoxSector.setModel(new DefaultComboBoxModel<>(new String[] { "", "Agricultura y Ganaderia",
 				"Bienes de Consumo", "Comercio electronico", "Comercio y establecimientos", "Construccion",
 				"Deporte y ocio", "Energia y medio ambiente", "Finanzas, Seguros y bienes inmuebles", "Internet",
 				"Logistica y Transporte", "Medios de comunicacion y marketing", "Metalurgia y electronica",
 				"Productos quimicos y materias primas", "Salud e industria farmaceutica", "Servicios", "Sociedad",
-				"Tecnologia y telecomunicaciones", "Turismo y hosteleria", "Vida"}));
+				"Tecnologia y telecomunicaciones", "Turismo y hosteleria", "Vida" }));
 		comboBoxSector.setBounds(121, 74, 163, 21);
 		getContentPane().add(comboBoxSector);
 
@@ -112,13 +113,13 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		JLabel lblEstado = new JLabel("Estado: *");
 		lblEstado.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEstado.setBounds(20, 271, 89, 31);
+		lblEstado.setBounds(60, 271, 89, 31);
 		getContentPane().add(lblEstado);
 
 		comboBoxEstado = new JComboBox<>();
-		comboBoxEstado.setModel(new DefaultComboBoxModel<>(new String[] {"", "Informado", "Valorando/interesado",
-				"Planificando inserciones", "Proximo año", "No interesado"}));
-		comboBoxEstado.setBounds(108, 277, 163, 21);
+		comboBoxEstado.setModel(new DefaultComboBoxModel<>(new String[] { "", "Informado", "Valorando/interesado",
+				"Planificando inserciones", "Proximo año", "No interesado" }));
+		comboBoxEstado.setBounds(166, 277, 163, 21);
 		getContentPane().add(comboBoxEstado);
 
 		JLabel lblContacto1 = new JLabel("1. contacto: *");
@@ -131,6 +132,12 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		textFieldContacto1.setColumns(10);
 		textFieldContacto1.setBounds(480, 35, 163, 19);
 		getContentPane().add(textFieldContacto1);
+
+		JLabel lblFecha = new JLabel("(Fecha)");
+		lblFecha.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFecha.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblFecha.setBounds(653, 28, 88, 31);
+		getContentPane().add(lblFecha);
 
 		JLabel lblContacto2 = new JLabel("2. contacto:");
 		lblContacto2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -183,35 +190,87 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		textAreaObservaciones.setBounds(511, 193, 230, 61);
 		getContentPane().add(textAreaObservaciones);
 
+		JLabel lblResultadoUltimoCont = new JLabel("Resultado ultimo contacto:");
+		lblResultadoUltimoCont.setHorizontalAlignment(SwingConstants.CENTER);
+		lblResultadoUltimoCont.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblResultadoUltimoCont.setBounds(395, 348, 162, 31);
+		getContentPane().add(lblResultadoUltimoCont);
+
+		comboBoxResultadoUltimoContacto = new JComboBox<>();
+		comboBoxResultadoUltimoContacto.setModel(
+				new DefaultComboBoxModel<>(new String[] { "", "Comunicacion sin respuesta", "Nos pospone la respuesta",
+						"Programada reunion", "Respuesta no concluyente", "Inicio valoracion oferta" }));
+		comboBoxResultadoUltimoContacto.setBounds(564, 354, 163, 21);
+		getContentPane().add(comboBoxResultadoUltimoContacto);
+
+		JLabel lblInfoUltimoCont = new JLabel("Informacion ultimo contacto:");
+		lblInfoUltimoCont.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInfoUltimoCont.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblInfoUltimoCont.setBounds(362, 277, 177, 31);
+		getContentPane().add(lblInfoUltimoCont);
+
+		JLabel lblResultadoFinal = new JLabel("Resultado final prospeccion:");
+		lblResultadoFinal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblResultadoFinal.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblResultadoFinal.setBounds(20, 348, 163, 31);
+		getContentPane().add(lblResultadoFinal);
+
+		comboBoxResultadoFinal = new JComboBox<String>();
+		comboBoxResultadoFinal.setModel(new DefaultComboBoxModel<>(new String[] { "", "Oferta de empleo",
+				"Convenio de colaboracion", "Medidas alternativas", "Relacion concluida", "Relacion pospuesta" }));
+		comboBoxResultadoFinal.setBounds(193, 354, 163, 21);
+		getContentPane().add(comboBoxResultadoFinal);
+
+		JLabel lblFechaResolucion = new JLabel("Fecha resolucion:");
+		lblFechaResolucion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFechaResolucion.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblFechaResolucion.setBounds(33, 312, 120, 31);
+		getContentPane().add(lblFechaResolucion);
+
+		JLabel lblFecha_1 = new JLabel("(Fecha)");
+		lblFecha_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFecha_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblFecha_1.setBounds(653, 69, 88, 31);
+		getContentPane().add(lblFecha_1);
+
+		JLabel lblFecha_2 = new JLabel("(Fecha)");
+		lblFecha_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFecha_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblFecha_2.setBounds(653, 104, 88, 31);
+		getContentPane().add(lblFecha_2);
+
+		JLabel lblFecha_3 = new JLabel("(Fecha)");
+		lblFecha_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFecha_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblFecha_3.setBounds(653, 145, 88, 31);
+		getContentPane().add(lblFecha_3);
+
+		textFieldFechaResolucion = new JTextField();
+		textFieldFechaResolucion.setColumns(10);
+		textFieldFechaResolucion.setBounds(166, 319, 163, 19);
+		getContentPane().add(textFieldFechaResolucion);
+
+		textAreaInfoUltimoCont = new JTextArea();
+		textAreaInfoUltimoCont.setLineWrap(true);
+		textAreaInfoUltimoCont.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaInfoUltimoCont.setBounds(549, 277, 230, 61);
+		getContentPane().add(textAreaInfoUltimoCont);
+
+		JLabel lblmaxChars_1 = new JLabel("(Max 200 caracteres)");
+		lblmaxChars_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblmaxChars_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblmaxChars_1.setBounds(385, 312, 126, 31);
+		getContentPane().add(lblmaxChars_1);
+
 		btnAñadir = new JButton("Añadir empresa");
-		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAñadir.setBounds(107, 569, 147, 37);
+		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btnAñadir.setBounds(215, 385, 380, 37);
 		getContentPane().add(btnAñadir);
-		
-		JLabel lblEstado_1 = new JLabel("Estado: *");
-		lblEstado_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEstado_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEstado_1.setBounds(16, 312, 89, 31);
-		getContentPane().add(lblEstado_1);
-		
-		JComboBox<String> comboBoxEstado_1 = new JComboBox<String>();
-		comboBoxEstado_1.setBounds(104, 318, 163, 21);
-		getContentPane().add(comboBoxEstado_1);
-		
-		JLabel lblEstado_2 = new JLabel("Estado: *");
-		lblEstado_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEstado_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEstado_2.setBounds(375, 271, 89, 31);
-		getContentPane().add(lblEstado_2);
-		
-		JComboBox<String> comboBoxEstado_2 = new JComboBox<String>();
-		comboBoxEstado_2.setBounds(463, 277, 163, 21);
-		getContentPane().add(comboBoxEstado_2);
-		btnAñadir.addActionListener(this);
 	}
 
 	public void emailFormatCheck(String email) throws EmailFormatException {
-		Pattern modelo = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{3,})$");
+		Pattern modelo = Pattern.compile(
+				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{3,})$");
 		Matcher matcher = modelo.matcher(email);
 		if (!matcher.matches()) {
 			throw new EmailFormatException();
@@ -221,8 +280,8 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 	public boolean dateFormatErrorCheck() {
 		boolean error = false;
 		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
-				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-')
-				.appendValue(ChronoField.DAY_OF_MONTH).toFormatter();
+				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
+				.toFormatter();
 		try {
 			LocalDate.parse(textFieldContacto1.getText(), format);
 			if (!textFieldContacto2.getText().isBlank()) {
@@ -254,7 +313,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 			} else {
 				try {
 					if (textFieldDatosContacto.getText().contains("@") && (textFieldDatosContacto.getText().contains(".com")
-						|| textFieldDatosContacto.getText().contains(".es") || textFieldDatosContacto.getText().contains(".eus"))) {
+							|| textFieldDatosContacto.getText().contains(".es") || textFieldDatosContacto.getText().contains(".eus"))) {
 						emailFormatCheck(textFieldDatosContacto.getText());
 					}
 					if (dateFormatErrorCheck()) {
@@ -263,6 +322,8 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 					} else {
 						Sector sector = null;
 						Estado estado = null;
+						ResultadoUltimoContacto resultadoUltimoCont = null;
+						ResultadoFinal resultadoFinal = null;
 						int result = 0;
 						switch ((String)comboBoxSector.getSelectedItem()) {
 						case "Agricultura y Ganaderia":
@@ -363,26 +424,89 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 							break;
 						}
 
+						switch ((String)comboBoxResultadoUltimoContacto.getSelectedItem()) {
+						case "Comunicacion sin respuesta":
+							resultadoUltimoCont = ResultadoUltimoContacto.COMUNICACION_SINRESPUESTA;
+							break;
+
+						case "Nos pospone la respuesta":
+							resultadoUltimoCont = ResultadoUltimoContacto.RESPUESTA_POSPUESTA;
+							break;
+
+						case "Programada reunion":
+							resultadoUltimoCont = ResultadoUltimoContacto.REUNION_PROGRAMADA;
+							break;
+
+						case "Respuesta no concluyente":
+							resultadoUltimoCont = ResultadoUltimoContacto.RESPUESTA_NOCONCLUYENTE;
+							break;
+
+						case "Inicio valoracion oferta":
+							resultadoUltimoCont = ResultadoUltimoContacto.INICIO_VALORACIONOFERTA;
+							break;
+						}
+
+						switch ((String)comboBoxResultadoFinal.getSelectedItem()) {
+						case "Oferta de empleo":
+							resultadoFinal = ResultadoFinal.OFERTA_EMPLEO;
+							break;
+
+						case "Convenio de colaboracion":
+							resultadoFinal = ResultadoFinal.CONVENIO_COLABORACION;
+							break;
+
+						case "Medidas alternativas":
+							resultadoFinal = ResultadoFinal.MEDIDAS_ALTERNATIVAS;
+							break;
+
+						case "Relacion concluida":
+							resultadoFinal = ResultadoFinal.RELACION_CONCLUIDA;
+							break;
+
+						case "Relacion pospuesta":
+							resultadoFinal = ResultadoFinal.RELACION_POSPUESTA;
+							break;
+						}
+
 						Empresa emp = new Empresa(textFieldNombre.getText(), sector, textFieldPuesto.getText(),
 								textFieldDatosContacto.getText(), textFieldContactoEmpresa.getText(),
 								textFieldPersonaContacto.getText(), estado);
+
+						Contacto con = new Contacto(textFieldContacto1.getText());
+
 						if (!textFieldContacto2.getText().isBlank()) {
-							emp.setContacto2(textFieldContacto2.getText());
+							con.setContacto2(textFieldContacto2.getText());
 						}
 
 						if (!textFieldContacto3.getText().isBlank()) {
-							emp.setContacto3(textFieldContacto3.getText());
+							con.setContacto3(textFieldContacto3.getText());
 						}
 
 						if (!textFieldContacto4.getText().isBlank()) {
-							emp.setContacto4(textFieldContacto4.getText());
+							con.setContacto4(textFieldContacto4.getText());
 						}
 
 						if (!textAreaObservaciones.getText().isBlank()) {
-							emp.setObservaciones(textAreaObservaciones.getText());
+							con.setObservaciones(textAreaObservaciones.getText());
 						}
 
-						if (cont.añadirEmpresa(emp)) {
+						if (!textAreaInfoUltimoCont.getText().isBlank()) {
+							con.setInfoUltimo(textAreaObservaciones.getText());
+						}
+
+						if (resultadoUltimoCont!=null) {
+							con.setResultadoUltimoContacto(resultadoUltimoCont);
+						}
+
+						if (!textFieldFechaResolucion.getText().isBlank()) {
+							con.setFechaResolucion(textAreaObservaciones.getText());
+						}
+						
+						if (resultadoFinal!=null) {
+							con.setResultadoFinal(resultadoFinal);
+						}
+
+						if (cont.añadirEmpresa(emp)&&cont.añadirContacto(con)) {
 							result = JOptionPane.showConfirmDialog(null, "La empresa ha sido añadida correctamente. Quiere añadir mas empresas?",
 									"", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 							if (result == JOptionPane.NO_OPTION) {
