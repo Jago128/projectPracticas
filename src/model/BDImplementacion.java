@@ -23,17 +23,20 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLEMPRESAS = "SELECT * FROM EMPRESA";
 	final String SQLNOMEMPRESAS = "SELECT NOM_EMPRESA FROM EMPRESA";
 	final String SQLSELECTEMPRESA = "SELECT * FROM EMPRESA WHERE NOM_EMPRESA = ?";
-	final String SQLINSERTEMPRESA = "INSERT INTO EMPRESA VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+	final String SQLINSERTEMPRESA = "INSERT INTO EMPRESA VALUES (?,?,?,?,?,?,?)";
 	final String SQLUPDATEDATOS = "UPDATE EMPRESA SET DATOSCONTACTO=? WHERE NOM_EMPRESA=?";
 	final String SQLUPDATECONTACTOEMPRESA = "UPDATE EMPRESA SET CONTACTOEMPRESA=? WHERE NOM_EMPRESA=?";
 	final String SQLUPDATECONTACTOAPNABI = "UPDATE EMPRESA SET CONTACTOAPNABI=? WHERE NOM_EMPRESA=?";
 	final String SQLUPDATEESTADO = "UPDATE EMPRESA SET ESTADO=? WHERE NOM_EMPRESA=?";
-	final String SQLUPDATECONTACTO1 = "UPDATE EMPRESA SET CONTACTO1=? WHERE NOM_EMPRESA=?";
-	final String SQLUPDATECONTACTO2 = "UPDATE EMPRESA SET CONTACTO2=? WHERE NOM_EMPRESA=?";
-	final String SQLUPDATECONTACTO3 = "UPDATE EMPRESA SET CONTACTO3=? WHERE NOM_EMPRESA=?";
-	final String SQLUPDATECONTACTO4 = "UPDATE EMPRESA SET CONTACTO4=? WHERE NOM_EMPRESA=?";
-	final String SQLUPDATEOBSERVACIONES = "UPDATE EMPRESA SET OBSERVACIONES=? WHERE NOM_EMPRESA=?";
 	final String SQLDELETE_EMPRESA = "DELETE FROM EMPRESA WHERE NOM_EMPRESA = ?";
+
+	final String SQLINSERTCONTACTO = "INSERT INTO CONTACTO (CONTACTO1, CONTACTO2, CONTACTO3, CONTACTO4, OBSERVACIONES, RESULTADOULTIMO, INFOULTIMO,"
+			+ "RESULTADOFINAL, FECHARESOLUCION) VALUES (?,?,?,?,?,?,?,?,?)";
+	final String SQLUPDATECONTACTO1 = "UPDATE CONTACTO SET CONTACTO1=? WHERE IDCONTACTO=?";
+	final String SQLUPDATECONTACTO2 = "UPDATE CONTACTO SET CONTACTO2=? WHERE IDCONTACTO=?";
+	final String SQLUPDATECONTACTO3 = "UPDATE CONTACTO SET CONTACTO3=? WHERE IDCONTACTO=?";
+	final String SQLUPDATECONTACTO4 = "UPDATE CONTACTO SET CONTACTO4=? WHERE IDCONTACTO=?";
+	final String SQLUPDATEOBSERVACIONES = "UPDATE CONTACTO SET OBSERVACIONES=? WHERE IDCONTACTO=?";
 
 	public BDImplementacion() {
 		this.configFile = ResourceBundle.getBundle("model.classConfig");
@@ -376,31 +379,6 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(8, emp.getContacto1());
-			if (emp.getContacto2() == null) {
-				stmt.setString(9, null);
-			} else {
-				stmt.setString(9, emp.getContacto2());
-			}
-
-			if (emp.getContacto3() == null) {
-				stmt.setString(10, null);
-			} else {
-				stmt.setString(10, emp.getContacto3());
-			}
-
-			if (emp.getContacto4() == null) {
-				stmt.setString(11, null);
-			} else {
-				stmt.setString(11, emp.getContacto4());
-			}
-
-			if (emp.getObservaciones() == null) {
-				stmt.setString(12, null);
-			} else {
-				stmt.setString(12, emp.getObservaciones());
-			}
-
 			if (stmt.executeUpdate()>0) {
 				check = true;
 			}
@@ -537,7 +515,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarContacto1(String contacto1, String nom) {
+	public boolean modificarContacto1(String contacto1, int id) {
 		boolean check = false;
 
 		this.openConnection();
@@ -545,7 +523,7 @@ public class BDImplementacion implements ApnabiDAO {
 			if (!contacto1.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO1);
 				stmt.setDate(1, Date.valueOf(contacto1));
-				stmt.setString(2, nom);
+				stmt.setInt(2, id);
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
@@ -562,7 +540,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarContacto2(String contacto2, String nom) {
+	public boolean modificarContacto2(String contacto2, int id) {
 		boolean check = false;
 
 		this.openConnection();
@@ -570,7 +548,7 @@ public class BDImplementacion implements ApnabiDAO {
 			if (!contacto2.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO2);
 				stmt.setDate(1, Date.valueOf(contacto2));
-				stmt.setString(2, nom);
+				stmt.setInt(2, id);
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
@@ -587,7 +565,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarContacto3(String contacto3, String nom) {
+	public boolean modificarContacto3(String contacto3, int id) {
 		boolean check = false;
 
 		this.openConnection();
@@ -595,7 +573,7 @@ public class BDImplementacion implements ApnabiDAO {
 			if (!contacto3.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO3);
 				stmt.setDate(1, Date.valueOf(contacto3));
-				stmt.setString(2, nom);
+				stmt.setInt(2, id);
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
@@ -612,7 +590,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarContacto4(String contacto4, String nom) {
+	public boolean modificarContacto4(String contacto4, int id) {
 		boolean check = false;
 
 		this.openConnection();
@@ -620,7 +598,7 @@ public class BDImplementacion implements ApnabiDAO {
 			if (!contacto4.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO4);
 				stmt.setDate(1, Date.valueOf(contacto4));
-				stmt.setString(2, nom);
+				stmt.setInt(2, id);
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
@@ -637,7 +615,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarObservaciones(String observaciones, String nom) {
+	public boolean modificarObservaciones(String observaciones, int id) {
 		boolean check = false;
 
 		this.openConnection();
@@ -645,7 +623,7 @@ public class BDImplementacion implements ApnabiDAO {
 			if (!observaciones.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATEOBSERVACIONES);
 				stmt.setString(1, observaciones);
-				stmt.setString(2, nom);
+				stmt.setInt(2, id);
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
@@ -679,5 +657,29 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		}
 		return check;
+	}
+
+	@Override
+	public boolean modificarResultadoUltimoContacto(String resultadoU, int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modificarInformacionUltimoContacto(String infoU, int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modificarResultadoFinal(String resultadoF, int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modificarFechaResolucion(String fecResolucion, int id) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
