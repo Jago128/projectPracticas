@@ -7,7 +7,7 @@ CREATE TABLE USUARIO (
 );
 
 CREATE TABLE EMPRESA (
-    NOM_EMPRESA VARCHAR(100) PRIMARY KEY,
+	NOM_EMPRESA VARCHAR(100) PRIMARY KEY,
     SECTOR ENUM('Agricultura_Ganaderia', 'BienesConsumo', 'ComercioElectronico', 'Comercio_Establecimientos', 'Construccion', 'Deporte_Ocio',
 	'Energia_MedioAmbiente', 'Finanzas_Seguros_BienesInmuebles', 'Internet', 'Logistica_Transporte', 'MediosComunicacion_Marketing',
     'Metalurgia_Electronica', 'ProductosQuimicos_MateriasPrimas', 'Salud_IndustriaFarmaceutica', 'Servicios', 'Sociedad', 'Tecnologia_Telecomunicaciones',
@@ -25,7 +25,8 @@ CREATE TABLE EMPRESA (
 );
 
 INSERT INTO USUARIO VALUES
-("Test", "e");
+("Test", "e"),
+("w","1");
 
 INSERT INTO EMPRESA VALUES
 ("Deportes Urbanos de Exterior S.L", "Deporte_Ocio", "Almacen", "info@deportesurbanos.com", "???", "Selene", "Informado", "2024-10-23", null, null, null, null),

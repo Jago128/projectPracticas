@@ -223,7 +223,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 				}
 
 				modelEmpresas.addElement(emp.getNom_empresa());
-				if (emp.getPuesto().equals(null)) {
+				if (emp.getPuesto()==null) {
 					modelPuestos.addElement("---");
 				} else {
 					modelPuestos.addElement(emp.getPuesto());
@@ -251,7 +251,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 					modelContactos4.addElement(emp.getContacto4());
 				}
 
-				if (emp.getObservaciones().equals(null)) {
+				if (emp.getObservaciones()==null) {
 					modelObservaciones.addElement("---");
 				} else {
 					modelObservaciones.addElement(emp.getObservaciones());

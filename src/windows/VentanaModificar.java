@@ -7,7 +7,9 @@ import javax.swing.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 
 import controller.LoginController;
 import model.*;
@@ -288,7 +290,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 
 		infoEmpresa.append("Nombre: "+emp.getNom_empresa()).append("\n");
 		infoEmpresa.append("Sector: "+sector).append("\n");
-		if (emp.getPuesto().equals(null)) {
+		if (emp.getPuesto()==null) {
 			infoEmpresa.append("Puesto: ---").append("\n");
 		} else {
 			infoEmpresa.append("Puesto: "+emp.getPuesto()).append("\n");
@@ -317,7 +319,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		}
 		
 		
-		if (emp.getObservaciones().equals(null)) {
+		if (emp.getObservaciones()==null) {
 			infoEmpresa.append("Observaciones: ---");
 		} else {
 			infoEmpresa.append("Observaciones: "+emp.getObservaciones());
@@ -328,9 +330,17 @@ public class VentanaModificar extends JDialog implements ActionListener {
 
 	public boolean dateFormatErrorCheck() {
 		boolean error = false;
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+		DateTimeFormatter format = new DateTimeFormatterBuilder()
+		        .appendValue(ChronoField.YEAR, 4)
+		        .appendLiteral('-')
+		        .appendValue(ChronoField.MONTH_OF_YEAR)
+		        .appendLiteral('-')
+		        .appendValue(ChronoField.DAY_OF_MONTH)
+		        .toFormatter();
 		try {
-			LocalDate.parse(textFieldContacto1.getText(), format);
+			if (!textFieldContacto1.getText().isBlank()) {
+				LocalDate.parse(textFieldContacto1.getText(), format);
+			}
 			if (!textFieldContacto2.getText().isBlank()) {
 				LocalDate.parse(textFieldContacto2.getText(), format);
 			}
@@ -356,7 +366,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 						JOptionPane.ERROR_MESSAGE);
 			} else {
 				Estado estado = null;
-				boolean error = false;
+				boolean check = false;
 				
 				switch ((String) comboBoxEstado.getSelectedItem()) {
 				case "Informado":
@@ -384,42 +394,42 @@ public class VentanaModificar extends JDialog implements ActionListener {
 					break;
 				}
 				if (!textFieldDatosContacto.getText().isBlank()) {
-					error = cont.modificarDatosContacto(textFieldDatosContacto.getText());
+					check = cont.modificarDatosContacto(textFieldDatosContacto.getText(), emp.getNom_empresa());
 				}
 				
 				if (!textFieldContactoEmpresa.getText().isBlank()) {
-					error = cont.modificarContactoEmpresa(textFieldContactoEmpresa.getText());
+					check = cont.modificarContactoEmpresa(textFieldContactoEmpresa.getText(), emp.getNom_empresa());
 				}
 				
 				if (!textFieldPersonaContacto.getText().isBlank()) {
-					error = cont.modificarPersonaContacto(textFieldPersonaContacto.getText());
+					check = cont.modificarPersonaContacto(textFieldPersonaContacto.getText(), emp.getNom_empresa());
 				}
 				
 				if (comboBoxEstado.getSelectedIndex() != -1) {
-					error = cont.modificarEstado(estado);
+					check = cont.modificarEstado(estado, emp.getNom_empresa());
 				}
 				
 				if (!textFieldContacto1.getText().isBlank()) {
-					error = cont.modificarContacto1(textFieldContacto1.getText());
+					check = cont.modificarContacto1(textFieldContacto1.getText(), emp.getNom_empresa());
 				}
 				
 				if (!textFieldContacto2.getText().isBlank()) {
-					error = cont.modificarContacto2(textFieldContacto2.getText());
+					check = cont.modificarContacto2(textFieldContacto2.getText(), emp.getNom_empresa());
 				}
 				
 				if (!textFieldContacto3.getText().isBlank()) {
-					error = cont.modificarContacto3(textFieldContacto3.getText());
+					check = cont.modificarContacto3(textFieldContacto3.getText(), emp.getNom_empresa());
 				}
 				
 				if (!textFieldContacto4.getText().isBlank()) {
-					error = cont.modificarContacto4(textFieldContacto4.getText());
+					check = cont.modificarContacto4(textFieldContacto4.getText(), emp.getNom_empresa());
 				}
 				
 				if (!textAreaObservaciones.getText().isBlank()) {
-					error = cont.modificarObservaciones(textAreaObservaciones.getText());
+					check = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getNom_empresa());
 				}
 				
-				if (error) {
+				if (!check) {
 					JOptionPane.showMessageDialog(null, "Ha occurrido un error al modificar la empresa.", "ERROR", JOptionPane.ERROR_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "La empresa ha sido modificada correctamente.");

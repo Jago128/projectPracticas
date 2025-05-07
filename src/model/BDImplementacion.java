@@ -397,7 +397,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarDatosContacto(String datos) {
+	public boolean modificarDatosContacto(String datos, String nom) {
 		boolean check = false;
 
 		this.openConnection();
@@ -405,10 +405,13 @@ public class BDImplementacion implements ApnabiDAO {
 			if (!datos.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATEDATOS);
 				stmt.setString(1, datos);
+				stmt.setString(2, nom);
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
 				stmt.close();
+			} else {
+				check = true;
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -419,7 +422,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarContactoEmpresa(String contactoE) {
+	public boolean modificarContactoEmpresa(String contactoE, String nom) {
 		boolean check = false;
 
 		this.openConnection();
@@ -427,10 +430,13 @@ public class BDImplementacion implements ApnabiDAO {
 			if (!contactoE.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTOEMPRESA);
 				stmt.setString(1, contactoE);
+				stmt.setString(2, nom);
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
 				stmt.close();
+			} else {
+				check = true;
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -441,7 +447,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarPersonaContacto(String personaC) {
+	public boolean modificarPersonaContacto(String personaC, String nom) {
 		boolean check = false;
 
 		this.openConnection();
@@ -449,10 +455,13 @@ public class BDImplementacion implements ApnabiDAO {
 			if (!personaC.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTOAPNABI);
 				stmt.setString(1, personaC);
+				stmt.setString(2, nom);
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
 				stmt.close();
+			} else {
+				check = true;
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -463,7 +472,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarEstado(Estado estado) {
+	public boolean modificarEstado(Estado estado, String nom) {
 		boolean check = false;
 
 		this.openConnection();
@@ -494,10 +503,13 @@ public class BDImplementacion implements ApnabiDAO {
 				default:
 					System.out.println("Tipo invalido.");
 				}
+				stmt.setString(2, nom);
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
 				stmt.close();
+			} else {
+				check = true;
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -508,7 +520,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarContacto1(String contacto1) {
+	public boolean modificarContacto1(String contacto1, String nom) {
 		boolean check = false;
 
 		this.openConnection();
@@ -516,10 +528,13 @@ public class BDImplementacion implements ApnabiDAO {
 			if (!contacto1.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO1);
 				stmt.setDate(1, Date.valueOf(contacto1));
+				stmt.setString(2, nom);
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
 				stmt.close();
+			} else {
+				check = true;
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -530,7 +545,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarContacto2(String contacto2) {
+	public boolean modificarContacto2(String contacto2, String nom) {
 		boolean check = false;
 
 		this.openConnection();
@@ -538,10 +553,13 @@ public class BDImplementacion implements ApnabiDAO {
 			if (!contacto2.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO2);
 				stmt.setDate(1, Date.valueOf(contacto2));
-				if (stmt.executeUpdate()>0) {
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate()>0) {	
 					check = true;
 				}
 				stmt.close();
+			} else {
+				check = true;
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -552,7 +570,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarContacto3(String contacto3) {
+	public boolean modificarContacto3(String contacto3, String nom) {
 		boolean check = false;
 
 		this.openConnection();
@@ -560,10 +578,13 @@ public class BDImplementacion implements ApnabiDAO {
 			if (!contacto3.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO3);
 				stmt.setDate(1, Date.valueOf(contacto3));
+				stmt.setString(2, nom);
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
 				stmt.close();
+			} else {
+				check = true;
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -574,7 +595,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarContacto4(String contacto4) {
+	public boolean modificarContacto4(String contacto4, String nom) {
 		boolean check = false;
 
 		this.openConnection();
@@ -582,10 +603,13 @@ public class BDImplementacion implements ApnabiDAO {
 			if (!contacto4.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO4);
 				stmt.setDate(1, Date.valueOf(contacto4));
+				stmt.setString(2, nom);
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
 				stmt.close();
+			} else {
+				check = true;
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -596,7 +620,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarObservaciones(String observaciones) {
+	public boolean modificarObservaciones(String observaciones, String nom) {
 		boolean check = false;
 
 		this.openConnection();
@@ -604,10 +628,13 @@ public class BDImplementacion implements ApnabiDAO {
 			if (!observaciones.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATEOBSERVACIONES);
 				stmt.setString(1, observaciones);
+				stmt.setString(2, nom);
 				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
 				stmt.close();
+			} else {
+				check = true;
 			}
 			con.close();
 		} catch (SQLException e) {

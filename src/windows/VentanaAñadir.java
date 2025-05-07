@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDate;
 import java.time.format.*;
+import java.time.temporal.ChronoField;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -194,7 +195,13 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 
 	public boolean dateFormatErrorCheck() {
 		boolean error = false;
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+		DateTimeFormatter format = new DateTimeFormatterBuilder()
+		        .appendValue(ChronoField.YEAR, 4)
+		        .appendLiteral('-')
+		        .appendValue(ChronoField.MONTH_OF_YEAR)
+		        .appendLiteral('-')
+		        .appendValue(ChronoField.DAY_OF_MONTH)
+		        .toFormatter();
 		try {
 			LocalDate.parse(textFieldContacto1.getText(), format);
 			if (!textFieldContacto2.getText().isBlank()) {

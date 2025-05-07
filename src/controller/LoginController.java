@@ -44,40 +44,40 @@ public class LoginController {
 		return dao.añadirEmpresa(emp);
 	}
 	
-	public boolean modificarDatosContacto(String datos) {
-		return dao.modificarDatosContacto(datos);
+	public boolean modificarDatosContacto(String datos, String nom) {
+		return dao.modificarDatosContacto(datos, nom);
 	}
 	
-	public boolean modificarContactoEmpresa(String contactoE) {
-		return dao.modificarContactoEmpresa(contactoE);
+	public boolean modificarContactoEmpresa(String contactoE, String nom) {
+		return dao.modificarContactoEmpresa(contactoE, nom);
 	}
 	
-	public boolean modificarPersonaContacto(String personaC) {
-		return dao.modificarPersonaContacto(personaC);
+	public boolean modificarPersonaContacto(String personaC, String nom) {
+		return dao.modificarPersonaContacto(personaC, nom);
 	}
 	
-	public boolean modificarEstado(Estado estado) {
-		return dao.modificarEstado(estado);
+	public boolean modificarEstado(Estado estado, String nom) {
+		return dao.modificarEstado(estado, nom);
 	}
 	
-	public boolean modificarContacto1(String contacto1) {
-		return dao.modificarContacto1(contacto1);
+	public boolean modificarContacto1(String contacto1, String nom) {
+		return dao.modificarContacto1(contacto1, nom);
 	}
 	
-	public boolean modificarContacto2(String contacto2) {
-		return dao.modificarContacto2(contacto2);
+	public boolean modificarContacto2(String contacto2, String nom) {
+		return dao.modificarContacto2(contacto2, nom);
 	}
 	
-	public boolean modificarContacto3(String contacto3) {
-		return dao.modificarContacto3(contacto3);
+	public boolean modificarContacto3(String contacto3, String nom) {
+		return dao.modificarContacto3(contacto3, nom);
 	}
 	
-	public boolean modificarContacto4(String contacto4) {
-		return dao.modificarContacto4(contacto4);
+	public boolean modificarContacto4(String contacto4, String nom) {
+		return dao.modificarContacto4(contacto4, nom);
 	}
 	
-	public boolean modificarObservaciones(String observaciones) {
-		return dao.modificarObservaciones(observaciones);
+	public boolean modificarObservaciones(String observaciones, String nom) {
+		return dao.modificarObservaciones(observaciones, nom);
 	}
 	
 	public boolean eliminarEmpresa(String nom) {
