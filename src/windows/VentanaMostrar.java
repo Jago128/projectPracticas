@@ -107,12 +107,18 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 
 	public void addEmpresas() {
 		Map<String, Empresa> empresas = cont.mostrarEmpresas();
-		DefaultListModel<String> modelSectores = new DefaultListModel<>(), modelEmpresas = new DefaultListModel<>(),
-				modelPuestos = new DefaultListModel<>(), modelDatosContacto = new DefaultListModel<>(),
-				modelContactosEmpresa = new DefaultListModel<>(), modelContactosApnabi = new DefaultListModel<>(),
-				modelEstados = new DefaultListModel<>(), modelContactos1 = new DefaultListModel<>(), modelContactos2 = new DefaultListModel<>(),
-				modelContactos3 = new DefaultListModel<>(), modelContactos4 = new DefaultListModel<>(),
-				modelObservaciones = new DefaultListModel<>();
+		DefaultListModel<String> modelSectores = new DefaultListModel<>();
+		DefaultListModel<String>modelEmpresas = new DefaultListModel<>();
+		DefaultListModel<String> modelPuestos = new DefaultListModel<>();
+		DefaultListModel<String> modelDatosContacto = new DefaultListModel<>();
+		DefaultListModel<String> modelContactosEmpresa = new DefaultListModel<>();
+		DefaultListModel<String> modelContactosApnabi = new DefaultListModel<>();
+		DefaultListModel<String> modelEstados = new DefaultListModel<>();
+		DefaultListModel<String> modelContactos1 = new DefaultListModel<>();
+		DefaultListModel<String> modelContactos2 = new DefaultListModel<>();
+		DefaultListModel<String> modelContactos3 = new DefaultListModel<>();
+		DefaultListModel<String> modelContactos4 = new DefaultListModel<>();
+		DefaultListModel<String> modelObservaciones = new DefaultListModel<>();
 
 		if (!empresas.isEmpty()) {
 			modelSectores.addElement("Sectores");
@@ -235,7 +241,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 				}
 
 				modelEmpresas.addElement(emp.getNom_empresa());
-				if (emp.getPuesto()==null) {
+				if (emp.getPuesto() == null) {
 					modelPuestos.addElement("---");
 				} else {
 					modelPuestos.addElement(emp.getPuesto());
@@ -263,7 +269,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 					modelContactos4.addElement(emp.getContacto4());
 				}
 
-				if (emp.getObservaciones()==null) {
+				if (emp.getObservaciones() == null) {
 					modelObservaciones.addElement("---");
 				} else {
 					modelObservaciones.addElement(emp.getObservaciones());

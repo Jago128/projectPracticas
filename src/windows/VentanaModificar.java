@@ -24,7 +24,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 	private Empresa emp;
 	private JTextArea textareaEmpresa;
 	private JTextField textFieldDatosContacto, textFieldContactoEmpresa, textFieldPersonaContacto, textFieldContacto1,
-			textFieldContacto2, textFieldContacto3, textFieldContacto4;
+	textFieldContacto2, textFieldContacto3, textFieldContacto4;
 	private JComboBox<String> comboBoxEstado;
 	private JButton btnModificar;
 	private JLabel lblDatosEmpresa;
@@ -43,8 +43,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 
 		textareaEmpresa = new JTextArea();
 		textareaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textareaEmpresa.setText(
-				"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+		textareaEmpresa.setText("");
 		textareaEmpresa.setBackground(new Color(255, 255, 255));
 		textareaEmpresa.setLineWrap(true);
 		textareaEmpresa.setEditable(false);
@@ -91,8 +90,8 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		getContentPane().add(lblEstado);
 
 		comboBoxEstado = new JComboBox<String>();
-		comboBoxEstado.setModel(new DefaultComboBoxModel<>(new String[] { "", "Informado", "Valorando/interesado",
-				"Planificando inserciones", "Proximo año", "No interesado" }));
+		comboBoxEstado.setModel(new DefaultComboBoxModel<>(new String[] {"", "Informado", "Valorando/interesado",
+				"Planificando inserciones", "Proximo año", "No interesado"}));
 		comboBoxEstado.setBounds(187, 179, 163, 21);
 		getContentPane().add(comboBoxEstado);
 
@@ -294,48 +293,47 @@ public class VentanaModificar extends JDialog implements ActionListener {
 			System.out.println("Tipo invalido.");
 		}
 
-		infoEmpresa.append("Nombre: " + emp.getNom_empresa()).append("\n");
-		infoEmpresa.append("Sector: " + sector).append("\n");
+		infoEmpresa.append("Nombre: "+emp.getNom_empresa()).append("\n");
+		infoEmpresa.append("Sector: "+sector).append("\n");
 		if (emp.getPuesto() == null) {
 			infoEmpresa.append("Puesto: ---").append("\n");
 		} else {
-			infoEmpresa.append("Puesto: " + emp.getPuesto()).append("\n");
+			infoEmpresa.append("Puesto: "+emp.getPuesto()).append("\n");
 		}
-		infoEmpresa.append("Datos de contacto: " + emp.getDatosContacto()).append("\n");
-		infoEmpresa.append("Contacto en la empresa: " + emp.getContactoEmpresa()).append("\n");
-		infoEmpresa.append("Persona de contacto: " + emp.getContactoApnabi()).append("\n");
-		infoEmpresa.append("Estado: " + estado).append("\n");
-		infoEmpresa.append("1. contacto: " + emp.getContacto1()).append("\n");
+		infoEmpresa.append("Datos de contacto: "+emp.getDatosContacto()).append("\n");
+		infoEmpresa.append("Contacto en la empresa: "+emp.getContactoEmpresa()).append("\n");
+		infoEmpresa.append("Persona de contacto: "+emp.getContactoApnabi()).append("\n");
+		infoEmpresa.append("Estado: "+estado).append("\n");
+		infoEmpresa.append("1. contacto: "+emp.getContacto1()).append("\n");
 		if (emp.getContacto2().equals("")) {
 			infoEmpresa.append("2. contacto: ---").append("\n");
 		} else {
-			infoEmpresa.append("2. contacto: " + emp.getContacto2()).append("\n");
+			infoEmpresa.append("2. contacto: "+emp.getContacto2()).append("\n");
 		}
 
 		if (emp.getContacto3().equals("")) {
 			infoEmpresa.append("3. contacto: ---").append("\n");
 		} else {
-			infoEmpresa.append("3. contacto: " + emp.getContacto3()).append("\n");
+			infoEmpresa.append("3. contacto: "+emp.getContacto3()).append("\n");
 		}
 
 		if (emp.getContacto4().equals("")) {
 			infoEmpresa.append("4. contacto: ---").append("\n");
 		} else {
-			infoEmpresa.append("4. contacto: " + emp.getContacto4()).append("\n");
+			infoEmpresa.append("4. contacto: "+emp.getContacto4()).append("\n");
 		}
 
 		if (emp.getObservaciones() == null) {
 			infoEmpresa.append("Observaciones: ---");
 		} else {
-			infoEmpresa.append("Observaciones: " + emp.getObservaciones());
+			infoEmpresa.append("Observaciones: "+emp.getObservaciones());
 		}
 
 		textareaEmpresa.setText(infoEmpresa.toString());
 	}
 
 	public void emailFormatCheck(String email) throws EmailFormatException {
-		Pattern modelo = Pattern.compile(
-				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		Pattern modelo = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 		Matcher matcher = modelo.matcher(email);
 		if (!matcher.matches()) {
 			throw new EmailFormatException();
@@ -345,8 +343,8 @@ public class VentanaModificar extends JDialog implements ActionListener {
 	public boolean dateFormatErrorCheck() {
 		boolean error = false;
 		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
-				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
-				.toFormatter();
+				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-')
+				.appendValue(ChronoField.DAY_OF_MONTH).toFormatter();
 		try {
 			if (!textFieldContacto1.getText().isBlank()) {
 				LocalDate.parse(textFieldContacto1.getText(), format);
@@ -372,18 +370,17 @@ public class VentanaModificar extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == btnModificar) {
 			if (dateFormatErrorCheck()) {
-				JOptionPane.showMessageDialog(null,
-						"El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD", "ERROR",
-						JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD",
+						"ERROR", JOptionPane.ERROR_MESSAGE);
 			} else {
+				Estado estado = null;
+				boolean check = false;
 				try {
 					if (textFieldDatosContacto.getText().contains("@")) {
 						emailFormatCheck(textFieldDatosContacto.getText());
 					}
-					Estado estado = null;
-					boolean check = false;
 
-					switch ((String) comboBoxEstado.getSelectedItem()) {
+					switch ((String)comboBoxEstado.getSelectedItem()) {
 					case "Informado":
 						estado = Estado.INFORMADO;
 						break;

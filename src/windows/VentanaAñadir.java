@@ -62,12 +62,12 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		contentPanel.add(lblSector);
 
 		comboBoxSector = new JComboBox<>();
-		comboBoxSector.setModel(new DefaultComboBoxModel<>(new String[] { "", "Agricultura y Ganaderia",
+		comboBoxSector.setModel(new DefaultComboBoxModel<>(new String[] {"", "Agricultura y Ganaderia",
 				"Bienes de Consumo", "Comercio electronico", "Comercio y establecimientos", "Construccion",
 				"Deporte y ocio", "Energia y medio ambiente", "Finanzas, Seguros y bienes inmuebles", "Internet",
 				"Logistica y Transporte", "Medios de comunicacion y marketing", "Metalurgia y electronica",
 				"Productos quimicos y materias primas", "Salud e industria farmaceutica", "Servicios", "Sociedad",
-				"Tecnologia y telecomunicaciones", "Turismo y hosteleria", "Vida" }));
+				"Tecnologia y telecomunicaciones", "Turismo y hosteleria", "Vida"}));
 		comboBoxSector.setBounds(191, 74, 163, 21);
 		contentPanel.add(comboBoxSector);
 
@@ -122,8 +122,8 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		contentPanel.add(lblEstado);
 
 		comboBoxEstado = new JComboBox<>();
-		comboBoxEstado.setModel(new DefaultComboBoxModel<>(new String[] { "", "Informado", "Valorando/interesado",
-				"Planificando inserciones", "Proximo año", "No interesado" }));
+		comboBoxEstado.setModel(new DefaultComboBoxModel<>(new String[] {"", "Informado", "Valorando/interesado",
+				"Planificando inserciones", "Proximo año", "No interesado"}));
 		comboBoxEstado.setBounds(191, 277, 163, 21);
 		contentPanel.add(comboBoxEstado);
 
@@ -197,8 +197,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 	}
 
 	public void emailFormatCheck(String email) throws EmailFormatException {
-		Pattern modelo = Pattern.compile(
-				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{3,})$");
+		Pattern modelo = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{3,})$");
 		Matcher matcher = modelo.matcher(email);
 		if (!matcher.matches()) {
 			throw new EmailFormatException();
@@ -208,8 +207,8 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 	public boolean dateFormatErrorCheck() {
 		boolean error = false;
 		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
-				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
-				.toFormatter();
+				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-')
+				.appendValue(ChronoField.DAY_OF_MONTH).toFormatter();
 		try {
 			LocalDate.parse(textFieldContacto1.getText(), format);
 			if (!textFieldContacto2.getText().isBlank()) {
@@ -240,21 +239,18 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 						"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				try {
-					if (textFieldDatosContacto.getText().contains("@")
-							&& (textFieldDatosContacto.getText().contains(".com")
-									|| textFieldDatosContacto.getText().contains(".es")
-									|| textFieldDatosContacto.getText().contains(".eus"))) {
+					if (textFieldDatosContacto.getText().contains("@") && (textFieldDatosContacto.getText().contains(".com")
+						|| textFieldDatosContacto.getText().contains(".es") || textFieldDatosContacto.getText().contains(".eus"))) {
 						emailFormatCheck(textFieldDatosContacto.getText());
 					}
 					if (dateFormatErrorCheck()) {
-						JOptionPane.showMessageDialog(null,
-								"El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD",
+						JOptionPane.showMessageDialog(null, "El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD",
 								"ERROR", JOptionPane.ERROR_MESSAGE);
 					} else {
 						Sector sector = null;
 						Estado estado = null;
 						int result = 0;
-						switch ((String) comboBoxSector.getSelectedItem()) {
+						switch ((String)comboBoxSector.getSelectedItem()) {
 						case "Agricultura y Ganaderia":
 							sector = Sector.AGRICULTURA_GANADERIA;
 							break;
@@ -331,7 +327,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 							break;
 						}
 
-						switch ((String) comboBoxEstado.getSelectedItem()) {
+						switch ((String)comboBoxEstado.getSelectedItem()) {
 						case "Informado":
 							estado = Estado.INFORMADO;
 							break;
@@ -356,7 +352,6 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 						Empresa emp = new Empresa(textFieldNombre.getText(), sector, textFieldPuesto.getText(),
 								textFieldDatosContacto.getText(), textFieldContactoEmpresa.getText(),
 								textFieldPersonaContacto.getText(), estado, textFieldContacto1.getText());
-
 						if (!textFieldContacto2.getText().isBlank()) {
 							emp.setContacto2(textFieldContacto2.getText());
 						}
@@ -374,9 +369,8 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 						}
 
 						if (cont.añadirEmpresa(emp)) {
-							result = JOptionPane.showConfirmDialog(null,
-									"La empresa ha sido añadida correctamente. Quiere añadir mas empresas?", "",
-									JOptionPane.YES_NO_OPTION);
+							result = JOptionPane.showConfirmDialog(null, "La empresa ha sido añadida correctamente. Quiere añadir mas empresas?",
+									"", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 							if (result == JOptionPane.NO_OPTION) {
 								this.dispose();
 							} else if (result == JOptionPane.YES_OPTION) {

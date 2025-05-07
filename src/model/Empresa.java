@@ -42,8 +42,8 @@ public class Empresa {
 	}
 
 	public Empresa(String nom_empresa, Sector sector, String puesto, String datosContacto, String contactoEmpresa,
-			String contactoApnabi, Estado estado, String contacto1, String contacto2, String contacto3, String contacto4,
-			String observaciones) {
+			String contactoApnabi, Estado estado, String contacto1, String contacto2, String contacto3,
+			String contacto4, String observaciones) {
 		this.nom_empresa = nom_empresa;
 		this.sector = sector;
 		this.puesto = puesto;
@@ -156,10 +156,10 @@ public class Empresa {
 
 	@Override
 	public String toString() {
-		return "Empresa=" +nom_empresa+", Sector: "+sector+", puesto=" + puesto + ", datosContacto="
-				+ datosContacto + ", contactoEmpresa=" + contactoEmpresa + ", contactoApnabi=" + contactoApnabi
-				+ ", estado=" + estado + ", contacto1=" + contacto1 + ", contacto2=" + contacto2 + ", contacto3="
-				+ contacto3 + ", contacto4=" + contacto4 + ", observaciones=" + observaciones + "]";
+		return "Empresa: "+nom_empresa+", Sector: "+sector+", Puesto: "+puesto+", Datos de contacto:" +datosContacto+
+				", Contacto en la empresa: "+contactoEmpresa+", Persona de contacto: "+contactoApnabi
+				+", Estado: "+estado+", Contacto 1: "+contacto1+", Contacto 2: "+contacto2+", Contacto 3: "+contacto3
+				+", Contacto 4: "+contacto4+", Observaciones: "+observaciones+"]";
 	}
 
 }

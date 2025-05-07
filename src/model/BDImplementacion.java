@@ -116,7 +116,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt = con.prepareStatement(SQLINSERTUSUARIO);
 				stmt.setString(1, user.getNombre());
 				stmt.setString(2, user.getContraseña());
-				if (stmt.executeUpdate() > 0) {
+				if (stmt.executeUpdate()>0) {
 					registro = true;
 				}
 				stmt.close();
@@ -173,15 +173,15 @@ public class BDImplementacion implements ApnabiDAO {
 				empresa.setContactoApnabi(rs.getString("CONTACTOAPNABI"));
 				empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
 				empresa.setContacto1(rs.getDate("CONTACTO1").toString());
-				if (rs.getDate("CONTACTO2")!=null) {
+				if (rs.getDate("CONTACTO2") != null) {
 					empresa.setContacto2(rs.getDate("CONTACTO2").toString());
 				}
-				
-				if (rs.getDate("CONTACTO3")!=null) {
+
+				if (rs.getDate("CONTACTO3") != null) {
 					empresa.setContacto3(rs.getDate("CONTACTO3").toString());
 				}
-				
-				if (rs.getDate("CONTACTO4")!=null) {
+
+				if (rs.getDate("CONTACTO4") != null) {
 					empresa.setContacto4(rs.getDate("CONTACTO4").toString());
 				}
 				empresa.setObservaciones(rs.getString("OBSERVACIONES"));
@@ -196,7 +196,7 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return empresas;
 	}
-	
+
 	@Override
 	public Map<String, Empresa> mostrarNomEmpresas() {
 		ResultSet rs = null;
@@ -241,16 +241,15 @@ public class BDImplementacion implements ApnabiDAO {
 				empresa.setContactoApnabi(rs.getString("CONTACTOAPNABI"));
 				empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
 				empresa.setContacto1(rs.getDate("CONTACTO1").toString());
-
-				if (rs.getDate("CONTACTO2")!=null) {
+				if (rs.getDate("CONTACTO2") != null) {
 					empresa.setContacto2(rs.getDate("CONTACTO2").toString());
 				}
-				
-				if (rs.getDate("CONTACTO3")!=null) {
+
+				if (rs.getDate("CONTACTO3") != null) {
 					empresa.setContacto3(rs.getDate("CONTACTO3").toString());
 				}
-				
-				if (rs.getDate("CONTACTO4")!=null) {
+
+				if (rs.getDate("CONTACTO4") != null) {
 					empresa.setContacto4(rs.getDate("CONTACTO4").toString());
 				}
 				empresa.setObservaciones(rs.getString("OBSERVACIONES"));
@@ -353,12 +352,11 @@ public class BDImplementacion implements ApnabiDAO {
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			
+
 			stmt.setString(3, emp.getPuesto());
 			stmt.setString(4, emp.getDatosContacto());
 			stmt.setString(5, emp.getContactoEmpresa());
 			stmt.setString(6, emp.getContactoApnabi());
-			
 			switch (emp.getEstado()) {
 			case INFORMADO:
 				stmt.setString(7, "Informado");
@@ -383,34 +381,33 @@ public class BDImplementacion implements ApnabiDAO {
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			
+
 			stmt.setString(8, emp.getContacto1());
-			
-			if (emp.getContacto2()==null) {
+			if (emp.getContacto2() == null) {
 				stmt.setString(9, null);
 			} else {
 				stmt.setString(9, emp.getContacto2());
 			}
 
-			if (emp.getContacto3()==null) {
+			if (emp.getContacto3() == null) {
 				stmt.setString(10, null);
 			} else {
 				stmt.setString(10, emp.getContacto3());
 			}
 
-			if (emp.getContacto4()==null) {
+			if (emp.getContacto4() == null) {
 				stmt.setString(11, null);
 			} else {
 				stmt.setString(11, emp.getContacto4());
 			}
 
-			if (emp.getObservaciones()==null) {
+			if (emp.getObservaciones() == null) {
 				stmt.setString(12, null);
 			} else {
 				stmt.setString(12, emp.getObservaciones());
 			}
 
-			if (stmt.executeUpdate() > 0) {
+			if (stmt.executeUpdate()>0) {
 				check = true;
 			}
 			stmt.close();
@@ -503,7 +500,7 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
-			if (estado!=null) {
+			if (estado != null) {
 				stmt = con.prepareStatement(SQLUPDATEESTADO);
 				switch (estado) {
 				case INFORMADO:
@@ -580,7 +577,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt = con.prepareStatement(SQLUPDATECONTACTO2);
 				stmt.setDate(1, Date.valueOf(contacto2));
 				stmt.setString(2, nom);
-				if (stmt.executeUpdate()>0) {	
+				if (stmt.executeUpdate()>0) {
 					check = true;
 				}
 				stmt.close();
@@ -678,7 +675,7 @@ public class BDImplementacion implements ApnabiDAO {
 		try {
 			stmt = con.prepareStatement(SQLDELETE_EMPRESA);
 			stmt.setString(1, nom);
-			if (stmt.executeUpdate() > 0) {
+			if (stmt.executeUpdate()>0) {
 				check = true;
 			}
 			stmt.close();
