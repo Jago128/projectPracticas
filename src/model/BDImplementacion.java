@@ -195,7 +195,7 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLEMPRESAS);
+			stmt = con.prepareStatement(SQLNOMEMPRESAS);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				empresa = new Empresa();
@@ -581,7 +581,7 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 
 		try {
-			stmt = con.prepareStatement(SQLINSERTEMPRESA);
+			stmt = con.prepareStatement(SQLINSERTCONTACTO);
 			stmt.setString(1, cont.getContacto1());
 			stmt.setString(2, cont.getContacto2());
 			stmt.setString(3, cont.getContacto3());
