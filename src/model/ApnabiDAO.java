@@ -29,13 +29,11 @@ public interface ApnabiDAO {
 
 	public boolean modificarPersonaContacto(String personaC, String nom);
 
-	public boolean modificarEstado(Estado estado, String nom);
+	public boolean modificarEstado(String estado, String nom);
 	
 	public boolean eliminarEmpresa(String nom);
 	
-	// Contactos
-	public Map<Integer, Contacto> mostrarContactos();
-	
+	// Contactos	
 	public Contacto getContacto(int empId);
 	
 	public boolean añadirContacto(Contacto cont);

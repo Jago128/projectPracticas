@@ -15,8 +15,8 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 	private LoginController cont;
 	// private Usuario user;
 	private JList<String> listSectores, listEmpresas, listPuestos, listDatosContacto, listContactosEmpresa,
-	listContactosApnabi, listEstados, listContacto1, listContacto2, listContacto3, listContacto4,
-	listObservaciones;
+	listContactosApnabi, listEstados, listContacto1, listContacto2, listContacto3, listContacto4, listObservaciones,
+	listResultadoUltimoContacto, listInfoUltimo, listResultadoFinal, listFechaResolucion;
 	private JButton btnModificarEmpresa;
 
 	public VentanaMostrar(JFrame parent, LoginController cont, Usuario user) {
@@ -25,8 +25,8 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		// this.user = user;
 
 		setResizable(false);
-		setTitle("Mostrar Empresas");
-		setBounds(100, 100, 920, 390);
+		setTitle("Mostrar empresas");
+		setBounds(100, 100, 920, 480);
 		getContentPane().setLayout(null);
 
 		listSectores = new JList<>();
@@ -77,31 +77,59 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		listObservaciones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
+		listResultadoUltimoContacto = new JList<>();
+		listResultadoUltimoContacto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listResultadoUltimoContacto.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+		listInfoUltimo = new JList<>();
+		listInfoUltimo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listInfoUltimo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+		listResultadoFinal = new JList<>();
+		listResultadoFinal.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listResultadoFinal.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+		listFechaResolucion = new JList<>();
+		listFechaResolucion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listFechaResolucion.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
 		addEmpresas();
 
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 10, 886, 246);
-		panel.add(listSectores);
-		panel.add(listEmpresas);
-		panel.add(listPuestos);
-		panel.add(listDatosContacto);
-		panel.add(listContactosEmpresa);
-		panel.add(listContactosApnabi);
-		panel.add(listEstados);
-		panel.add(listContacto1);
-		panel.add(listContacto2);
-		panel.add(listContacto3);
-		panel.add(listContacto4);
-		panel.add(listObservaciones);
-		getContentPane().add(panel);
+		JPanel panelEmpresas = new JPanel();
+		panelEmpresas.setBounds(10, 10, 886, 170);
+		panelEmpresas.add(listSectores);
+		panelEmpresas.add(listEmpresas);
+		panelEmpresas.add(listPuestos);
+		panelEmpresas.add(listDatosContacto);
+		panelEmpresas.add(listContactosEmpresa);
+		panelEmpresas.add(listContactosApnabi);
+		panelEmpresas.add(listEstados);
+		getContentPane().add(panelEmpresas);
 
-		JScrollPane scrollPane = new JScrollPane(panel);
-		scrollPane.setBounds(10, 10, 886, 246);
-		getContentPane().add(scrollPane);
+		JPanel panelContactos = new JPanel();
+		panelContactos.setBounds(10, 190, 886, 174);
+		panelContactos.add(listContacto1);
+		panelContactos.add(listContacto2);
+		panelContactos.add(listContacto3);
+		panelContactos.add(listContacto4);
+		panelContactos.add(listObservaciones);
+		panelContactos.add(listResultadoUltimoContacto);
+		panelContactos.add(listInfoUltimo);
+		panelContactos.add(listResultadoFinal);
+		panelContactos.add(listFechaResolucion);
+		getContentPane().add(panelContactos);
+
+		JScrollPane scrollPaneEmpresas = new JScrollPane(panelEmpresas);
+		scrollPaneEmpresas.setBounds(10, 10, 886, 170);
+		getContentPane().add(scrollPaneEmpresas);
+
+		JScrollPane scrollPaneContactos = new JScrollPane(panelContactos);
+		scrollPaneContactos.setBounds(10, 190, 886, 174);
+		getContentPane().add(scrollPaneContactos);
 
 		btnModificarEmpresa = new JButton("Modificar empresa");
 		btnModificarEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnModificarEmpresa.setBounds(254, 271, 431, 59);
+		btnModificarEmpresa.setBounds(263, 361, 395, 72);
 		getContentPane().add(btnModificarEmpresa);
 		btnModificarEmpresa.addActionListener(this);
 	}
@@ -120,6 +148,11 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		DefaultListModel<String> modelContactos3 = new DefaultListModel<>();
 		DefaultListModel<String> modelContactos4 = new DefaultListModel<>();
 		DefaultListModel<String> modelObservaciones = new DefaultListModel<>();
+		DefaultListModel<String> modelResultadoUltimoCont = new DefaultListModel<>();
+		DefaultListModel<String> modelInfoUltimo = new DefaultListModel<>();
+		DefaultListModel<String> modelResultadoFinal = new DefaultListModel<>();
+		DefaultListModel<String> modelFechaResolucion = new DefaultListModel<>();
+		Contacto con;
 
 		if (!empresas.isEmpty()) {
 			modelSectores.addElement("Sectores");
@@ -134,7 +167,12 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 			modelContactos3.addElement("3. contacto");
 			modelContactos4.addElement("4. contacto");
 			modelObservaciones.addElement("Observaciones");
+			modelResultadoUltimoCont.addElement("Resultado ultimo contacto");
+			modelInfoUltimo.addElement("Informacion ultimo contacto");
+			modelResultadoFinal.addElement("Resultado final prospeccion");
+			modelFechaResolucion.addElement("Fecha resolucion");
 			for (Empresa emp : empresas.values()) {
+				con = cont.getContacto(emp.getCodEmpresa());
 				switch (emp.getSector()) {
 				case AGRICULTURA_GANADERIA:
 					modelSectores.addElement("Agricultura y ganadería");
@@ -250,45 +288,119 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 				modelDatosContacto.addElement(emp.getDatosContacto());
 				modelContactosEmpresa.addElement(emp.getContactoEmpresa());
 				modelContactosApnabi.addElement(emp.getContactoApnabi());
-				modelContactos1.addElement(emp.getContacto1());
 
-				if (emp.getContacto2().equals("")) {
+				if (con.getResultadoUltimoContacto() == null) {
+					modelResultadoUltimoCont.addElement("---");
+				} else {
+					switch (con.getResultadoUltimoContacto()) {
+					case COMUNICACION_SINRESPUESTA:
+						modelResultadoUltimoCont.addElement("Comunicacion sin respuesta");
+						break;
+
+					case INICIO_VALORACIONOFERTA:
+						modelResultadoUltimoCont.addElement("Inicio valoracion oferta");
+						break;
+
+					case RESPUESTA_NOCONCLUYENTE:
+						modelResultadoUltimoCont.addElement("Respuesta no concluyente");
+						break;
+
+					case RESPUESTA_POSPUESTA:
+						modelResultadoUltimoCont.addElement("Nos pospone la respuesta");
+						break;
+
+					case REUNION_PROGRAMADA:
+						modelResultadoUltimoCont.addElement("Programada reunion");
+						break;
+
+					default:
+						System.out.println("Tipo invalido.");
+					}
+				}
+
+				if (con.getResultadoFinal() == null) {
+					modelResultadoFinal.addElement("---");
+				} else {
+					switch (con.getResultadoFinal()) {
+					case CONVENIO_COLABORACION:
+						modelResultadoFinal.addElement("Convenio de colaboracion");
+						break;
+
+					case MEDIDAS_ALTERNATIVAS:
+						modelResultadoFinal.addElement("Medidas alternativas");
+						break;
+
+					case OFERTA_EMPLEO:
+						modelResultadoFinal.addElement("Oferta de empleo");
+						break;
+
+					case RELACION_CONCLUIDA:
+						modelResultadoFinal.addElement("Relacion concluida");
+						break;
+
+					case RELACION_POSPUESTA:
+						modelResultadoFinal.addElement("Relacion pospuesta");
+						break;
+
+					default:
+						System.out.println("Tipo invalido.");
+					}
+				}
+
+				modelContactos1.addElement(con.getContacto1());
+				if (con.getContacto2() == null) {
 					modelContactos2.addElement("---");
 				} else {
-					modelContactos2.addElement(emp.getContacto2());
+					modelContactos2.addElement(con.getContacto2());
 				}
 
-				if (emp.getContacto3().equals("")) {
+				if (con.getContacto3() == null) {
 					modelContactos3.addElement("---");
 				} else {
-					modelContactos3.addElement(emp.getContacto3());
+					modelContactos3.addElement(con.getContacto3());
 				}
 
-				if (emp.getContacto4().equals("")) {
+				if (con.getContacto4() == null) {
 					modelContactos4.addElement("---");
 				} else {
-					modelContactos4.addElement(emp.getContacto4());
+					modelContactos4.addElement(con.getContacto4());
 				}
 
-				if (emp.getObservaciones() == null) {
+				if (con.getObservaciones() == null) {
 					modelObservaciones.addElement("---");
 				} else {
-					modelObservaciones.addElement(emp.getObservaciones());
+					modelObservaciones.addElement(con.getObservaciones());
+				}
+
+				if (con.getInfoUltimo() == null) {
+					modelInfoUltimo.addElement("---");
+				} else {
+					modelInfoUltimo.addElement(con.getInfoUltimo());
+				}
+
+				if (con.getFechaResolucion() == null) {
+					modelFechaResolucion.addElement("---");
+				} else {
+					modelFechaResolucion.addElement(con.getFechaResolucion());
 				}
 			}
-			listSectores.setModel(modelSectores);
-			listEmpresas.setModel(modelEmpresas);
-			listPuestos.setModel(modelPuestos);
-			listDatosContacto.setModel(modelDatosContacto);
-			listContactosEmpresa.setModel(modelContactosEmpresa);
-			listContactosApnabi.setModel(modelContactosApnabi);
-			listEstados.setModel(modelEstados);
-			listContacto1.setModel(modelContactos1);
-			listContacto2.setModel(modelContactos2);
-			listContacto3.setModel(modelContactos3);
-			listContacto4.setModel(modelContactos4);
-			listObservaciones.setModel(modelObservaciones);
 		}
+		listSectores.setModel(modelSectores);
+		listEmpresas.setModel(modelEmpresas);
+		listPuestos.setModel(modelPuestos);
+		listDatosContacto.setModel(modelDatosContacto);
+		listContactosEmpresa.setModel(modelContactosEmpresa);
+		listContactosApnabi.setModel(modelContactosApnabi);
+		listEstados.setModel(modelEstados);
+		listContacto1.setModel(modelContactos1);
+		listContacto2.setModel(modelContactos2);
+		listContacto3.setModel(modelContactos3);
+		listContacto4.setModel(modelContactos4);
+		listObservaciones.setModel(modelObservaciones);
+		listResultadoUltimoContacto.setModel(modelResultadoUltimoCont);
+		listInfoUltimo.setModel(modelInfoUltimo);
+		listResultadoFinal.setModel(modelResultadoFinal);
+		listFechaResolucion.setModel(modelFechaResolucion);
 	}
 
 	@Override
@@ -305,6 +417,6 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 			} else {
 				JOptionPane.showMessageDialog(null, "[ERROR] Elija una empresa de la lista de empresas.");
 			}
-		}
+		} 
 	}
 }

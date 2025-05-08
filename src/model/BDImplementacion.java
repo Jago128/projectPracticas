@@ -167,6 +167,7 @@ public class BDImplementacion implements ApnabiDAO {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				empresa = new Empresa();
+				empresa.setCodEmpresa(rs.getInt("COD_EMPRESA"));
 				empresa.setNom_empresa(rs.getString("NOM_EMPRESA"));
 				empresa.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
 				empresa.setPuesto(rs.getString("PUESTO"));
@@ -222,6 +223,7 @@ public class BDImplementacion implements ApnabiDAO {
 			stmt.setString(1, nom);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
+				empresa.setCodEmpresa(rs.getInt("COD_EMPRESA"));
 				empresa.setNom_empresa(rs.getString("NOM_EMPRESA"));
 				empresa.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
 				empresa.setPuesto(rs.getString("PUESTO"));
@@ -469,37 +471,14 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarEstado(Estado estado, String nom) {
+	public boolean modificarEstado(String estado, String nom) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
 			if (estado != null) {
 				stmt = con.prepareStatement(SQLUPDATEESTADO);
-				switch (estado) {
-				case INFORMADO:
-					stmt.setString(1, "Informado");
-					break;
-
-				case NOINTERESADO:
-					stmt.setString(1, "NoInteresado");
-					break;
-
-				case PLANIFICANDOINSERCIONES:
-					stmt.setString(1, "PlanificandoInserciones");
-					break;
-
-				case PROXIMOAÑO:
-					stmt.setString(1, "ProximoAño");
-					break;
-
-				case VALORANDO_INTERESADO:
-					stmt.setString(1, "Valorando_Interesado");
-					break;
-
-				default:
-					System.out.println("Tipo invalido.");
-				}
+				stmt.setString(1, estado);
 				stmt.setString(2, nom);
 				if (stmt.executeUpdate() > 0) {
 					check = true;
@@ -537,66 +516,13 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public Map<Integer, Contacto> mostrarContactos() {
-		ResultSet rs = null;
-		Contacto cont;
-		Map<Integer, Contacto> contactos = new TreeMap<>();
-
-		this.openConnection();
-		try {
-			stmt = con.prepareStatement(SQLEMPRESAS);
-			rs = stmt.executeQuery();
-			while (rs.next()) {
-				cont = new Contacto();
-				cont.setCodContacto(rs.getInt("COD_CONTACTO"));
-				cont.setContacto1(rs.getDate("CONTACTO1").toString());
-				if (rs.getDate("CONTACTO2")==null) {
-					cont.setContacto2(null);
-				} else {
-					cont.setContacto2(rs.getDate("CONTACTO2").toString());
-				}
-
-				if (rs.getDate("CONTACTO3")==null) {
-					cont.setContacto3(null);
-				} else {
-					cont.setContacto3(rs.getDate("CONTACTO3").toString());
-				}
-
-				if (rs.getDate("CONTACTO4")==null) {
-					cont.setContacto4(null);
-				} else {
-					cont.setContacto4(rs.getDate("CONTACTO4").toString());
-				}
-				cont.setObservaciones(rs.getString("OBSERVACIONES"));
-				cont.setResultadoUltimoContacto(ResultadoUltimoContacto.valueOf(rs.getString("RESULTADOULTIMO").toUpperCase()));
-				cont.setInfoUltimo(rs.getString("INFOULTIMO"));
-				cont.setResultadoFinal(ResultadoFinal.valueOf(rs.getString("RESULTADOFINAL").toUpperCase()));
-				if (rs.getDate("FECHARESOLUCION")==null) {
-					cont.setFechaResolucion(null);
-				} else {
-					cont.setFechaResolucion(rs.getDate("FECHARESOLUCION").toString());
-				}
-				cont.setCodEmpresa(rs.getInt("COD_EMPRESA"));
-				contactos.put(cont.getCodContacto(), cont);
-			}
-			rs.close();
-			stmt.close();
-			con.close();
-		} catch (SQLException e) {
-			System.out.println("Un error ha occurrido al intentar recoger las empresas.");
-			e.printStackTrace();
-		}
-		return contactos;
-	}
-
-	@Override
 	public Contacto getContacto(int empId) {
 		ResultSet rs = null;
 		Contacto cont = new Contacto();
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLSELECTEMPRESA);
+			stmt = con.prepareStatement(SQLSELECTCONTACTO);
 			stmt.setInt(1, empId);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
@@ -627,7 +553,7 @@ public class BDImplementacion implements ApnabiDAO {
 				}
 				cont.setInfoUltimo(rs.getString("INFOULTIMO"));
 				
-				if (rs.getString("RESULTADOULTIMO")!=null) {
+				if (rs.getString("RESULTADOFINAL")!=null) {
 					cont.setResultadoFinal(ResultadoFinal.valueOf(rs.getString("RESULTADOFINAL").toUpperCase()));
 				} else {
 					cont.setResultadoFinal(null);

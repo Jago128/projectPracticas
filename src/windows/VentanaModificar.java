@@ -179,14 +179,14 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		JLabel lblResultadoUltimoCont = new JLabel("Resultado ultimo contacto:");
 		lblResultadoUltimoCont.setHorizontalAlignment(SwingConstants.CENTER);
 		lblResultadoUltimoCont.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblResultadoUltimoCont.setBounds(10, 392, 162, 31);
+		lblResultadoUltimoCont.setBounds(21, 364, 162, 31);
 		getContentPane().add(lblResultadoUltimoCont);
 
 		comboBoxResultadoUltimoContacto = new JComboBox<>();
 		comboBoxResultadoUltimoContacto.setModel(
 				new DefaultComboBoxModel<>(new String[] { "", "Comunicacion sin respuesta", "Nos pospone la respuesta",
 						"Programada reunion", "Respuesta no concluyente", "Inicio valoracion oferta" }));
-		comboBoxResultadoUltimoContacto.setBounds(179, 398, 163, 21);
+		comboBoxResultadoUltimoContacto.setBounds(187, 366, 163, 21);
 		getContentPane().add(comboBoxResultadoUltimoContacto);
 
 		JLabel lblInfoUltimoCont = new JLabel("Informacion ultimo contacto:");
@@ -198,24 +198,24 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		JLabel lblResultadoFinal = new JLabel("Resultado final prospeccion:");
 		lblResultadoFinal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblResultadoFinal.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblResultadoFinal.setBounds(14, 355, 163, 31);
+		lblResultadoFinal.setBounds(14, 406, 163, 31);
 		getContentPane().add(lblResultadoFinal);
 
 		comboBoxResultadoFinal = new JComboBox<String>();
 		comboBoxResultadoFinal.setModel(new DefaultComboBoxModel<>(new String[] { "", "Oferta de empleo",
 				"Convenio de colaboracion", "Medidas alternativas", "Relacion concluida", "Relacion pospuesta" }));
-		comboBoxResultadoFinal.setBounds(187, 361, 163, 21);
+		comboBoxResultadoFinal.setBounds(187, 412, 163, 21);
 		getContentPane().add(comboBoxResultadoFinal);
 
 		JLabel lblFechaResolucion = new JLabel("Fecha resolucion:");
 		lblFechaResolucion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFechaResolucion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblFechaResolucion.setBounds(46, 429, 120, 31);
+		lblFechaResolucion.setBounds(42, 447, 120, 31);
 		getContentPane().add(lblFechaResolucion);
 
 		textFieldFechaResolucion = new JTextField();
 		textFieldFechaResolucion.setColumns(10);
-		textFieldFechaResolucion.setBounds(179, 436, 163, 19);
+		textFieldFechaResolucion.setBounds(175, 454, 163, 19);
 		getContentPane().add(textFieldFechaResolucion);
 
 		textAreaInfoUltimoCont = new JTextArea();
@@ -367,55 +367,59 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		default:
 			System.out.println("Tipo invalido.");
 		}
+		
+		if (con.getResultadoUltimoContacto() != null) {
+			switch (con.getResultadoUltimoContacto()) {
+			case COMUNICACION_SINRESPUESTA:
+				resultadoUltimoCont = "Comunicacion sin respuesta";
+				break;
 
-		switch (con.getResultadoUltimoContacto()) {
-		case COMUNICACION_SINRESPUESTA:
-			resultadoUltimoCont = "Comunicacion sin respuesta";
-			break;
+			case INICIO_VALORACIONOFERTA:
+				resultadoUltimoCont = "Inicio valoracion oferta";
+				break;
 
-		case INICIO_VALORACIONOFERTA:
-			resultadoUltimoCont = "Inicio valoracion oferta";
-			break;
+			case RESPUESTA_NOCONCLUYENTE:
+				resultadoUltimoCont = "Respuesta no concluyente";
+				break;
 
-		case RESPUESTA_NOCONCLUYENTE:
-			resultadoUltimoCont = "Respuesta no concluyente";
-			break;
+			case RESPUESTA_POSPUESTA:
+				resultadoUltimoCont = "Nos pospone la respuesta";
+				break;
 
-		case RESPUESTA_POSPUESTA:
-			resultadoUltimoCont = "Nos pospone la respuesta";
-			break;
+			case REUNION_PROGRAMADA:
+				resultadoUltimoCont = "Programada reunion";
+				break;
 
-		case REUNION_PROGRAMADA:
-			resultadoUltimoCont = "Programada reunion";
-			break;
-
-		default:
-			System.out.println("Tipo invalido.");
+			default:
+				System.out.println("Tipo invalido.");
+			}
 		}
+		
+		if (con.getResultadoFinal() != null) {
+			switch (con.getResultadoFinal()) {
+			case CONVENIO_COLABORACION:
+				resultadoFinal = "Convenio de colaboracion";
+				break;
 
-		switch (con.getResultadoFinal()) {
-		case CONVENIO_COLABORACION:
-			resultadoFinal = "Convenio de colaboracion";
-			break;
+			case MEDIDAS_ALTERNATIVAS:
+				resultadoFinal = "Medidas alternativas";
+				break;
 
-		case MEDIDAS_ALTERNATIVAS:
-			resultadoFinal = "Medidas alternativas";
-			break;
+			case OFERTA_EMPLEO:
+				resultadoFinal = "Oferta de empleo";
+				break;
 
-		case OFERTA_EMPLEO:
-			resultadoFinal = "Oferta de empleo";
-			break;
+			case RELACION_CONCLUIDA:
+				resultadoFinal = "Relacion concluida";
+				break;
 
-		case RELACION_CONCLUIDA:
-			resultadoFinal = "Relacion concluida";
-			break;
+			case RELACION_POSPUESTA:
+				resultadoFinal = "Relacion pospuesta";
+				break;
 
-		case RELACION_POSPUESTA:
-			resultadoFinal = "Relacion pospuesta";
-			break;
-			
-		default:
-			System.out.println("Tipo invalido.");
+			default:
+				System.out.println("Tipo invalido.");
+			}
 		}
 
 		infoEmpresa.append("Nombre: " + emp.getNom_empresa()).append("\n");
@@ -449,33 +453,33 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		}
 
 		if (con.getObservaciones() == null) {
-			infoEmpresa.append("Observaciones: ---");
+			infoEmpresa.append("Observaciones: ---").append("\n");
 		} else {
-			infoEmpresa.append("Observaciones: " + con.getObservaciones());
+			infoEmpresa.append("Observaciones: " + con.getObservaciones()).append("\n");
 		}
-		
+
 		if (con.getResultadoUltimoContacto() == null) {
-			infoEmpresa.append("Resultado ultimo contacto: ---");
+			infoEmpresa.append("Resultado ultimo contacto: ---").append("\n");
 		} else {
-			infoEmpresa.append("Resultado ultimo contacto: "+resultadoUltimoCont);
+			infoEmpresa.append("Resultado ultimo contacto: " + resultadoUltimoCont).append("\n");
 		}
-		
+
 		if (con.getInfoUltimo() == null) {
-			infoEmpresa.append("Informacion ultimo contacto: ---");
+			infoEmpresa.append("Informacion ultimo contacto: ---").append("\n");
 		} else {
-			infoEmpresa.append("Informacion ultimo contacto: "+con.getInfoUltimo());
+			infoEmpresa.append("Informacion ultimo contacto: " + con.getInfoUltimo()).append("\n");
 		}
-		
+
 		if (con.getResultadoFinal() == null) {
-			infoEmpresa.append("Resultado final prospeccion: ---");
+			infoEmpresa.append("Resultado final prospeccion: ---").append("\n");
 		} else {
-			infoEmpresa.append("Resultado final prospeccion: "+resultadoFinal);
+			infoEmpresa.append("Resultado final prospeccion: " + resultadoFinal).append("\n");
 		}
-		
+
 		if (con.getFechaResolucion() == null) {
 			infoEmpresa.append("Fecha resolucion: ---");
 		} else {
-			infoEmpresa.append("Fecha resolucion: "+con.getFechaResolucion());
+			infoEmpresa.append("Fecha resolucion: " + con.getFechaResolucion());
 		}
 		textareaEmpresa.setText(infoEmpresa.toString());
 	}
@@ -527,8 +531,8 @@ public class VentanaModificar extends JDialog implements ActionListener {
 						"El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD", "ERROR",
 						JOptionPane.ERROR_MESSAGE);
 			} else {
-				Estado estado = null;
 				boolean check = false;
+				StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 				try {
 					if (textFieldDatosContacto.getText().contains("@")) {
 						emailFormatCheck(textFieldDatosContacto.getText());
@@ -536,65 +540,110 @@ public class VentanaModificar extends JDialog implements ActionListener {
 
 					if (!textFieldDatosContacto.getText().isBlank()) {
 						check = cont.modificarDatosContacto(textFieldDatosContacto.getText(), emp.getNom_empresa());
+						if (!check) {
+							infoError.append("Datos de contacto");
+						}
 					}
 
-					if (!textFieldContactoEmpresa.getText().isBlank()) {
+					if (!textFieldContactoEmpresa.getText().isBlank() && check) {
 						check = cont.modificarContactoEmpresa(textFieldContactoEmpresa.getText(), emp.getNom_empresa());
+						if (!check) {
+							infoError.append("Contacto en la empresa");
+						}
 					}
 
-					if (!textFieldPersonaContacto.getText().isBlank()) {
+					if (!textFieldPersonaContacto.getText().isBlank() && check) {
 						check = cont.modificarPersonaContacto(textFieldPersonaContacto.getText(), emp.getNom_empresa());
+						if (!check) {
+							infoError.append("Persona de contacto");
+						}
 					}
 
-					if (comboBoxEstado.getSelectedIndex() != -1) {
-						check = cont.modificarEstado(estado, emp.getNom_empresa());
+					if (comboBoxEstado.getSelectedIndex() != -1 && check) {
+						check = cont.modificarEstado(comboBoxEstado.getItemAt(comboBoxEstado.getSelectedIndex()),
+								emp.getNom_empresa());
+						if (!check) {
+							infoError.append("Estado");
+						}
 					}
 
-					if (!textFieldContacto1.getText().isBlank()) {
+					if (!textFieldContacto1.getText().isBlank() && check) {
 						check = cont.modificarContacto1(textFieldContacto1.getText(), emp.getCodEmpresa());
+						if (!check) {
+							infoError.append("1. contacto");
+						}
 					}
 
-					if (!textFieldContacto2.getText().isBlank()) {
+					if (!textFieldContacto2.getText().isBlank() && check) {
 						check = cont.modificarContacto2(textFieldContacto2.getText(), emp.getCodEmpresa());
+						if (!check) {
+							infoError.append("2. contacto");
+						}
 					}
 
-					if (!textFieldContacto3.getText().isBlank()) {
+					if (!textFieldContacto3.getText().isBlank() && check) {
 						check = cont.modificarContacto3(textFieldContacto3.getText(), emp.getCodEmpresa());
+						if (!check) {
+							infoError.append("3. contacto");
+						}
 					}
 
-					if (!textFieldContacto4.getText().isBlank()) {
+					if (!textFieldContacto4.getText().isBlank() && check) {
 						check = cont.modificarContacto4(textFieldContacto4.getText(), emp.getCodEmpresa());
+						if (!check) {
+							infoError.append("4. contacto");
+						}
 					}
 
-					if (!textAreaObservaciones.getText().isBlank()) {
+					if (!textAreaObservaciones.getText().isBlank() && check) {
 						check = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
+						if (!check) {
+							infoError.append("Observaciones");
+						}
 					}
 
-					if (!textAreaInfoUltimoCont.getText().isBlank()) {
+					if (!textAreaInfoUltimoCont.getText().isBlank() && check) {
 						check = cont.modificarInformacionUltimoContacto(textAreaInfoUltimoCont.getText(),
 								emp.getCodEmpresa());
+						if (!check) {
+							infoError.append("Resultado ultimo contacto");
+						}
 					}
 
-					if (comboBoxResultadoUltimoContacto.getSelectedIndex() != -1) {
+					if (comboBoxResultadoUltimoContacto.getSelectedIndex() != -1 && !check) {
 						check = cont.modificarResultadoUltimoContacto(comboBoxResultadoUltimoContacto
 								.getItemAt(comboBoxResultadoUltimoContacto.getSelectedIndex()), emp.getCodEmpresa());
+						if (!check) {
+							infoError.append("Informacion ultimo contacto");
+						}
 					}
 
-					if (!textFieldFechaResolucion.getText().isBlank()) {
-						check = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
-					}
-
-					if (comboBoxResultadoFinal.getSelectedIndex() != -1) {
+					if (comboBoxResultadoFinal.getSelectedIndex() != -1 && !check) {
 						check = cont.modificarResultadoFinal(
 								comboBoxResultadoFinal.getItemAt(comboBoxResultadoFinal.getSelectedIndex()),
 								emp.getCodEmpresa());
+						if (!check) {
+							infoError.append("Resultado final prospeccion");
+						}
+					}
+
+					if (!textFieldFechaResolucion.getText().isBlank() && !check) {
+						check = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
+						if (!check) {
+							infoError.append("Fecha de resolucion");
+						}
 					}
 
 					if (!check) {
-						JOptionPane.showMessageDialog(null, "Ha occurrido un error al modificar la empresa.", "ERROR",
-								JOptionPane.ERROR_MESSAGE);
+						infoError.append(" al intentar actualizar la empresa.");
+						JOptionPane.showMessageDialog(null, infoError.toString()
+								+ "\nLa informacion cambiada correctamente se actualizara en el recuadro de infomacion de empresa.",
+								"ERROR", JOptionPane.ERROR_MESSAGE);
+						emp = cont.getEmpresa(emp.getNom_empresa());
+						loadEmpresa();
 					} else {
-						JOptionPane.showMessageDialog(null, "La empresa ha sido modificada correctamente.");
+						JOptionPane.showMessageDialog(null,
+								"La empresa ha sido modificada correctamente. La informacion en el recuadro de infomacion de empresa se acualizara para reflejar los cambios.");
 						emp = cont.getEmpresa(emp.getNom_empresa());
 						loadEmpresa();
 					}

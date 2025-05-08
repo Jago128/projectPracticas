@@ -33,7 +33,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		setBounds(100, 100, 800, 480);
 		getContentPane().setLayout(null);
 
-		JLabel lblObligatorio = new JLabel("Los campos con * son obligatorias. Formato de fechas: AAAA-MM-DD");
+		JLabel lblObligatorio = new JLabel("Los campos con * son obligatorias. Formato de fechas: AAAA-MM-DD (excepto en campos que no sean de fecha)");
 		lblObligatorio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblObligatorio.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblObligatorio.setBounds(20, 10, 721, 19);

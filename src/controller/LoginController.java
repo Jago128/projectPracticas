@@ -66,7 +66,7 @@ public class LoginController {
 		return dao.modificarPersonaContacto(personaC, nom);
 	}
 
-	public boolean modificarEstado(Estado estado, String nom) {
+	public boolean modificarEstado(String estado, String nom) {
 		return dao.modificarEstado(estado, nom);
 	}
 
@@ -75,16 +75,12 @@ public class LoginController {
 	}
 	
 	// Contactos
-	public Map<Integer, Contacto> mostrarContactos() {
-		return mostrarContactos();
-	}
-	
 	public Contacto getContacto(int empId) {
-		return getContacto(empId);
+		return dao.getContacto(empId);
 	}
 	
 	public boolean añadirContacto(Contacto cont) {
-		return añadirContacto(cont);
+		return dao.añadirContacto(cont);
 	}
 
 	public boolean modificarContacto1(String contacto1, int id) {
