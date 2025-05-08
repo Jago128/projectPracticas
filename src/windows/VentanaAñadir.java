@@ -310,19 +310,19 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 			fecRes = LocalDate.parse(textFieldFechaResolucion.getText(), format);
 		}
 
-		if (!fecRes.isAfter(cont4) || !fecRes.isAfter(cont3) || !fecRes.isAfter(cont2) || !fecRes.isAfter(cont1)) {
+		if ((!fecRes.isAfter(cont4) || !fecRes.isAfter(cont3) || !fecRes.isAfter(cont2) || !fecRes.isAfter(cont1))&&!fecRes.equals(cont4)) {
 			isBefore = false;
 		}
 
-		if (!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1)) {
+		if ((!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1))&&!fecRes.equals(cont3)) {
 			isBefore = false;
 		}
 
-		if (!cont3.isAfter(cont2) || !cont3.isAfter(cont1)) {
+		if ((!cont3.isAfter(cont2) || !cont3.isAfter(cont1))&&!fecRes.equals(cont2)) {
 			isBefore = false;
 		}
 
-		if (!cont2.isAfter(cont1)) {
+		if ((!cont2.isAfter(cont1))&&!fecRes.equals(cont1)) {
 			isBefore = false;
 		}
 

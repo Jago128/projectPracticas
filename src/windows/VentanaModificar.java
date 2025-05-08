@@ -514,43 +514,43 @@ public class VentanaModificar extends JDialog implements ActionListener {
 			cont1 = LocalDate.parse(con.getContacto1(), format);
 		}
 
-		if (!textFieldContacto2.getText().isBlank()) {
+		if (!textFieldContacto2.getText().isBlank() && con.getContacto2() == null) {
 			cont2 = LocalDate.parse(textFieldContacto2.getText(), format);
 		} else if (con.getContacto2() != null) {
 			cont2 = LocalDate.parse(con.getContacto2(), format);
 		}
 
-		if (!textFieldContacto3.getText().isBlank()) {
+		if (!textFieldContacto3.getText().isBlank() && con.getContacto3() == null) {
 			cont3 = LocalDate.parse(textFieldContacto3.getText(), format);
 		} else if (con.getContacto3() != null) {
 			cont3 = LocalDate.parse(con.getContacto3(), format);
 		}
 
-		if (!textFieldContacto4.getText().isBlank()) {
+		if (!textFieldContacto4.getText().isBlank() && con.getContacto4() == null) {
 			cont4 = LocalDate.parse(textFieldContacto4.getText(), format);
 		} else if (con.getContacto4() != null) {
 			cont4 = LocalDate.parse(con.getContacto4(), format);
 		}
 
-		if (!textFieldFechaResolucion.getText().isBlank()) {
+		if (!textFieldFechaResolucion.getText().isBlank() && con.getFechaResolucion() == null) {
 			fecRes = LocalDate.parse(textFieldFechaResolucion.getText(), format);
 		} else if (con.getFechaResolucion() != null) {
 			fecRes = LocalDate.parse(con.getFechaResolucion(), format);
 		}
 
-		if (!fecRes.isAfter(cont4) || !fecRes.isAfter(cont3) || !fecRes.isAfter(cont2) || !fecRes.isAfter(cont1)) {
+		if ((!fecRes.isAfter(cont4) || !fecRes.isAfter(cont3) || !fecRes.isAfter(cont2) || !fecRes.isAfter(cont1))&&!fecRes.equals(cont4)) {
 			isBefore = false;
 		}
 
-		if (!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1)) {
+		if ((!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1))&&!fecRes.equals(cont3)) {
 			isBefore = false;
 		}
 
-		if (!cont3.isAfter(cont2) || !cont3.isAfter(cont1)) {
+		if ((!cont3.isAfter(cont2) || !cont3.isAfter(cont1))&&!fecRes.equals(cont2)) {
 			isBefore = false;
 		}
 
-		if (!cont2.isAfter(cont1)) {
+		if ((!cont2.isAfter(cont1))&&!fecRes.equals(cont1)) {
 			isBefore = false;
 		}
 
