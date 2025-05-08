@@ -19,6 +19,8 @@ public interface ApnabiDAO {
 
 	public Empresa getEmpresa(String nom);
 	
+	public boolean verificarEmpresa(String nom);
+	
 	public int getCodEmpresa(String nom);
 
 	public boolean añadirEmpresa(Empresa emp);
@@ -36,7 +38,7 @@ public interface ApnabiDAO {
 	// Contactos	
 	public Contacto getContacto(int empId);
 	
-	public boolean añadirContacto(Contacto cont);
+	public boolean añadirContacto(Contacto cont, int id);
 	
 	public boolean modificarContacto1(String contacto1, int id);
 

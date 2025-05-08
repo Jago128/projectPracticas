@@ -47,7 +47,11 @@ public class LoginController {
 	}
 	
 	public int getCodEmpresa(String nom) {
-		return getCodEmpresa(nom);
+		return dao.getCodEmpresa(nom);
+	}
+	
+	public boolean verificarEmpresa(String nom) {
+		return dao.verificarEmpresa(nom);
 	}
 
 	public boolean añadirEmpresa(Empresa emp) {
@@ -79,8 +83,8 @@ public class LoginController {
 		return dao.getContacto(empId);
 	}
 	
-	public boolean añadirContacto(Contacto cont) {
-		return dao.añadirContacto(cont);
+	public boolean añadirContacto(Contacto cont, int id) {
+		return dao.añadirContacto(cont, id);
 	}
 
 	public boolean modificarContacto1(String contacto1, int id) {

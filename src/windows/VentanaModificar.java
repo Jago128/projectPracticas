@@ -85,8 +85,9 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		getContentPane().add(lblEstado);
 
 		comboBoxEstado = new JComboBox<String>();
-		comboBoxEstado.setModel(new DefaultComboBoxModel<>(new String[] { "", "Informado", "Valorando/interesado",
+		comboBoxEstado.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Informado", "Valorando/interesado",
 				"Planificando inserciones", "Proximo año", "No interesado" }));
+		comboBoxEstado.setSelectedIndex(0);
 		comboBoxEstado.setBounds(187, 179, 163, 21);
 		getContentPane().add(comboBoxEstado);
 
@@ -183,9 +184,10 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		getContentPane().add(lblResultadoUltimoCont);
 
 		comboBoxResultadoUltimoContacto = new JComboBox<>();
-		comboBoxResultadoUltimoContacto.setModel(
-				new DefaultComboBoxModel<>(new String[] { "", "Comunicacion sin respuesta", "Nos pospone la respuesta",
-						"Programada reunion", "Respuesta no concluyente", "Inicio valoracion oferta" }));
+		comboBoxResultadoUltimoContacto.setModel(new DefaultComboBoxModel<>(
+				new String[] { "---", "Comunicacion sin respuesta", "Nos pospone la respuesta", "Programada reunion",
+						"Respuesta no concluyente", "Inicio valoracion oferta" }));
+		comboBoxResultadoUltimoContacto.setSelectedIndex(0);
 		comboBoxResultadoUltimoContacto.setBounds(187, 366, 163, 21);
 		getContentPane().add(comboBoxResultadoUltimoContacto);
 
@@ -202,8 +204,9 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		getContentPane().add(lblResultadoFinal);
 
 		comboBoxResultadoFinal = new JComboBox<String>();
-		comboBoxResultadoFinal.setModel(new DefaultComboBoxModel<>(new String[] { "", "Oferta de empleo",
+		comboBoxResultadoFinal.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Oferta de empleo",
 				"Convenio de colaboracion", "Medidas alternativas", "Relacion concluida", "Relacion pospuesta" }));
+		comboBoxResultadoFinal.setSelectedIndex(0);
 		comboBoxResultadoFinal.setBounds(187, 412, 163, 21);
 		getContentPane().add(comboBoxResultadoFinal);
 
@@ -261,6 +264,8 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		StringBuilder infoEmpresa = new StringBuilder("");
 		String sector = "", estado = "", resultadoFinal = "", resultadoUltimoCont = "";
 		Contacto con = cont.getContacto(emp.getCodEmpresa());
+
+		textareaEmpresa.removeAll();
 
 		switch (emp.getSector()) {
 		case AGRICULTURA_GANADERIA:
@@ -367,7 +372,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		default:
 			System.out.println("Tipo invalido.");
 		}
-		
+
 		if (con.getResultadoUltimoContacto() != null) {
 			switch (con.getResultadoUltimoContacto()) {
 			case COMUNICACION_SINRESPUESTA:
@@ -394,7 +399,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 				System.out.println("Tipo invalido.");
 			}
 		}
-		
+
 		if (con.getResultadoFinal() != null) {
 			switch (con.getResultadoFinal()) {
 			case CONVENIO_COLABORACION:
@@ -493,6 +498,65 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		}
 	}
 
+	public boolean dateAfterCheck() {
+		boolean isBefore = true;
+		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
+				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
+				.toFormatter();
+		Contacto con = cont.getContacto(emp.getCodEmpresa());
+		LocalDate cont1 = LocalDate.parse("0000-1-1", format), cont2 = LocalDate.parse("0000-1-1", format),
+				cont3 = LocalDate.parse("0000-1-1", format), cont4 = LocalDate.parse("0000-1-1", format),
+				fecRes = LocalDate.parse("0000-1-1", format);
+
+		if (!textFieldContacto1.getText().isBlank()) {
+			cont1 = LocalDate.parse(textFieldContacto1.getText(), format);
+		} else {
+			cont1 = LocalDate.parse(con.getContacto1(), format);
+		}
+
+		if (!textFieldContacto2.getText().isBlank()) {
+			cont2 = LocalDate.parse(textFieldContacto2.getText(), format);
+		} else if (con.getContacto2() != null) {
+			cont2 = LocalDate.parse(con.getContacto2(), format);
+		}
+
+		if (!textFieldContacto3.getText().isBlank()) {
+			cont3 = LocalDate.parse(textFieldContacto3.getText(), format);
+		} else if (con.getContacto3() != null) {
+			cont3 = LocalDate.parse(con.getContacto3(), format);
+		}
+
+		if (!textFieldContacto4.getText().isBlank()) {
+			cont4 = LocalDate.parse(textFieldContacto4.getText(), format);
+		} else if (con.getContacto4() != null) {
+			cont4 = LocalDate.parse(con.getContacto4(), format);
+		}
+
+		if (!textFieldFechaResolucion.getText().isBlank()) {
+			fecRes = LocalDate.parse(textFieldFechaResolucion.getText(), format);
+		} else if (con.getFechaResolucion() != null) {
+			fecRes = LocalDate.parse(con.getFechaResolucion(), format);
+		}
+
+		if (!fecRes.isAfter(cont4) || !fecRes.isAfter(cont3) || !fecRes.isAfter(cont2) || !fecRes.isAfter(cont1)) {
+			isBefore = false;
+		}
+
+		if (!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1)) {
+			isBefore = false;
+		}
+
+		if (!cont3.isAfter(cont2) || !cont3.isAfter(cont1)) {
+			isBefore = false;
+		}
+
+		if (!cont2.isAfter(cont1)) {
+			isBefore = false;
+		}
+
+		return isBefore;
+	}
+
 	public boolean dateFormatErrorCheck() {
 		boolean error = false;
 		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
@@ -502,6 +566,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 			if (!textFieldContacto1.getText().isBlank()) {
 				LocalDate.parse(textFieldContacto1.getText(), format);
 			}
+
 			if (!textFieldContacto2.getText().isBlank()) {
 				LocalDate.parse(textFieldContacto2.getText(), format);
 			}
@@ -530,8 +595,21 @@ public class VentanaModificar extends JDialog implements ActionListener {
 				JOptionPane.showMessageDialog(null,
 						"El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD", "ERROR",
 						JOptionPane.ERROR_MESSAGE);
+			} else if (!dateAfterCheck()) {
+				if (textFieldContacto1.getText().isBlank()) {
+					JOptionPane.showMessageDialog(null,
+							"Una o varias de las fechas introducidas no estan en orden cronologico."
+									+ "\nComprueba la fecha del 1. Contacto del recuadro de informacion de empresa si tienes dudas, y compruba el orden de las fechas.",
+							"ERROR", JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane
+							.showMessageDialog(null,
+									"Una o varias de las fechas introducidas no estan en orden cronologico."
+											+ "\nComprueba el orden de las fechas.",
+									"ERROR", JOptionPane.ERROR_MESSAGE);
+				}
 			} else {
-				boolean check = false;
+				boolean check = true;
 				StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 				try {
 					if (textFieldDatosContacto.getText().contains("@")) {
@@ -559,7 +637,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 						}
 					}
 
-					if (comboBoxEstado.getSelectedIndex() != -1 && check) {
+					if (!comboBoxEstado.getSelectedItem().equals("---") && check) {
 						check = cont.modificarEstado(comboBoxEstado.getItemAt(comboBoxEstado.getSelectedIndex()),
 								emp.getNom_empresa());
 						if (!check) {
@@ -610,7 +688,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 						}
 					}
 
-					if (comboBoxResultadoUltimoContacto.getSelectedIndex() != -1 && !check) {
+					if (!comboBoxResultadoUltimoContacto.getSelectedItem().equals("---") && check) {
 						check = cont.modificarResultadoUltimoContacto(comboBoxResultadoUltimoContacto
 								.getItemAt(comboBoxResultadoUltimoContacto.getSelectedIndex()), emp.getCodEmpresa());
 						if (!check) {
@@ -618,7 +696,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 						}
 					}
 
-					if (comboBoxResultadoFinal.getSelectedIndex() != -1 && !check) {
+					if (!comboBoxResultadoFinal.getSelectedItem().equals("---") && check) {
 						check = cont.modificarResultadoFinal(
 								comboBoxResultadoFinal.getItemAt(comboBoxResultadoFinal.getSelectedIndex()),
 								emp.getCodEmpresa());
@@ -627,7 +705,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 						}
 					}
 
-					if (!textFieldFechaResolucion.getText().isBlank() && !check) {
+					if (!textFieldFechaResolucion.getText().isBlank() && check) {
 						check = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
 						if (!check) {
 							infoError.append("Fecha de resolucion");
@@ -642,8 +720,8 @@ public class VentanaModificar extends JDialog implements ActionListener {
 						emp = cont.getEmpresa(emp.getNom_empresa());
 						loadEmpresa();
 					} else {
-						JOptionPane.showMessageDialog(null,
-								"La empresa ha sido modificada correctamente. La informacion en el recuadro de infomacion de empresa se acualizara para reflejar los cambios.");
+						JOptionPane.showMessageDialog(null, "La empresa ha sido modificada correctamente."
+								+ "\nLa informacion en el recuadro de infomacion de empresa se acualizara para reflejar los cambios.");
 						emp = cont.getEmpresa(emp.getNom_empresa());
 						loadEmpresa();
 					}

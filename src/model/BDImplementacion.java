@@ -33,15 +33,15 @@ public class BDImplementacion implements ApnabiDAO {
 
 	final String SQLSELECTCONTACTO = "SELECT * FROM CONTACTO WHERE COD_EMPRESA=?";
 	final String SQLINSERTCONTACTO = "INSERT INTO CONTACTO (CONTACTO1, CONTACTO2, CONTACTO3, CONTACTO4, OBSERVACIONES, RESULTADOULTIMO, INFOULTIMO, RESULTADOFINAL, FECHARESOLUCION, COD_EMPRESA) VALUES (?,?,?,?,?,?,?,?,?,?)";
-	final String SQLUPDATECONTACTO1 = "UPDATE CONTACTO SET CONTACTO1=? WHERE IDCONTACTO=?";
-	final String SQLUPDATECONTACTO2 = "UPDATE CONTACTO SET CONTACTO2=? WHERE IDCONTACTO=?";
-	final String SQLUPDATECONTACTO3 = "UPDATE CONTACTO SET CONTACTO3=? WHERE IDCONTACTO=?";
-	final String SQLUPDATECONTACTO4 = "UPDATE CONTACTO SET CONTACTO4=? WHERE IDCONTACTO=?";
-	final String SQLUPDATEOBSERVACIONES = "UPDATE CONTACTO SET OBSERVACIONES=? WHERE IDCONTACTO=?";
-	final String SQLUPDATERESULTADOULTIMO = "UPDATE CONTACTO SET RESULTADOULTIMO=? WHERE IDCONTACTO=?";
-	final String SQLUPDATEINFOULTIMO = "UPDATE CONTACTO SET INFOULTIMO=? WHERE IDCONTACTO=?";
-	final String SQLUPDATERESULTADOFINAL = "UPDATE CONTACTO SET RESULTADOFINAL=? WHERE IDCONTACTO=?";
-	final String SQLUPDATEFECHARESOLUCION = "UPDATE CONTACTO SET FECHARESOLUCION=? WHERE IDCONTACTO=?";
+	final String SQLUPDATECONTACTO1 = "UPDATE CONTACTO SET CONTACTO1=? WHERE COD_CONTACTO=?";
+	final String SQLUPDATECONTACTO2 = "UPDATE CONTACTO SET CONTACTO2=? WHERE COD_CONTACTO=?";
+	final String SQLUPDATECONTACTO3 = "UPDATE CONTACTO SET CONTACTO3=? WHERE COD_CONTACTO=?";
+	final String SQLUPDATECONTACTO4 = "UPDATE CONTACTO SET CONTACTO4=? WHERE COD_CONTACTO=?";
+	final String SQLUPDATEOBSERVACIONES = "UPDATE CONTACTO SET OBSERVACIONES=? WHERE COD_CONTACTO=?";
+	final String SQLUPDATERESULTADOULTIMO = "UPDATE CONTACTO SET RESULTADOULTIMO=? WHERE COD_CONTACTO=?";
+	final String SQLUPDATEINFOULTIMO = "UPDATE CONTACTO SET INFOULTIMO=? WHERE COD_CONTACTO=?";
+	final String SQLUPDATERESULTADOFINAL = "UPDATE CONTACTO SET RESULTADOFINAL=? WHERE COD_CONTACTO=?";
+	final String SQLUPDATEFECHARESOLUCION = "UPDATE CONTACTO SET FECHARESOLUCION=? WHERE COD_CONTACTO=?";
 
 	public BDImplementacion() {
 		this.configFile = ResourceBundle.getBundle("model.classConfig");
@@ -80,7 +80,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("El usuario no se pudo verificar correctamente.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return existe;
 	}
 
@@ -103,7 +105,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("El usuario no se pudo verificar correctamente.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return existe;
 	}
 
@@ -126,7 +130,9 @@ public class BDImplementacion implements ApnabiDAO {
 			} catch (SQLException e) {
 				System.out.println("Un error ha ocurrido al intentar registrar el usuario.");
 				e.printStackTrace();
-			}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
 		}
 		return user;
 	}
@@ -150,7 +156,9 @@ public class BDImplementacion implements ApnabiDAO {
 			} catch (SQLException e) {
 				System.out.println("Un error ha ocurrido al intentar registrar el usuario.");
 				e.printStackTrace();
-			}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
 		}
 		return registro;
 	}
@@ -183,7 +191,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Un error ha occurrido al intentar recoger las empresas.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return empresas;
 	}
 
@@ -208,7 +218,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Un error ha occurrido al intentar recoger los nombres de las empresas.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return empresas;
 	}
 
@@ -238,8 +250,35 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Un error ha occurrido al intentar recoger la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return empresa;
+	}
+	
+	@Override
+	public boolean verificarEmpresa(String nom) {
+		ResultSet rs = null;
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLSELECTEMPRESA);
+			stmt.setString(1, nom);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				check = true;
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger la empresa.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
 	}
 
 	@Override
@@ -261,7 +300,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Un error ha occurrido al intentar recoger el codigo de la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return cod;
 	}
 
@@ -391,7 +432,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha habido un error al intentar añadir la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -416,7 +459,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -441,7 +486,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -466,7 +513,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -491,7 +540,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -511,7 +562,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("La empresa no se pudo borrar.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -571,12 +624,14 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Un error ha occurrido al intentar recoger la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return cont;
 	}
 
 	@Override
-	public boolean añadirContacto(Contacto cont) {
+	public boolean añadirContacto(Contacto cont, int id) {
 		boolean check = false;
 		this.openConnection();
 
@@ -641,7 +696,7 @@ public class BDImplementacion implements ApnabiDAO {
 			}
 
 			stmt.setDate(9, Date.valueOf(cont.getFechaResolucion()));
-			stmt.setInt(10, cont.getCodEmpresa());
+			stmt.setInt(10, id);
 			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
@@ -649,6 +704,9 @@ public class BDImplementacion implements ApnabiDAO {
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
+			System.out.println("Ha habido un error al intentar añadir la empresa.");
+			e.printStackTrace();
+		} catch (Exception e) {
 			System.out.println("Ha habido un error al intentar añadir la empresa.");
 			e.printStackTrace();
 		}
@@ -676,7 +734,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -701,7 +761,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -726,7 +788,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -751,7 +815,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -776,7 +842,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -801,7 +869,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -826,7 +896,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -851,7 +923,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 
@@ -876,7 +950,9 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return check;
 	}
 }
