@@ -181,7 +181,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		lblObservaciones.setBounds(385, 187, 108, 31);
 		getContentPane().add(lblObservaciones);
 
-		JLabel lblMaxChars = new JLabel("(Max 100 caracteres)");
+		JLabel lblMaxChars = new JLabel("(Max 500 caracteres)");
 		lblMaxChars.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMaxChars.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblMaxChars.setBounds(375, 215, 126, 31);
@@ -261,7 +261,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		textAreaInfoUltimoCont.setBounds(549, 277, 230, 61);
 		getContentPane().add(textAreaInfoUltimoCont);
 
-		JLabel lblmaxChars_1 = new JLabel("(Max 200 caracteres)");
+		JLabel lblmaxChars_1 = new JLabel("(Max 500 caracteres)");
 		lblmaxChars_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblmaxChars_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblmaxChars_1.setBounds(385, 312, 126, 31);
@@ -273,7 +273,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		getContentPane().add(btnAñadir);
 		btnAñadir.addActionListener(this);
 	}
-
+	
 	public void emailFormatCheck(String email) throws EmailFormatException {
 		Pattern modelo = Pattern.compile(
 				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{3,})$");
@@ -283,7 +283,58 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		}
 	}
 
-	public boolean dateAfterCheck() {
+	public boolean errorChecks(int errorID) {
+		boolean error = false;
+		switch (errorID) {
+		case 1:
+			addError();
+			break;
+
+		case 2:
+			error = dateFormatErrorCheck();
+			break;
+
+		case 3:
+			error = dateAfterCheck();
+			break;
+
+		case 4:
+			error = lengthCheck();
+			break;
+		}
+		return error;
+	}
+
+	public void addError() { // ErrorID: 1
+		JOptionPane.showMessageDialog(null, "Ha habido un error al intentar añadir la empresa.", "ERROR",
+				JOptionPane.ERROR_MESSAGE);
+	}
+
+	public boolean dateFormatErrorCheck() { // ErrorID: 2
+		boolean error = false;
+		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
+				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
+				.toFormatter();
+		try {
+			LocalDate.parse(textFieldContacto1.getText(), format);
+			if (!textFieldContacto2.getText().isBlank()) {
+				LocalDate.parse(textFieldContacto2.getText(), format);
+			}
+
+			if (!textFieldContacto3.getText().isBlank()) {
+				LocalDate.parse(textFieldContacto3.getText(), format);
+			}
+
+			if (!textFieldContacto4.getText().isBlank()) {
+				LocalDate.parse(textFieldContacto4.getText(), format);
+			}
+		} catch (DateTimeParseException e) {
+			error = true;
+		}
+		return error;
+	}
+
+	public boolean dateAfterCheck() { // ErrorID: 3
 		boolean isBefore = true;
 		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
 				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
@@ -310,52 +361,36 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 			fecRes = LocalDate.parse(textFieldFechaResolucion.getText(), format);
 		}
 
-		if ((!fecRes.isAfter(cont4) || !fecRes.isAfter(cont3) || !fecRes.isAfter(cont2) || !fecRes.isAfter(cont1))&&!fecRes.equals(cont4)) {
+		if ((!fecRes.isAfter(cont4) || !fecRes.isAfter(cont3) || !fecRes.isAfter(cont2) || !fecRes.isAfter(cont1))
+				&& !fecRes.equals(cont4)) {
 			isBefore = false;
 		}
 
-		if ((!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1))&&!fecRes.equals(cont3)) {
+		if ((!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1)) && !fecRes.equals(cont3)) {
 			isBefore = false;
 		}
 
-		if ((!cont3.isAfter(cont2) || !cont3.isAfter(cont1))&&!fecRes.equals(cont2)) {
+		if ((!cont3.isAfter(cont2) || !cont3.isAfter(cont1)) && !fecRes.equals(cont2)) {
 			isBefore = false;
 		}
 
-		if ((!cont2.isAfter(cont1))&&!fecRes.equals(cont1)) {
+		if ((!cont2.isAfter(cont1)) && !fecRes.equals(cont1)) {
 			isBefore = false;
 		}
 
 		return isBefore;
 	}
 
-	public boolean dateFormatErrorCheck() {
-		boolean error = false;
-		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
-				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
-				.toFormatter();
-		try {
-			LocalDate.parse(textFieldContacto1.getText(), format);
-			if (!textFieldContacto2.getText().isBlank()) {
-				LocalDate.parse(textFieldContacto2.getText(), format);
-			}
-
-			if (!textFieldContacto3.getText().isBlank()) {
-				LocalDate.parse(textFieldContacto3.getText(), format);
-			}
-
-			if (!textFieldContacto4.getText().isBlank()) {
-				LocalDate.parse(textFieldContacto4.getText(), format);
-			}
-		} catch (DateTimeParseException e) {
-			error = true;
+	public boolean lengthCheck() { // ErrorID: 4
+		boolean tooLong = false;
+		if (textAreaObservaciones.getText().length() > 500) {
+			tooLong = true;
 		}
-		return error;
-	}
 
-	public void addError() {
-		JOptionPane.showMessageDialog(null, "Ha habido un error al intentar añadir la empresa.", "ERROR",
-				JOptionPane.ERROR_MESSAGE);
+		if (textAreaObservaciones.getText().length() > 500) {
+			tooLong = true;
+		}
+		return tooLong;
 	}
 
 	@Override
@@ -368,11 +403,6 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 						|| comboBoxEstado.getSelectedItem().equals("---") || textFieldContacto1.getText().isBlank()) {
 					JOptionPane.showMessageDialog(null, "Por favor, rellena toda todos los campos obligatorios.",
 							"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
-				} else if (!dateAfterCheck()) {
-					JOptionPane.showMessageDialog(null,
-							"Una o varias de las fechas introducidas no estan en orden cronologico."
-									+ "\nComprueba la fecha del 1. Contacto del recuadro de informacion de empresa si tienes dudas, y compruba el orden de las fechas.",
-							"ERROR", JOptionPane.ERROR_MESSAGE);
 				} else {
 					try {
 						if (textFieldDatosContacto.getText().contains("@")
@@ -381,7 +411,11 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 										|| textFieldDatosContacto.getText().contains(".eus"))) {
 							emailFormatCheck(textFieldDatosContacto.getText());
 						}
-						if (dateFormatErrorCheck()) {
+						if (errorChecks(2)) {
+							JOptionPane.showMessageDialog(null,
+									"El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD",
+									"ERROR", JOptionPane.ERROR_MESSAGE);
+						} else if (errorChecks(3)) {
 							if (textFieldContacto1.getText().isBlank()) {
 								JOptionPane.showMessageDialog(null,
 										"Una o varias de las fechas introducidas no estan en orden cronologico."
@@ -393,6 +427,10 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 												+ "\nComprueba el orden de las fechas.",
 										"ERROR", JOptionPane.ERROR_MESSAGE);
 							}
+						} else if (errorChecks(4)) {
+							JOptionPane.showMessageDialog(null,
+									"Hay mas caracteres que el limite de caracteres en uno de los campos de texto con limite especificado.",
+									"ERROR", JOptionPane.ERROR_MESSAGE);
 						} else {
 							Sector sector = null;
 							Estado estado = null;
@@ -602,10 +640,10 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 										comboBoxSector.setSelectedIndex(-1);
 									}
 								} else {
-									addError();
+									errorChecks(1);
 								}
 							} else {
-								addError();
+								errorChecks(1);
 							}
 						}
 					} catch (EmailFormatException e) {

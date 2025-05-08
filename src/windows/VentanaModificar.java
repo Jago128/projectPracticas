@@ -165,7 +165,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		lblObservaciones.setBounds(370, 348, 108, 31);
 		getContentPane().add(lblObservaciones);
 
-		JLabel lblMaxChars = new JLabel("(Max 100 caracteres)");
+		JLabel lblMaxChars = new JLabel("(Max 500 caracteres)");
 		lblMaxChars.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMaxChars.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblMaxChars.setBounds(360, 376, 126, 31);
@@ -227,7 +227,7 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		textAreaInfoUltimoCont.setBounds(539, 417, 230, 61);
 		getContentPane().add(textAreaInfoUltimoCont);
 
-		JLabel lblmaxChars_1 = new JLabel("(Max 200 caracteres)");
+		JLabel lblmaxChars_1 = new JLabel("(Max 500 caracteres)");
 		lblmaxChars_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblmaxChars_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblmaxChars_1.setBounds(375, 447, 126, 31);
@@ -498,7 +498,167 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		}
 	}
 
-	public boolean dateAfterCheck() {
+	public boolean errorChecks(int errorID) {
+		boolean error = false;
+		switch (errorID) {
+		case 1:
+			error = addError();
+			break;
+
+		case 2:
+			error = dateFormatErrorCheck();
+			break;
+
+		case 3:
+			error = dateAfterCheck();
+			break;
+
+		case 4:
+			error = lengthCheck();
+			break;
+		}
+		return error;
+	}
+
+	public boolean addError() { // ErrorID: 1
+		boolean error = false;
+		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
+		if (!textFieldDatosContacto.getText().isBlank()) {
+			error = cont.modificarDatosContacto(textFieldDatosContacto.getText(), emp.getNom_empresa());
+			if (!error) {
+				infoError.append("Datos de contacto");
+			}
+		}
+
+		if (!textFieldContactoEmpresa.getText().isBlank() && error) {
+			error = cont.modificarContactoEmpresa(textFieldContactoEmpresa.getText(), emp.getNom_empresa());
+			if (!error) {
+				infoError.append("Contacto en la empresa");
+			}
+		}
+
+		if (!textFieldPersonaContacto.getText().isBlank() && error) {
+			error = cont.modificarPersonaContacto(textFieldPersonaContacto.getText(), emp.getNom_empresa());
+			if (!error) {
+				infoError.append("Persona de contacto");
+			}
+		}
+
+		if (!comboBoxEstado.getSelectedItem().equals("---") && error) {
+			error = cont.modificarEstado(comboBoxEstado.getItemAt(comboBoxEstado.getSelectedIndex()),
+					emp.getNom_empresa());
+			if (!error) {
+				infoError.append("Estado");
+			}
+		}
+
+		if (!textFieldContacto1.getText().isBlank() && error) {
+			error = cont.modificarContacto1(textFieldContacto1.getText(), emp.getCodEmpresa());
+			if (!error) {
+				infoError.append("1. contacto");
+			}
+		}
+
+		if (!textFieldContacto2.getText().isBlank() && error) {
+			error = cont.modificarContacto2(textFieldContacto2.getText(), emp.getCodEmpresa());
+			if (!error) {
+				infoError.append("2. contacto");
+			}
+		}
+
+		if (!textFieldContacto3.getText().isBlank() && error) {
+			error = cont.modificarContacto3(textFieldContacto3.getText(), emp.getCodEmpresa());
+			if (!error) {
+				infoError.append("3. contacto");
+			}
+		}
+
+		if (!textFieldContacto4.getText().isBlank() && error) {
+			error = cont.modificarContacto4(textFieldContacto4.getText(), emp.getCodEmpresa());
+			if (!error) {
+				infoError.append("4. contacto");
+			}
+		}
+
+		if (!textAreaObservaciones.getText().isBlank() && error) {
+			error = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
+			if (!error) {
+				infoError.append("Observaciones");
+			}
+		}
+
+		if (!textAreaInfoUltimoCont.getText().isBlank() && error) {
+			error = cont.modificarInformacionUltimoContacto(textAreaInfoUltimoCont.getText(), emp.getCodEmpresa());
+			if (!error) {
+				infoError.append("Resultado ultimo contacto");
+			}
+		}
+
+		if (!comboBoxResultadoUltimoContacto.getSelectedItem().equals("---") && error) {
+			error = cont.modificarResultadoUltimoContacto(
+					comboBoxResultadoUltimoContacto.getItemAt(comboBoxResultadoUltimoContacto.getSelectedIndex()),
+					emp.getCodEmpresa());
+			if (!error) {
+				infoError.append("Informacion ultimo contacto");
+			}
+		}
+
+		if (!comboBoxResultadoFinal.getSelectedItem().equals("---") && error) {
+			error = cont.modificarResultadoFinal(
+					comboBoxResultadoFinal.getItemAt(comboBoxResultadoFinal.getSelectedIndex()), emp.getCodEmpresa());
+			if (!error) {
+				infoError.append("Resultado final prospeccion");
+			}
+		}
+
+		if (!textFieldFechaResolucion.getText().isBlank() && error) {
+			error = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
+			if (!error) {
+				infoError.append("Fecha de resolucion");
+			}
+		}
+
+		if (error) {
+			infoError.append(" al intentar actualizar la empresa.");
+			JOptionPane.showMessageDialog(null, infoError.toString()
+					+ "\nLa informacion cambiada correctamente se actualizara en el recuadro de infomacion de empresa.",
+					"ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+		return error;
+	}
+
+	public boolean dateFormatErrorCheck() { // ErrorID: 2
+		boolean error = false;
+		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
+				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
+				.toFormatter();
+		try {
+			if (!textFieldContacto1.getText().isBlank()) {
+				LocalDate.parse(textFieldContacto1.getText(), format);
+			}
+
+			if (!textFieldContacto2.getText().isBlank()) {
+				LocalDate.parse(textFieldContacto2.getText(), format);
+			}
+
+			if (!textFieldContacto3.getText().isBlank()) {
+				LocalDate.parse(textFieldContacto3.getText(), format);
+			}
+
+			if (!textFieldContacto4.getText().isBlank()) {
+				LocalDate.parse(textFieldContacto4.getText(), format);
+			}
+
+			if (!textFieldFechaResolucion.getText().isBlank()) {
+				LocalDate.parse(textFieldFechaResolucion.getText(), format);
+			}
+		} catch (DateTimeParseException e) {
+			error = true;
+		}
+		return error;
+	}
+
+	public boolean dateAfterCheck() { // ErrorID: 3
 		boolean isBefore = true;
 		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
 				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
@@ -538,64 +698,46 @@ public class VentanaModificar extends JDialog implements ActionListener {
 			fecRes = LocalDate.parse(con.getFechaResolucion(), format);
 		}
 
-		if ((!fecRes.isAfter(cont4) || !fecRes.isAfter(cont3) || !fecRes.isAfter(cont2) || !fecRes.isAfter(cont1))&&!fecRes.equals(cont4)) {
+		if ((!fecRes.isAfter(cont4) || !fecRes.isAfter(cont3) || !fecRes.isAfter(cont2) || !fecRes.isAfter(cont1))
+				&& !fecRes.equals(cont4)) {
 			isBefore = false;
 		}
 
-		if ((!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1))&&!fecRes.equals(cont3)) {
+		if ((!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1)) && !fecRes.equals(cont3)) {
 			isBefore = false;
 		}
 
-		if ((!cont3.isAfter(cont2) || !cont3.isAfter(cont1))&&!fecRes.equals(cont2)) {
+		if ((!cont3.isAfter(cont2) || !cont3.isAfter(cont1)) && !fecRes.equals(cont2)) {
 			isBefore = false;
 		}
 
-		if ((!cont2.isAfter(cont1))&&!fecRes.equals(cont1)) {
+		if ((!cont2.isAfter(cont1)) && !fecRes.equals(cont1)) {
 			isBefore = false;
 		}
 
 		return isBefore;
 	}
 
-	public boolean dateFormatErrorCheck() {
-		boolean error = false;
-		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
-				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
-				.toFormatter();
-		try {
-			if (!textFieldContacto1.getText().isBlank()) {
-				LocalDate.parse(textFieldContacto1.getText(), format);
-			}
-
-			if (!textFieldContacto2.getText().isBlank()) {
-				LocalDate.parse(textFieldContacto2.getText(), format);
-			}
-
-			if (!textFieldContacto3.getText().isBlank()) {
-				LocalDate.parse(textFieldContacto3.getText(), format);
-			}
-
-			if (!textFieldContacto4.getText().isBlank()) {
-				LocalDate.parse(textFieldContacto4.getText(), format);
-			}
-
-			if (!textFieldFechaResolucion.getText().isBlank()) {
-				LocalDate.parse(textFieldFechaResolucion.getText(), format);
-			}
-		} catch (DateTimeParseException e) {
-			error = true;
+	public boolean lengthCheck() { // ErrorID: 4
+		boolean tooLong = false;
+		if (textAreaObservaciones.getText().length() > 500) {
+			tooLong = true;
 		}
-		return error;
+
+		if (textAreaObservaciones.getText().length() > 500) {
+			tooLong = true;
+		}
+		return tooLong;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == btnModificar) {
-			if (dateFormatErrorCheck()) {
+			if (errorChecks(2)) {
 				JOptionPane.showMessageDialog(null,
 						"El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD", "ERROR",
 						JOptionPane.ERROR_MESSAGE);
-			} else if (!dateAfterCheck()) {
+			} else if (errorChecks(3)) {
 				if (textFieldContacto1.getText().isBlank()) {
 					JOptionPane.showMessageDialog(null,
 							"Una o varias de las fechas introducidas no estan en orden cronologico."
@@ -609,114 +751,12 @@ public class VentanaModificar extends JDialog implements ActionListener {
 									"ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				boolean check = true;
-				StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 				try {
 					if (textFieldDatosContacto.getText().contains("@")) {
 						emailFormatCheck(textFieldDatosContacto.getText());
 					}
 
-					if (!textFieldDatosContacto.getText().isBlank()) {
-						check = cont.modificarDatosContacto(textFieldDatosContacto.getText(), emp.getNom_empresa());
-						if (!check) {
-							infoError.append("Datos de contacto");
-						}
-					}
-
-					if (!textFieldContactoEmpresa.getText().isBlank() && check) {
-						check = cont.modificarContactoEmpresa(textFieldContactoEmpresa.getText(), emp.getNom_empresa());
-						if (!check) {
-							infoError.append("Contacto en la empresa");
-						}
-					}
-
-					if (!textFieldPersonaContacto.getText().isBlank() && check) {
-						check = cont.modificarPersonaContacto(textFieldPersonaContacto.getText(), emp.getNom_empresa());
-						if (!check) {
-							infoError.append("Persona de contacto");
-						}
-					}
-
-					if (!comboBoxEstado.getSelectedItem().equals("---") && check) {
-						check = cont.modificarEstado(comboBoxEstado.getItemAt(comboBoxEstado.getSelectedIndex()),
-								emp.getNom_empresa());
-						if (!check) {
-							infoError.append("Estado");
-						}
-					}
-
-					if (!textFieldContacto1.getText().isBlank() && check) {
-						check = cont.modificarContacto1(textFieldContacto1.getText(), emp.getCodEmpresa());
-						if (!check) {
-							infoError.append("1. contacto");
-						}
-					}
-
-					if (!textFieldContacto2.getText().isBlank() && check) {
-						check = cont.modificarContacto2(textFieldContacto2.getText(), emp.getCodEmpresa());
-						if (!check) {
-							infoError.append("2. contacto");
-						}
-					}
-
-					if (!textFieldContacto3.getText().isBlank() && check) {
-						check = cont.modificarContacto3(textFieldContacto3.getText(), emp.getCodEmpresa());
-						if (!check) {
-							infoError.append("3. contacto");
-						}
-					}
-
-					if (!textFieldContacto4.getText().isBlank() && check) {
-						check = cont.modificarContacto4(textFieldContacto4.getText(), emp.getCodEmpresa());
-						if (!check) {
-							infoError.append("4. contacto");
-						}
-					}
-
-					if (!textAreaObservaciones.getText().isBlank() && check) {
-						check = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
-						if (!check) {
-							infoError.append("Observaciones");
-						}
-					}
-
-					if (!textAreaInfoUltimoCont.getText().isBlank() && check) {
-						check = cont.modificarInformacionUltimoContacto(textAreaInfoUltimoCont.getText(),
-								emp.getCodEmpresa());
-						if (!check) {
-							infoError.append("Resultado ultimo contacto");
-						}
-					}
-
-					if (!comboBoxResultadoUltimoContacto.getSelectedItem().equals("---") && check) {
-						check = cont.modificarResultadoUltimoContacto(comboBoxResultadoUltimoContacto
-								.getItemAt(comboBoxResultadoUltimoContacto.getSelectedIndex()), emp.getCodEmpresa());
-						if (!check) {
-							infoError.append("Informacion ultimo contacto");
-						}
-					}
-
-					if (!comboBoxResultadoFinal.getSelectedItem().equals("---") && check) {
-						check = cont.modificarResultadoFinal(
-								comboBoxResultadoFinal.getItemAt(comboBoxResultadoFinal.getSelectedIndex()),
-								emp.getCodEmpresa());
-						if (!check) {
-							infoError.append("Resultado final prospeccion");
-						}
-					}
-
-					if (!textFieldFechaResolucion.getText().isBlank() && check) {
-						check = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
-						if (!check) {
-							infoError.append("Fecha de resolucion");
-						}
-					}
-
-					if (!check) {
-						infoError.append(" al intentar actualizar la empresa.");
-						JOptionPane.showMessageDialog(null, infoError.toString()
-								+ "\nLa informacion cambiada correctamente se actualizara en el recuadro de infomacion de empresa.",
-								"ERROR", JOptionPane.ERROR_MESSAGE);
+					if (errorChecks(1)) {
 						emp = cont.getEmpresa(emp.getNom_empresa());
 						loadEmpresa();
 					} else {

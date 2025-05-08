@@ -26,14 +26,28 @@ CREATE TABLE CONTACTO (
     CONTACTO2 DATE,
     CONTACTO3 DATE,
     CONTACTO4 DATE,
-    OBSERVACIONES VARCHAR(100),
+    OBSERVACIONES VARCHAR(500),
     RESULTADOULTIMO ENUM('Comunicacion_SinRespuesta', 'Respuesta_Pospuesta', 'Reunion_Programada', 'Respuesta_NoConcluyente', 'Inicio_ValoracionOferta'),
-    INFOULTIMO VARCHAR(200),
+    INFOULTIMO VARCHAR(500),
     RESULTADOFINAL ENUM('Oferta_Empleo', 'Convenio_Colaboracion', 'Medidas_Alternativas', 'Relacion_Concluida', 'Relacion_Pospuesta'),
     FECHARESOLUCION DATE,
     COD_EMPRESA INT,
     FOREIGN KEY (COD_EMPRESA)
         REFERENCES EMPRESA (COD_EMPRESA)
+);
+
+CREATE TABLE PERSONA (
+	NOM_P VARCHAR(100) PRIMARY KEY,
+    APOYO VARCHAR(30) NOT NULL,
+    FORMACION ENUM("AT", "Primaria", "ESO", "EPA", "FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado") NOT NULL,
+    
+    CV VARCHAR(999),
+    DISCAPACIDAD ENUM("Si", "No", "No sabe", "Tramitando"),
+    EUSKERA ENUM("A1", "A2", "B1", "B2", "C1", "C2", "Conocimiento_NoAcreditado"),
+    INGLES ENUM("A1", "A2", "B1", "B2", "C1", "C2", "Conocimiento_NoAcreditado"),
+    OTROSIDIOMAS VARCHAR(50),
+    ACCESIBILIDAD ENUM("Carnet_Coche", "Carnet", "Transporte_Publico"),
+    OBSERVACIONES VARCHAR(500)
 );
 
 INSERT INTO USUARIO VALUES
