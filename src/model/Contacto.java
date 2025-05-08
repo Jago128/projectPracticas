@@ -1,5 +1,8 @@
 package model;
 
+import enums.ResultadoFinal;
+import enums.ResultadoUltimoContacto;
+
 public class Contacto {
 	private int codContacto;
 	private String contacto1;

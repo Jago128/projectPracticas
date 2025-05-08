@@ -1,5 +1,8 @@
 package model;
 
+import enums.Estado;
+import enums.Sector;
+
 public class Empresa {
 	private int codEmpresa;
 	private String nom_empresa;

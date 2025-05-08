@@ -1,0 +1,5 @@
+package enums;
+
+public enum Especialidad_TecnicoSuperior_MantenimietoAeromecanico {
+	UNSET, AVIONESCONMOTOR_PISTON, AVIONESCONMOTOR_TURBINA, HELICOPTEROSCONMOTOR_PISTON, HELICOPTEROSCONMOTOR_TURBINA
+}

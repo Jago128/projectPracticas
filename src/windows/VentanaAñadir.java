@@ -10,6 +10,7 @@ import java.util.regex.*;
 import javax.swing.*;
 
 import controller.LoginController;
+import enums.*;
 import exceptions.EmailFormatException;
 import model.*;
 

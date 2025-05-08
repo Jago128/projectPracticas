@@ -4,6 +4,11 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
+import enums.Estado;
+import enums.ResultadoFinal;
+import enums.ResultadoUltimoContacto;
+import enums.Sector;
+
 public class BDImplementacion implements ApnabiDAO {
 	private Connection con;
 	private PreparedStatement stmt;

@@ -1,4 +1,4 @@
-package model;
+package enums;
 
 public enum Estado {
 	UNSET, INFORMADO, VALORANDO_INTERESADO, PLANIFICANDOINSERCIONES, PROXIMOAÑO, NOINTERESADO
