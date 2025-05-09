@@ -14,18 +14,18 @@ import enums.*;
 import exceptions.EmailFormatException;
 import model.*;
 
-public class VentanaAñadir extends JDialog implements ActionListener {
+public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
 	private JTextField textFieldNombre, textFieldPuesto, textFieldDatosContacto, textFieldContactoEmpresa,
-			textFieldContacto1, textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldPersonaContacto,
-			textFieldFechaResolucion;
+	textFieldContacto1, textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldPersonaContacto,
+	textFieldFechaResolucion;
 	private JTextArea textAreaObservaciones, textAreaInfoUltimoCont;
 	private JComboBox<String> comboBoxSector, comboBoxResultadoUltimoContacto, comboBoxEstado, comboBoxResultadoFinal;
 	private JButton btnAñadir;
 
-	public VentanaAñadir(JFrame parent, LoginController cont) {
+	public VentanaAñadirEmpresa(JDialog parent, LoginController cont) {
 		super(parent, true);
 		this.cont = cont;
 
@@ -274,7 +274,7 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 		getContentPane().add(btnAñadir);
 		btnAñadir.addActionListener(this);
 	}
-	
+
 	public void emailFormatCheck(String email) throws EmailFormatException {
 		Pattern modelo = Pattern.compile(
 				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{3,})$");
@@ -421,12 +421,12 @@ public class VentanaAñadir extends JDialog implements ActionListener {
 								JOptionPane.showMessageDialog(null,
 										"Una o varias de las fechas introducidas no estan en orden cronologico."
 												+ "\nComprueba la fecha del 1. Contacto del recuadro de informacion de empresa si tienes dudas, y compruba el orden de las fechas.",
-										"ERROR", JOptionPane.ERROR_MESSAGE);
+												"ERROR", JOptionPane.ERROR_MESSAGE);
 							} else {
 								JOptionPane.showMessageDialog(null,
 										"Una o varias de las fechas introducidas no estan en orden cronologico."
 												+ "\nComprueba el orden de las fechas.",
-										"ERROR", JOptionPane.ERROR_MESSAGE);
+												"ERROR", JOptionPane.ERROR_MESSAGE);
 							}
 						} else if (errorChecks(4)) {
 							JOptionPane.showMessageDialog(null,

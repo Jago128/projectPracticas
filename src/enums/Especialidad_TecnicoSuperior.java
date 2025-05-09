@@ -1,7 +1,7 @@
 package enums;
 
 public enum Especialidad_TecnicoSuperior {
-	AcondicionamientoFisico, Enseñanza_AnimacionSociodeportiva, Administracion_Finanzas, AsistenciaA_LaDireccion,
+	UNSET, AcondicionamientoFisico, Enseñanza_AnimacionSociodeportiva, Administracion_Finanzas, AsistenciaA_LaDireccion,
 	Ganaderia_AsistenciaSanidadAnimal, GestionForestal_MedioNatural, Paisajismo_MedioRural,
 	Diseño_EdicionPublicacionesImpresas_Multimedia, Diseño_Gestion_ProduccionGrafica,
 	ArtistaFallero_ConstruccionEscenografias, ComercioInternacional, GestionVentas_EspaciosComerciales,

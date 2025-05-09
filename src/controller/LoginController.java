@@ -122,4 +122,57 @@ public class LoginController {
 	public boolean modificarFechaResolucion(String fecResolucion, int id) {
 		return dao.modificarFechaResolucion(fecResolucion, id);
 	}
+	
+	// Personas
+	public Map<String, Persona> mostrarPersonas() {
+		return dao.mostrarPersonas();
+	}
+
+	public boolean añadirPersona(Persona persona) {
+		return dao.añadirPersona(persona);
+	}
+
+	public boolean modificarApoyo(String apoyo) {
+		return dao.modificarApoyo(apoyo);
+	}
+
+	public boolean modificarFormacion(String formacion) {
+		return dao.modificarFormacion(formacion);
+	}
+
+	public boolean modificarEspecialidad(String especialidad) {
+		return dao.modificarEspecialidad(especialidad);
+	}
+
+	public boolean modificarCVLink(String link) {
+		return dao.modificarCVLink(link);
+	}
+
+	public boolean modificarDiscapacidad(String discap) {
+		return dao.modificarDiscapacidad(discap);
+	}
+
+	public boolean modificarEuskera(String nivel) {
+		return dao.modificarEuskera(nivel);
+	}
+
+	public boolean modificarIngles(String nivel) {
+		return dao.modificarIngles(nivel);
+	}
+
+	public boolean modificarOtrosIdiomas(String idioma) {
+		return dao.modificarOtrosIdiomas(idioma);
+	}
+
+	public boolean modificarLocalidad(String localidad) {
+		return dao.modificarLocalidad(localidad);
+	}
+
+	public boolean modificarAccesibiliad(String accesibilidad) {
+		return dao.modificarAccesibiliad(accesibilidad);
+	}
+
+	public boolean modificarObservaciones(String observaciones) {
+		return dao.modificarObservaciones(observaciones);
+	}
 }

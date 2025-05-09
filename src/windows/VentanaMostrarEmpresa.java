@@ -9,7 +9,7 @@ import javax.swing.*;
 import controller.LoginController;
 import model.*;
 
-public class VentanaMostrar extends JDialog implements ActionListener {
+public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
@@ -19,7 +19,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 	listResultadoUltimoContacto, listInfoUltimo, listResultadoFinal, listFechaResolucion;
 	private JButton btnModificarEmpresa;
 
-	public VentanaMostrar(JFrame parent, LoginController cont, Usuario user) {
+	public VentanaMostrarEmpresa(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
 		this.cont = cont;
 		// this.user = user;
@@ -408,7 +408,7 @@ public class VentanaMostrar extends JDialog implements ActionListener {
 		if (event.getSource() == btnModificarEmpresa) {
 			if (!listEmpresas.isSelectionEmpty()) {
 				if (!listEmpresas.getSelectedValue().equals("Empresas")) {
-					VentanaModificar dialog = new VentanaModificar(this, cont, cont.getEmpresa(listEmpresas.getSelectedValue()));
+					VentanaModificarEmpresa dialog = new VentanaModificarEmpresa(this, cont, cont.getEmpresa(listEmpresas.getSelectedValue()));
 					dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} else {

@@ -960,4 +960,82 @@ public class BDImplementacion implements ApnabiDAO {
 		} 
 		return check;
 	}
+
+	@Override
+	public Map<String, Persona> mostrarPersonas() {
+		
+		return null;
+	}
+
+	@Override
+	public boolean añadirPersona(Persona persona) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean modificarApoyo(String apoyo) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean modificarFormacion(String formacion) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean modificarEspecialidad(String especialidad) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean modificarCVLink(String link) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean modificarDiscapacidad(String discap) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean modificarEuskera(String nivel) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean modificarIngles(String nivel) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean modificarOtrosIdiomas(String idioma) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean modificarLocalidad(String localidad) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean modificarAccesibiliad(String accesibilidad) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean modificarObservaciones(String observaciones) {
+		
+		return false;
+	}
 }

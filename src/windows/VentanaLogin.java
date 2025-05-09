@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import controller.LoginController;
 import model.Usuario;
+import model.VentanaPrincipal;
 
 public class VentanaLogin extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -88,7 +89,6 @@ public class VentanaLogin extends JDialog implements ActionListener {
 						lblMensaje.setText("Se ha iniciado sesion correctamente.");
 						JOptionPane.showMessageDialog(null, "Bienvenido, "+user.getNombre());
 						VentanaPrincipal frame = new VentanaPrincipal(cont, user);
-						frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 						frame.setVisible(true);
 						this.dispose();
 					} else {

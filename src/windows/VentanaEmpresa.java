@@ -4,54 +4,44 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.border.*;
 
 import controller.LoginController;
 import model.Usuario;
 
-public class VentanaPrincipal extends JFrame implements ActionListener {
+public class VentanaEmpresa extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
-	private JPanel contentPane;
 	private JButton btnMostrar;
 	private JButton btnAñadir;
-	private JButton btnBorrarempresas;
+	private JButton btnBorrar;
 	private LoginController cont;
 	private Usuario user;
 
-	public VentanaPrincipal(LoginController cont, Usuario user) {
+	public VentanaEmpresa(JFrame parent, LoginController cont, Usuario user) {
+		super(parent, true);
 		this.cont = cont;
 		this.user = user;
 		
 		setResizable(false);
-		setTitle("Base de datos Apnabi");
+		setTitle("Empresas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setBounds(100, 100, 400, 180);
+		getContentPane().setLayout(null);
 
 		btnAñadir = new JButton("Añadir empresas");
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAñadir.setBounds(213, 103, 145, 45);
-		contentPane.add(btnAñadir);
+		btnAñadir.setBounds(215, 76, 145, 45);
+		getContentPane().add(btnAñadir);
 
-		btnBorrarempresas = new JButton("Borrar empresas");
-		btnBorrarempresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrarempresas.setBounds(213, 48, 145, 45);
-		contentPane.add(btnBorrarempresas);
+		btnBorrar = new JButton("Borrar empresas");
+		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnBorrar.setBounds(215, 21, 145, 45);
+		getContentPane().add(btnBorrar);
 
 		btnMostrar = new JButton("Mostrar empresas");
 		btnMostrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnMostrar.setBounds(28, 48, 145, 45);
-		contentPane.add(btnMostrar);
-
-		JLabel lblEmpresas = new JLabel("Empresas:");
-		lblEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEmpresas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEmpresas.setBounds(115, 10, 138, 28);
-		contentPane.add(lblEmpresas);
+		btnMostrar.setBounds(29, 31, 145, 45);
+		getContentPane().add(btnMostrar);
 
 		JTextArea textAreaInfoModificar = new JTextArea();
 		textAreaInfoModificar.setEditable(false);
@@ -59,26 +49,26 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		textAreaInfoModificar.setLineWrap(true);
 		textAreaInfoModificar.setText("Se modifican las empresas desde esta ventana.");
 		textAreaInfoModificar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaInfoModificar.setBounds(28, 94, 145, 34);
-		contentPane.add(textAreaInfoModificar);
+		textAreaInfoModificar.setBounds(25, 79, 145, 34);
+		getContentPane().add(textAreaInfoModificar);
 
 		btnAñadir.addActionListener(this);
-		btnBorrarempresas.addActionListener(this);
+		btnBorrar.addActionListener(this);
 		btnMostrar.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAñadir) {
-			VentanaAñadir dialog = new VentanaAñadir(this, cont);
+			VentanaAñadirEmpresa dialog = new VentanaAñadirEmpresa(this, cont);
 			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-		} else if (e.getSource() == btnBorrarempresas) {
-			VentanaBorrar dialog = new VentanaBorrar(this, cont, user);
+		} else if (e.getSource() == btnBorrar) {
+			VentanaBorrarEmpresa dialog = new VentanaBorrarEmpresa(this, cont, user);
 			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnMostrar) {
-			VentanaMostrar dialog = new VentanaMostrar(this, cont, user);
+			VentanaMostrarEmpresa dialog = new VentanaMostrarEmpresa(this, cont, user);
 			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}

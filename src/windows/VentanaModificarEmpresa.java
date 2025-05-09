@@ -14,19 +14,19 @@ import controller.LoginController;
 import exceptions.EmailFormatException;
 import model.*;
 
-public class VentanaModificar extends JDialog implements ActionListener {
+public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
 	private Empresa emp;
 	private JTextArea textareaEmpresa, textAreaObservaciones, textAreaInfoUltimoCont;
 	private JTextField textFieldDatosContacto, textFieldContactoEmpresa, textFieldPersonaContacto, textFieldContacto1,
-			textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldFechaResolucion;
+	textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldFechaResolucion;
 	private JComboBox<String> comboBoxEstado, comboBoxResultadoUltimoContacto, comboBoxResultadoFinal;
 	private JButton btnModificar;
 	private JLabel lblDatosEmpresa, lblFechaFormato;
 
-	public VentanaModificar(JDialog parent, LoginController cont, Empresa emp) {
+	public VentanaModificarEmpresa(JDialog parent, LoginController cont, Empresa emp) {
 		super(parent, true);
 		this.cont = cont;
 		this.emp = emp;
@@ -257,7 +257,6 @@ public class VentanaModificar extends JDialog implements ActionListener {
 		btnModificar.setBounds(745, 346, 151, 55);
 		getContentPane().add(btnModificar);
 		btnModificar.addActionListener(this);
-
 	}
 
 	public void loadEmpresa() {
@@ -521,110 +520,110 @@ public class VentanaModificar extends JDialog implements ActionListener {
 	}
 
 	public boolean addError() { // ErrorID: 1
-		boolean error = false;
+		boolean check = false;
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 		if (!textFieldDatosContacto.getText().isBlank()) {
-			error = cont.modificarDatosContacto(textFieldDatosContacto.getText(), emp.getNom_empresa());
-			if (!error) {
+			check = cont.modificarDatosContacto(textFieldDatosContacto.getText(), emp.getNom_empresa());
+			if (!check) {
 				infoError.append("Datos de contacto");
 			}
 		}
 
-		if (!textFieldContactoEmpresa.getText().isBlank() && error) {
-			error = cont.modificarContactoEmpresa(textFieldContactoEmpresa.getText(), emp.getNom_empresa());
-			if (!error) {
+		if (!textFieldContactoEmpresa.getText().isBlank() && check) {
+			check = cont.modificarContactoEmpresa(textFieldContactoEmpresa.getText(), emp.getNom_empresa());
+			if (!check) {
 				infoError.append("Contacto en la empresa");
 			}
 		}
 
-		if (!textFieldPersonaContacto.getText().isBlank() && error) {
-			error = cont.modificarPersonaContacto(textFieldPersonaContacto.getText(), emp.getNom_empresa());
-			if (!error) {
+		if (!textFieldPersonaContacto.getText().isBlank() && check) {
+			check = cont.modificarPersonaContacto(textFieldPersonaContacto.getText(), emp.getNom_empresa());
+			if (!check) {
 				infoError.append("Persona de contacto");
 			}
 		}
 
-		if (!comboBoxEstado.getSelectedItem().equals("---") && error) {
-			error = cont.modificarEstado(comboBoxEstado.getItemAt(comboBoxEstado.getSelectedIndex()),
+		if (!comboBoxEstado.getSelectedItem().equals("---") && check) {
+			check = cont.modificarEstado(comboBoxEstado.getItemAt(comboBoxEstado.getSelectedIndex()),
 					emp.getNom_empresa());
-			if (!error) {
+			if (!check) {
 				infoError.append("Estado");
 			}
 		}
 
-		if (!textFieldContacto1.getText().isBlank() && error) {
-			error = cont.modificarContacto1(textFieldContacto1.getText(), emp.getCodEmpresa());
-			if (!error) {
+		if (!textFieldContacto1.getText().isBlank() && check) {
+			check = cont.modificarContacto1(textFieldContacto1.getText(), emp.getCodEmpresa());
+			if (!check) {
 				infoError.append("1. contacto");
 			}
 		}
 
-		if (!textFieldContacto2.getText().isBlank() && error) {
-			error = cont.modificarContacto2(textFieldContacto2.getText(), emp.getCodEmpresa());
-			if (!error) {
+		if (!textFieldContacto2.getText().isBlank() && check) {
+			check = cont.modificarContacto2(textFieldContacto2.getText(), emp.getCodEmpresa());
+			if (!check) {
 				infoError.append("2. contacto");
 			}
 		}
 
-		if (!textFieldContacto3.getText().isBlank() && error) {
-			error = cont.modificarContacto3(textFieldContacto3.getText(), emp.getCodEmpresa());
-			if (!error) {
+		if (!textFieldContacto3.getText().isBlank() && check) {
+			check = cont.modificarContacto3(textFieldContacto3.getText(), emp.getCodEmpresa());
+			if (!check) {
 				infoError.append("3. contacto");
 			}
 		}
 
-		if (!textFieldContacto4.getText().isBlank() && error) {
-			error = cont.modificarContacto4(textFieldContacto4.getText(), emp.getCodEmpresa());
-			if (!error) {
+		if (!textFieldContacto4.getText().isBlank() && check) {
+			check = cont.modificarContacto4(textFieldContacto4.getText(), emp.getCodEmpresa());
+			if (!check) {
 				infoError.append("4. contacto");
 			}
 		}
 
-		if (!textAreaObservaciones.getText().isBlank() && error) {
-			error = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
-			if (!error) {
+		if (!textAreaObservaciones.getText().isBlank() && check) {
+			check = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
+			if (!check) {
 				infoError.append("Observaciones");
 			}
 		}
 
-		if (!textAreaInfoUltimoCont.getText().isBlank() && error) {
-			error = cont.modificarInformacionUltimoContacto(textAreaInfoUltimoCont.getText(), emp.getCodEmpresa());
-			if (!error) {
+		if (!textAreaInfoUltimoCont.getText().isBlank() && check) {
+			check = cont.modificarInformacionUltimoContacto(textAreaInfoUltimoCont.getText(), emp.getCodEmpresa());
+			if (!check) {
 				infoError.append("Resultado ultimo contacto");
 			}
 		}
 
-		if (!comboBoxResultadoUltimoContacto.getSelectedItem().equals("---") && error) {
-			error = cont.modificarResultadoUltimoContacto(
+		if (!comboBoxResultadoUltimoContacto.getSelectedItem().equals("---") && check) {
+			check = cont.modificarResultadoUltimoContacto(
 					comboBoxResultadoUltimoContacto.getItemAt(comboBoxResultadoUltimoContacto.getSelectedIndex()),
 					emp.getCodEmpresa());
-			if (!error) {
+			if (!check) {
 				infoError.append("Informacion ultimo contacto");
 			}
 		}
 
-		if (!comboBoxResultadoFinal.getSelectedItem().equals("---") && error) {
-			error = cont.modificarResultadoFinal(
+		if (!comboBoxResultadoFinal.getSelectedItem().equals("---") && check) {
+			check = cont.modificarResultadoFinal(
 					comboBoxResultadoFinal.getItemAt(comboBoxResultadoFinal.getSelectedIndex()), emp.getCodEmpresa());
-			if (!error) {
+			if (!check) {
 				infoError.append("Resultado final prospeccion");
 			}
 		}
 
-		if (!textFieldFechaResolucion.getText().isBlank() && error) {
-			error = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
-			if (!error) {
+		if (!textFieldFechaResolucion.getText().isBlank() && check) {
+			check = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
+			if (!check) {
 				infoError.append("Fecha de resolucion");
 			}
 		}
 
-		if (error) {
+		if (!check) {
 			infoError.append(" al intentar actualizar la empresa.");
 			JOptionPane.showMessageDialog(null, infoError.toString()
 					+ "\nLa informacion cambiada correctamente se actualizara en el recuadro de infomacion de empresa.",
 					"ERROR", JOptionPane.ERROR_MESSAGE);
 		}
-		return error;
+		return check;
 	}
 
 	public boolean dateFormatErrorCheck() { // ErrorID: 2
@@ -742,21 +741,25 @@ public class VentanaModificar extends JDialog implements ActionListener {
 					JOptionPane.showMessageDialog(null,
 							"Una o varias de las fechas introducidas no estan en orden cronologico."
 									+ "\nComprueba la fecha del 1. Contacto del recuadro de informacion de empresa si tienes dudas, y compruba el orden de las fechas.",
-							"ERROR", JOptionPane.ERROR_MESSAGE);
+									"ERROR", JOptionPane.ERROR_MESSAGE);
 				} else {
 					JOptionPane
-							.showMessageDialog(null,
-									"Una o varias de las fechas introducidas no estan en orden cronologico."
-											+ "\nComprueba el orden de las fechas.",
+					.showMessageDialog(null,
+							"Una o varias de las fechas introducidas no estan en orden cronologico."
+									+ "\nComprueba el orden de las fechas.",
 									"ERROR", JOptionPane.ERROR_MESSAGE);
 				}
+			} else if (errorChecks(4)) {
+				JOptionPane.showMessageDialog(null,
+						"Hay mas caracteres que el limite de caracteres en uno de los campos de texto con limite especificado.",
+						"ERROR", JOptionPane.ERROR_MESSAGE);
 			} else {
 				try {
 					if (textFieldDatosContacto.getText().contains("@")) {
 						emailFormatCheck(textFieldDatosContacto.getText());
 					}
 
-					if (errorChecks(1)) {
+					if (!errorChecks(1)) {
 						emp = cont.getEmpresa(emp.getNom_empresa());
 						loadEmpresa();
 					} else {

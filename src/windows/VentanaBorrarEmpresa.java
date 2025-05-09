@@ -9,7 +9,7 @@ import javax.swing.*;
 import controller.LoginController;
 import model.*;
 
-public class VentanaBorrar extends JDialog implements ActionListener {
+public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
@@ -17,7 +17,7 @@ public class VentanaBorrar extends JDialog implements ActionListener {
 	private JButton btnBorrar;
 	private JList<String> listEmpresas;
 
-	public VentanaBorrar(JFrame parent, LoginController cont, Usuario user) {
+	public VentanaBorrarEmpresa(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
 		this.cont = cont;
 		// this.user = user;
