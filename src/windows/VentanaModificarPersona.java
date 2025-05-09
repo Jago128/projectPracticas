@@ -3,6 +3,7 @@ package windows;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.*;
 
@@ -250,6 +251,16 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		btnModificar.setBounds(745, 346, 151, 55);
 		getContentPane().add(btnModificar);
 		btnModificar.addActionListener(this);
+	}
+	
+	public void addPersonas() {
+		Map<String, Persona> personas = cont.mostrarPersonas();
+
+		if (!personas.isEmpty()) {
+			for (Persona p:personas.values()) {
+
+			}
+		}
 	}
 
 	@Override

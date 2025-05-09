@@ -137,7 +137,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 	public void addEmpresas() {
 		Map<String, Empresa> empresas = cont.mostrarEmpresas();
 		DefaultListModel<String> modelSectores = new DefaultListModel<>();
-		DefaultListModel<String>modelEmpresas = new DefaultListModel<>();
+		DefaultListModel<String> modelEmpresas = new DefaultListModel<>();
 		DefaultListModel<String> modelPuestos = new DefaultListModel<>();
 		DefaultListModel<String> modelDatosContacto = new DefaultListModel<>();
 		DefaultListModel<String> modelContactosEmpresa = new DefaultListModel<>();

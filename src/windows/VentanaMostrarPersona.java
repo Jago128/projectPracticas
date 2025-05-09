@@ -2,30 +2,32 @@ package windows;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Map;
 
 import javax.swing.*;
 
 import controller.LoginController;
-import model.Usuario;
+import enums.*;
+import model.*;
 
 public class VentanaMostrarPersona extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	
+
 	private LoginController cont;
 	// private Usuario user;
-	private JList<String> listNom, listApoyo, listFormacion, listEspecialidad, listSectorInteres,
-	listCVLink, listCertifDiscapacidad, listEuskera, listIngles, listOtrosIdiomas, listLocalidad, listObservaciones,
-	listAccesibilidad, listInfoUltimo, listResultadoFinal, listFechaResolucion;
+	private JList<String> listNom, listApoyo, listFormacion, listEspecialidad, listSectorInteres, listCVLink,
+	listCertifDiscapacidad, listEuskera, listIngles, listOtrosIdiomas, listLocalidad, listObservaciones,
+	listAccesibilidad;
 	private JButton btnModificarEmpresa;
-	
+
 	public VentanaMostrarPersona(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
 		this.cont = cont;
 		// this.user = user;
 
 		setResizable(false);
-		setTitle("Mostrar empresas");
-		setBounds(100, 100, 920, 480);
+		setTitle("Mostrar personas");
+		setBounds(100, 100, 1080, 410);
 		getContentPane().setLayout(null);
 
 		listNom = new JList<>();
@@ -75,13 +77,15 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		listAccesibilidad = new JList<>();
 		listAccesibilidad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listAccesibilidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		
+
 		listObservaciones = new JList<>();
 		listObservaciones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
+		addPersonas();
+
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 10, 886, 170);
+		panel.setBounds(10, 10, 1033, 267);
 		panel.add(listNom);
 		panel.add(listApoyo);
 		panel.add(listFormacion);
@@ -97,15 +101,233 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		panel.add(listObservaciones);
 		getContentPane().add(panel);
 
-		JScrollPane scrollPaneEmpresas = new JScrollPane(panel);
-		scrollPaneEmpresas.setBounds(10, 10, 886, 170);
-		getContentPane().add(scrollPaneEmpresas);
+		JScrollPane scrollPane = new JScrollPane(panel);
+		scrollPane.setBounds(10, 10, 1033, 267);
+		getContentPane().add(scrollPane);
 
 		btnModificarEmpresa = new JButton("Modificar empresa");
 		btnModificarEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnModificarEmpresa.setBounds(263, 361, 395, 72);
+		btnModificarEmpresa.setBounds(346, 287, 395, 72);
 		getContentPane().add(btnModificarEmpresa);
 		btnModificarEmpresa.addActionListener(this);
+	}
+
+	public void addPersonas() {
+		Map<String, Persona> personas = cont.mostrarPersonas();
+		DefaultListModel<String> modelNom = new DefaultListModel<>();
+		DefaultListModel<String> modelApoyo = new DefaultListModel<>();
+		DefaultListModel<String> modelFormacion = new DefaultListModel<>();
+		DefaultListModel<String> modelEspecialidad = new DefaultListModel<>();
+		DefaultListModel<String> modelSectorInteres = new DefaultListModel<>();
+		DefaultListModel<String> modelCVLink = new DefaultListModel<>();
+		DefaultListModel<String> modelCertifDiscapacidad = new DefaultListModel<>();
+		DefaultListModel<String> modelEuskera = new DefaultListModel<>();
+		DefaultListModel<String> modelIngles = new DefaultListModel<>();
+		DefaultListModel<String> modelOtrosIdiomas = new DefaultListModel<>();
+		DefaultListModel<String> modelLocalidad = new DefaultListModel<>();
+		DefaultListModel<String> modelAccesibilidad = new DefaultListModel<>();
+		DefaultListModel<String> modelObservaciones = new DefaultListModel<>();
+
+		modelNom.addElement("");
+		modelApoyo.addElement("");
+		modelFormacion.addElement("");
+		modelEspecialidad.addElement("");
+		modelSectorInteres.addElement("");
+		modelCVLink.addElement("");
+		modelCertifDiscapacidad.addElement("");
+		modelEuskera.addElement("");
+		modelIngles.addElement("");
+		modelOtrosIdiomas.addElement("");
+		modelLocalidad.addElement("Localidad");
+		modelAccesibilidad.addElement("");
+		modelObservaciones.addElement("");
+
+		if (!personas.isEmpty()) {
+
+			for (Persona p : personas.values()) {
+
+				switch (p.getFormacion()) {
+				case AT:
+					modelFormacion.addElement("AT");
+					break;
+
+				case BACHILLERATO:
+					modelFormacion.addElement("Bachillerato");
+					break;
+
+				case DOCTORADO:
+					modelFormacion.addElement("");
+					break;
+
+				case EPA:
+					modelFormacion.addElement("");
+					break;
+
+				case ESO:
+					modelFormacion.addElement("");
+					break;
+
+				case FPBASICA:
+					modelFormacion.addElement("");
+					break;
+
+				case GM:
+					modelFormacion.addElement("");
+					break;
+
+				case GS:
+					modelFormacion.addElement("");
+					break;
+
+				case MASTER:
+					modelFormacion.addElement("");
+					break;
+
+				case PRIMARIA:
+					modelFormacion.addElement("");
+					break;
+
+				case UNIVERSIDAD:
+					modelFormacion.addElement("");
+					break;
+
+				default:
+					System.out.println("Tipo invalido");
+
+				}
+
+				// Especialidades, SectorInteres [TBD]
+
+						switch (p.getCerfificadoDiscapacidad()) {
+						case NO:
+
+							break;
+
+						case NOSABE:
+
+							break;
+
+						case SI:
+
+							break;
+
+						case TRAMITANDO:
+
+							break;
+
+						default:
+							System.out.println("Tipo invalido");
+						}
+
+						switch (p.getEuskera()) {
+						case A1:
+							modelEuskera.addElement("A1");
+							break;
+
+						case A2:
+							modelEuskera.addElement("A2");
+							break;
+
+						case B1:
+							modelEuskera.addElement("B1");
+							break;
+
+						case B2:
+							modelEuskera.addElement("B2");
+							break;
+
+						case C1:
+							modelEuskera.addElement("C1");
+							break;
+
+						case C2:
+							modelEuskera.addElement("C2");
+							break;
+
+						case CONOCIMIENTO_NOACREDITADO:
+							modelEuskera.addElement("Conocimiento, pero sin acreditar");
+							break;
+
+						default:
+							System.out.println("Tipo invalido");
+						}
+
+						switch (p.getIngles()) {
+						case A1:
+							modelIngles.addElement("A1");
+							break;
+
+						case A2:
+							modelIngles.addElement("A2");
+							break;
+
+						case B1:
+							modelIngles.addElement("B1");
+							break;
+
+						case B2:
+							modelIngles.addElement("B2");
+							break;
+
+						case C1:
+							modelIngles.addElement("C1");
+							break;
+
+						case C2:
+							modelIngles.addElement("C2");
+							break;
+
+						case CONOCIMIENTO_NOACREDITADO:
+							modelIngles.addElement("Conocimiento, pero sin acreditar");
+							break;
+						
+						default:
+							System.out.println("Tipo invalido");
+						}
+
+						switch (p.getLocalidad()) {
+
+						default:
+							System.out.println("Tipo invalido");
+						}
+
+						switch (p.getAccesibilidad()) {
+						case CARNET:
+							
+							break;
+							
+						case CARNET_COCHE:
+							
+							break;
+							
+						case TRANSPORTEPUBLICO:
+							
+							break;
+							
+						default:
+							System.out.println("Tipo invalido");
+						}
+
+						modelNom.addElement(p.getNombre());
+						modelApoyo.addElement(p.getApoyo());
+						modelCVLink.addElement(p.getCvLink());
+						modelOtrosIdiomas.addElement(p.getOtrosIdiomas());
+						modelObservaciones.addElement(p.getObservaciones());
+			}
+		}
+		listNom.setModel(modelNom);
+		listApoyo.setModel(modelApoyo);
+		listFormacion.setModel(modelFormacion);
+		listEspecialidad.setModel(modelEspecialidad);
+		listSectorInteres.setModel(modelSectorInteres);
+		listCVLink.setModel(modelCVLink);
+		listCertifDiscapacidad.setModel(modelCertifDiscapacidad);
+		listEuskera.setModel(modelEuskera);
+		listIngles.setModel(modelIngles);
+		listOtrosIdiomas.setModel(modelOtrosIdiomas);
+		listLocalidad.setModel(modelLocalidad);
+		listAccesibilidad.setModel(modelAccesibilidad);
+		listObservaciones.setModel(modelObservaciones);
 	}
 
 	@Override

@@ -14,11 +14,13 @@ public class Persona {
 	private SectorInteres sectorInteres; // TBD
 	private String cvLink;
 	private Discapacidad cerfificadoDiscapacidad;
+	private Euskera euskera;
+	private Ingles ingles;
 	private String otrosIdiomas;
-	private Municipio municipio;
+	private Localidad localidad;
 	private Accesibilidad accesibilidad;
 	private String observaciones;
-	
+
 	public Persona() {
 		this.nombre = "";
 		this.apoyo = "";
@@ -31,15 +33,18 @@ public class Persona {
 		this.sectorInteres = SectorInteres.UNSET;
 		this.cvLink = "";
 		this.cerfificadoDiscapacidad = Discapacidad.UNSET;
+		this.euskera = Euskera.UNSET;
+		this.ingles = Ingles.UNSET;
 		this.otrosIdiomas = "";
-		this.municipio = Municipio.UNSET;
+		this.localidad = Localidad.UNSET;
 		this.accesibilidad = Accesibilidad.UNSET;
 		this.observaciones = "";
 	}
 
 	public Persona(String nombre, String apoyo, Formacion formacion, Especialidad especialidad,
-			SectorInteres sectorInteres, String cvLink, Discapacidad cerfificadoDiscapacidad, String otrosIdiomas,
-			Municipio municipio, Accesibilidad accesibilidad, String observaciones) {
+			SectorInteres sectorInteres, String cvLink, Discapacidad cerfificadoDiscapacidad, Euskera euskera,
+			Ingles ingles, String otrosIdiomas, Localidad localidad, Accesibilidad accesibilidad,
+			String observaciones) {
 		this.nombre = nombre;
 		this.apoyo = apoyo;
 		this.formacion = formacion;
@@ -47,16 +52,18 @@ public class Persona {
 		this.sectorInteres = sectorInteres;
 		this.cvLink = cvLink;
 		this.cerfificadoDiscapacidad = cerfificadoDiscapacidad;
+		this.euskera = euskera;
+		this.ingles = ingles;
 		this.otrosIdiomas = otrosIdiomas;
-		this.municipio = municipio;
+		this.localidad = localidad;
 		this.accesibilidad = accesibilidad;
 		this.observaciones = observaciones;
 	}
 
 	public Persona(String nombre, String apoyo, Formacion formacion,
 			Especialidad_TecnicoSuperior especialidadTecnicoSuperior, SectorInteres sectorInteres, String cvLink,
-			Discapacidad cerfificadoDiscapacidad, String otrosIdiomas, Municipio municipio, Accesibilidad accesibilidad,
-			String observaciones) {
+			Discapacidad cerfificadoDiscapacidad, Euskera euskera, Ingles ingles, String otrosIdiomas,
+			Localidad localidad, Accesibilidad accesibilidad, String observaciones) {
 		this.nombre = nombre;
 		this.apoyo = apoyo;
 		this.formacion = formacion;
@@ -64,16 +71,19 @@ public class Persona {
 		this.sectorInteres = sectorInteres;
 		this.cvLink = cvLink;
 		this.cerfificadoDiscapacidad = cerfificadoDiscapacidad;
+		this.euskera = euskera;
+		this.ingles = ingles;
 		this.otrosIdiomas = otrosIdiomas;
-		this.municipio = municipio;
+		this.localidad = localidad;
 		this.accesibilidad = accesibilidad;
 		this.observaciones = observaciones;
 	}
 
 	public Persona(String nombre, String apoyo, Formacion formacion,
 			Especialidad_TecnicoSuperior_MantenimietoAeromecanico especialidadTecnicoSuperiorMantenimientoAeromecanico,
-			SectorInteres sectorInteres, String cvLink, Discapacidad cerfificadoDiscapacidad, String otrosIdiomas,
-			Municipio municipio, Accesibilidad accesibilidad, String observaciones) {
+			SectorInteres sectorInteres, String cvLink, Discapacidad cerfificadoDiscapacidad, Euskera euskera,
+			Ingles ingles, String otrosIdiomas, Localidad localidad, Accesibilidad accesibilidad,
+			String observaciones) {
 		this.nombre = nombre;
 		this.apoyo = apoyo;
 		this.formacion = formacion;
@@ -81,15 +91,18 @@ public class Persona {
 		this.sectorInteres = sectorInteres;
 		this.cvLink = cvLink;
 		this.cerfificadoDiscapacidad = cerfificadoDiscapacidad;
+		this.euskera = euskera;
+		this.ingles = ingles;
 		this.otrosIdiomas = otrosIdiomas;
-		this.municipio = municipio;
+		this.localidad = localidad;
 		this.accesibilidad = accesibilidad;
 		this.observaciones = observaciones;
 	}
 
 	public Persona(String nombre, String apoyo, Formacion formacion, Especialidad_Grado especialidadGrado,
-			SectorInteres sectorInteres, String cvLink, Discapacidad cerfificadoDiscapacidad, String otrosIdiomas,
-			Municipio municipio, Accesibilidad accesibilidad, String observaciones) {
+			SectorInteres sectorInteres, String cvLink, Discapacidad cerfificadoDiscapacidad, Euskera euskera,
+			Ingles ingles, String otrosIdiomas, Localidad localidad, Accesibilidad accesibilidad,
+			String observaciones) {
 		this.nombre = nombre;
 		this.apoyo = apoyo;
 		this.formacion = formacion;
@@ -97,16 +110,18 @@ public class Persona {
 		this.sectorInteres = sectorInteres;
 		this.cvLink = cvLink;
 		this.cerfificadoDiscapacidad = cerfificadoDiscapacidad;
+		this.euskera = euskera;
+		this.ingles = ingles;
 		this.otrosIdiomas = otrosIdiomas;
-		this.municipio = municipio;
+		this.localidad = localidad;
 		this.accesibilidad = accesibilidad;
 		this.observaciones = observaciones;
 	}
 
 	public Persona(String nombre, String apoyo, Formacion formacion,
 			Especialidad_Grado_Abierto especialidadGradoAbierto, SectorInteres sectorInteres, String cvLink,
-			Discapacidad cerfificadoDiscapacidad, String otrosIdiomas, Municipio municipio, Accesibilidad accesibilidad,
-			String observaciones) {
+			Discapacidad cerfificadoDiscapacidad, Euskera euskera, Ingles ingles, String otrosIdiomas,
+			Localidad localidad, Accesibilidad accesibilidad, String observaciones) {
 		this.nombre = nombre;
 		this.apoyo = apoyo;
 		this.formacion = formacion;
@@ -114,8 +129,10 @@ public class Persona {
 		this.sectorInteres = sectorInteres;
 		this.cvLink = cvLink;
 		this.cerfificadoDiscapacidad = cerfificadoDiscapacidad;
+		this.euskera = euskera;
+		this.ingles = ingles;
 		this.otrosIdiomas = otrosIdiomas;
-		this.municipio = municipio;
+		this.localidad = localidad;
 		this.accesibilidad = accesibilidad;
 		this.observaciones = observaciones;
 	}
@@ -209,6 +226,22 @@ public class Persona {
 		this.cerfificadoDiscapacidad = cerfificadoDiscapacidad;
 	}
 
+	public Euskera getEuskera() {
+		return euskera;
+	}
+
+	public void setEuskera(Euskera euskera) {
+		this.euskera = euskera;
+	}
+
+	public Ingles getIngles() {
+		return ingles;
+	}
+
+	public void setIngles(Ingles ingles) {
+		this.ingles = ingles;
+	}
+
 	public String getOtrosIdiomas() {
 		return otrosIdiomas;
 	}
@@ -217,12 +250,12 @@ public class Persona {
 		this.otrosIdiomas = otrosIdiomas;
 	}
 
-	public Municipio getMunicipio() {
-		return municipio;
+	public Localidad getLocalidad() {
+		return localidad;
 	}
 
-	public void setMunicipio(Municipio municipio) {
-		this.municipio = municipio;
+	public void setLocalidad(Localidad localidad) {
+		this.localidad = localidad;
 	}
 
 	public Accesibilidad getAccesibilidad() {
