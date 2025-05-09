@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.swing.*;
 
 import controller.LoginController;
-import enums.*;
 import model.*;
 
 public class VentanaMostrarPersona extends JDialog implements ActionListener {
@@ -156,39 +155,39 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 					break;
 
 				case DOCTORADO:
-					modelFormacion.addElement("");
+					modelFormacion.addElement("Doctorado");
 					break;
 
 				case EPA:
-					modelFormacion.addElement("");
+					modelFormacion.addElement("EPA");
 					break;
 
 				case ESO:
-					modelFormacion.addElement("");
+					modelFormacion.addElement("ESO");
 					break;
 
-				case FPBASICA:
-					modelFormacion.addElement("");
+				case FP_BASICA:
+					modelFormacion.addElement("FP_Basica");
 					break;
 
 				case GM:
-					modelFormacion.addElement("");
+					modelFormacion.addElement("GM");
 					break;
 
 				case GS:
-					modelFormacion.addElement("");
+					modelFormacion.addElement("GS");
 					break;
 
 				case MASTER:
-					modelFormacion.addElement("");
+					modelFormacion.addElement("Master");
 					break;
 
 				case PRIMARIA:
-					modelFormacion.addElement("");
+					modelFormacion.addElement("Primaria");
 					break;
 
 				case UNIVERSIDAD:
-					modelFormacion.addElement("");
+					modelFormacion.addElement("Universidad");
 					break;
 
 				default:
