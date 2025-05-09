@@ -11,32 +11,11 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
-	private JButton btnAñadir;
-
-	private JTextField textFieldApoyo;
-
-	private JComboBox<String> comboBoxFormacion;
-
-	private JComboBox<String> comboBoxEspecialidad;
-
-	private JComboBox<String> comboBoxSectorInteres;
-
-	private JTextField textFieldCVLink;
-
-	private JComboBox<String> comboBoxCertifDiscapacidad;
-
-	private JComboBox<String> comboBoxEuskera;
-
-	private JComboBox<String> comboBoxIngles;
-
-	private JTextField textFieldOtrosIdiomas;
-
-	private JComboBox<String> comboBoxLocalidad;
-
-	private JComboBox<String> comboBoxAccesibilidad;
-
+	private JTextField textFieldApoyo, textFieldCVLink, textFieldOtrosIdiomas, textFieldNom;
+	private JComboBox<String> comboBoxFormacion, comboBoxEspecialidad, comboBoxSectorInteres,
+			comboBoxCertifDiscapacidad, comboBoxEuskera, comboBoxIngles, comboBoxLocalidad, comboBoxAccesibilidad;
 	private JTextArea textAreaObservaciones;
-	private JTextField textFieldNom;
+	private JButton btnAñadir;
 
 	public VentanaAñadirPersona(JDialog parent, LoginController cont) {
 		super(parent, true);
@@ -52,7 +31,7 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		lblObligatorio.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblObligatorio.setBounds(20, 10, 721, 19);
 		getContentPane().add(lblObligatorio);
-		
+
 		JLabel lblApoyo = new JLabel("Apoyo: *");
 		lblApoyo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblApoyo.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -199,20 +178,20 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(153, 346, 380, 37);
 		getContentPane().add(btnAñadir);
-		
+
 		JLabel lblNom = new JLabel("Nombre: *");
 		lblNom.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNom.setBounds(51, 39, 103, 28);
 		getContentPane().add(lblNom);
-		
+
 		textFieldNom = new JTextField();
 		textFieldNom.setColumns(10);
 		textFieldNom.setBounds(170, 45, 163, 19);
 		getContentPane().add(textFieldNom);
 		btnAñadir.addActionListener(this);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
