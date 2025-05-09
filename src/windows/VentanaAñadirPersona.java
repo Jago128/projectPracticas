@@ -32,6 +32,17 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		lblObligatorio.setBounds(20, 10, 721, 19);
 		getContentPane().add(lblObligatorio);
 
+		JLabel lblNom = new JLabel("Nombre: *");
+		lblNom.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNom.setBounds(51, 39, 103, 28);
+		getContentPane().add(lblNom);
+
+		textFieldNom = new JTextField();
+		textFieldNom.setColumns(10);
+		textFieldNom.setBounds(170, 45, 163, 19);
+		getContentPane().add(textFieldNom);
+
 		JLabel lblApoyo = new JLabel("Apoyo: *");
 		lblApoyo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblApoyo.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -178,17 +189,6 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(153, 346, 380, 37);
 		getContentPane().add(btnAñadir);
-
-		JLabel lblNom = new JLabel("Nombre: *");
-		lblNom.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNom.setBounds(51, 39, 103, 28);
-		getContentPane().add(lblNom);
-
-		textFieldNom = new JTextField();
-		textFieldNom.setColumns(10);
-		textFieldNom.setBounds(170, 45, 163, 19);
-		getContentPane().add(textFieldNom);
 		btnAñadir.addActionListener(this);
 	}
 
