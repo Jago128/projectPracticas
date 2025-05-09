@@ -17,7 +17,7 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 	private JList<String> listNom, listApoyo, listFormacion, listEspecialidad, listSectorInteres, listCVLink,
 	listCertifDiscapacidad, listEuskera, listIngles, listOtrosIdiomas, listLocalidad, listObservaciones,
 	listAccesibilidad;
-	private JButton btnModificarEmpresa;
+	private JButton btnModificarPersona;
 
 	public VentanaMostrarPersona(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
@@ -104,11 +104,11 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		scrollPane.setBounds(10, 10, 1033, 267);
 		getContentPane().add(scrollPane);
 
-		btnModificarEmpresa = new JButton("Modificar empresa");
-		btnModificarEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnModificarEmpresa.setBounds(346, 287, 395, 72);
-		getContentPane().add(btnModificarEmpresa);
-		btnModificarEmpresa.addActionListener(this);
+		btnModificarPersona = new JButton("Modificar persona");
+		btnModificarPersona.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		btnModificarPersona.setBounds(346, 287, 395, 72);
+		getContentPane().add(btnModificarPersona);
+		btnModificarPersona.addActionListener(this);
 	}
 
 	public void addPersonas() {
@@ -127,24 +127,22 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		DefaultListModel<String> modelAccesibilidad = new DefaultListModel<>();
 		DefaultListModel<String> modelObservaciones = new DefaultListModel<>();
 
-		modelNom.addElement("");
-		modelApoyo.addElement("");
-		modelFormacion.addElement("");
-		modelEspecialidad.addElement("");
-		modelSectorInteres.addElement("");
-		modelCVLink.addElement("");
-		modelCertificadoDiscapacidad.addElement("");
-		modelEuskera.addElement("");
-		modelIngles.addElement("");
-		modelOtrosIdiomas.addElement("");
+		modelNom.addElement("Nombre");
+		modelApoyo.addElement("Apoyo");
+		modelFormacion.addElement("Formacion");
+		modelEspecialidad.addElement("Especialidad");
+		modelSectorInteres.addElement("Sector de interes");
+		modelCVLink.addElement("CV Link (Para copiar)");
+		modelCertificadoDiscapacidad.addElement("Certificado de discapacidad");
+		modelEuskera.addElement("Euskera");
+		modelIngles.addElement("Ingles");
+		modelOtrosIdiomas.addElement("Otros idiomas");
 		modelLocalidad.addElement("Localidad");
-		modelAccesibilidad.addElement("");
+		modelAccesibilidad.addElement("Accesibilidad");
 		modelObservaciones.addElement("");
 
 		if (!personas.isEmpty()) {
-
 			for (Persona p : personas.values()) {
-
 				switch (p.getFormacion()) {
 				case AT:
 					modelFormacion.addElement("AT");
@@ -197,121 +195,122 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 
 				// Especialidades, SectorInteres [TBD]
 
-						switch (p.getCerfificadoDiscapacidad()) {
-						case NO:
-							modelCertificadoDiscapacidad.addElement("No");
-							break;
+				switch (p.getCerfificadoDiscapacidad()) {
+				case NO:
+					modelCertificadoDiscapacidad.addElement("No");
+					break;
 
-						case NO_SABE:
-							modelCertificadoDiscapacidad.addElement("No sabe");
-							break;
+				case NO_SABE:
+					modelCertificadoDiscapacidad.addElement("No sabe");
+					break;
 
-						case SI:
-							modelCertificadoDiscapacidad.addElement("Si");
-							break;
+				case SI:
+					modelCertificadoDiscapacidad.addElement("Si");
+					break;
 
-						case TRAMITANDO:
-							modelCertificadoDiscapacidad.addElement("Tramitando");
-							break;
+				case TRAMITANDO:
+					modelCertificadoDiscapacidad.addElement("Tramitando");
+					break;
 
-						default:
-							System.out.println("Tipo invalido");
-						}
+				default:
+					System.out.println("Tipo invalido");
+				}
 
-						switch (p.getEuskera()) {
-						case A1:
-							modelEuskera.addElement("A1");
-							break;
+				switch (p.getEuskera()) {
+				case A1:
+					modelEuskera.addElement("A1");
+					break;
 
-						case A2:
-							modelEuskera.addElement("A2");
-							break;
+				case A2:
+					modelEuskera.addElement("A2");
+					break;
 
-						case B1:
-							modelEuskera.addElement("B1");
-							break;
+				case B1:
+					modelEuskera.addElement("B1");
+					break;
 
-						case B2:
-							modelEuskera.addElement("B2");
-							break;
+				case B2:
+					modelEuskera.addElement("B2");
+					break;
 
-						case C1:
-							modelEuskera.addElement("C1");
-							break;
+				case C1:
+					modelEuskera.addElement("C1");
+					break;
 
-						case C2:
-							modelEuskera.addElement("C2");
-							break;
+				case C2:
+					modelEuskera.addElement("C2");
+					break;
 
-						case CONOCIMIENTO_NOACREDITADO:
-							modelEuskera.addElement("Conocimiento, pero sin acreditar");
-							break;
+				case CONOCIMIENTO_NOACREDITADO:
+					modelEuskera.addElement("Conocimiento, pero sin acreditar");
+					break;
 
-						default:
-							System.out.println("Tipo invalido");
-						}
+				default:
+					System.out.println("Tipo invalido");
+				}
 
-						switch (p.getIngles()) {
-						case A1:
-							modelIngles.addElement("A1");
-							break;
+				switch (p.getIngles()) {
+				case A1:
+					modelIngles.addElement("A1");
+					break;
 
-						case A2:
-							modelIngles.addElement("A2");
-							break;
+				case A2:
+					modelIngles.addElement("A2");
+					break;
 
-						case B1:
-							modelIngles.addElement("B1");
-							break;
+				case B1:
+					modelIngles.addElement("B1");
+					break;
 
-						case B2:
-							modelIngles.addElement("B2");
-							break;
+				case B2:
+					modelIngles.addElement("B2");
+					break;
 
-						case C1:
-							modelIngles.addElement("C1");
-							break;
+				case C1:
+					modelIngles.addElement("C1");
+					break;
 
-						case C2:
-							modelIngles.addElement("C2");
-							break;
+				case C2:
+					modelIngles.addElement("C2");
+					break;
 
-						case CONOCIMIENTO_NOACREDITADO:
-							modelIngles.addElement("Conocimiento, pero sin acreditar");
-							break;
-						
-						default:
-							System.out.println("Tipo invalido");
-						}
+				case CONOCIMIENTO_NOACREDITADO:
+					modelIngles.addElement("Conocimiento, pero sin acreditar");
+					break;
 
-						switch (p.getLocalidad()) {
+				default:
+					System.out.println("Tipo invalido");
+				}
 
-						default:
-							System.out.println("Tipo invalido");
-						}
+				switch (p.getLocalidad()) {
+				// TBD
 
-						switch (p.getAccesibilidad()) {
-						case CARNET:
-							modelAccesibilidad.addElement("Carnet");
-							break;
-							
-						case CARNET_COCHE:
-							modelAccesibilidad.addElement("Carnet + Coche");
-							break;
-							
-						case TRANSPORTE_PUBLICO:
-							modelAccesibilidad.addElement("Transporte publico");
-							break;
-							
-						default:
-							System.out.println("Tipo invalido");
-						}
+				default:
+					System.out.println("Tipo invalido");
+				}
 
-						modelNom.addElement(p.getNombre());
-						modelApoyo.addElement(p.getApoyo());
-						modelCVLink.addElement(p.getCvLink());
-						modelOtrosIdiomas.addElement(p.getOtrosIdiomas());
-						modelObservaciones.addElement(p.getObservaciones());
+				switch (p.getAccesibilidad()) {
+				case CARNET:
+					modelAccesibilidad.addElement("Carnet");
+					break;
+
+				case CARNET_COCHE:
+					modelAccesibilidad.addElement("Carnet + Coche");
+					break;
+
+				case TRANSPORTE_PUBLICO:
+					modelAccesibilidad.addElement("Transporte publico");
+					break;
+
+				default:
+					System.out.println("Tipo invalido");
+				}
+
+				modelNom.addElement(p.getNombre());
+				modelApoyo.addElement(p.getApoyo());
+				modelCVLink.addElement(p.getCvLink());
+				modelOtrosIdiomas.addElement(p.getOtrosIdiomas());
+				modelObservaciones.addElement(p.getObservaciones());
 			}
 		}
 		listNom.setModel(modelNom);
@@ -331,8 +330,18 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		VentanaModificarPersona dialog = new VentanaModificarPersona(this, cont, null); // Not ready
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		dialog.setVisible(true);
+		if (e.getSource() == btnModificarPersona) {
+			if (!listNom.isSelectionEmpty()) {
+				if (!listNom.getSelectedValue().equals("Nombre")) {
+					VentanaModificarPersona dialog = new VentanaModificarPersona(this, cont, cont.getPersona(listNom.getSelectedValue()));
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null, "[ERROR] No se puede modificar el titulo de la columna.");
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "[ERROR] Elije un nombre de la lista de nombres.");
+			}
+		}
 	}
 }

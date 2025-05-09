@@ -33,7 +33,7 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 		listEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		getContentPane().add(listEmpresas);
 
-		addEmpresas();
+		addNomEmpresas();
 
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -48,7 +48,7 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 		getContentPane().add(lblInfo);
 	}
 
-	public void addEmpresas() {
+	public void addNomEmpresas() {
 		Map<String, Empresa> empresas = cont.mostrarNomEmpresas();
 		DefaultListModel<String> modelEmpresas = new DefaultListModel<>();
 
@@ -63,8 +63,8 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent event) {
-		if (event.getSource() == btnBorrar) {
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnBorrar) {
 			if (!listEmpresas.isSelectionEmpty()) {
 				int result = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que quieras borrar la empresa '"+listEmpresas.getSelectedValue()+"'?",
 						"Confirmacion", JOptionPane.YES_NO_OPTION);
@@ -76,7 +76,7 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 						if (result == JOptionPane.NO_OPTION) {
 							this.dispose();
 						} else if (result == JOptionPane.YES_OPTION) {
-							addEmpresas();
+							addNomEmpresas();
 							listEmpresas.setSelectedIndex(-1);
 						}
 					} else {

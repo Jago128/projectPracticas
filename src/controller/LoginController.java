@@ -128,6 +128,10 @@ public class LoginController {
 		return dao.mostrarPersonas();
 	}
 	
+	public Map<String, Persona> mostrarNomPersonas() {
+		return dao.mostrarNomPersonas();
+	}
+	
 	public Persona getPersona(String nom) {
 		return dao.getPersona(nom);
 	}

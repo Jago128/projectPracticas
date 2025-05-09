@@ -404,8 +404,8 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent event) {
-		if (event.getSource() == btnModificarEmpresa) {
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnModificarEmpresa) {
 			if (!listEmpresas.isSelectionEmpty()) {
 				if (!listEmpresas.getSelectedValue().equals("Empresas")) {
 					VentanaModificarEmpresa dialog = new VentanaModificarEmpresa(this, cont, cont.getEmpresa(listEmpresas.getSelectedValue()));

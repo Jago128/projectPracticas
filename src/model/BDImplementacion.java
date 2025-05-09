@@ -1024,6 +1024,33 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 	
 	@Override
+	public Map<String, Persona> mostrarNomPersonas() {
+		ResultSet rs = null;
+		Persona persona;
+		Map<String, Persona> personas = new TreeMap<>();
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLNOMEMPRESAS);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				persona = new Persona();
+				persona.setNombre(rs.getString("NOM_EMPRESA"));
+				personas.put(persona.getNombre(), persona);
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger los nombres de las personas.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return personas;
+	}
+	
+	@Override
 	public Persona getPersona(String nom) {
 		ResultSet rs = null;
 		Persona persona = new Persona();
