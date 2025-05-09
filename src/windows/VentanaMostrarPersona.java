@@ -119,7 +119,7 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		DefaultListModel<String> modelEspecialidad = new DefaultListModel<>();
 		DefaultListModel<String> modelSectorInteres = new DefaultListModel<>();
 		DefaultListModel<String> modelCVLink = new DefaultListModel<>();
-		DefaultListModel<String> modelCertifDiscapacidad = new DefaultListModel<>();
+		DefaultListModel<String> modelCertificadoDiscapacidad = new DefaultListModel<>();
 		DefaultListModel<String> modelEuskera = new DefaultListModel<>();
 		DefaultListModel<String> modelIngles = new DefaultListModel<>();
 		DefaultListModel<String> modelOtrosIdiomas = new DefaultListModel<>();
@@ -133,7 +133,7 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		modelEspecialidad.addElement("");
 		modelSectorInteres.addElement("");
 		modelCVLink.addElement("");
-		modelCertifDiscapacidad.addElement("");
+		modelCertificadoDiscapacidad.addElement("");
 		modelEuskera.addElement("");
 		modelIngles.addElement("");
 		modelOtrosIdiomas.addElement("");
@@ -199,19 +199,19 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 
 						switch (p.getCerfificadoDiscapacidad()) {
 						case NO:
-
+							modelCertificadoDiscapacidad.addElement("No");
 							break;
 
-						case NOSABE:
-
+						case NO_SABE:
+							modelCertificadoDiscapacidad.addElement("No sabe");
 							break;
 
 						case SI:
-
+							modelCertificadoDiscapacidad.addElement("Si");
 							break;
 
 						case TRAMITANDO:
-
+							modelCertificadoDiscapacidad.addElement("Tramitando");
 							break;
 
 						default:
@@ -292,15 +292,15 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 
 						switch (p.getAccesibilidad()) {
 						case CARNET:
-							
+							modelAccesibilidad.addElement("Carnet");
 							break;
 							
 						case CARNET_COCHE:
-							
+							modelAccesibilidad.addElement("Carnet + Coche");
 							break;
 							
-						case TRANSPORTEPUBLICO:
-							
+						case TRANSPORTE_PUBLICO:
+							modelAccesibilidad.addElement("Transporte publico");
 							break;
 							
 						default:
@@ -320,7 +320,7 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		listEspecialidad.setModel(modelEspecialidad);
 		listSectorInteres.setModel(modelSectorInteres);
 		listCVLink.setModel(modelCVLink);
-		listCertifDiscapacidad.setModel(modelCertifDiscapacidad);
+		listCertifDiscapacidad.setModel(modelCertificadoDiscapacidad);
 		listEuskera.setModel(modelEuskera);
 		listIngles.setModel(modelIngles);
 		listOtrosIdiomas.setModel(modelOtrosIdiomas);

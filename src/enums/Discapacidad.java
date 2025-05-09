@@ -1,5 +1,5 @@
 package enums;
 
 public enum Discapacidad {
-	UNSET, SI, NO, NOSABE, TRAMITANDO
+	UNSET, SI, NO, NO_SABE, TRAMITANDO
 }

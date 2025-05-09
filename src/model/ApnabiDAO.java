@@ -60,28 +60,32 @@ public interface ApnabiDAO {
 
 	// Personas
 	public Map<String, Persona> mostrarPersonas();
+	
+	public Persona getPersona(String nom);
 
 	public boolean añadirPersona(Persona persona);
 
-	public boolean modificarApoyo(String apoyo);
+	public boolean modificarApoyo(String apoyo, String nom);
 
-	public boolean modificarFormacion(String formacion);
+	public boolean modificarFormacion(String formacion, String nom);
 
-	public boolean modificarEspecialidad(String especialidad);
+	public boolean modificarEspecialidad(String especialidad, String nom);
+	
+	public boolean modificarSectorInteres(String sectorI, String nom);
 
-	public boolean modificarCVLink(String link);
+	public boolean modificarCVLink(String link, String nom);
 
-	public boolean modificarDiscapacidad(String discap);
+	public boolean modificarDiscapacidad(String discap, String nom);
 
-	public boolean modificarEuskera(String nivel);
+	public boolean modificarEuskera(String nivel, String nom);
 
-	public boolean modificarIngles(String nivel);
+	public boolean modificarIngles(String nivel, String nom);
 
-	public boolean modificarOtrosIdiomas(String idioma);
+	public boolean modificarOtrosIdiomas(String idioma, String nom);
 
-	public boolean modificarLocalidad(String localidad);
+	public boolean modificarLocalidad(String localidad, String nom);
 
-	public boolean modificarAccesibiliad(String accesibilidad);
+	public boolean modificarAccesibilidad(String accesibilidad, String nom);
 
-	public boolean modificarObservaciones(String observaciones);
+	public boolean modificarObservaciones(String observaciones, String nom);
 }

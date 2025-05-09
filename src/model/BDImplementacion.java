@@ -4,10 +4,17 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
+import enums.Accesibilidad;
+import enums.Discapacidad;
 import enums.Estado;
+import enums.Euskera;
+import enums.Formacion;
+import enums.Ingles;
+import enums.Localidad;
 import enums.ResultadoFinal;
 import enums.ResultadoUltimoContacto;
 import enums.Sector;
+import enums.SectorInteres;
 
 public class BDImplementacion implements ApnabiDAO {
 	private Connection con;
@@ -22,7 +29,6 @@ public class BDImplementacion implements ApnabiDAO {
 
 	final String SQLUSUARIO = "SELECT * FROM USUARIO WHERE NOMBRE=?";
 	final String SQLUSUARIOCONTRASEÑA = "SELECT * FROM USUARIO WHERE NOMBRE=? AND CONTRASEÑA=?";
-	final String SQLTIPO = "SELECT TIPO FROM USUARIO WHERE NOMBRE=?";
 	final String SQLINSERTUSUARIO = "INSERT INTO USUARIO VALUES (?,?)";
 
 	final String SQLEMPRESAS = "SELECT * FROM EMPRESA";
@@ -36,17 +42,35 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUPDATEESTADO = "UPDATE EMPRESA SET ESTADO=? WHERE NOM_EMPRESA=?";
 	final String SQLDELETE_EMPRESA = "DELETE FROM EMPRESA WHERE NOM_EMPRESA = ?";
 
-	final String SQLSELECTCONTACTO = "SELECT * FROM CONTACTO WHERE COD_EMPRESA=?";
+	final String SQLSELECTCONTACTOS = "SELECT * FROM CONTACTO WHERE COD_EMPRESA=?";
 	final String SQLINSERTCONTACTO = "INSERT INTO CONTACTO (CONTACTO1, CONTACTO2, CONTACTO3, CONTACTO4, OBSERVACIONES, RESULTADOULTIMO, INFOULTIMO, RESULTADOFINAL, FECHARESOLUCION, COD_EMPRESA) VALUES (?,?,?,?,?,?,?,?,?,?)";
 	final String SQLUPDATECONTACTO1 = "UPDATE CONTACTO SET CONTACTO1=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATECONTACTO2 = "UPDATE CONTACTO SET CONTACTO2=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATECONTACTO3 = "UPDATE CONTACTO SET CONTACTO3=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATECONTACTO4 = "UPDATE CONTACTO SET CONTACTO4=? WHERE COD_CONTACTO=?";
-	final String SQLUPDATEOBSERVACIONES = "UPDATE CONTACTO SET OBSERVACIONES=? WHERE COD_CONTACTO=?";
+	final String SQLUPDATE_EMPRESAOBSERVACIONES = "UPDATE CONTACTO SET OBSERVACIONES=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATERESULTADOULTIMO = "UPDATE CONTACTO SET RESULTADOULTIMO=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATEINFOULTIMO = "UPDATE CONTACTO SET INFOULTIMO=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATERESULTADOFINAL = "UPDATE CONTACTO SET RESULTADOFINAL=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATEFECHARESOLUCION = "UPDATE CONTACTO SET FECHARESOLUCION=? WHERE COD_CONTACTO=?";
+	
+	final String SQLPERSONAS = "SELECT * FROM PERSONA";
+	final String SQLNOMPERSONAS = "SELECT NOM_P FROM PERSONA";
+	final String SQLSELECTPERSONA = "SELECT * FROM PERSONA WHERE NOM_P=?";
+	final String SQLINSERTPERSONA = "INSERT INTO PERSONA VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	final String SQLUPDATEAPOYO = "UPDATE PERSONA SET APOYO=? WHERE NOM_P=?";
+	final String SQLUPDATEFORMACION = "UPDATE PERSONA SET FORMACION=? WHERE NOM_P=?";
+	final String SQLUPDATE_ESPECIALIDAD = "UPDATE PERSONA SET ESPECIALIDAD=? WHERE NOM_P=?";
+	final String SQLUPDATESECTORINTERES = "UPDATE PERSONA SET SECTORINTERES=? WHERE NOM_P=?";
+	final String SQLUPDATECVLINK = "UPDATE PERSONA SET CV=? WHERE NOM_P=?";
+	final String SQLUPDATEDISCAPACIDAD = "UPDATE PERSONA SET DISCAPACIDAD=? WHERE NOM_P=?";
+	final String SQLUPDATE_EUSKERA = "UPDATE PERSONA SET EUSKERA=? WHERE NOM_P=?";
+	final String SQLUPDATEINGLES = "UPDATE PERSONA SET INGLES=? WHERE NOM_P=?";
+	final String SQLUPDATEOTROSIDIOMAS = "UPDATE PERSONA SET OTROSIDIOMAS=? WHERE NOM_P=?";
+	final String SQLUPDATELOCALIDAD = "UPDATE PERSONA SET LOCALIDAD=? WHERE NOM_P=?";
+	final String SQLUPDATEACCESIBILIDAD = "UPDATE PERSONA SET ACCESIBILIDAD=? WHERE NOM_P=?";
+	final String SQLUPDATEPERSONAOBSERVACIONES = "UPDATE PERSONA SET OBSERVACIONES=? WHERE NOM_P=?";
+	
 
 	public BDImplementacion() {
 		this.configFile = ResourceBundle.getBundle("model.classConfig");
@@ -580,7 +604,7 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLSELECTCONTACTO);
+			stmt = con.prepareStatement(SQLSELECTCONTACTOS);
 			stmt.setInt(1, empId);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
@@ -712,7 +736,6 @@ public class BDImplementacion implements ApnabiDAO {
 			System.out.println("Ha habido un error al intentar añadir la empresa.");
 			e.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("Ha habido un error al intentar añadir la empresa.");
 			e.printStackTrace();
 		}
 		return check;
@@ -833,7 +856,7 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!observaciones.isBlank()) {
-				stmt = con.prepareStatement(SQLUPDATEOBSERVACIONES);
+				stmt = con.prepareStatement(SQLUPDATE_EMPRESAOBSERVACIONES);
 				stmt.setString(1, observaciones);
 				stmt.setInt(2, id);
 				if (stmt.executeUpdate() > 0) {
@@ -963,79 +986,594 @@ public class BDImplementacion implements ApnabiDAO {
 
 	@Override
 	public Map<String, Persona> mostrarPersonas() {
-		
-		return null;
-	}
+		ResultSet rs = null;
+		Persona persona;
+		Map<String, Persona> personas = new TreeMap<>();
 
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLPERSONAS);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				persona = new Persona();
+				persona.setNombre(rs.getString("NOM_P"));
+				persona.setApoyo(rs.getString("APOYO"));
+				persona.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				// Especialidad
+				persona.setSectorInteres(SectorInteres.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				persona.setCvLink(rs.getString("CV"));
+				persona.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
+				persona.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
+				persona.setIngles(Ingles.valueOf(rs.getString("INGLES")));
+				persona.setOtrosIdiomas(rs.getString("OTROSIDIOMAS"));
+				persona.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
+				persona.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				persona.setObservaciones(rs.getString("OBSERVACIONES"));
+				personas.put(persona.getNombre(), persona);
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger las personas.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return personas;
+	}
+	
+	@Override
+	public Persona getPersona(String nom) {
+		ResultSet rs = null;
+		Persona persona = new Persona();
+		
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLNOMPERSONAS);
+			stmt.setString(1, nom);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				persona.setNombre(rs.getString("NOM_P"));
+				persona.setApoyo(rs.getString("APOYO"));
+				persona.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				// Especialidad
+				persona.setSectorInteres(SectorInteres.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				persona.setCvLink(rs.getString("CV"));
+				persona.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
+				persona.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
+				persona.setIngles(Ingles.valueOf(rs.getString("INGLES")));
+				persona.setOtrosIdiomas(rs.getString("OTROSIDIOMAS"));
+				persona.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
+				persona.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				persona.setObservaciones(rs.getString("OBSERVACIONES"));
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return persona;
+	}
+	
 	@Override
 	public boolean añadirPersona(Persona persona) {
-		
-		return false;
+		boolean check = false;
+		this.openConnection();
+
+		try {
+			stmt = con.prepareStatement(SQLINSERTEMPRESA);
+			stmt.setString(1, persona.getNombre());
+			stmt.setString(2, persona.getApoyo());
+			switch (persona.getFormacion()) {
+			case AT:
+				stmt.setString(3, "AT");
+				break;
+				
+			case BACHILLERATO:
+				stmt.setString(3, "Bachillerato");
+				break;
+				
+			case DOCTORADO:
+				stmt.setString(3, "Doctorado");
+				break;
+				
+			case EPA:
+				stmt.setString(3, "EPA");
+				break;
+				
+			case ESO:
+				stmt.setString(3, "ESO");
+				break;
+				
+			case FP_BASICA:
+				stmt.setString(3, "FP_Basica");
+				break;
+				
+			case GM:
+				stmt.setString(3, "GM");
+				break;
+				
+			case GS:
+				stmt.setString(3, "GS");
+				break;
+				
+			case MASTER:
+				stmt.setString(3, "Master");
+				break;
+				
+			case PRIMARIA:
+				stmt.setString(3, "Primaria");
+				break;
+				
+			case UNIVERSIDAD:
+				stmt.setString(3, "Universidad");
+				break;
+
+			default:
+				System.out.println("Tipo invalido.");
+			}
+			
+			// 4: Especialidad
+			switch (persona.getSectorInteres()) { // 5
+			// TBD
+			
+			default:
+				System.out.println("Tipo invalido.");
+			}
+			
+			stmt.setString(6, persona.getCvLink());
+			switch (persona.getCerfificadoDiscapacidad()) {
+			case NO:
+				stmt.setString(7, "No");
+				break;
+				
+			case NO_SABE:
+				stmt.setString(7, "No_Sabe");
+				break;
+				
+			case SI:
+				stmt.setString(7, "Si");
+				break;
+				
+			case TRAMITANDO:
+				stmt.setString(7, "Tramitando");
+				break;
+
+			default:
+				System.out.println("Tipo invalido.");
+			}
+			
+			switch (persona.getEuskera()) {
+			case A1:
+				stmt.setString(8, "A1");
+				break;
+				
+			case A2:
+				stmt.setString(8, "A2");
+				break;
+				
+			case B1:
+				stmt.setString(8, "B1");
+				break;
+				
+			case B2:
+				stmt.setString(8, "B2");
+				break;
+				
+			case C1:
+				stmt.setString(8, "C1");
+				break;
+				
+			case C2:
+				stmt.setString(8, "C1");
+				break;
+				
+			case CONOCIMIENTO_NOACREDITADO:
+				stmt.setString(8, "Conocimiento_NoAcreditado");
+				break;
+
+			default:
+				System.out.println("Tipo invalido.");
+			}
+			
+			switch (persona.getIngles()) {
+			case A1:
+				stmt.setString(9, "A1");
+				break;
+				
+			case A2:
+				stmt.setString(9, "A2");
+				break;
+				
+			case B1:
+				stmt.setString(9, "B1");
+				break;
+				
+			case B2:
+				stmt.setString(9, "B2");
+				break;
+				
+			case C1:
+				stmt.setString(9, "C1");
+				break;
+				
+			case C2:
+				stmt.setString(9, "C1");
+				break;
+				
+			case CONOCIMIENTO_NOACREDITADO:
+				stmt.setString(9, "Conocimiento_NoAcreditado");
+				break;
+			
+			default:
+				System.out.println("Tipo invalido.");
+			}
+			
+			stmt.setString(10, persona.getOtrosIdiomas());
+			switch (persona.getLocalidad()) { // 11
+			// TBD
+			default:
+				break;
+			}
+			
+			switch (persona.getAccesibilidad()) {
+			case CARNET:
+				stmt.setString(12, "Carnet");
+				break;
+				
+			case CARNET_COCHE:
+				stmt.setString(12, "Carnet_Coche");
+				break;
+				
+			case TRANSPORTE_PUBLICO:
+				stmt.setString(12, "Transporte_Publico");
+				break;
+
+			default:
+				System.out.println("Tipo invalido.");
+			}
+			
+			stmt.setString(13, persona.getObservaciones());
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha habido un error al intentar añadir la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
 	}
 
 	@Override
-	public boolean modificarApoyo(String apoyo) {
-		
-		return false;
+	public boolean modificarApoyo(String apoyo, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!apoyo.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEAPOYO);
+				stmt.setString(1, apoyo);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
 	}
 
 	@Override
-	public boolean modificarFormacion(String formacion) {
-		
-		return false;
+	public boolean modificarFormacion(String formacion, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!formacion.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEFORMACION);
+				stmt.setString(1, formacion);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
 	}
 
 	@Override
-	public boolean modificarEspecialidad(String especialidad) {
-		
-		return false;
+	public boolean modificarEspecialidad(String especialidad, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!especialidad.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATE_ESPECIALIDAD);
+				stmt.setString(1, especialidad);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
+	}
+	
+	@Override
+	public boolean modificarSectorInteres(String sectorI, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!sectorI.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATESECTORINTERES);
+				stmt.setString(1, sectorI);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
 	}
 
 	@Override
-	public boolean modificarCVLink(String link) {
-		
-		return false;
+	public boolean modificarCVLink(String link, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!link.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATECVLINK);
+				stmt.setString(1, link);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
 	}
 
 	@Override
-	public boolean modificarDiscapacidad(String discap) {
-		
-		return false;
+	public boolean modificarDiscapacidad(String discap, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!discap.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEDISCAPACIDAD);
+				stmt.setString(1, discap);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
 	}
 
 	@Override
-	public boolean modificarEuskera(String nivel) {
-		
-		return false;
+	public boolean modificarEuskera(String nivel, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!nivel.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATE_EUSKERA);
+				stmt.setString(1, nivel);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
 	}
 
 	@Override
-	public boolean modificarIngles(String nivel) {
-		
-		return false;
+	public boolean modificarIngles(String nivel, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!nivel.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEINGLES);
+				stmt.setString(1, nivel);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
 	}
 
 	@Override
-	public boolean modificarOtrosIdiomas(String idioma) {
-		
-		return false;
+	public boolean modificarOtrosIdiomas(String idioma, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!idioma.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEOTROSIDIOMAS);
+				stmt.setString(1, idioma);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
 	}
 
 	@Override
-	public boolean modificarLocalidad(String localidad) {
-		
-		return false;
+	public boolean modificarLocalidad(String localidad, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!localidad.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATELOCALIDAD);
+				stmt.setString(1, localidad);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
 	}
 
 	@Override
-	public boolean modificarAccesibiliad(String accesibilidad) {
-		
-		return false;
+	public boolean modificarAccesibilidad(String accesibilidad, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!accesibilidad.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEACCESIBILIDAD);
+				stmt.setString(1, accesibilidad);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
 	}
 
 	@Override
-	public boolean modificarObservaciones(String observaciones) {
-		
-		return false;
+	public boolean modificarObservaciones(String observaciones, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!observaciones.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEPERSONAOBSERVACIONES);
+				stmt.setString(1, observaciones);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return check;
 	}
 }

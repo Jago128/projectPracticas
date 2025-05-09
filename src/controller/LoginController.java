@@ -127,52 +127,60 @@ public class LoginController {
 	public Map<String, Persona> mostrarPersonas() {
 		return dao.mostrarPersonas();
 	}
+	
+	public Persona getPersona(String nom) {
+		return dao.getPersona(nom);
+	}
 
 	public boolean añadirPersona(Persona persona) {
 		return dao.añadirPersona(persona);
 	}
 
-	public boolean modificarApoyo(String apoyo) {
-		return dao.modificarApoyo(apoyo);
+	public boolean modificarApoyo(String apoyo, String nom) {
+		return dao.modificarApoyo(apoyo, nom);
 	}
 
-	public boolean modificarFormacion(String formacion) {
-		return dao.modificarFormacion(formacion);
+	public boolean modificarFormacion(String formacion, String nom) {
+		return dao.modificarFormacion(formacion, nom);
 	}
 
-	public boolean modificarEspecialidad(String especialidad) {
-		return dao.modificarEspecialidad(especialidad);
+	public boolean modificarEspecialidad(String especialidad, String nom) {
+		return dao.modificarEspecialidad(especialidad, nom);
+	}
+	
+	public boolean modificarSectorInteres(String sectorI, String nom) {
+		return dao.modificarSectorInteres(sectorI, nom);
 	}
 
-	public boolean modificarCVLink(String link) {
-		return dao.modificarCVLink(link);
+	public boolean modificarCVLink(String link, String nom) {
+		return dao.modificarCVLink(link, nom);
 	}
 
-	public boolean modificarDiscapacidad(String discap) {
-		return dao.modificarDiscapacidad(discap);
+	public boolean modificarDiscapacidad(String discap, String nom) {
+		return dao.modificarDiscapacidad(discap, nom);
 	}
 
-	public boolean modificarEuskera(String nivel) {
-		return dao.modificarEuskera(nivel);
+	public boolean modificarEuskera(String nivel, String nom) {
+		return dao.modificarEuskera(nivel, nom);
 	}
 
-	public boolean modificarIngles(String nivel) {
-		return dao.modificarIngles(nivel);
+	public boolean modificarIngles(String nivel, String nom) {
+		return dao.modificarIngles(nivel, nom);
 	}
 
-	public boolean modificarOtrosIdiomas(String idioma) {
-		return dao.modificarOtrosIdiomas(idioma);
+	public boolean modificarOtrosIdiomas(String idioma, String nom) {
+		return dao.modificarOtrosIdiomas(idioma, nom);
 	}
 
-	public boolean modificarLocalidad(String localidad) {
-		return dao.modificarLocalidad(localidad);
+	public boolean modificarLocalidad(String localidad, String nom) {
+		return dao.modificarLocalidad(localidad, nom);
 	}
 
-	public boolean modificarAccesibiliad(String accesibilidad) {
-		return dao.modificarAccesibiliad(accesibilidad);
+	public boolean modificarAccesibilidad(String accesibilidad, String nom) {
+		return dao.modificarAccesibilidad(accesibilidad, nom);
 	}
 
-	public boolean modificarObservaciones(String observaciones) {
-		return dao.modificarObservaciones(observaciones);
+	public boolean modificarObservaciones(String observaciones, String nom) {
+		return dao.modificarObservaciones(observaciones, nom);
 	}
 }
