@@ -139,7 +139,7 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		modelOtrosIdiomas.addElement("Otros idiomas");
 		modelLocalidad.addElement("Localidad");
 		modelAccesibilidad.addElement("Accesibilidad");
-		modelObservaciones.addElement("");
+		modelObservaciones.addElement("Observaciones");
 
 		if (!personas.isEmpty()) {
 			for (Persona p : personas.values()) {
@@ -312,20 +312,24 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 				modelOtrosIdiomas.addElement(p.getOtrosIdiomas());
 				modelObservaciones.addElement(p.getObservaciones());
 			}
+			listNom.setModel(modelNom);
+			listApoyo.setModel(modelApoyo);
+			listFormacion.setModel(modelFormacion);
+			listEspecialidad.setModel(modelEspecialidad);
+			listSectorInteres.setModel(modelSectorInteres);
+			listCVLink.setModel(modelCVLink);
+			listCertifDiscapacidad.setModel(modelCertificadoDiscapacidad);
+			listEuskera.setModel(modelEuskera);
+			listIngles.setModel(modelIngles);
+			listOtrosIdiomas.setModel(modelOtrosIdiomas);
+			listLocalidad.setModel(modelLocalidad);
+			listAccesibilidad.setModel(modelAccesibilidad);
+			listObservaciones.setModel(modelObservaciones);
+		} else {
+			JOptionPane.showMessageDialog(null, "No hay ninguna persona para visualizar."
+					+ "\nPor favor, añada una persona anter the abrir esta ventana.", "AVISO!", JOptionPane.INFORMATION_MESSAGE);
+			this.dispose();
 		}
-		listNom.setModel(modelNom);
-		listApoyo.setModel(modelApoyo);
-		listFormacion.setModel(modelFormacion);
-		listEspecialidad.setModel(modelEspecialidad);
-		listSectorInteres.setModel(modelSectorInteres);
-		listCVLink.setModel(modelCVLink);
-		listCertifDiscapacidad.setModel(modelCertificadoDiscapacidad);
-		listEuskera.setModel(modelEuskera);
-		listIngles.setModel(modelIngles);
-		listOtrosIdiomas.setModel(modelOtrosIdiomas);
-		listLocalidad.setModel(modelLocalidad);
-		listAccesibilidad.setModel(modelAccesibilidad);
-		listObservaciones.setModel(modelObservaciones);
 	}
 
 	@Override

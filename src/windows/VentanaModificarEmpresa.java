@@ -24,7 +24,6 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 	textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldFechaResolucion;
 	private JComboBox<String> comboBoxEstado, comboBoxResultadoUltimoContacto, comboBoxResultadoFinal;
 	private JButton btnModificar;
-	private JLabel lblDatosEmpresa, lblFechaFormato;
 
 	public VentanaModificarEmpresa(JDialog parent, LoginController cont, Empresa emp) {
 		super(parent, true);
@@ -35,6 +34,25 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		setTitle("Modificar empresa");
 		setBounds(100, 100, 920, 530);
 		getContentPane().setLayout(null);
+		
+		JLabel lblDatosEmpresa = new JLabel("Informacion de la empresa seleccionada:");
+		lblDatosEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDatosEmpresa.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblDatosEmpresa.setBounds(378, 10, 506, 28);
+		getContentPane().add(lblDatosEmpresa);
+		
+		JLabel lblNota = new JLabel("No hace falta rellenar toda la informacion.");
+		lblNota.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNota.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNota.setBounds(10, 7, 377, 28);
+		getContentPane().add(lblNota);
+		
+		JLabel lblFechaFormato = new JLabel("Formato de fechas: AAAA-MM-DD");
+		lblFechaFormato.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblFechaFormato.setBounds(42, 38, 275, 16);
+		getContentPane().add(lblFechaFormato);
+		
+		loadEmpresa();
 
 		textareaEmpresa = new JTextArea();
 		textareaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -232,25 +250,6 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		lblmaxChars_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblmaxChars_1.setBounds(375, 447, 126, 31);
 		getContentPane().add(lblmaxChars_1);
-
-		lblDatosEmpresa = new JLabel("Informacion de la empresa seleccionada:");
-		lblDatosEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDatosEmpresa.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDatosEmpresa.setBounds(378, 10, 506, 28);
-		getContentPane().add(lblDatosEmpresa);
-
-		loadEmpresa();
-
-		lblFechaFormato = new JLabel("Formato de fechas: AAAA-MM-DD");
-		lblFechaFormato.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblFechaFormato.setBounds(42, 38, 275, 16);
-		getContentPane().add(lblFechaFormato);
-
-		JLabel lblNota = new JLabel("No hace falta rellenar toda la informacion.");
-		lblNota.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNota.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNota.setBounds(10, 7, 377, 28);
-		getContentPane().add(lblNota);
 
 		btnModificar = new JButton("Modificar");
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));

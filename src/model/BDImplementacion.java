@@ -1031,11 +1031,11 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLNOMEMPRESAS);
+			stmt = con.prepareStatement(SQLNOMPERSONAS);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				persona = new Persona();
-				persona.setNombre(rs.getString("NOM_EMPRESA"));
+				persona.setNombre(rs.getString("NOM_P"));
 				personas.put(persona.getNombre(), persona);
 			}
 			rs.close();

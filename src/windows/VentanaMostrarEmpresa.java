@@ -384,23 +384,27 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 					modelFechaResolucion.addElement(con.getFechaResolucion());
 				}
 			}
+			listSectores.setModel(modelSectores);
+			listEmpresas.setModel(modelEmpresas);
+			listPuestos.setModel(modelPuestos);
+			listDatosContacto.setModel(modelDatosContacto);
+			listContactosEmpresa.setModel(modelContactosEmpresa);
+			listContactosApnabi.setModel(modelContactosApnabi);
+			listEstados.setModel(modelEstados);
+			listContacto1.setModel(modelContactos1);
+			listContacto2.setModel(modelContactos2);
+			listContacto3.setModel(modelContactos3);
+			listContacto4.setModel(modelContactos4);
+			listObservaciones.setModel(modelObservaciones);
+			listResultadoUltimoContacto.setModel(modelResultadoUltimoCont);
+			listInfoUltimo.setModel(modelInfoUltimo);
+			listResultadoFinal.setModel(modelResultadoFinal);
+			listFechaResolucion.setModel(modelFechaResolucion);
+		} else {
+			JOptionPane.showMessageDialog(null, "No hay ninguna empresa para visualizar."
+					+ "\nPor favor, añada una empresa anter the abrir esta ventana.", "AVISO!", JOptionPane.INFORMATION_MESSAGE);
+			this.dispose();
 		}
-		listSectores.setModel(modelSectores);
-		listEmpresas.setModel(modelEmpresas);
-		listPuestos.setModel(modelPuestos);
-		listDatosContacto.setModel(modelDatosContacto);
-		listContactosEmpresa.setModel(modelContactosEmpresa);
-		listContactosApnabi.setModel(modelContactosApnabi);
-		listEstados.setModel(modelEstados);
-		listContacto1.setModel(modelContactos1);
-		listContacto2.setModel(modelContactos2);
-		listContacto3.setModel(modelContactos3);
-		listContacto4.setModel(modelContactos4);
-		listObservaciones.setModel(modelObservaciones);
-		listResultadoUltimoContacto.setModel(modelResultadoUltimoCont);
-		listInfoUltimo.setModel(modelInfoUltimo);
-		listResultadoFinal.setModel(modelResultadoFinal);
-		listFechaResolucion.setModel(modelFechaResolucion);
 	}
 
 	@Override

@@ -95,10 +95,10 @@ CREATE TABLE PERSONA (
 	"AnimacionSociocultural_Turistica", "EducacionInfantil", "FormacionParaMovilidadSegura_Sostenible", "IntegracionSocial",
 	"MediacionComunicativa", "PromocionIgualdadGenero", "DiseñoTecnicoTextil_Piel", "Diseño_ProduccionCalzado_Complementos",
 	"Patronaje_Moda, VestuarioMedida_de_Espectaculos", "Automocion", "Desarrollo_FabricacionProductosCeramicos",
-	"MantenimientoSistemasElectronicos_AvionicosAeronaves", "TecnicoCuidadosAuxiliaresEnfermeria"),
-    SECTORINTERES ENUM(""),
+	"MantenimientoSistemasElectronicos_AvionicosAeronaves", "TecnicoCuidadosAuxiliaresEnfermeria") NOT NULL,
+    SECTORINTERES ENUM("") NOT NULL,
     CV VARCHAR(999),
-    DISCAPACIDAD ENUM('Si', 'No', 'No_Sabe', 'Tramitando'),
+    DISCAPACIDAD ENUM('Si', 'No', 'No_Sabe', 'Tramitando') NOT NULL,
     EUSKERA ENUM('A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Conocimiento_NoAcreditado'),
     INGLES ENUM('A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Conocimiento_NoAcreditado'),
     OTROSIDIOMAS VARCHAR(50),
@@ -110,8 +110,8 @@ CREATE TABLE PERSONA (
     'MarkinaXemein', 'Maruri', 'Mendata', 'Mendexa', 'Meñaka', 'Morga', 'Mundaka', 'Mungia', 'MunitibArarbatzegi_Gerrikaitz', 'Murueta', 'Muskiz', 'Muxika', 'Nabarniz',
     'Ondarroa', 'Orduña', 'Orozko', 'Ortuella', 'Otxandio', 'Plentzia', 'Portugalete', 'Santurtzi', 'Sestao', 'Sondika', 'Sopela', 'Sopuerta', 'Sukarrieta', 'Trapagaran',
     'Turtzioz', 'Ubide', 'UgaoMiraballes', 'Urduliz', 'Urduña', 'Usansolo', 'Zaldibar', 'Zalla', 'Zamudio', 'Zaratamo', 'Zeanuri', 'Zeberio', 'Zierbena', 'Ziortza_Bolibar',
-    'Zornotza'),
-    ACCESIBILIDAD ENUM('Carnet_Coche', 'Carnet', 'Transporte_Publico'),
+    'Zornotza') NOT NULL,
+    ACCESIBILIDAD ENUM('Carnet_Coche', 'Carnet', 'Transporte_Publico') NOT NULL,
     OBSERVACIONES VARCHAR(500)
 );
 
