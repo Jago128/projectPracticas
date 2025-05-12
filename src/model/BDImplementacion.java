@@ -1043,7 +1043,7 @@ public class BDImplementacion implements ApnabiDAO {
 				persona.setApoyo(rs.getString("APOYO"));
 				persona.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
 				persona.setEspecialidad(rs.getString("ESPECIALIDAD"));
-				persona.setSectorInteres(SectorInteres.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				persona.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
 				persona.setCvLink(rs.getString("CV"));
 				persona.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
 				persona.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
@@ -1106,7 +1106,7 @@ public class BDImplementacion implements ApnabiDAO {
 				persona.setApoyo(rs.getString("APOYO"));
 				persona.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
 				persona.setEspecialidad(rs.getString("ESPECIALIDAD"));
-				persona.setSectorInteres(SectorInteres.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				persona.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
 				persona.setCvLink(rs.getString("CV"));
 				persona.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
 				persona.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));

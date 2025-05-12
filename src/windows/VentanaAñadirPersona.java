@@ -282,7 +282,7 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 					Formacion formacion = null;
 					Ingles en = null;
 					Localidad localidad = null;
-					SectorInteres sectorInteres = null;
+					Sector sectorInteres = null;
 
 					switch ((String) comboBoxFormacion.getSelectedItem()) {
 					case "AT":
@@ -330,7 +330,83 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 						break;
 					}
 
-					// Sector interes
+					switch ((String) comboBoxSectorInteres.getSelectedItem()) {
+					case "Agricultura y Ganaderia":
+						sectorInteres = Sector.AGRICULTURA_GANADERIA;
+						break;
+
+					case "Bienes de Consumo":
+						sectorInteres = Sector.BIENESCONSUMO;
+						break;
+
+					case "Comercio electronico":
+						sectorInteres = Sector.COMERCIOELECTRONICO;
+						break;
+
+					case "Comercio y establecimientos":
+						sectorInteres = Sector.COMERCIO_ESTABLECIMIENTOS;
+						break;
+
+					case "Construccion":
+						sectorInteres = Sector.CONSTRUCCION;
+						break;
+
+					case "Deporte y ocio":
+						sectorInteres = Sector.DEPORTE_OCIO;
+						break;
+
+					case "Energia y medio ambiente":
+						sectorInteres = Sector.ENERGIA_MEDIOAMBIENTE;
+						break;
+
+					case "Finanzas, Seguros y bienes inmuebles":
+						sectorInteres = Sector.FINANZAS_SEGUROS_BIENESINMUEBLES;
+						break;
+
+					case "Internet":
+						sectorInteres = Sector.INTERNET;
+						break;
+
+					case "Logistica y Transporte":
+						sectorInteres = Sector.LOGISTICA_TRANSPORTE;
+						break;
+
+					case "Medios de comunicacion y marketing":
+						sectorInteres = Sector.MEDIOSCOMUNICACION_MARKETING;
+						break;
+
+					case "Metalurgia y electronica":
+						sectorInteres = Sector.METALURGIA_ELECTRONICA;
+						break;
+
+					case "Productos quimicos y materias primas":
+						sectorInteres = Sector.PRODUCTOSQUIMICOS_MATERIASPRIMAS;
+						break;
+
+					case "Salud e industria farmaceutica":
+						sectorInteres = Sector.SALUD_INDUSTRIAFARMACEUTICA;
+						break;
+
+					case "Servicios":
+						sectorInteres = Sector.SERVICIOS;
+						break;
+
+					case "Sociedad":
+						sectorInteres = Sector.SOCIEDAD;
+						break;
+
+					case "Tecnologia y telecomunicaciones":
+						sectorInteres = Sector.TECNOLOGIA_TELECOMUNICACIONES;
+						break;
+
+					case "Turismo y hosteleria":
+						sectorInteres = Sector.TURISMO_HOSTELERIA;
+						break;
+
+					case "Vida":
+						sectorInteres = Sector.VIDA;
+						break;
+					}
 
 					if (!textFieldCVLink.getText().isBlank()) {
 						cv = textFieldCVLink.getText();

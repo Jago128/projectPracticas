@@ -286,7 +286,81 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		}
 
 		switch (persona.getSectorInteres()) {
-		// TBD
+		case AGRICULTURA_GANADERIA:
+			sectorInteres = "Agricultura y ganadería";
+			break;
+
+		case BIENESCONSUMO:
+			sectorInteres = "Bienes de consumo";
+			break;
+
+		case COMERCIOELECTRONICO:
+			sectorInteres = "Comercio electrónico";
+			break;
+
+		case COMERCIO_ESTABLECIMIENTOS:
+			sectorInteres = "Comercio y establecimientos";
+			break;
+
+		case CONSTRUCCION:
+			sectorInteres = "Construcción";
+			break;
+
+		case DEPORTE_OCIO:
+			sectorInteres = "Deporte y ocio";
+			break;
+
+		case ENERGIA_MEDIOAMBIENTE:
+			sectorInteres = "Energía y medio ambiente";
+			break;
+
+		case FINANZAS_SEGUROS_BIENESINMUEBLES:
+			sectorInteres = "Finanzas, seguros y bienes inmuebles";
+			break;
+
+		case INTERNET:
+			sectorInteres = "Internet";
+			break;
+
+		case LOGISTICA_TRANSPORTE:
+			sectorInteres = "Logística y transporte";
+			break;
+
+		case MEDIOSCOMUNICACION_MARKETING:
+			sectorInteres = "Medios de comunicación y marketing";
+			break;
+
+		case METALURGIA_ELECTRONICA:
+			sectorInteres = "Metalurgia y electrónica";
+			break;
+
+		case PRODUCTOSQUIMICOS_MATERIASPRIMAS:
+			sectorInteres = "Productos químicos y materias primas";
+			break;
+
+		case SALUD_INDUSTRIAFARMACEUTICA:
+			sectorInteres = "Salud e industria farmacéutica";
+			break;
+
+		case SERVICIOS:
+			sectorInteres = "Servicios";
+			break;
+
+		case SOCIEDAD:
+			sectorInteres = "Sociedad";
+			break;
+
+		case TECNOLOGIA_TELECOMUNICACIONES:
+			sectorInteres = "Tecnología y telecomunicaciones";
+			break;
+
+		case TURISMO_HOSTELERIA:
+			sectorInteres = "Turismo y hostelería";
+			break;
+
+		case VIDA:
+			sectorInteres = "Vida";
+			break;
 
 		default:
 			System.out.println("Tipo invalido");

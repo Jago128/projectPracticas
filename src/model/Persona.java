@@ -7,7 +7,7 @@ public class Persona {
 	private String apoyo;
 	private Formacion formacion;
 	private String especialidad;
-	private SectorInteres sectorInteres; // TBD
+	private Sector sectorInteres; // TBD
 	private String cvLink;
 	private Discapacidad cerfificadoDiscapacidad;
 	private Euskera euskera;
@@ -22,7 +22,7 @@ public class Persona {
 		this.apoyo = "";
 		this.formacion = Formacion.UNSET;
 		this.especialidad = "";
-		this.sectorInteres = SectorInteres.UNSET;
+		this.sectorInteres = Sector.UNSET;
 		this.cvLink = "";
 		this.cerfificadoDiscapacidad = Discapacidad.UNSET;
 		this.euskera = Euskera.UNSET;
@@ -34,7 +34,7 @@ public class Persona {
 	}
 
 	public Persona(String nombre, String apoyo, Formacion formacion, String especialidad,
-			SectorInteres sectorInteres, String cvLink, Discapacidad cerfificadoDiscapacidad, Euskera euskera,
+			Sector sectorInteres, String cvLink, Discapacidad cerfificadoDiscapacidad, Euskera euskera,
 			Ingles ingles, String otrosIdiomas, Localidad localidad, Accesibilidad accesibilidad,
 			String observaciones) {
 		this.nombre = nombre;
@@ -84,11 +84,11 @@ public class Persona {
 		this.especialidad = especialidad;
 	}
 
-	public SectorInteres getSectorInteres() {
+	public Sector getSectorInteres() {
 		return sectorInteres;
 	}
 
-	public void setSectorInteres(SectorInteres sectorInteres) {
+	public void setSectorInteres(Sector sectorInteres) {
 		this.sectorInteres = sectorInteres;
 	}
 
