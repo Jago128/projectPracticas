@@ -132,7 +132,7 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		modelFormacion.addElement("Formacion");
 		modelEspecialidad.addElement("Especialidad");
 		modelSectorInteres.addElement("Sector de interes");
-		modelCVLink.addElement("CV Link (Para copiar)");
+		modelCVLink.addElement("CV Link");
 		modelCertificadoDiscapacidad.addElement("Certificado de discapacidad");
 		modelEuskera.addElement("Euskera");
 		modelIngles.addElement("Ingles");

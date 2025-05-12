@@ -184,7 +184,7 @@ public class LoginController {
 		return dao.modificarAccesibilidad(accesibilidad, nom);
 	}
 
-	public boolean modificarObservaciones(String observaciones, String nom) {
-		return dao.modificarObservaciones(observaciones, nom);
+	public boolean modificarPersonaObservaciones(String observaciones, String nom) {
+		return dao.modificarPersonaObservaciones(observaciones, nom);
 	}
 }

@@ -89,5 +89,5 @@ public interface ApnabiDAO {
 
 	public boolean modificarAccesibilidad(String accesibilidad, String nom);
 
-	public boolean modificarObservaciones(String observaciones, String nom);
+	public boolean modificarPersonaObservaciones(String observaciones, String nom);
 }

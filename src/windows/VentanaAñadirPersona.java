@@ -29,7 +29,7 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		JLabel lblObligatorio = new JLabel("Los campos con * son obligatorias.");
 		lblObligatorio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblObligatorio.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblObligatorio.setBounds(20, 10, 721, 19);
+		lblObligatorio.setBounds(215, 10, 241, 19);
 		getContentPane().add(lblObligatorio);
 
 		JLabel lblNom = new JLabel("Nombre: *");
@@ -77,10 +77,10 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		comboBoxEspecialidad.setBounds(497, 82, 163, 21);
 		getContentPane().add(comboBoxEspecialidad);
 
-		JLabel lblSectorInteres = new JLabel("Sector interes: *");
+		JLabel lblSectorInteres = new JLabel("Sector de interes: *");
 		lblSectorInteres.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSectorInteres.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSectorInteres.setBounds(41, 111, 119, 28);
+		lblSectorInteres.setBounds(31, 111, 129, 28);
 		getContentPane().add(lblSectorInteres);
 
 		comboBoxSectorInteres = new JComboBox<>();

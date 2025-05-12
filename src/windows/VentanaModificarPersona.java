@@ -70,6 +70,8 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblFormacion);
 
 		comboBoxFormacion = new JComboBox<>();
+		comboBoxFormacion.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO", "EPA",
+				"FP Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacion.setSelectedIndex(0);
 		comboBoxFormacion.setBounds(175, 80, 163, 21);
 		getContentPane().add(comboBoxFormacion);
@@ -81,7 +83,7 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblEspecialidad);
 
 		comboBoxEspecialidad = new JComboBox<>();
-		comboBoxEspecialidad.setModel(new DefaultComboBoxModel<>(new String[] {}));
+		comboBoxEspecialidad.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
 		comboBoxEspecialidad.setSelectedIndex(0);
 		comboBoxEspecialidad.setBounds(175, 118, 163, 21);
 		getContentPane().add(comboBoxEspecialidad);
@@ -93,7 +95,7 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblSectorInteres);
 
 		comboBoxSectorInteres = new JComboBox<>();
-		comboBoxSectorInteres.setModel(new DefaultComboBoxModel<>(new String[] {}));
+		comboBoxSectorInteres.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
 		comboBoxSectorInteres.setSelectedIndex(0);
 		comboBoxSectorInteres.setBounds(175, 158, 163, 21);
 		getContentPane().add(comboBoxSectorInteres);
@@ -116,6 +118,8 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblCertifDiscapacidad);
 
 		comboBoxCertifDiscapacidad = new JComboBox<>();
+		comboBoxCertifDiscapacidad
+				.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Si", "No", "No sabe", "Tramitando" }));
 		comboBoxCertifDiscapacidad.setSelectedIndex(0);
 		comboBoxCertifDiscapacidad.setBounds(175, 234, 163, 21);
 		getContentPane().add(comboBoxCertifDiscapacidad);
@@ -127,6 +131,8 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblEuskera);
 
 		comboBoxEuskera = new JComboBox<>();
+		comboBoxEuskera.setModel(new DefaultComboBoxModel<>(
+				new String[] { "---", "A1", "A2", "B1", "B2", "C1", "C2", "Conocimiento, pero sin acreditar" }));
 		comboBoxEuskera.setSelectedIndex(0);
 		comboBoxEuskera.setBounds(175, 272, 163, 21);
 		getContentPane().add(comboBoxEuskera);
@@ -138,6 +144,8 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblIngles);
 
 		comboBoxIngles = new JComboBox<>();
+		comboBoxIngles.setModel(new DefaultComboBoxModel<>(
+				new String[] { "---", "A1", "A2", "B1", "B2", "C1", "C2", "Conocimiento, pero sin acreditar" }));
 		comboBoxIngles.setSelectedIndex(0);
 		comboBoxIngles.setBounds(175, 310, 163, 21);
 		getContentPane().add(comboBoxIngles);
@@ -160,7 +168,7 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblLocalidad);
 
 		comboBoxLocalidad = new JComboBox<>();
-		comboBoxLocalidad.setModel(new DefaultComboBoxModel<>(new String[] {}));
+		comboBoxLocalidad.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
 		comboBoxLocalidad.setSelectedIndex(0);
 		comboBoxLocalidad.setBounds(175, 389, 163, 21);
 		getContentPane().add(comboBoxLocalidad);
@@ -172,6 +180,8 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblAccesibilidad);
 
 		comboBoxAccesibilidad = new JComboBox<>();
+		comboBoxAccesibilidad.setModel(
+				new DefaultComboBoxModel<>(new String[] { "---", "Carnet + coche", "Carnet", "Transporte publico" }));
 		comboBoxAccesibilidad.setSelectedIndex(0);
 		comboBoxAccesibilidad.setBounds(175, 432, 163, 21);
 		getContentPane().add(comboBoxAccesibilidad);
@@ -410,8 +420,125 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		textareaPersona.setText(infoPersona.toString());
 	}
 
+	public boolean addError() { // ErrorID: 1
+		boolean check = false;
+		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
+
+		if (!textFieldApoyo.getText().isBlank()) {
+			check = cont.modificarApoyo(textFieldApoyo.getText(), persona.getNombre());
+			if (!check) {
+				infoError.append("Apoyo");
+			}
+		}
+
+		if (!comboBoxFormacion.getSelectedItem().equals("---") && check) {
+			check = cont.modificarFormacion(comboBoxFormacion.getItemAt(comboBoxFormacion.getSelectedIndex()),
+					persona.getNombre());
+			if (!check) {
+				infoError.append("Formacion");
+			}
+		}
+
+		if (!comboBoxEspecialidad.getSelectedItem().equals("---") && check) {
+			check = cont.modificarEspecialidad(comboBoxEspecialidad.getItemAt(comboBoxEspecialidad.getSelectedIndex()),
+					persona.getNombre());
+			if (!check) {
+				infoError.append("Especialidad");
+			}
+		}
+
+		if (!comboBoxSectorInteres.getSelectedItem().equals("---") && check) {
+			check = cont.modificarSectorInteres(
+					comboBoxSectorInteres.getItemAt(comboBoxSectorInteres.getSelectedIndex()), persona.getNombre());
+			if (!check) {
+				infoError.append("Sector de interes");
+			}
+		}
+
+		if (!textFieldCVLink.getText().isBlank()) {
+			check = cont.modificarCVLink(textFieldCVLink.getText(), persona.getNombre());
+			if (!check) {
+				infoError.append("CV Link");
+			}
+		}
+
+		if (!comboBoxCertifDiscapacidad.getSelectedItem().equals("---") && check) {
+			check = cont.modificarDiscapacidad(
+					comboBoxCertifDiscapacidad.getItemAt(comboBoxCertifDiscapacidad.getSelectedIndex()),
+					persona.getNombre());
+			if (!check) {
+				infoError.append("Certificado de discapacidad");
+			}
+		}
+
+		if (!comboBoxEuskera.getSelectedItem().equals("---") && check) {
+			check = cont.modificarEuskera(comboBoxEuskera.getItemAt(comboBoxEuskera.getSelectedIndex()),
+					persona.getNombre());
+			if (!check) {
+				infoError.append("Euskera");
+			}
+		}
+
+		if (!comboBoxIngles.getSelectedItem().equals("---") && check) {
+			check = cont.modificarIngles(comboBoxIngles.getItemAt(comboBoxIngles.getSelectedIndex()),
+					persona.getNombre());
+			if (!check) {
+				infoError.append("Ingles");
+			}
+		}
+
+		if (!textFieldOtrosIdiomas.getText().isBlank()) {
+			check = cont.modificarOtrosIdiomas(textFieldOtrosIdiomas.getText(), persona.getNombre());
+			if (!check) {
+				infoError.append("Otros idiomas");
+			}
+		}
+
+		if (!comboBoxLocalidad.getSelectedItem().equals("---") && check) {
+			check = cont.modificarLocalidad(comboBoxLocalidad.getItemAt(comboBoxLocalidad.getSelectedIndex()),
+					persona.getNombre());
+			if (!check) {
+				infoError.append("Localidad");
+			}
+		}
+
+		if (!comboBoxAccesibilidad.getSelectedItem().equals("---") && check) {
+			check = cont.modificarAccesibilidad(
+					comboBoxAccesibilidad.getItemAt(comboBoxAccesibilidad.getSelectedIndex()), persona.getNombre());
+			if (!check) {
+				infoError.append("Sector de interes");
+			}
+		}
+
+		if (!textAreaObservaciones.getText().isBlank()) {
+			check = cont.modificarPersonaObservaciones(textAreaObservaciones.getText(), persona.getNombre());
+			if (!check) {
+				infoError.append("Observaciones");
+			}
+		}
+
+		if (!check) {
+			infoError.append(" al intentar actualizar la persona.");
+			JOptionPane.showMessageDialog(null, infoError.toString()
+					+ "\nLa informacion cambiada correctamente se actualizara en el recuadro de infomacion de la persona.",
+					"ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+
+		return check;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		if (e.getSource() == btnModificar) {
+			if (!addError()) {
+				persona = cont.getPersona(persona.getNombre());
+				loadPersona();
+			} else {
+				JOptionPane.showMessageDialog(null, "La persona ha sido modificada correctamente."
+						+ "\nLa informacion en el recuadro de infomacion de la persona se acualizara para reflejar los cambios.");
+				persona = cont.getPersona(persona.getNombre());
+				loadPersona();
+			}
+		}
 	}
 }

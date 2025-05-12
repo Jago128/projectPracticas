@@ -53,7 +53,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUPDATEINFOULTIMO = "UPDATE CONTACTO SET INFOULTIMO=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATERESULTADOFINAL = "UPDATE CONTACTO SET RESULTADOFINAL=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATEFECHARESOLUCION = "UPDATE CONTACTO SET FECHARESOLUCION=? WHERE COD_CONTACTO=?";
-	
+
 	final String SQLPERSONAS = "SELECT * FROM PERSONA";
 	final String SQLNOMPERSONAS = "SELECT NOM_P FROM PERSONA";
 	final String SQLSELECTPERSONA = "SELECT * FROM PERSONA WHERE NOM_P=?";
@@ -70,7 +70,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUPDATELOCALIDAD = "UPDATE PERSONA SET LOCALIDAD=? WHERE NOM_P=?";
 	final String SQLUPDATEACCESIBILIDAD = "UPDATE PERSONA SET ACCESIBILIDAD=? WHERE NOM_P=?";
 	final String SQLUPDATEPERSONAOBSERVACIONES = "UPDATE PERSONA SET OBSERVACIONES=? WHERE NOM_P=?";
-	
+
 
 	public BDImplementacion() {
 		this.configFile = ResourceBundle.getBundle("model.classConfig");
@@ -284,7 +284,7 @@ public class BDImplementacion implements ApnabiDAO {
 		} 
 		return empresa;
 	}
-	
+
 	@Override
 	public boolean verificarEmpresa(String nom) {
 		ResultSet rs = null;
@@ -555,6 +555,25 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (estado != null) {
+				switch (estado) {
+
+				case "Valorando/interesado":
+					estado = "Valorando_Interesado";
+					break;
+
+				case "Planificando inserciones":
+					estado = "PlanificandoInserciones";
+					break;
+
+				case "Proximo año":
+					estado = "ProximoAño";
+					break;
+
+				case "No interesado":
+					estado = "NoInteresado";
+					break;
+				}
+
 				stmt = con.prepareStatement(SQLUPDATEESTADO);
 				stmt.setString(1, estado);
 				stmt.setString(2, nom);
@@ -634,7 +653,7 @@ public class BDImplementacion implements ApnabiDAO {
 					cont.setResultadoUltimoContacto(null);
 				}
 				cont.setInfoUltimo(rs.getString("INFOULTIMO"));
-				
+
 				if (rs.getString("RESULTADOFINAL")!=null) {
 					cont.setResultadoFinal(ResultadoFinal.valueOf(rs.getString("RESULTADOFINAL").toUpperCase()));
 				} else {
@@ -675,19 +694,19 @@ public class BDImplementacion implements ApnabiDAO {
 			case COMUNICACION_SINRESPUESTA:
 				stmt.setString(6, "Comunicacion_SinRespuesta");
 				break;
-				
+
 			case INICIO_VALORACIONOFERTA:
 				stmt.setString(6, "Inicio_ValoracionOferta");
 				break;
-				
+
 			case RESPUESTA_NOCONCLUYENTE:
 				stmt.setString(6, "Respuesta_NoConcluyente");
 				break;
-				
+
 			case RESPUESTA_POSPUESTA:
 				stmt.setString(6, "Respuesta_Pospuesta");
 				break;
-				
+
 			case REUNION_PROGRAMADA:
 				stmt.setString(6, "Reunion_Programada");
 				break;
@@ -696,7 +715,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt.setString(6, null);
 				break;
 			}
-			
+
 			stmt.setString(7, cont.getInfoUltimo());
 			switch (cont.getResultadoFinal()) {
 			case CONVENIO_COLABORACION:
@@ -729,7 +748,7 @@ public class BDImplementacion implements ApnabiDAO {
 			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
-			
+
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
@@ -883,6 +902,29 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!resultadoU.isBlank()) {
+				switch (resultadoU) {
+
+				case "Comunicacion sin respuesta":
+					resultadoU = "Comunicacion_SinRespuesta";
+					break;
+
+				case "Nos pospone la respuesta":
+					resultadoU = "Respuesta_Pospuesta";
+					break;
+
+				case "Programada reunion":
+					resultadoU = "Reunion_Programada";
+					break;
+
+				case "Respuesta no concluyente":
+					resultadoU = "Respuesta_NoConcluyente";
+					break;
+
+				case "Inicio valoracion oferta":
+					resultadoU = "Inicio_ValoracionOferta";
+					break;
+				}
+
 				stmt = con.prepareStatement(SQLUPDATERESULTADOULTIMO);
 				stmt.setString(1, resultadoU);
 				stmt.setInt(2, id);
@@ -937,6 +979,28 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!resultadoF.isBlank()) {
+				switch (resultadoF) {
+				case "Oferta de empleo":
+					resultadoF = "Oferta_Empleo";
+					break;
+
+				case "Convenio de colaboracion":
+					resultadoF = "Convenio_Colaboracion";
+					break;
+
+				case "Medidas alternativas":
+					resultadoF = "Medidas_Alternativas";
+					break;
+
+				case "Relacion concluida":
+					resultadoF = "Relacion_Concluida";
+					break;
+
+				case "Relacion pospuesta":
+					resultadoF = "Relacion_Pospuesta";
+					break;
+				}
+
 				stmt = con.prepareStatement(SQLUPDATERESULTADOFINAL);
 				stmt.setString(1, resultadoF);
 				stmt.setInt(2, id);
@@ -1022,7 +1086,7 @@ public class BDImplementacion implements ApnabiDAO {
 		} 
 		return personas;
 	}
-	
+
 	@Override
 	public Map<String, Persona> mostrarNomPersonas() {
 		ResultSet rs = null;
@@ -1049,12 +1113,12 @@ public class BDImplementacion implements ApnabiDAO {
 		} 
 		return personas;
 	}
-	
+
 	@Override
 	public Persona getPersona(String nom) {
 		ResultSet rs = null;
 		Persona persona = new Persona();
-		
+
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLNOMPERSONAS);
@@ -1086,7 +1150,7 @@ public class BDImplementacion implements ApnabiDAO {
 		} 
 		return persona;
 	}
-	
+
 	@Override
 	public boolean añadirPersona(Persona persona) {
 		boolean check = false;
@@ -1100,43 +1164,43 @@ public class BDImplementacion implements ApnabiDAO {
 			case AT:
 				stmt.setString(3, "AT");
 				break;
-				
+
 			case BACHILLERATO:
 				stmt.setString(3, "Bachillerato");
 				break;
-				
+
 			case DOCTORADO:
 				stmt.setString(3, "Doctorado");
 				break;
-				
+
 			case EPA:
 				stmt.setString(3, "EPA");
 				break;
-				
+
 			case ESO:
 				stmt.setString(3, "ESO");
 				break;
-				
+
 			case FP_BASICA:
 				stmt.setString(3, "FP_Basica");
 				break;
-				
+
 			case GM:
 				stmt.setString(3, "GM");
 				break;
-				
+
 			case GS:
 				stmt.setString(3, "GS");
 				break;
-				
+
 			case MASTER:
 				stmt.setString(3, "Master");
 				break;
-				
+
 			case PRIMARIA:
 				stmt.setString(3, "Primaria");
 				break;
-				
+
 			case UNIVERSIDAD:
 				stmt.setString(3, "Universidad");
 				break;
@@ -1144,29 +1208,30 @@ public class BDImplementacion implements ApnabiDAO {
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			
+
 			// 4: Especialidad
+
 			switch (persona.getSectorInteres()) { // 5
 			// TBD
-			
+
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			
+
 			stmt.setString(6, persona.getCvLink());
 			switch (persona.getCerfificadoDiscapacidad()) {
 			case NO:
 				stmt.setString(7, "No");
 				break;
-				
+
 			case NO_SABE:
 				stmt.setString(7, "No_Sabe");
 				break;
-				
+
 			case SI:
 				stmt.setString(7, "Si");
 				break;
-				
+
 			case TRAMITANDO:
 				stmt.setString(7, "Tramitando");
 				break;
@@ -1174,32 +1239,32 @@ public class BDImplementacion implements ApnabiDAO {
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			
+
 			switch (persona.getEuskera()) {
 			case A1:
 				stmt.setString(8, "A1");
 				break;
-				
+
 			case A2:
 				stmt.setString(8, "A2");
 				break;
-				
+
 			case B1:
 				stmt.setString(8, "B1");
 				break;
-				
+
 			case B2:
 				stmt.setString(8, "B2");
 				break;
-				
+
 			case C1:
 				stmt.setString(8, "C1");
 				break;
-				
+
 			case C2:
 				stmt.setString(8, "C1");
 				break;
-				
+
 			case CONOCIMIENTO_NOACREDITADO:
 				stmt.setString(8, "Conocimiento_NoAcreditado");
 				break;
@@ -1207,56 +1272,56 @@ public class BDImplementacion implements ApnabiDAO {
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			
+
 			switch (persona.getIngles()) {
 			case A1:
 				stmt.setString(9, "A1");
 				break;
-				
+
 			case A2:
 				stmt.setString(9, "A2");
 				break;
-				
+
 			case B1:
 				stmt.setString(9, "B1");
 				break;
-				
+
 			case B2:
 				stmt.setString(9, "B2");
 				break;
-				
+
 			case C1:
 				stmt.setString(9, "C1");
 				break;
-				
+
 			case C2:
 				stmt.setString(9, "C1");
 				break;
-				
+
 			case CONOCIMIENTO_NOACREDITADO:
 				stmt.setString(9, "Conocimiento_NoAcreditado");
 				break;
-			
+
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			
+
 			stmt.setString(10, persona.getOtrosIdiomas());
 			switch (persona.getLocalidad()) { // 11
 			// TBD
 			default:
-				break;
+				System.out.println("Tipo invalido.");
 			}
-			
+
 			switch (persona.getAccesibilidad()) {
 			case CARNET:
 				stmt.setString(12, "Carnet");
 				break;
-				
+
 			case CARNET_COCHE:
 				stmt.setString(12, "Carnet_Coche");
 				break;
-				
+
 			case TRANSPORTE_PUBLICO:
 				stmt.setString(12, "Transporte_Publico");
 				break;
@@ -1264,7 +1329,7 @@ public class BDImplementacion implements ApnabiDAO {
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			
+
 			stmt.setString(13, persona.getObservaciones());
 			if (stmt.executeUpdate() > 0) {
 				check = true;
@@ -1314,6 +1379,10 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!formacion.isBlank()) {
+				if (formacion.equals("FP Basica")) {
+					formacion = "FP_Basica";
+				}
+				
 				stmt = con.prepareStatement(SQLUPDATEFORMACION);
 				stmt.setString(1, formacion);
 				stmt.setString(2, nom);
@@ -1341,6 +1410,7 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!especialidad.isBlank()) {
+				// Handling TBD
 				stmt = con.prepareStatement(SQLUPDATE_ESPECIALIDAD);
 				stmt.setString(1, especialidad);
 				stmt.setString(2, nom);
@@ -1360,7 +1430,7 @@ public class BDImplementacion implements ApnabiDAO {
 		} 
 		return check;
 	}
-	
+
 	@Override
 	public boolean modificarSectorInteres(String sectorI, String nom) {
 		boolean check = false;
@@ -1368,6 +1438,7 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!sectorI.isBlank()) {
+				// Handling TBD
 				stmt = con.prepareStatement(SQLUPDATESECTORINTERES);
 				stmt.setString(1, sectorI);
 				stmt.setString(2, nom);
@@ -1422,6 +1493,10 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!discap.isBlank()) {
+				if (discap.equals("No sabe")) {
+					discap = "No_Sabe";
+				}
+				
 				stmt = con.prepareStatement(SQLUPDATEDISCAPACIDAD);
 				stmt.setString(1, discap);
 				stmt.setString(2, nom);
@@ -1449,6 +1524,10 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!nivel.isBlank()) {
+				if (nivel.equals("Conocimiento, pero sin acreditar")) {
+					nivel = "Conocimiento_NoAcreditado";
+				}
+				
 				stmt = con.prepareStatement(SQLUPDATE_EUSKERA);
 				stmt.setString(1, nivel);
 				stmt.setString(2, nom);
@@ -1476,6 +1555,10 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!nivel.isBlank()) {
+				if (nivel.equals("Conocimiento, pero sin acreditar")) {
+					nivel = "Conocimiento_NoAcreditado";
+				}
+				
 				stmt = con.prepareStatement(SQLUPDATEINGLES);
 				stmt.setString(1, nivel);
 				stmt.setString(2, nom);
@@ -1530,6 +1613,9 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!localidad.isBlank()) {
+				switch (localidad) {
+
+				}
 				stmt = con.prepareStatement(SQLUPDATELOCALIDAD);
 				stmt.setString(1, localidad);
 				stmt.setString(2, nom);
@@ -1556,6 +1642,16 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
+			switch (accesibilidad) {
+			case "Carnet + coche":
+				accesibilidad = "Carnet_Coche";
+				break;
+				
+			case "Transporte publico":
+				accesibilidad = "Transporte_Publico";
+				break;
+			}
+
 			if (!accesibilidad.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATEACCESIBILIDAD);
 				stmt.setString(1, accesibilidad);
@@ -1578,7 +1674,7 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarObservaciones(String observaciones, String nom) {
+	public boolean modificarPersonaObservaciones(String observaciones, String nom) {
 		boolean check = false;
 
 		this.openConnection();
