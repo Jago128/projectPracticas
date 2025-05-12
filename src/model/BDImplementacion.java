@@ -1042,7 +1042,7 @@ public class BDImplementacion implements ApnabiDAO {
 				persona.setNombre(rs.getString("NOM_P"));
 				persona.setApoyo(rs.getString("APOYO"));
 				persona.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
-				// Especialidad
+				persona.setEspecialidad(rs.getString("ESPECIALIDAD"));
 				persona.setSectorInteres(SectorInteres.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
 				persona.setCvLink(rs.getString("CV"));
 				persona.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
@@ -1105,7 +1105,7 @@ public class BDImplementacion implements ApnabiDAO {
 				persona.setNombre(rs.getString("NOM_P"));
 				persona.setApoyo(rs.getString("APOYO"));
 				persona.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
-				// Especialidad
+				persona.setEspecialidad(rs.getString("ESPECIALIDAD"));
 				persona.setSectorInteres(SectorInteres.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
 				persona.setCvLink(rs.getString("CV"));
 				persona.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
@@ -1210,9 +1210,8 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			// 4: Especialidad
-
-			switch (persona.getSectorInteres()) { // 5
+			stmt.setString(4, persona.getEspecialidad());
+			switch (persona.getSectorInteres()) {
 			// TBD
 
 			default:
@@ -1308,8 +1307,487 @@ public class BDImplementacion implements ApnabiDAO {
 			}
 
 			stmt.setString(10, persona.getOtrosIdiomas());
-			switch (persona.getLocalidad()) { // 11
-			// TBD
+			switch (persona.getLocalidad()) {
+			case ABADIÑO:
+				stmt.setString(11, "Abadiño");
+				break;
+
+			case ABANTO_ZIERBENA:
+				stmt.setString(11, "Abanto_Zierbena");
+				break;
+
+			case AJANGIZ:
+				stmt.setString(11, "Ajangiz");
+				break;
+
+			case ALONSOTEGI:
+				stmt.setString(11, "Alonsotegi");
+				break;
+
+			case AMOREBIETA:
+				stmt.setString(11, "Amorebieta");
+				break;
+
+			case AMOROTO:
+				stmt.setString(11, "Amoroto");
+				break;
+
+			case AMURRIO:
+				stmt.setString(11, "Amurrio");
+				break;
+
+			case ARAKALDO:
+				stmt.setString(11, "Arakaldo");
+				break;
+
+			case ARANTZAZU:
+				stmt.setString(11, "Arantzazu");
+				break;
+
+			case AREATZA_BILARO:
+				stmt.setString(11, "Areatza_Bilaro");
+				break;
+
+			case ARRANKUDIAGA:
+				stmt.setString(11, "Arrankudiaga");
+				break;
+
+			case ARRATZU:
+				stmt.setString(11, "Arratzu");
+				break;
+
+			case ARRIETA:
+				stmt.setString(11, "Arrieta");
+				break;
+
+			case ARRIGORRIAGA:
+				stmt.setString(11, "Arrigorriaga");
+				break;
+
+			case ARTZENTALES:
+				stmt.setString(11, "Artzentales");
+				break;
+
+			case ARTZINIEGA:
+				stmt.setString(11, "Artziniega");
+				break;
+
+			case AULESTI:
+				stmt.setString(11, "Aulesti");
+				break;
+
+			case AXPEATXONDO:
+				stmt.setString(11, "AxpeAtxondo");
+				break;
+
+			case AYALA_AIARA:
+				stmt.setString(11, "Ayala_Aiara");
+				break;
+
+			case BAKIO:
+				stmt.setString(11, "Bakio");
+				break;
+
+			case BALMASEDA:
+				stmt.setString(11, "Balmaseda");
+				break;
+
+			case BARAKALDO:
+				stmt.setString(11, "Barakaldo");
+				break;
+
+			case BARRIKA:
+				stmt.setString(11, "Barrika");
+				break;
+
+			case BASAURI:
+				stmt.setString(11, "Basauri");
+				break;
+
+			case BEDIA:
+				stmt.setString(11, "Bedia");
+				break;
+
+			case BERANGO:
+				stmt.setString(11, "Berango");
+				break;
+
+			case BERMEO:
+				stmt.setString(11, "Bermeo");
+				break;
+
+			case BERRIATUA:
+				stmt.setString(11, "Berriatua");
+				break;
+
+			case BERRIZ:
+				stmt.setString(11, "Berriz");
+				break;
+
+			case BILBAO:
+				stmt.setString(11, "Bilbao");
+				break;
+
+			case BUSTURIA:
+				stmt.setString(11, "Busturia");
+				break;
+
+			case CASTROURDIALES:
+				stmt.setString(11, "CastroUrdiales");
+				break;
+
+			case DERIO:
+				stmt.setString(11, "Derio");
+				break;
+
+			case DIMA:
+				stmt.setString(11, "Dima");
+				break;
+
+			case DURANGO:
+				stmt.setString(11, "Durango");
+				break;
+
+			case EA:
+				stmt.setString(11, "Ea");
+				break;
+
+			case ELANTXOBE:
+				stmt.setString(11, "Elantxobe");
+				break;
+
+			case ELORRIO:
+				stmt.setString(11, "Elorrio");
+				break;
+
+			case ERANDIO:
+				stmt.setString(11, "Erandio");
+				break;
+
+			case EREÑO:
+				stmt.setString(11, "Ereño");
+				break;
+
+			case ERMUA:
+				stmt.setString(11, "Ermua");
+				break;
+
+			case ERRIGOITI:
+				stmt.setString(11, "Errigoiti");
+				break;
+
+			case ETXEBARRI:
+				stmt.setString(11, "Etxebarri");
+				break;
+
+			case ETXEBARRIA:
+				stmt.setString(11, "Etxebarria");
+				break;
+
+			case FORUA:
+				stmt.setString(11, "Forua");
+				break;
+
+			case FRUIZ:
+				stmt.setString(11, "Fruiz");
+				break;
+
+			case GALDAKAO:
+				stmt.setString(11, "Galdakao");
+				break;
+
+			case GALDAMES:
+				stmt.setString(11, "Galdames");
+				break;
+
+			case GAMIZFIKA:
+				stmt.setString(11, "GamizFika");
+				break;
+
+			case GARAI:
+				stmt.setString(11, "Garai");
+				break;
+
+			case GATIKA:
+				stmt.setString(11, "Gatika");
+				break;
+
+			case GAUTEGIZ:
+				stmt.setString(11, "Gautegiz");
+				break;
+
+			case GAZTELUELEXABEITIA_ARTEAGA:
+				stmt.setString(11, "GazteluElexabeitia_Arteaga");
+				break;
+
+			case GERNIKALUMO:
+				stmt.setString(11, "GernikaLumo");
+				break;
+
+			case GETXO:
+				stmt.setString(11, "Getxo");
+				break;
+
+			case GIZABURUAGA:
+				stmt.setString(11, "Gizaburuaga");
+				break;
+
+			case GORDEXOLA:
+				stmt.setString(11, "Gordexola");
+				break;
+
+			case GORLIZ:
+				stmt.setString(11, "Gorliz");
+				break;
+
+			case GUEÑES:
+				stmt.setString(11, "Gueñes");
+				break;
+
+			case IBARRANGELU:
+				stmt.setString(11, "Ibarrangelu");
+				break;
+
+			case IGORRE:
+				stmt.setString(11, "Igorre");
+				break;
+
+			case ISPASTER:
+				stmt.setString(11, "Ispaster");
+				break;
+
+			case IURRETA:
+				stmt.setString(11, "Iurreta");
+				break;
+
+			case IZURTZA:
+				stmt.setString(11, "Izurtza");
+				break;
+
+			case KARRANTZAHARANA:
+				stmt.setString(11, "KarrantzaHarana");
+				break;
+
+			case KORTEZUBI:
+				stmt.setString(11, "Kortezubi");
+				break;
+
+			case LANESTOSA:
+				stmt.setString(11, "Lanestosa");
+				break;
+
+			case LARRABETZU:
+				stmt.setString(11, "Larrabetzu");
+				break;
+
+			case LAUDIO_LLODIO:
+				stmt.setString(11, "Laudio_Llodio");
+				break;
+
+			case LAUKIZ:
+				stmt.setString(11, "Laukiz");
+				break;
+
+			case LEIOA:
+				stmt.setString(11, "Leioa");
+				break;
+
+			case LEKEITIO:
+				stmt.setString(11, "Lekeitio");
+				break;
+
+			case LEMOA:
+				stmt.setString(11, "Lemoa");
+				break;
+
+			case LEMOIZ:
+				stmt.setString(11, "Lemoiz");
+				break;
+
+			case LEZAMA:
+				stmt.setString(11, "Lezama");
+				break;
+
+			case LOIU:
+				stmt.setString(11, "Loiu");
+				break;
+
+			case MALLABIA:
+				stmt.setString(11, "Mallabia");
+				break;
+
+			case MARKINAXEMEIN:
+				stmt.setString(11, "MarkinaXemein");
+				break;
+
+			case MARURI:
+				stmt.setString(11, "Maruri");
+				break;
+
+			case MAÑARIA:
+				stmt.setString(11, "Mañaria");
+				break;
+
+			case MENDATA:
+				stmt.setString(11, "Mendata");
+				break;
+
+			case MENDEXA:
+				stmt.setString(11, "Mendexa");
+				break;
+
+			case MEÑAKA:
+				stmt.setString(11, "Meñaka");
+				break;
+
+			case MORGA:
+				stmt.setString(11, "Morga");
+				break;
+
+			case MUNDAKA:
+				stmt.setString(11, "Mundaka");
+				break;
+
+			case MUNGIA:
+				stmt.setString(11, "Mungia");
+				break;
+
+			case MUNITIBARARBATZEGI_GERRIKAITZ:
+				stmt.setString(11, "MunitibarArbatzegi_Gerrikaitz");
+				break;
+
+			case MURUETA:
+				stmt.setString(11, "Murueta");
+				break;
+
+			case MUSKIZ:
+				stmt.setString(11, "Muskiz");
+				break;
+
+			case MUXIKA:
+				stmt.setString(11, "Muxika");
+				break;
+
+			case NABARNIZ:
+				stmt.setString(11, "Nabarniz");
+				break;
+
+			case ONDARROA:
+				stmt.setString(11, "Ondarroa");
+				break;
+
+			case ORDUÑA:
+				stmt.setString(11, "Orduña");
+				break;
+
+			case OROZKO:
+				stmt.setString(11, "Orozko");
+				break;
+
+			case ORTUELLA:
+				stmt.setString(11, "Ortuella");
+				break;
+
+			case OTXANDIO:
+				stmt.setString(11, "Otxandio");
+				break;
+
+			case PLENTZIA:
+				stmt.setString(11, "Plentzia");
+				break;
+
+			case PORTUGALETE:
+				stmt.setString(11, "Portugalete");
+				break;
+
+			case SANTURTZI:
+				stmt.setString(11, "Santurtzi");
+				break;
+
+			case SESTAO:
+				stmt.setString(11, "Sestao");
+				break;
+
+			case SONDIKA:
+				stmt.setString(11, "Sondika");
+				break;
+
+			case SOPELA:
+				stmt.setString(11, "Sopela");
+				break;
+
+			case SOPUERTA:
+				stmt.setString(11, "Sopuerta");
+				break;
+
+			case SUKARRIETA:
+				stmt.setString(11, "Sukarrieta");
+				break;
+
+			case TRAPAGARAN:
+				stmt.setString(11, "Trapagaran");
+				break;
+
+			case TURTZIOZ:
+				stmt.setString(11, "Turtzioz");
+				break;
+
+			case UBIDE:
+				stmt.setString(11, "Ubide");
+				break;
+
+			case UGAOMIRABALLES:
+				stmt.setString(11, "UgaoMiraballes");
+				break;
+
+			case URDULIZ:
+				stmt.setString(11, "Urduliz");
+				break;
+
+			case URDUÑA:
+				stmt.setString(11, "Urduña");
+				break;
+
+			case USANSOLO:
+				stmt.setString(11, "Usansolo");
+				break;
+
+			case ZALDIBAR:
+				stmt.setString(11, "Zaldibar");
+				break;
+
+			case ZALLA:
+				stmt.setString(11, "Zalla");
+				break;
+
+			case ZAMUDIO:
+				stmt.setString(11, "Zamudio");
+				break;
+
+			case ZARATAMO:
+				stmt.setString(11, "Zaratamo");
+				break;
+
+			case ZEANURI:
+				stmt.setString(11, "Zeanuri");
+				break;
+
+			case ZEBERIO:
+				stmt.setString(11, "Zeberio");
+				break;
+
+			case ZIERBENA:
+				stmt.setString(11, "Zierbena");
+				break;
+
+			case ZIORTZA_BOLIBAR:
+				stmt.setString(11, "ZiortzaBolibar");
+				break;
+
+			case ZORNOTZA:
+				stmt.setString(11, "Zornotza");
+				break;
+			
 			default:
 				System.out.println("Tipo invalido.");
 			}
@@ -1410,7 +1888,6 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!especialidad.isBlank()) {
-				// Handling TBD
 				stmt = con.prepareStatement(SQLUPDATE_ESPECIALIDAD);
 				stmt.setString(1, especialidad);
 				stmt.setString(2, nom);
@@ -1613,7 +2090,61 @@ public class BDImplementacion implements ApnabiDAO {
 		try {
 			if (!localidad.isBlank()) {
 				switch (localidad) {
-					// TBD
+				case "Abanto-Zierbena":
+					localidad = "Abanto_Zierbena";
+					break;
+
+				case "Areatza o Bilaro":
+					localidad = "Areatza_Bilaro";
+					break;
+
+				case "Axpe Atxondo":
+					localidad = "AxpeAtxondo";
+					break;
+
+				case "Ayala/Aiara":
+					localidad = "Ayala_Aiara";
+					break;
+
+				case "Castro Urdiales":
+					localidad = "CastroUrdiales";
+					break;
+
+				case "Gamiz-Fika":
+					localidad = "GamizFika";
+					break;
+					
+				case "Gaztelu-Elexabeitia o Arteaga":
+					localidad = "GazteluElexabeitia_Arteaga";
+					break;
+
+				case "Gernika-Lumo":
+					localidad = "GernikaLumo";
+					break;
+
+				case "Karrantza Harana":
+					localidad = "KarrantzaHarana";
+					break;
+
+				case "Laudio/Llodio":
+					localidad = "Laudio_Llodio";
+					break;
+
+				case "Markina-Xemein":
+					localidad = "MarkinaXemein";
+					break;
+
+				case "Munitibar-Arbatzegi Gerrikaitz":
+					localidad = "MunitibarArbatzegi_Gerrikaitz";
+					break;
+
+				case "Ugao-Miraballes":
+					localidad = "UgaoMiraballes";
+					break;
+
+				case "Ziortza-Bolibar":
+					localidad = "ZiortzaBolibar";
+					break;
 				}
 				stmt = con.prepareStatement(SQLUPDATELOCALIDAD);
 				stmt.setString(1, localidad);

@@ -15,9 +15,10 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 	private Persona persona;
 	private JTextArea textareaPersona, textAreaObservaciones;
 	private JTextField textFieldOtrosIdiomas, textFieldCVLink;
-	private JComboBox<String> comboBoxSectorInteres, comboBoxEspecialidad, comboBoxLocalidad, comboBoxFormacion,
-			comboBoxCertifDiscapacidad, comboBoxEuskera, comboBoxIngles, comboBoxAccesibilidad, comboBoxApoyo;
+	private JComboBox<String> comboBoxSectorInteres, comboBoxLocalidad, comboBoxFormacion, comboBoxCertifDiscapacidad,
+	comboBoxEuskera, comboBoxIngles, comboBoxAccesibilidad, comboBoxApoyo;
 	private JButton btnModificar;
+	private JTextArea textAreaEspecialidad;
 
 	public VentanaModificarPersona(JDialog parent, LoginController cont, Persona persona) {
 		super(parent, true);
@@ -26,7 +27,7 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 
 		setResizable(false);
 		setTitle("Modificar empresa");
-		setBounds(100, 100, 920, 530);
+		setBounds(100, 100, 920, 660);
 		getContentPane().setLayout(null);
 
 		JLabel lblDatosPersona = new JLabel("Informacion de la persona seleccionada:");
@@ -79,145 +80,160 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		comboBoxFormacion.setBounds(175, 80, 163, 21);
 		getContentPane().add(comboBoxFormacion);
 
-		JLabel lblEspecialidad = new JLabel("Especialidad:");
+		JLabel lblEspecialidad = new JLabel("Especialidad: (Describa la especialidad)");
 		lblEspecialidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEspecialidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEspecialidad.setBounds(25, 113, 140, 28);
+		lblEspecialidad.setBounds(71, 424, 245, 28);
 		getContentPane().add(lblEspecialidad);
 
-		comboBoxEspecialidad = new JComboBox<>();
-		comboBoxEspecialidad.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
-		comboBoxEspecialidad.setSelectedIndex(0);
-		comboBoxEspecialidad.setBounds(175, 118, 163, 21);
-		getContentPane().add(comboBoxEspecialidad);
+		textAreaEspecialidad = new JTextArea();
+		textAreaEspecialidad.setLineWrap(true);
+		textAreaEspecialidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaEspecialidad.setBounds(25, 455, 416, 105);
+		getContentPane().add(textAreaEspecialidad);
 
 		JLabel lblSectorInteres = new JLabel("Sector interes:");
 		lblSectorInteres.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSectorInteres.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSectorInteres.setBounds(46, 153, 119, 28);
+		lblSectorInteres.setBounds(46, 106, 119, 28);
 		getContentPane().add(lblSectorInteres);
 
 		comboBoxSectorInteres = new JComboBox<>();
 		comboBoxSectorInteres.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
 		comboBoxSectorInteres.setSelectedIndex(0);
-		comboBoxSectorInteres.setBounds(175, 158, 163, 21);
+		comboBoxSectorInteres.setBounds(175, 111, 163, 21);
 		getContentPane().add(comboBoxSectorInteres);
 
 		JLabel lblCVLink = new JLabel("CV Link:");
 		lblCVLink.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCVLink.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCVLink.setBounds(56, 191, 78, 28);
+		lblCVLink.setBounds(56, 144, 78, 28);
 		getContentPane().add(lblCVLink);
 
 		textFieldCVLink = new JTextField();
 		textFieldCVLink.setColumns(10);
-		textFieldCVLink.setBounds(175, 197, 163, 19);
+		textFieldCVLink.setBounds(175, 150, 163, 19);
 		getContentPane().add(textFieldCVLink);
 
 		JLabel lblCertifDiscapacidad = new JLabel("Certificado discapacidad:");
 		lblCertifDiscapacidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCertifDiscapacidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCertifDiscapacidad.setBounds(25, 229, 140, 28);
+		lblCertifDiscapacidad.setBounds(25, 182, 140, 28);
 		getContentPane().add(lblCertifDiscapacidad);
 
 		comboBoxCertifDiscapacidad = new JComboBox<>();
 		comboBoxCertifDiscapacidad
-				.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Si", "No", "No sabe", "Tramitando" }));
+		.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Si", "No", "No sabe", "Tramitando" }));
 		comboBoxCertifDiscapacidad.setSelectedIndex(0);
-		comboBoxCertifDiscapacidad.setBounds(175, 234, 163, 21);
+		comboBoxCertifDiscapacidad.setBounds(175, 187, 163, 21);
 		getContentPane().add(comboBoxCertifDiscapacidad);
 
 		JLabel lblEuskera = new JLabel("Euskera:");
 		lblEuskera.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEuskera.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEuskera.setBounds(56, 267, 78, 28);
+		lblEuskera.setBounds(56, 220, 78, 28);
 		getContentPane().add(lblEuskera);
 
 		comboBoxEuskera = new JComboBox<>();
 		comboBoxEuskera.setModel(new DefaultComboBoxModel<>(
 				new String[] { "---", "A1", "A2", "B1", "B2", "C1", "C2", "Conocimiento, pero sin acreditar" }));
 		comboBoxEuskera.setSelectedIndex(0);
-		comboBoxEuskera.setBounds(175, 272, 163, 21);
+		comboBoxEuskera.setBounds(175, 225, 163, 21);
 		getContentPane().add(comboBoxEuskera);
 
 		JLabel lblIngles = new JLabel("Ingles:");
 		lblIngles.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIngles.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblIngles.setBounds(56, 305, 78, 28);
+		lblIngles.setBounds(56, 258, 78, 28);
 		getContentPane().add(lblIngles);
 
 		comboBoxIngles = new JComboBox<>();
 		comboBoxIngles.setModel(new DefaultComboBoxModel<>(
 				new String[] { "---", "A1", "A2", "B1", "B2", "C1", "C2", "Conocimiento, pero sin acreditar" }));
 		comboBoxIngles.setSelectedIndex(0);
-		comboBoxIngles.setBounds(175, 310, 163, 21);
+		comboBoxIngles.setBounds(175, 263, 163, 21);
 		getContentPane().add(comboBoxIngles);
 
 		JLabel lblOtrosIdiomas = new JLabel("Otros idiomas:");
 		lblOtrosIdiomas.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOtrosIdiomas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblOtrosIdiomas.setBounds(25, 343, 126, 31);
+		lblOtrosIdiomas.setBounds(25, 296, 126, 31);
 		getContentPane().add(lblOtrosIdiomas);
 
 		textFieldOtrosIdiomas = new JTextField();
 		textFieldOtrosIdiomas.setColumns(10);
-		textFieldOtrosIdiomas.setBounds(175, 350, 163, 19);
+		textFieldOtrosIdiomas.setBounds(175, 303, 163, 19);
 		getContentPane().add(textFieldOtrosIdiomas);
 
 		JLabel lblLocalidad = new JLabel("Localidad:");
 		lblLocalidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLocalidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblLocalidad.setBounds(14, 385, 163, 31);
+		lblLocalidad.setBounds(14, 338, 163, 31);
 		getContentPane().add(lblLocalidad);
 
 		comboBoxLocalidad = new JComboBox<>();
-		comboBoxLocalidad.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
+		comboBoxLocalidad.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Abadiño", "Abanto-Zierbena",
+				"Ajangiz", "Alonsotegi", "Amorebieta", "Amoroto", "Amurrio", "Arakaldo", "Arantzazu",
+				"Areatza o Bilaro", "Arrankudiaga", "Arratzu", "Arrieta", "Arrigorriaga", "Artzentales", "Artziniega",
+				"Aulesti", "Axpe Atxondo", "Ayala/Aiara", "Bakio", "Balmaseda", "Barakaldo", "Barrika", "Basauri",
+				"Bedia", "Berango", "Bermeo", "Berriatua", "Berriz", "Bilbao", "Busturia", "Castro Urdiales", "Derio",
+				"Dima", "Durango", "Ea", "Elantxobe", "Elorrio", "Erandio", "Ereño", "Ermua", "Errigoiti", "Etxebarri",
+				"Etxebarria", "Forua", "Fruiz", "Galdakao", "Galdames", "Gamiz-Fika", "Garai", "Gatika", "Gautegiz",
+				"Gaztelu-Elexabeitia o Arteaga", "Gernika-Lumo", "Getxo", "Gizaburuaga", "Gordexola", "Gorliz",
+				"Gueñes", "Ibarrangelu", "Igorre", "Ispaster", "Iurreta", "Izurtza", "Karrantza Harana", "Kortezubi",
+				"Lanestosa", "Larrabetzu", "Laudio/Llodio", "Laukiz", "Leioa", "Lekeitio", "Lemoa", "Lemoiz", "Lezama",
+				"Loiu", "Mallabia", "Mañaria", "Markina-Xemein", "Maruri", "Mendata", "Mendexa", "Meñaka", "Morga",
+				"Mundaka", "Mungia", "Munitibar-Arbatzegi Gerrikaitz", "Murueta", "Muskiz", "Muxika", "Nabarniz",
+				"Ondarroa", "Orduña", "Orozko", "Ortuella", "Otxandio", "Plentzia", "Portugalete", "Santurtzi",
+				"Sestao", "Sondika", "Sopela", "Sopuerta", "Sukarrieta", "Trapagaran", "Turtzioz", "Ubide",
+				"Ugao-Miraballes", "Urduliz", "Urduña", "Usansolo", "Zaldibar", "Zalla", "Zamudio", "Zaratamo",
+				"Zeanuri", "Zeberio", "Zierbena", "Ziortza-Bolibar", "Zornotza" }));
 		comboBoxLocalidad.setSelectedIndex(0);
-		comboBoxLocalidad.setBounds(175, 389, 163, 21);
+		comboBoxLocalidad.setBounds(175, 342, 163, 21);
 		getContentPane().add(comboBoxLocalidad);
 
 		JLabel lblAccesibilidad = new JLabel("Accesibilidad:");
 		lblAccesibilidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAccesibilidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblAccesibilidad.setBounds(42, 426, 120, 31);
+		lblAccesibilidad.setBounds(42, 379, 120, 31);
 		getContentPane().add(lblAccesibilidad);
 
 		comboBoxAccesibilidad = new JComboBox<>();
 		comboBoxAccesibilidad.setModel(
 				new DefaultComboBoxModel<>(new String[] { "---", "Carnet + coche", "Carnet", "Transporte publico" }));
 		comboBoxAccesibilidad.setSelectedIndex(0);
-		comboBoxAccesibilidad.setBounds(175, 432, 163, 21);
+		comboBoxAccesibilidad.setBounds(175, 385, 163, 21);
 		getContentPane().add(comboBoxAccesibilidad);
 
 		JLabel lblObservaciones = new JLabel("Observaciones:");
 		lblObservaciones.setHorizontalAlignment(SwingConstants.CENTER);
 		lblObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblObservaciones.setBounds(369, 418, 108, 31);
+		lblObservaciones.setBounds(634, 423, 108, 31);
 		getContentPane().add(lblObservaciones);
 
-		JLabel lblMaxChars = new JLabel("(Max 500 caracteres)");
+		JLabel lblMaxChars = new JLabel("(Max 500 caracteres para ambos)");
 		lblMaxChars.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMaxChars.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblMaxChars.setBounds(359, 446, 126, 31);
+		lblMaxChars.setBounds(355, 420, 201, 31);
 		getContentPane().add(lblMaxChars);
 
 		textAreaObservaciones = new JTextArea();
 		textAreaObservaciones.setLineWrap(true);
 		textAreaObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaObservaciones.setBounds(500, 418, 230, 61);
+		textAreaObservaciones.setBounds(451, 455, 433, 105);
 		getContentPane().add(textAreaObservaciones);
 
 		btnModificar = new JButton("Modificar");
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnModificar.setBounds(749, 424, 151, 55);
+		btnModificar.setBounds(359, 570, 175, 43);
 		getContentPane().add(btnModificar);
 		btnModificar.addActionListener(this);
 	}
 
 	public void loadPersona() {
 		StringBuilder infoPersona = new StringBuilder("");
-		String formacion = "", especialidad = "", sectorInteres = "", discapacidad = "", euskera = "", ingles = "",
-				localidad = "", accesibilidad = "";
+		String formacion = "", sectorInteres = "", discapacidad = "", euskera = "", ingles = "", localidad = "",
+				accesibilidad = "";
 
 		textareaPersona.removeAll();
 		switch (persona.getFormacion()) {
@@ -267,10 +283,14 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 
 		default:
 			System.out.println("Tipo invalido");
-
 		}
 
-		// Especialidades, SectorInteres [TBD]
+		switch (persona.getSectorInteres()) {
+		// TBD
+
+		default:
+			System.out.println("Tipo invalido");
+		}
 
 		switch (persona.getCerfificadoDiscapacidad()) {
 		case NO:
@@ -363,7 +383,485 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 			}
 
 			switch (persona.getLocalidad()) {
-			// TBD
+			case ABADIÑO:
+				localidad = "Abadiño";
+				break;
+
+			case ABANTO_ZIERBENA:
+				localidad = "Abanto-Zierbena";
+				break;
+
+			case AJANGIZ:
+				localidad = "Ajangiz";
+				break;
+
+			case ALONSOTEGI:
+				localidad = "Alonsotegi";
+				break;
+
+			case AMOREBIETA:
+				localidad = "Amorebieta";
+				break;
+
+			case AMOROTO:
+				localidad = "Amoroto";
+				break;
+
+			case AMURRIO:
+				localidad = "Amurrio";
+				break;
+
+			case ARAKALDO:
+				localidad = "Arakaldo";
+				break;
+
+			case ARANTZAZU:
+				localidad = "Arantzazu";
+				break;
+
+			case AREATZA_BILARO:
+				localidad = "Areatza o Bilaro";
+				break;
+
+			case ARRANKUDIAGA:
+				localidad = "Arrankudiaga";
+				break;
+
+			case ARRATZU:
+				localidad = "Arratzu";
+				break;
+
+			case ARRIETA:
+				localidad = "Arrieta";
+				break;
+
+			case ARRIGORRIAGA:
+				localidad = "Arrigorriaga";
+				break;
+
+			case ARTZENTALES:
+				localidad = "Artzentales";
+				break;
+
+			case ARTZINIEGA:
+				localidad = "Artziniega";
+				break;
+
+			case AULESTI:
+				localidad = "Aulesti";
+				break;
+
+			case AXPEATXONDO:
+				localidad = "Axpe Atxondo";
+				break;
+
+			case AYALA_AIARA:
+				localidad = "Ayala/Aiara";
+				break;
+
+			case BAKIO:
+				localidad = "Bakio";
+				break;
+
+			case BALMASEDA:
+				localidad = "Balmaseda";
+				break;
+
+			case BARAKALDO:
+				localidad = "Barakaldo";
+				break;
+
+			case BARRIKA:
+				localidad = "Barrika";
+				break;
+
+			case BASAURI:
+				localidad = "Basauri";
+				break;
+
+			case BEDIA:
+				localidad = "Bedia";
+				break;
+
+			case BERANGO:
+				localidad = "Berango";
+				break;
+
+			case BERMEO:
+				localidad = "Bermeo";
+				break;
+
+			case BERRIATUA:
+				localidad = "Berriatua";
+				break;
+
+			case BERRIZ:
+				localidad = "Berriz";
+				break;
+
+			case BILBAO:
+				localidad = "Bilbao";
+				break;
+
+			case BUSTURIA:
+				localidad = "Busturia";
+				break;
+
+			case CASTROURDIALES:
+				localidad = "Castro Urdiales";
+				break;
+
+			case DERIO:
+				localidad = "Derio";
+				break;
+
+			case DIMA:
+				localidad = "Dima";
+				break;
+
+			case DURANGO:
+				localidad = "Durango";
+				break;
+
+			case EA:
+				localidad = "Ea";
+				break;
+
+			case ELANTXOBE:
+				localidad = "Elantxobe";
+				break;
+
+			case ELORRIO:
+				localidad = "Elorrio";
+				break;
+
+			case ERANDIO:
+				localidad = "Erandio";
+				break;
+
+			case EREÑO:
+				localidad = "Ereño";
+				break;
+
+			case ERMUA:
+				localidad = "Ermua";
+				break;
+
+			case ERRIGOITI:
+				localidad = "Errigoiti";
+				break;
+
+			case ETXEBARRI:
+				localidad = "Etxebarri";
+				break;
+
+			case ETXEBARRIA:
+				localidad = "Etxebarria";
+				break;
+
+			case FORUA:
+				localidad = "Forua";
+				break;
+
+			case FRUIZ:
+				localidad = "Fruiz";
+				break;
+
+			case GALDAKAO:
+				localidad = "Galdakao";
+				break;
+
+			case GALDAMES:
+				localidad = "Galdames";
+				break;
+
+			case GAMIZFIKA:
+				localidad = "Gamiz-Fika";
+				break;
+
+			case GARAI:
+				localidad = "Garai";
+				break;
+
+			case GATIKA:
+				localidad = "Gatika";
+				break;
+
+			case GAUTEGIZ:
+				localidad = "Gautegiz";
+				break;
+
+			case GAZTELUELEXABEITIA_ARTEAGA:
+				localidad = "Gaztelu-Elexabeitia o Arteaga";
+				break;
+
+			case GERNIKALUMO:
+				localidad = "Gernika-Lumo";
+				break;
+
+			case GETXO:
+				localidad = "Getxo";
+				break;
+
+			case GIZABURUAGA:
+				localidad = "Gizaburuaga";
+				break;
+
+			case GORDEXOLA:
+				localidad = "Gordexola";
+				break;
+
+			case GORLIZ:
+				localidad = "Gorliz";
+				break;
+
+			case GUEÑES:
+				localidad = "Gueñes";
+				break;
+
+			case IBARRANGELU:
+				localidad = "Ibarrangelu";
+				break;
+
+			case IGORRE:
+				localidad = "Igorre";
+				break;
+
+			case ISPASTER:
+				localidad = "Ispaster";
+				break;
+
+			case IURRETA:
+				localidad = "Iurreta";
+				break;
+
+			case IZURTZA:
+				localidad = "Izurtza";
+				break;
+
+			case KARRANTZAHARANA:
+				localidad = "Karrantza Harana";
+				break;
+
+			case KORTEZUBI:
+				localidad = "Kortezubi";
+				break;
+
+			case LANESTOSA:
+				localidad = "Lanestosa";
+				break;
+
+			case LARRABETZU:
+				localidad = "Larrabetzu";
+				break;
+
+			case LAUDIO_LLODIO:
+				localidad = "Laudio/Llodio";
+				break;
+
+			case LAUKIZ:
+				localidad = "Laukiz";
+				break;
+
+			case LEIOA:
+				localidad = "Leioa";
+				break;
+
+			case LEKEITIO:
+				localidad = "Lekeitio";
+				break;
+
+			case LEMOA:
+				localidad = "Lemoa";
+				break;
+
+			case LEMOIZ:
+				localidad = "Lemoiz";
+				break;
+
+			case LEZAMA:
+				localidad = "Lezama";
+				break;
+
+			case LOIU:
+				localidad = "Loiu";
+				break;
+
+			case MALLABIA:
+				localidad = "Mallabia";
+				break;
+
+			case MARKINAXEMEIN:
+				localidad = "Markina-Xemein";
+				break;
+
+			case MARURI:
+				localidad = "Maruri";
+				break;
+
+			case MAÑARIA:
+				localidad = "Mañaria";
+				break;
+
+			case MENDATA:
+				localidad = "Mendata";
+				break;
+
+			case MENDEXA:
+				localidad = "Mendexa";
+				break;
+
+			case MEÑAKA:
+				localidad = "Meñaka";
+				break;
+
+			case MORGA:
+				localidad = "Morga";
+				break;
+
+			case MUNDAKA:
+				localidad = "Mundaka";
+				break;
+
+			case MUNGIA:
+				localidad = "Mungia";
+				break;
+
+			case MUNITIBARARBATZEGI_GERRIKAITZ:
+				localidad = "Munitibar-Arbatzegi Gerrikaitz";
+				break;
+
+			case MURUETA:
+				localidad = "Murueta";
+				break;
+
+			case MUSKIZ:
+				localidad = "Muskiz";
+				break;
+
+			case MUXIKA:
+				localidad = "Muxika";
+				break;
+
+			case NABARNIZ:
+				localidad = "Nabarniz";
+				break;
+
+			case ONDARROA:
+				localidad = "Ondarroa";
+				break;
+
+			case ORDUÑA:
+				localidad = "Orduña";
+				break;
+
+			case OROZKO:
+				localidad = "Orozko";
+				break;
+
+			case ORTUELLA:
+				localidad = "Ortuella";
+				break;
+
+			case OTXANDIO:
+				localidad = "Otxandio";
+				break;
+
+			case PLENTZIA:
+				localidad = "Plentzia";
+				break;
+
+			case PORTUGALETE:
+				localidad = "Portugalete";
+				break;
+
+			case SANTURTZI:
+				localidad = "Santurtzi";
+				break;
+
+			case SESTAO:
+				localidad = "Sestao";
+				break;
+
+			case SONDIKA:
+				localidad = "Sondika";
+				break;
+
+			case SOPELA:
+				localidad = "Sopela";
+				break;
+
+			case SOPUERTA:
+				localidad = "Sopuerta";
+				break;
+
+			case SUKARRIETA:
+				localidad = "Sukarrieta";
+				break;
+
+			case TRAPAGARAN:
+				localidad = "Trapagaran";
+				break;
+
+			case TURTZIOZ:
+				localidad = "Turtzioz";
+				break;
+
+			case UBIDE:
+				localidad = "Ubide";
+				break;
+
+			case UGAOMIRABALLES:
+				localidad = "Ugao-Miraballes";
+				break;
+
+			case URDULIZ:
+				localidad = "Urduliz";
+				break;
+
+			case URDUÑA:
+				localidad = "Urduña";
+				break;
+
+			case USANSOLO:
+				localidad = "Usansolo";
+				break;
+
+			case ZALDIBAR:
+				localidad = "Zaldibar";
+				break;
+
+			case ZALLA:
+				localidad = "Zalla";
+				break;
+
+			case ZAMUDIO:
+				localidad = "Zamudio";
+				break;
+
+			case ZARATAMO:
+				localidad = "Zaratamo";
+				break;
+
+			case ZEANURI:
+				localidad = "Zeanuri";
+				break;
+
+			case ZEBERIO:
+				localidad = "Zeberio";
+				break;
+
+			case ZIERBENA:
+				localidad = "Zierbena";
+				break;
+
+			case ZIORTZA_BOLIBAR:
+				localidad = "Ziortza-Bolibar";
+				break;
+
+			case ZORNOTZA:
+				localidad = "Zornotza";
+				break;
 
 			default:
 				System.out.println("Tipo invalido");
@@ -390,7 +888,7 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		infoPersona.append("Nombre: " + persona.getNombre()).append("\n");
 		infoPersona.append("Apoyo: " + persona.getApoyo()).append("\n");
 		infoPersona.append("Formacion: " + formacion).append("\n");
-		infoPersona.append("Especialidad: " + especialidad).append("\n");
+		infoPersona.append("Especialidad: " + persona.getEspecialidad()).append("\n");
 		infoPersona.append("Sector de interes: " + sectorInteres).append("\n");
 		infoPersona.append("CV Link: " + persona.getCvLink()).append("\n");
 		infoPersona.append("Certificado de discapacidad: " + discapacidad).append("\n");
@@ -442,7 +940,7 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 
 		if (!comboBoxApoyo.getEditor().getItem().equals("---")) {
-			check = cont.modificarApoyo((String)comboBoxApoyo.getEditor().getItem(), persona.getNombre());
+			check = cont.modificarApoyo((String) comboBoxApoyo.getEditor().getItem(), persona.getNombre());
 			if (!check) {
 				infoError.append("Apoyo");
 			}
@@ -456,9 +954,8 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 			}
 		}
 
-		if (!comboBoxEspecialidad.getSelectedItem().equals("---") && check) {
-			check = cont.modificarEspecialidad(comboBoxEspecialidad.getItemAt(comboBoxEspecialidad.getSelectedIndex()),
-					persona.getNombre());
+		if (!textAreaEspecialidad.getText().isBlank() && check) {
+			check = cont.modificarEspecialidad(textAreaEspecialidad.getText(), persona.getNombre());
 			if (!check) {
 				infoError.append("Especialidad");
 			}
@@ -555,8 +1052,8 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		if (e.getSource() == btnModificar) {
 			if (errorChecks(2)) {
 				JOptionPane.showMessageDialog(null,
-						"Hay mas caracteres que el limite de caracteres en el campo de observaciones.", "ERROR",
-						JOptionPane.ERROR_MESSAGE);
+						"Hay mas caracteres que el limite de caracteres en uno de los campos de texto con limite especificado.",
+						"ERROR", JOptionPane.ERROR_MESSAGE);
 			} else {
 				if (!errorChecks(1)) {
 					persona = cont.getPersona(persona.getNombre());
