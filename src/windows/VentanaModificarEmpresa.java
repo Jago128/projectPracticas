@@ -21,7 +21,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 	private Empresa emp;
 	private JTextArea textareaEmpresa, textAreaObservaciones, textAreaInfoUltimoCont;
 	private JTextField textFieldDatosContacto, textFieldContactoEmpresa, textFieldPersonaContacto, textFieldContacto1,
-	textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldFechaResolucion;
+			textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldFechaResolucion;
 	private JComboBox<String> comboBoxEstado, comboBoxResultadoUltimoContacto, comboBoxResultadoFinal;
 	private JButton btnModificar;
 
@@ -34,24 +34,24 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		setTitle("Modificar empresa");
 		setBounds(100, 100, 920, 530);
 		getContentPane().setLayout(null);
-		
+
 		JLabel lblDatosEmpresa = new JLabel("Informacion de la empresa seleccionada:");
 		lblDatosEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatosEmpresa.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblDatosEmpresa.setBounds(378, 10, 506, 28);
 		getContentPane().add(lblDatosEmpresa);
-		
+
 		JLabel lblNota = new JLabel("No hace falta rellenar toda la informacion.");
 		lblNota.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNota.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNota.setBounds(10, 7, 377, 28);
 		getContentPane().add(lblNota);
-		
+
 		JLabel lblFechaFormato = new JLabel("Formato de fechas: AAAA-MM-DD");
 		lblFechaFormato.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblFechaFormato.setBounds(42, 38, 275, 16);
 		getContentPane().add(lblFechaFormato);
-		
+
 		loadEmpresa();
 
 		textareaEmpresa = new JTextArea();
@@ -264,7 +264,6 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		Contacto con = cont.getContacto(emp.getCodEmpresa());
 
 		textareaEmpresa.removeAll();
-
 		switch (emp.getSector()) {
 		case AGRICULTURA_GANADERIA:
 			sector = "Agricultura y ganadería";
@@ -432,6 +431,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		} else {
 			infoEmpresa.append("Puesto: " + emp.getPuesto()).append("\n");
 		}
+
 		infoEmpresa.append("Datos de contacto: " + emp.getDatosContacto()).append("\n");
 		infoEmpresa.append("Contacto en la empresa: " + emp.getContactoEmpresa()).append("\n");
 		infoEmpresa.append("Persona de contacto: " + emp.getContactoApnabi()).append("\n");
@@ -484,6 +484,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		} else {
 			infoEmpresa.append("Fecha resolucion: " + con.getFechaResolucion());
 		}
+
 		textareaEmpresa.setText(infoEmpresa.toString());
 	}
 
@@ -491,6 +492,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		Pattern modelo = Pattern.compile(
 				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 		Matcher matcher = modelo.matcher(email);
+
 		if (!matcher.matches()) {
 			throw new EmailFormatException();
 		}
@@ -498,6 +500,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 
 	public boolean errorChecks(int errorID) {
 		boolean error = false;
+
 		switch (errorID) {
 		case 1:
 			error = addError();
@@ -521,6 +524,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 	public boolean addError() { // ErrorID: 1
 		boolean check = false;
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
+
 		if (!textFieldDatosContacto.getText().isBlank()) {
 			check = cont.modificarDatosContacto(textFieldDatosContacto.getText(), emp.getNom_empresa());
 			if (!check) {
@@ -626,7 +630,6 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 	}
 
 	public boolean dateFormatErrorCheck() { // ErrorID: 2
-		boolean error = false;
 		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
 				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
 				.toFormatter();
@@ -651,13 +654,12 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 				LocalDate.parse(textFieldFechaResolucion.getText(), format);
 			}
 		} catch (DateTimeParseException e) {
-			error = true;
+			return true;
 		}
-		return error;
+		return false;
 	}
 
 	public boolean dateAfterCheck() { // ErrorID: 3
-		boolean isBefore = true;
 		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
 				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
 				.toFormatter();
@@ -698,34 +700,32 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 
 		if ((!fecRes.isAfter(cont4) || !fecRes.isAfter(cont3) || !fecRes.isAfter(cont2) || !fecRes.isAfter(cont1))
 				&& !fecRes.equals(cont4)) {
-			isBefore = false;
+			return false;
 		}
 
 		if ((!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1)) && !fecRes.equals(cont3)) {
-			isBefore = false;
+			return false;
 		}
 
 		if ((!cont3.isAfter(cont2) || !cont3.isAfter(cont1)) && !fecRes.equals(cont2)) {
-			isBefore = false;
+			return false;
 		}
 
 		if ((!cont2.isAfter(cont1)) && !fecRes.equals(cont1)) {
-			isBefore = false;
+			return false;
 		}
-
-		return isBefore;
+		return true;
 	}
 
 	public boolean lengthCheck() { // ErrorID: 4
-		boolean tooLong = false;
-		if (textAreaObservaciones.getText().length() > 500) {
-			tooLong = true;
+		if (textAreaInfoUltimoCont.getText().length() > 500) {
+			return true;
 		}
 
 		if (textAreaObservaciones.getText().length() > 500) {
-			tooLong = true;
+			return true;
 		}
-		return tooLong;
+		return false;
 	}
 
 	@Override
@@ -740,12 +740,12 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 					JOptionPane.showMessageDialog(null,
 							"Una o varias de las fechas introducidas no estan en orden cronologico."
 									+ "\nComprueba la fecha del 1. Contacto del recuadro de informacion de empresa si tienes dudas, y compruba el orden de las fechas.",
-									"ERROR", JOptionPane.ERROR_MESSAGE);
+							"ERROR", JOptionPane.ERROR_MESSAGE);
 				} else {
 					JOptionPane
-					.showMessageDialog(null,
-							"Una o varias de las fechas introducidas no estan en orden cronologico."
-									+ "\nComprueba el orden de las fechas.",
+							.showMessageDialog(null,
+									"Una o varias de las fechas introducidas no estan en orden cronologico."
+											+ "\nComprueba el orden de las fechas.",
 									"ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 			} else if (errorChecks(4)) {

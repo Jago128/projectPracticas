@@ -287,16 +287,15 @@ public class BDImplementacion implements ApnabiDAO {
 
 	@Override
 	public boolean verificarEmpresa(String nom) {
-		ResultSet rs = null;
-		boolean check = false;
+		boolean existe = false;
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLSELECTEMPRESA);
 			stmt.setString(1, nom);
-			rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
-				check = true;
+				existe = true;
 			}
 			rs.close();
 			stmt.close();
@@ -307,19 +306,18 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		return check;
+		return existe;
 	}
 
 	@Override
 	public int getCodEmpresa(String nom) {
-		ResultSet rs = null;
 		int cod = 0;
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLCODEMPRESA);
 			stmt.setString(1, nom);
-			rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				cod = rs.getInt("COD_EMPRESA");
 			}
@@ -618,14 +616,13 @@ public class BDImplementacion implements ApnabiDAO {
 
 	@Override
 	public Contacto getContacto(int empId) {
-		ResultSet rs = null;
 		Contacto cont = new Contacto();
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLSELECTCONTACTOS);
 			stmt.setInt(1, empId);
-			rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				cont.setCodContacto(rs.getInt("COD_CONTACTO"));
 				cont.setContacto1(rs.getDate("CONTACTO1").toString());
@@ -1050,14 +1047,13 @@ public class BDImplementacion implements ApnabiDAO {
 
 	@Override
 	public Map<String, Persona> mostrarPersonas() {
-		ResultSet rs = null;
 		Persona persona;
 		Map<String, Persona> personas = new TreeMap<>();
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLPERSONAS);
-			rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				persona = new Persona();
 				persona.setNombre(rs.getString("NOM_P"));
@@ -1089,14 +1085,13 @@ public class BDImplementacion implements ApnabiDAO {
 
 	@Override
 	public Map<String, Persona> mostrarNomPersonas() {
-		ResultSet rs = null;
 		Persona persona;
 		Map<String, Persona> personas = new TreeMap<>();
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLNOMPERSONAS);
-			rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				persona = new Persona();
 				persona.setNombre(rs.getString("NOM_P"));
@@ -1149,6 +1144,30 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} 
 		return persona;
+	}
+	
+	@Override
+	public boolean verificarPersona(String nom) {
+		boolean existe = false;
+		this.openConnection();
+
+		try {
+			stmt = con.prepareStatement(SQLSELECTPERSONA);
+			stmt.setString(1, nom);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				existe = true;
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("La persona no se pudo verificar correctamente.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return existe;
 	}
 
 	@Override

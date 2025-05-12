@@ -416,8 +416,22 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		} else {
 			infoPersona.append("Observaciones: ---");
 		}
-
 		textareaPersona.setText(infoPersona.toString());
+	}
+
+	public boolean errorChecks(int errorID) {
+		boolean error = false;
+		
+		switch (errorID) {
+		case 1:
+			error = addError();
+			break;
+
+		case 2:
+			error = lengthCheck();
+			break;
+		}
+		return error;
 	}
 
 	public boolean addError() { // ErrorID: 1
@@ -527,17 +541,30 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		return check;
 	}
 
+	public boolean lengthCheck() { // ErrorID: 2
+		if (textAreaObservaciones.getText().length() > 500) {
+			return true;
+		}
+		return false;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnModificar) {
-			if (!addError()) {
-				persona = cont.getPersona(persona.getNombre());
-				loadPersona();
+			if (errorChecks(2)) {
+				JOptionPane.showMessageDialog(null,
+						"Hay mas caracteres que el limite de caracteres en el campo de observaciones.", "ERROR",
+						JOptionPane.ERROR_MESSAGE);
 			} else {
-				JOptionPane.showMessageDialog(null, "La persona ha sido modificada correctamente."
-						+ "\nLa informacion en el recuadro de infomacion de la persona se acualizara para reflejar los cambios.");
-				persona = cont.getPersona(persona.getNombre());
-				loadPersona();
+				if (!errorChecks(1)) {
+					persona = cont.getPersona(persona.getNombre());
+					loadPersona();
+				} else {
+					JOptionPane.showMessageDialog(null, "La persona ha sido modificada correctamente."
+							+ "\nLa informacion en el recuadro de infomacion de la persona se acualizara para reflejar los cambios.");
+					persona = cont.getPersona(persona.getNombre());
+					loadPersona();
+				}
 			}
 		}
 	}

@@ -312,7 +312,6 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 	}
 
 	public boolean dateFormatErrorCheck() { // ErrorID: 2
-		boolean error = false;
 		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
 				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
 				.toFormatter();
@@ -329,14 +328,17 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 			if (!textFieldContacto4.getText().isBlank()) {
 				LocalDate.parse(textFieldContacto4.getText(), format);
 			}
+
+			if (!textFieldFechaResolucion.getText().isBlank()) {
+				LocalDate.parse(textFieldFechaResolucion.getText(), format);
+			}
 		} catch (DateTimeParseException e) {
-			error = true;
+			return true;
 		}
-		return error;
+		return false;
 	}
 
 	public boolean dateAfterCheck() { // ErrorID: 3
-		boolean isBefore = true;
 		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
 				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
 				.toFormatter();
@@ -345,7 +347,6 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 				fecRes = LocalDate.parse("0000-1-1", format);
 
 		cont1 = LocalDate.parse(textFieldContacto1.getText(), format);
-
 		if (!textFieldContacto2.getText().isBlank()) {
 			cont2 = LocalDate.parse(textFieldContacto2.getText(), format);
 		}
@@ -364,296 +365,293 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 
 		if ((!fecRes.isAfter(cont4) || !fecRes.isAfter(cont3) || !fecRes.isAfter(cont2) || !fecRes.isAfter(cont1))
 				&& !fecRes.equals(cont4)) {
-			isBefore = false;
+			return false;
 		}
 
 		if ((!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1)) && !fecRes.equals(cont3)) {
-			isBefore = false;
+			return false;
 		}
 
 		if ((!cont3.isAfter(cont2) || !cont3.isAfter(cont1)) && !fecRes.equals(cont2)) {
-			isBefore = false;
+			return false;
 		}
 
 		if ((!cont2.isAfter(cont1)) && !fecRes.equals(cont1)) {
-			isBefore = false;
+			return false;
 		}
-
-		return isBefore;
+		return true;
 	}
 
 	public boolean lengthCheck() { // ErrorID: 4
-		boolean tooLong = false;
 		if (textAreaObservaciones.getText().length() > 500) {
-			tooLong = true;
+			return true;
 		}
 
 		if (textAreaObservaciones.getText().length() > 500) {
-			tooLong = true;
+			return true;
 		}
-		return tooLong;
+		return false;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == btnAñadir) {
-			if (!cont.verificarEmpresa(textFieldNombre.getText())) {
-				if (textFieldNombre.getText().isBlank() || comboBoxSector.getSelectedItem().equals("---")
-						|| textFieldDatosContacto.getText().isBlank() || textFieldContactoEmpresa.getText().isBlank()
-						|| textFieldPersonaContacto.getText().isBlank()
-						|| comboBoxEstado.getSelectedItem().equals("---") || textFieldContacto1.getText().isBlank()) {
-					JOptionPane.showMessageDialog(null, "Por favor, rellena toda todos los campos obligatorios.",
-							"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					try {
-						if (textFieldDatosContacto.getText().contains("@")
-								&& (textFieldDatosContacto.getText().contains(".com")
-										|| textFieldDatosContacto.getText().contains(".es")
-										|| textFieldDatosContacto.getText().contains(".eus"))) {
-							emailFormatCheck(textFieldDatosContacto.getText());
-						}
-						if (errorChecks(2)) {
+			if (textFieldNombre.getText().isBlank() || comboBoxSector.getSelectedItem().equals("---")
+					|| textFieldDatosContacto.getText().isBlank() || textFieldContactoEmpresa.getText().isBlank()
+					|| textFieldPersonaContacto.getText().isBlank()
+					|| comboBoxEstado.getSelectedItem().equals("---") || textFieldContacto1.getText().isBlank()) {
+				JOptionPane.showMessageDialog(null, "Por favor, rellena toda todos los campos obligatorios.",
+						"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
+			} else if (cont.verificarEmpresa(textFieldNombre.getText())) {
+				JOptionPane.showMessageDialog(null, "Ya existe una empresa con el mismo nombre en la base de datos.",
+						"ERROR", JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					if (textFieldDatosContacto.getText().contains("@")
+							&& (textFieldDatosContacto.getText().contains(".com")
+									|| textFieldDatosContacto.getText().contains(".es")
+									|| textFieldDatosContacto.getText().contains(".eus"))) {
+						emailFormatCheck(textFieldDatosContacto.getText());
+					}
+					if (errorChecks(2)) {
+						JOptionPane.showMessageDialog(null,
+								"El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD",
+								"ERROR", JOptionPane.ERROR_MESSAGE);
+					} else if (errorChecks(3)) {
+						if (textFieldContacto1.getText().isBlank()) {
 							JOptionPane.showMessageDialog(null,
-									"El formato de una de las fechas es incorrecta. El formato correcto es AAAA-MM-DD",
-									"ERROR", JOptionPane.ERROR_MESSAGE);
-						} else if (errorChecks(3)) {
-							if (textFieldContacto1.getText().isBlank()) {
-								JOptionPane.showMessageDialog(null,
-										"Una o varias de las fechas introducidas no estan en orden cronologico."
-												+ "\nComprueba la fecha del 1. Contacto del recuadro de informacion de empresa si tienes dudas, y compruba el orden de las fechas.",
-												"ERROR", JOptionPane.ERROR_MESSAGE);
-							} else {
-								JOptionPane.showMessageDialog(null,
-										"Una o varias de las fechas introducidas no estan en orden cronologico."
-												+ "\nComprueba el orden de las fechas.",
-												"ERROR", JOptionPane.ERROR_MESSAGE);
-							}
-						} else if (errorChecks(4)) {
-							JOptionPane.showMessageDialog(null,
-									"Hay mas caracteres que el limite de caracteres en uno de los campos de texto con limite especificado.",
-									"ERROR", JOptionPane.ERROR_MESSAGE);
+									"Una o varias de las fechas introducidas no estan en orden cronologico."
+											+ "\nComprueba la fecha del 1. Contacto del recuadro de informacion de empresa si tienes dudas, y compruba el orden de las fechas.",
+											"ERROR", JOptionPane.ERROR_MESSAGE);
 						} else {
-							Sector sector = null;
-							Estado estado = null;
-							ResultadoUltimoContacto resultadoUltimoCont = null;
-							ResultadoFinal resultadoFinal = null;
-							int result = 0;
-							switch ((String) comboBoxSector.getSelectedItem()) {
-							case "Agricultura y Ganaderia":
-								sector = Sector.AGRICULTURA_GANADERIA;
-								break;
+							JOptionPane.showMessageDialog(null,
+									"Una o varias de las fechas introducidas no estan en orden cronologico."
+											+ "\nComprueba el orden de las fechas.",
+											"ERROR", JOptionPane.ERROR_MESSAGE);
+						}
+					} else if (errorChecks(4)) {
+						JOptionPane.showMessageDialog(null,
+								"Hay mas caracteres que el limite de caracteres en uno de los campos de texto con limite especificado.",
+								"ERROR", JOptionPane.ERROR_MESSAGE);
+					} else {
+						Sector sector = null;
+						Estado estado = null;
+						ResultadoUltimoContacto resultadoUltimoCont = null;
+						ResultadoFinal resultadoFinal = null;
+						int result = 0;
 
-							case "Bienes de Consumo":
-								sector = Sector.BIENESCONSUMO;
-								break;
+						switch ((String) comboBoxSector.getSelectedItem()) {
+						case "Agricultura y Ganaderia":
+							sector = Sector.AGRICULTURA_GANADERIA;
+							break;
 
-							case "Comercio electronico":
-								sector = Sector.COMERCIOELECTRONICO;
-								break;
+						case "Bienes de Consumo":
+							sector = Sector.BIENESCONSUMO;
+							break;
 
-							case "Comercio y establecimientos":
-								sector = Sector.COMERCIO_ESTABLECIMIENTOS;
-								break;
+						case "Comercio electronico":
+							sector = Sector.COMERCIOELECTRONICO;
+							break;
 
-							case "Construccion":
-								sector = Sector.CONSTRUCCION;
-								break;
+						case "Comercio y establecimientos":
+							sector = Sector.COMERCIO_ESTABLECIMIENTOS;
+							break;
 
-							case "Deporte y ocio":
-								sector = Sector.DEPORTE_OCIO;
-								break;
+						case "Construccion":
+							sector = Sector.CONSTRUCCION;
+							break;
 
-							case "Energia y medio ambiente":
-								sector = Sector.ENERGIA_MEDIOAMBIENTE;
-								break;
+						case "Deporte y ocio":
+							sector = Sector.DEPORTE_OCIO;
+							break;
 
-							case "Finanzas, Seguros y bienes inmuebles":
-								sector = Sector.FINANZAS_SEGUROS_BIENESINMUEBLES;
-								break;
+						case "Energia y medio ambiente":
+							sector = Sector.ENERGIA_MEDIOAMBIENTE;
+							break;
 
-							case "Internet":
-								sector = Sector.INTERNET;
-								break;
+						case "Finanzas, Seguros y bienes inmuebles":
+							sector = Sector.FINANZAS_SEGUROS_BIENESINMUEBLES;
+							break;
 
-							case "Logistica y Transporte":
-								sector = Sector.LOGISTICA_TRANSPORTE;
-								break;
+						case "Internet":
+							sector = Sector.INTERNET;
+							break;
 
-							case "Medios de comunicacion y marketing":
-								sector = Sector.MEDIOSCOMUNICACION_MARKETING;
-								break;
+						case "Logistica y Transporte":
+							sector = Sector.LOGISTICA_TRANSPORTE;
+							break;
 
-							case "Metalurgia y electronica":
-								sector = Sector.METALURGIA_ELECTRONICA;
-								break;
+						case "Medios de comunicacion y marketing":
+							sector = Sector.MEDIOSCOMUNICACION_MARKETING;
+							break;
 
-							case "Productos quimicos y materias primas":
-								sector = Sector.PRODUCTOSQUIMICOS_MATERIASPRIMAS;
-								break;
+						case "Metalurgia y electronica":
+							sector = Sector.METALURGIA_ELECTRONICA;
+							break;
 
-							case "Salud e industria farmaceutica":
-								sector = Sector.SALUD_INDUSTRIAFARMACEUTICA;
-								break;
-							case "Servicios":
-								sector = Sector.SERVICIOS;
-								break;
+						case "Productos quimicos y materias primas":
+							sector = Sector.PRODUCTOSQUIMICOS_MATERIASPRIMAS;
+							break;
 
-							case "Sociedad":
-								sector = Sector.SOCIEDAD;
-								break;
+						case "Salud e industria farmaceutica":
+							sector = Sector.SALUD_INDUSTRIAFARMACEUTICA;
+							break;
 
-							case "Tecnologia y telecomunicaciones":
-								sector = Sector.TECNOLOGIA_TELECOMUNICACIONES;
-								break;
+						case "Servicios":
+							sector = Sector.SERVICIOS;
+							break;
 
-							case "Turismo y hosteleria":
-								sector = Sector.TURISMO_HOSTELERIA;
-								break;
+						case "Sociedad":
+							sector = Sector.SOCIEDAD;
+							break;
 
-							case "Vida":
-								sector = Sector.VIDA;
-								break;
-							}
+						case "Tecnologia y telecomunicaciones":
+							sector = Sector.TECNOLOGIA_TELECOMUNICACIONES;
+							break;
 
-							switch ((String) comboBoxEstado.getSelectedItem()) {
-							case "Informado":
-								estado = Estado.INFORMADO;
-								break;
+						case "Turismo y hosteleria":
+							sector = Sector.TURISMO_HOSTELERIA;
+							break;
 
-							case "Valorando/interesado":
-								estado = Estado.VALORANDO_INTERESADO;
-								break;
+						case "Vida":
+							sector = Sector.VIDA;
+							break;
+						}
 
-							case "Planificando inserciones":
-								estado = Estado.PLANIFICANDOINSERCIONES;
-								break;
+						switch ((String) comboBoxEstado.getSelectedItem()) {
+						case "Informado":
+							estado = Estado.INFORMADO;
+							break;
 
-							case "Proximo año":
-								estado = Estado.PROXIMOAÑO;
-								break;
+						case "Valorando/interesado":
+							estado = Estado.VALORANDO_INTERESADO;
+							break;
 
-							case "No interesado":
-								estado = Estado.NOINTERESADO;
-								break;
-							}
+						case "Planificando inserciones":
+							estado = Estado.PLANIFICANDOINSERCIONES;
+							break;
 
-							switch ((String) comboBoxResultadoUltimoContacto.getSelectedItem()) {
-							case "Comunicacion sin respuesta":
-								resultadoUltimoCont = ResultadoUltimoContacto.COMUNICACION_SINRESPUESTA;
-								break;
+						case "Proximo año":
+							estado = Estado.PROXIMOAÑO;
+							break;
 
-							case "Nos pospone la respuesta":
-								resultadoUltimoCont = ResultadoUltimoContacto.RESPUESTA_POSPUESTA;
-								break;
+						case "No interesado":
+							estado = Estado.NOINTERESADO;
+							break;
+						}
 
-							case "Programada reunion":
-								resultadoUltimoCont = ResultadoUltimoContacto.REUNION_PROGRAMADA;
-								break;
+						switch ((String) comboBoxResultadoUltimoContacto.getSelectedItem()) {
+						case "Comunicacion sin respuesta":
+							resultadoUltimoCont = ResultadoUltimoContacto.COMUNICACION_SINRESPUESTA;
+							break;
 
-							case "Respuesta no concluyente":
-								resultadoUltimoCont = ResultadoUltimoContacto.RESPUESTA_NOCONCLUYENTE;
-								break;
+						case "Nos pospone la respuesta":
+							resultadoUltimoCont = ResultadoUltimoContacto.RESPUESTA_POSPUESTA;
+							break;
 
-							case "Inicio valoracion oferta":
-								resultadoUltimoCont = ResultadoUltimoContacto.INICIO_VALORACIONOFERTA;
-								break;
-							}
+						case "Programada reunion":
+							resultadoUltimoCont = ResultadoUltimoContacto.REUNION_PROGRAMADA;
+							break;
 
-							switch ((String) comboBoxResultadoFinal.getSelectedItem()) {
-							case "Oferta de empleo":
-								resultadoFinal = ResultadoFinal.OFERTA_EMPLEO;
-								break;
+						case "Respuesta no concluyente":
+							resultadoUltimoCont = ResultadoUltimoContacto.RESPUESTA_NOCONCLUYENTE;
+							break;
 
-							case "Convenio de colaboracion":
-								resultadoFinal = ResultadoFinal.CONVENIO_COLABORACION;
-								break;
+						case "Inicio valoracion oferta":
+							resultadoUltimoCont = ResultadoUltimoContacto.INICIO_VALORACIONOFERTA;
+							break;
+						}
 
-							case "Medidas alternativas":
-								resultadoFinal = ResultadoFinal.MEDIDAS_ALTERNATIVAS;
-								break;
+						switch ((String) comboBoxResultadoFinal.getSelectedItem()) {
+						case "Oferta de empleo":
+							resultadoFinal = ResultadoFinal.OFERTA_EMPLEO;
+							break;
 
-							case "Relacion concluida":
-								resultadoFinal = ResultadoFinal.RELACION_CONCLUIDA;
-								break;
+						case "Convenio de colaboracion":
+							resultadoFinal = ResultadoFinal.CONVENIO_COLABORACION;
+							break;
 
-							case "Relacion pospuesta":
-								resultadoFinal = ResultadoFinal.RELACION_POSPUESTA;
-								break;
-							}
+						case "Medidas alternativas":
+							resultadoFinal = ResultadoFinal.MEDIDAS_ALTERNATIVAS;
+							break;
 
-							Empresa emp = new Empresa(textFieldNombre.getText(), sector, textFieldPuesto.getText(),
-									textFieldDatosContacto.getText(), textFieldContactoEmpresa.getText(),
-									textFieldPersonaContacto.getText(), estado);
+						case "Relacion concluida":
+							resultadoFinal = ResultadoFinal.RELACION_CONCLUIDA;
+							break;
 
-							Contacto con = new Contacto(textFieldContacto1.getText());
+						case "Relacion pospuesta":
+							resultadoFinal = ResultadoFinal.RELACION_POSPUESTA;
+							break;
+						}
 
-							if (!textFieldContacto2.getText().isBlank()) {
-								con.setContacto2(textFieldContacto2.getText());
-							}
+						Empresa emp = new Empresa(textFieldNombre.getText(), sector, textFieldPuesto.getText(),
+								textFieldDatosContacto.getText(), textFieldContactoEmpresa.getText(),
+								textFieldPersonaContacto.getText(), estado);
+						Contacto con = new Contacto(textFieldContacto1.getText());
 
-							if (!textFieldContacto3.getText().isBlank()) {
-								con.setContacto3(textFieldContacto3.getText());
-							}
+						if (!textFieldContacto2.getText().isBlank()) {
+							con.setContacto2(textFieldContacto2.getText());
+						}
 
-							if (!textFieldContacto4.getText().isBlank()) {
-								con.setContacto4(textFieldContacto4.getText());
-							}
+						if (!textFieldContacto3.getText().isBlank()) {
+							con.setContacto3(textFieldContacto3.getText());
+						}
 
-							if (!textAreaObservaciones.getText().isBlank()) {
-								con.setObservaciones(textAreaObservaciones.getText());
-							}
+						if (!textFieldContacto4.getText().isBlank()) {
+							con.setContacto4(textFieldContacto4.getText());
+						}
 
-							if (!textAreaInfoUltimoCont.getText().isBlank()) {
-								con.setInfoUltimo(textAreaInfoUltimoCont.getText());
-							}
+						if (!textAreaObservaciones.getText().isBlank()) {
+							con.setObservaciones(textAreaObservaciones.getText());
+						}
 
-							if (resultadoUltimoCont != null) {
-								con.setResultadoUltimoContacto(resultadoUltimoCont);
-							}
+						if (!textAreaInfoUltimoCont.getText().isBlank()) {
+							con.setInfoUltimo(textAreaInfoUltimoCont.getText());
+						}
 
-							if (!textFieldFechaResolucion.getText().isBlank()) {
-								con.setFechaResolucion(textFieldFechaResolucion.getText());
-							}
+						if (resultadoUltimoCont != null) {
+							con.setResultadoUltimoContacto(resultadoUltimoCont);
+						}
 
-							if (resultadoFinal != null) {
-								con.setResultadoFinal(resultadoFinal);
-							}
+						if (!textFieldFechaResolucion.getText().isBlank()) {
+							con.setFechaResolucion(textFieldFechaResolucion.getText());
+						}
 
-							if (cont.añadirEmpresa(emp)) {
-								if (cont.añadirContacto(con, cont.getCodEmpresa(textFieldNombre.getText()))) {
-									result = JOptionPane.showConfirmDialog(null,
-											"La empresa ha sido añadida correctamente. Quiere añadir mas empresas?", "",
-											JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-									if (result == JOptionPane.NO_OPTION) {
-										this.dispose();
-									} else if (result == JOptionPane.YES_OPTION) {
-										textAreaObservaciones.setText("");
-										textFieldContacto1.setText("");
-										textFieldContacto2.setText("");
-										textFieldContacto3.setText("");
-										textFieldContacto4.setText("");
-										textFieldContactoEmpresa.setText("");
-										textFieldDatosContacto.setText("");
-										textFieldNombre.setText("");
-										textFieldPersonaContacto.setText("");
-										textFieldPuesto.setText("");
-										comboBoxEstado.setSelectedIndex(-1);
-										comboBoxSector.setSelectedIndex(-1);
-									}
-								} else {
-									errorChecks(1);
+						if (resultadoFinal != null) {
+							con.setResultadoFinal(resultadoFinal);
+						}
+
+						if (cont.añadirEmpresa(emp)) {
+							if (cont.añadirContacto(con, cont.getCodEmpresa(textFieldNombre.getText()))) {
+								result = JOptionPane.showConfirmDialog(null,
+										"La empresa ha sido añadida correctamente. Quiere añadir mas empresas?", "",
+										JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+								if (result == JOptionPane.NO_OPTION) {
+									this.dispose();
+								} else if (result == JOptionPane.YES_OPTION) {
+									textAreaObservaciones.setText("");
+									textFieldContacto1.setText("");
+									textFieldContacto2.setText("");
+									textFieldContacto3.setText("");
+									textFieldContacto4.setText("");
+									textFieldContactoEmpresa.setText("");
+									textFieldDatosContacto.setText("");
+									textFieldNombre.setText("");
+									textFieldPersonaContacto.setText("");
+									textFieldPuesto.setText("");
+									comboBoxEstado.setSelectedIndex(-1);
+									comboBoxSector.setSelectedIndex(-1);
 								}
 							} else {
 								errorChecks(1);
 							}
+						} else {
+							errorChecks(1);
 						}
-					} catch (EmailFormatException e) {
-						JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 					}
+				} catch (EmailFormatException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
-			} else {
-				JOptionPane.showMessageDialog(null, "Ya existe una empresa con el mismo nombre en la base de datos.",
-						"ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

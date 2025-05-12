@@ -6,6 +6,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import controller.LoginController;
+import enums.*;
+import model.Persona;
 
 public class VentanaAñadirPersona extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -61,6 +63,8 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblFormacion);
 
 		comboBoxFormacion = new JComboBox<>();
+		comboBoxFormacion.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO", "EPA",
+				"FP Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacion.setSelectedIndex(0);
 		comboBoxFormacion.setBounds(170, 80, 163, 21);
 		getContentPane().add(comboBoxFormacion);
@@ -72,7 +76,7 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblEspecialidad);
 
 		comboBoxEspecialidad = new JComboBox<>();
-		comboBoxEspecialidad.setModel(new DefaultComboBoxModel<>(new String[] {}));
+		comboBoxEspecialidad.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
 		comboBoxEspecialidad.setSelectedIndex(0);
 		comboBoxEspecialidad.setBounds(497, 82, 163, 21);
 		getContentPane().add(comboBoxEspecialidad);
@@ -84,7 +88,7 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblSectorInteres);
 
 		comboBoxSectorInteres = new JComboBox<>();
-		comboBoxSectorInteres.setModel(new DefaultComboBoxModel<>(new String[] {}));
+		comboBoxSectorInteres.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
 		comboBoxSectorInteres.setSelectedIndex(0);
 		comboBoxSectorInteres.setBounds(170, 116, 163, 21);
 		getContentPane().add(comboBoxSectorInteres);
@@ -107,6 +111,8 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblCertifDiscapacidad);
 
 		comboBoxCertifDiscapacidad = new JComboBox<>();
+		comboBoxCertifDiscapacidad
+				.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Si", "No", "No sabe", "Tramitando" }));
 		comboBoxCertifDiscapacidad.setSelectedIndex(0);
 		comboBoxCertifDiscapacidad.setBounds(170, 154, 163, 21);
 		getContentPane().add(comboBoxCertifDiscapacidad);
@@ -118,6 +124,8 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblEuskera);
 
 		comboBoxEuskera = new JComboBox<>();
+		comboBoxEuskera.setModel(new DefaultComboBoxModel<>(
+				new String[] { "---", "A1", "A2", "B1", "B2", "C1", "C2", "Conocimiento, pero sin acreditar" }));
 		comboBoxEuskera.setSelectedIndex(0);
 		comboBoxEuskera.setBounds(497, 158, 163, 21);
 		getContentPane().add(comboBoxEuskera);
@@ -129,6 +137,8 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblIngles);
 
 		comboBoxIngles = new JComboBox<>();
+		comboBoxIngles.setModel(new DefaultComboBoxModel<>(
+				new String[] { "---", "A1", "A2", "B1", "B2", "C1", "C2", "Conocimiento, pero sin acreditar" }));
 		comboBoxIngles.setSelectedIndex(0);
 		comboBoxIngles.setBounds(170, 192, 163, 21);
 		getContentPane().add(comboBoxIngles);
@@ -151,7 +161,7 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblLocalidad);
 
 		comboBoxLocalidad = new JComboBox<>();
-		comboBoxLocalidad.setModel(new DefaultComboBoxModel<>(new String[] {}));
+		comboBoxLocalidad.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
 		comboBoxLocalidad.setSelectedIndex(0);
 		comboBoxLocalidad.setBounds(170, 231, 163, 21);
 		getContentPane().add(comboBoxLocalidad);
@@ -163,6 +173,8 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblAccesibilidad);
 
 		comboBoxAccesibilidad = new JComboBox<>();
+		comboBoxAccesibilidad.setModel(
+				new DefaultComboBoxModel<>(new String[] { "---", "Carnet + coche", "Carnet", "Transporte publico" }));
 		comboBoxAccesibilidad.setSelectedIndex(0);
 		comboBoxAccesibilidad.setBounds(497, 238, 163, 21);
 		getContentPane().add(comboBoxAccesibilidad);
@@ -192,8 +204,235 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		btnAñadir.addActionListener(this);
 	}
 
+	public boolean errorChecks(int errorID) {
+		boolean error = false;
+
+		switch (errorID) {
+		case 1:
+			addError();
+			break;
+
+		case 2:
+			error = lengthCheck();
+			break;
+		}
+		return error;
+	}
+
+	public void addError() { // ErrorID: 1
+		JOptionPane.showMessageDialog(null, "Ha habido un error al intentar añadir la persona.", "ERROR",
+				JOptionPane.ERROR_MESSAGE);
+	}
+
+	public boolean lengthCheck() { // ErrorID: 2
+		if (textAreaObservaciones.getText().length() > 500) {
+			return true;
+		}
+		return false;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAñadir) {
+			if (textFieldNom.getText().isBlank() || textFieldApoyo.getText().isBlank()
+					|| comboBoxFormacion.getSelectedItem().equals("---")
+					|| comboBoxEspecialidad.getSelectedItem().equals("---")
+					|| comboBoxSectorInteres.getSelectedItem().equals("---")
+					|| comboBoxCertifDiscapacidad.getSelectedItem().equals("---")
+					|| comboBoxLocalidad.getSelectedItem().equals("---")
+					|| comboBoxAccesibilidad.getSelectedItem().equals("---")) {
+				JOptionPane.showMessageDialog(null, "Por favor, rellena toda todos los campos obligatorios.",
+						"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
+			} else if (cont.verificarPersona(textFieldNom.getText())) {
+				JOptionPane.showMessageDialog(null, "Ya existe una persona con el mismo nombre en la base de datos.",
+						"ERROR", JOptionPane.ERROR_MESSAGE);
+			} else {
+				if (errorChecks(2)) {
+					JOptionPane.showMessageDialog(null,
+							"Hay mas caracteres que el limite de caracteres en el campo de observaciones.", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					int result = 0;
+					Persona persona = new Persona();
 
+					persona.setNombre(textFieldNom.getText());
+					persona.setApoyo(textFieldApoyo.getText());
+					switch ((String) comboBoxFormacion.getSelectedItem()) {
+					case "AT":
+						persona.setFormacion(Formacion.AT);
+						break;
+
+					case "Primaria":
+						persona.setFormacion(Formacion.PRIMARIA);
+						break;
+
+					case "ESO":
+						persona.setFormacion(Formacion.ESO);
+						break;
+
+					case "EPA":
+						persona.setFormacion(Formacion.EPA);
+						break;
+
+					case "FP Basica":
+						persona.setFormacion(Formacion.FP_BASICA);
+						break;
+
+					case "GM":
+						persona.setFormacion(Formacion.GM);
+						break;
+
+					case "Bachillerato":
+						persona.setFormacion(Formacion.BACHILLERATO);
+						break;
+
+					case "GS":
+						persona.setFormacion(Formacion.GS);
+						break;
+
+					case "Universidad":
+						persona.setFormacion(Formacion.UNIVERSIDAD);
+						break;
+
+					case "Master":
+						persona.setFormacion(Formacion.MASTER);
+						break;
+
+					case "Doctorado":
+						persona.setFormacion(Formacion.DOCTORADO);
+						break;
+					}
+
+					// Especialidad
+
+					/*
+					 * switch ((String) comboBoxSectorInteres.getSelectedItem()) {
+					 * 
+					 * }
+					 */
+
+					if (!textFieldCVLink.getText().isBlank()) {
+						persona.setCvLink(textFieldCVLink.getText());
+					}
+
+					switch ((String) comboBoxCertifDiscapacidad.getSelectedItem()) {
+					case "Si":
+						persona.setCerfificadoDiscapacidad(Discapacidad.SI);
+						break;
+						
+					case "No":
+						persona.setCerfificadoDiscapacidad(Discapacidad.NO);
+						break;
+						
+					case "No sabe":
+						persona.setCerfificadoDiscapacidad(Discapacidad.NO_SABE);
+						break;
+						
+					case "Tramitando":
+						persona.setCerfificadoDiscapacidad(Discapacidad.TRAMITANDO);
+						break;
+					}
+
+					if (!comboBoxEuskera.getSelectedItem().equals("---")) {
+						switch ((String) comboBoxEuskera.getSelectedItem()) {
+						case "A1":
+							persona.setEuskera(Euskera.A1);
+							break;
+							
+						case "A2":
+							persona.setEuskera(Euskera.A2);
+							break;
+							
+						case "B1":
+							persona.setEuskera(Euskera.B1);
+							break;
+							
+						case "B2":
+							persona.setEuskera(Euskera.B2);
+							break;
+							
+						case "C1":
+							persona.setEuskera(Euskera.C1);
+							break;
+							
+						case "C2":
+							persona.setEuskera(Euskera.C2);
+							break;
+							
+						case "Conocimiento, pero sin acreditar":
+							persona.setEuskera(Euskera.CONOCIMIENTO_NOACREDITADO);
+							break;
+						}
+					}
+
+					if (!comboBoxIngles.getSelectedItem().equals("---")) {
+						switch ((String) comboBoxIngles.getSelectedItem()) {
+						case "A1":
+							persona.setIngles(Ingles.A1);
+							break;
+							
+						case "A2":
+							persona.setIngles(Ingles.A2);
+							break;
+							
+						case "B1":
+							persona.setIngles(Ingles.B1);
+							break;
+							
+						case "B2":
+							persona.setIngles(Ingles.B2);
+							break;
+							
+						case "C1":
+							persona.setIngles(Ingles.C1);
+							break;
+							
+						case "C2":
+							persona.setIngles(Ingles.C2);
+							break;
+							
+						case "Conocimiento, pero sin acreditar":
+							persona.setIngles(Ingles.CONOCIMIENTO_NOACREDITADO);
+							break;
+						}
+					}
+
+					if (!textFieldOtrosIdiomas.getText().isBlank()) {
+						persona.setOtrosIdiomas(textFieldOtrosIdiomas.getText());
+					}
+
+					switch ((String) comboBoxLocalidad.getSelectedItem()) {
+						// TBD
+					}
+
+					switch ((String) comboBoxAccesibilidad.getSelectedItem()) {
+					case "Carnet + coche":
+						persona.setAccesibilidad(Accesibilidad.CARNET_COCHE);
+						break;
+						
+					case "Carnet":
+						persona.setAccesibilidad(Accesibilidad.CARNET);
+						break;
+						
+					case "Transporte publico":
+						persona.setAccesibilidad(Accesibilidad.TRANSPORTE_PUBLICO);
+						break;
+					}
+
+					if (cont.añadirPersona(persona)) {
+						result = JOptionPane.showConfirmDialog(null,
+								"La empresa ha sido añadida correctamente. Quiere añadir mas empresas?", "",
+								JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+						if (result == JOptionPane.NO_OPTION) {
+							this.dispose();
+						} else if (result == JOptionPane.YES_OPTION) {
+							textAreaObservaciones.setText("");
+						}
+					} else {
+						errorChecks(1);
+					}
+				}
+			}
+		}
 	}
 }

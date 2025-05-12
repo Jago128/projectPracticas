@@ -64,6 +64,8 @@ public interface ApnabiDAO {
 	public Map<String, Persona> mostrarNomPersonas();
 	
 	public Persona getPersona(String nom);
+	
+	public boolean verificarPersona(String nom);
 
 	public boolean añadirPersona(Persona persona);
 

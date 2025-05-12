@@ -135,6 +135,10 @@ public class LoginController {
 	public Persona getPersona(String nom) {
 		return dao.getPersona(nom);
 	}
+	
+	public boolean verificarPersona(String nom) {
+		return verificarPersona(nom);
+	}
 
 	public boolean añadirPersona(Persona persona) {
 		return dao.añadirPersona(persona);
