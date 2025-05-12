@@ -41,7 +41,7 @@ CREATE TABLE PERSONA (
     APOYO VARCHAR(30) NOT NULL,
     FORMACION ENUM('AT', 'Primaria', 'ESO', 'EPA', 'FP_Basica', 'GM', 'Bachillerato', 'GS', 'Universidad', 'Master', 'Doctorado') NOT NULL,
     ESPECIALIDAD VARCHAR(500) NOT NULL,
-    SECTORINTERES ENUM("") NOT NULL,
+    SECTORINTERES ENUM("") NOT NULL, # TBD atm
     CV VARCHAR(999),
     DISCAPACIDAD ENUM('Si', 'No', 'No_Sabe', 'Tramitando') NOT NULL,
     EUSKERA ENUM('A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Conocimiento_NoAcreditado'),
