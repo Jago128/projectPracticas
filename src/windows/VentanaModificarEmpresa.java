@@ -20,10 +20,12 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 	private LoginController cont;
 	private Empresa emp;
 	private JTextArea textareaEmpresa, textAreaObservaciones, textAreaInfoUltimoCont;
-	private JTextField textFieldDatosContacto, textFieldContactoEmpresa, textFieldPersonaContacto, textFieldContacto1,
-			textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldFechaResolucion;
+	private JTextField textFieldDatosContacto, textFieldContactoEmpresa, textFieldContacto1, textFieldContacto2,
+			textFieldContacto3, textFieldContacto4, textFieldFechaResolucion;
 	private JComboBox<String> comboBoxEstado, comboBoxResultadoUltimoContacto, comboBoxResultadoFinal;
 	private JButton btnModificar;
+
+	private JComboBox<String> comboBoxPersonaContacto;
 
 	public VentanaModificarEmpresa(JDialog parent, LoginController cont, Empresa emp) {
 		super(parent, true);
@@ -91,10 +93,13 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		lblPersonaContacto.setBounds(21, 134, 140, 28);
 		getContentPane().add(lblPersonaContacto);
 
-		textFieldPersonaContacto = new JTextField();
-		textFieldPersonaContacto.setColumns(10);
-		textFieldPersonaContacto.setBounds(187, 140, 163, 19);
-		getContentPane().add(textFieldPersonaContacto);
+		comboBoxPersonaContacto = new JComboBox<>();
+		comboBoxPersonaContacto.setEditable(true);
+		comboBoxPersonaContacto.setModel(new DefaultComboBoxModel<>(
+				new String[] { "---", "Alba", "Ellen", "Selene", "Piti", "María", "Gorka", "Rocío" }));
+		comboBoxPersonaContacto.setSelectedIndex(0);
+		comboBoxPersonaContacto.setBounds(187, 140, 163, 19);
+		getContentPane().add(comboBoxPersonaContacto);
 
 		JLabel lblEstado = new JLabel("Estado:");
 		lblEstado.setHorizontalAlignment(SwingConstants.CENTER);
@@ -538,8 +543,9 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 			}
 		}
 
-		if (!textFieldPersonaContacto.getText().isBlank() && check) {
-			check = cont.modificarPersonaContacto(textFieldPersonaContacto.getText(), emp.getNom_empresa());
+		if (!comboBoxPersonaContacto.getEditor().getItem().equals("---") && check) {
+			check = cont.modificarPersonaContacto((String) comboBoxPersonaContacto.getEditor().getItem(),
+					emp.getNom_empresa());
 			if (!check) {
 				infoError.append("Persona de contacto");
 			}

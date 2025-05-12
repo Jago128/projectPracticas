@@ -14,9 +14,9 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 	private LoginController cont;
 	private Persona persona;
 	private JTextArea textareaPersona, textAreaObservaciones;
-	private JTextField textFieldApoyo, textFieldOtrosIdiomas, textFieldCVLink;
+	private JTextField textFieldOtrosIdiomas, textFieldCVLink;
 	private JComboBox<String> comboBoxSectorInteres, comboBoxEspecialidad, comboBoxLocalidad, comboBoxFormacion,
-			comboBoxCertifDiscapacidad, comboBoxEuskera, comboBoxIngles, comboBoxAccesibilidad;
+			comboBoxCertifDiscapacidad, comboBoxEuskera, comboBoxIngles, comboBoxAccesibilidad, comboBoxApoyo;
 	private JButton btnModificar;
 
 	public VentanaModificarPersona(JDialog parent, LoginController cont, Persona persona) {
@@ -58,10 +58,13 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		lblApoyo.setBounds(25, 37, 140, 28);
 		getContentPane().add(lblApoyo);
 
-		textFieldApoyo = new JTextField();
-		textFieldApoyo.setColumns(10);
-		textFieldApoyo.setBounds(175, 43, 163, 19);
-		getContentPane().add(textFieldApoyo);
+		comboBoxApoyo = new JComboBox<>();
+		comboBoxApoyo.setEditable(true);
+		comboBoxApoyo.setModel(new DefaultComboBoxModel<>(
+				new String[] { "---", "Alba", "Ellen", "Selene", "Piti", "María", "Gorka", "Rocío" }));
+		comboBoxApoyo.setSelectedIndex(0);
+		comboBoxApoyo.setBounds(175, 43, 163, 19);
+		getContentPane().add(comboBoxApoyo);
 
 		JLabel lblFormacion = new JLabel("Formacion:");
 		lblFormacion.setHorizontalAlignment(SwingConstants.CENTER);
@@ -438,8 +441,8 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		boolean check = false;
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 
-		if (!textFieldApoyo.getText().isBlank()) {
-			check = cont.modificarApoyo(textFieldApoyo.getText(), persona.getNombre());
+		if (!comboBoxApoyo.getEditor().getItem().equals("---")) {
+			check = cont.modificarApoyo((String)comboBoxApoyo.getEditor().getItem(), persona.getNombre());
 			if (!check) {
 				infoError.append("Apoyo");
 			}

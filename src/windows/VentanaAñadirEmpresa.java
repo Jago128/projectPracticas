@@ -19,10 +19,10 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 
 	private LoginController cont;
 	private JTextField textFieldNombre, textFieldPuesto, textFieldDatosContacto, textFieldContactoEmpresa,
-			textFieldContacto1, textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldPersonaContacto,
-			textFieldFechaResolucion;
+			textFieldContacto1, textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldFechaResolucion;
 	private JTextArea textAreaObservaciones, textAreaInfoUltimoCont;
-	private JComboBox<String> comboBoxSector, comboBoxResultadoUltimoContacto, comboBoxEstado, comboBoxResultadoFinal;
+	private JComboBox<String> comboBoxSector, comboBoxResultadoUltimoContacto, comboBoxEstado, comboBoxResultadoFinal,
+			comboBoxPersonaContacto;
 	private JButton btnAñadir;
 
 	public VentanaAñadirEmpresa(JDialog parent, LoginController cont) {
@@ -108,10 +108,13 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		lblPersonaContacto.setBounds(10, 230, 153, 31);
 		getContentPane().add(lblPersonaContacto);
 
-		textFieldPersonaContacto = new JTextField();
-		textFieldPersonaContacto.setColumns(10);
-		textFieldPersonaContacto.setBounds(181, 237, 163, 19);
-		getContentPane().add(textFieldPersonaContacto);
+		comboBoxPersonaContacto = new JComboBox<>();
+		comboBoxPersonaContacto.setEditable(true);
+		comboBoxPersonaContacto.setModel(new DefaultComboBoxModel<>(
+				new String[] { "---", "Alba", "Ellen", "Selene", "Piti", "María", "Gorka", "Rocío" }));
+		comboBoxPersonaContacto.setSelectedIndex(0);
+		comboBoxPersonaContacto.setBounds(166, 236, 178, 21);
+		getContentPane().add(comboBoxPersonaContacto);
 
 		JLabel lblEstado = new JLabel("Estado: *");
 		lblEstado.setHorizontalAlignment(SwingConstants.CENTER);
@@ -398,8 +401,8 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		if (event.getSource() == btnAñadir) {
 			if (textFieldNombre.getText().isBlank() || comboBoxSector.getSelectedItem().equals("---")
 					|| textFieldDatosContacto.getText().isBlank() || textFieldContactoEmpresa.getText().isBlank()
-					|| textFieldPersonaContacto.getText().isBlank() || comboBoxEstado.getSelectedItem().equals("---")
-					|| textFieldContacto1.getText().isBlank()) {
+					|| comboBoxPersonaContacto.getSelectedItem().equals("---")
+					|| comboBoxEstado.getSelectedItem().equals("---") || textFieldContacto1.getText().isBlank()) {
 				JOptionPane.showMessageDialog(null, "Por favor, rellena toda todos los campos obligatorios.",
 						"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
 			} else if (cont.verificarEmpresa(textFieldNombre.getText())) {
@@ -585,7 +588,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 
 						Empresa emp = new Empresa(textFieldNombre.getText(), sector, textFieldPuesto.getText(),
 								textFieldDatosContacto.getText(), textFieldContactoEmpresa.getText(),
-								textFieldPersonaContacto.getText(), estado);
+								(String) comboBoxPersonaContacto.getEditor().getItem(), estado);
 						Contacto con = new Contacto(textFieldContacto1.getText());
 
 						if (!textFieldContacto2.getText().isBlank()) {
@@ -628,6 +631,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 								if (result == JOptionPane.NO_OPTION) {
 									this.dispose();
 								} else if (result == JOptionPane.YES_OPTION) {
+									textAreaInfoUltimoCont.setText("");
 									textAreaObservaciones.setText("");
 									textFieldContacto1.setText("");
 									textFieldContacto2.setText("");
@@ -635,10 +639,13 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 									textFieldContacto4.setText("");
 									textFieldContactoEmpresa.setText("");
 									textFieldDatosContacto.setText("");
+									textFieldFechaResolucion.setText("");
 									textFieldNombre.setText("");
-									textFieldPersonaContacto.setText("");
 									textFieldPuesto.setText("");
 									comboBoxEstado.setSelectedIndex(0);
+									comboBoxPersonaContacto.setSelectedIndex(0);
+									comboBoxResultadoFinal.setSelectedIndex(0);
+									comboBoxResultadoUltimoContacto.setSelectedIndex(0);
 									comboBoxSector.setSelectedIndex(0);
 								}
 							} else {

@@ -13,9 +13,10 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
-	private JTextField textFieldApoyo, textFieldCVLink, textFieldOtrosIdiomas, textFieldNom;
+	private JTextField textFieldCVLink, textFieldOtrosIdiomas, textFieldNom;
 	private JComboBox<String> comboBoxFormacion, comboBoxEspecialidad, comboBoxSectorInteres,
-			comboBoxCertifDiscapacidad, comboBoxEuskera, comboBoxIngles, comboBoxLocalidad, comboBoxAccesibilidad;
+			comboBoxCertifDiscapacidad, comboBoxEuskera, comboBoxIngles, comboBoxLocalidad, comboBoxAccesibilidad,
+			comboBoxApoyo;
 	private JTextArea textAreaObservaciones;
 	private JButton btnAñadir;
 
@@ -51,10 +52,13 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		lblApoyo.setBounds(390, 39, 97, 28);
 		getContentPane().add(lblApoyo);
 
-		textFieldApoyo = new JTextField();
-		textFieldApoyo.setColumns(10);
-		textFieldApoyo.setBounds(497, 45, 163, 19);
-		getContentPane().add(textFieldApoyo);
+		comboBoxApoyo = new JComboBox<>();
+		comboBoxApoyo.setEditable(true);
+		comboBoxApoyo.setModel(new DefaultComboBoxModel<>(
+				new String[] { "---", "Alba", "Ellen", "Selene", "Piti", "María", "Gorka", "Rocío" }));
+		comboBoxApoyo.setSelectedIndex(0);
+		comboBoxApoyo.setBounds(497, 44, 163, 21);
+		getContentPane().add(comboBoxApoyo);
 
 		JLabel lblFormacion = new JLabel("Formacion: *");
 		lblFormacion.setHorizontalAlignment(SwingConstants.CENTER);
@@ -234,7 +238,7 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAñadir) {
-			if (textFieldNom.getText().isBlank() || textFieldApoyo.getText().isBlank()
+			if (textFieldNom.getText().isBlank() || comboBoxApoyo.getEditor().getItem().equals("---")
 					|| comboBoxFormacion.getSelectedItem().equals("---")
 					|| comboBoxEspecialidad.getSelectedItem().equals("---")
 					|| comboBoxSectorInteres.getSelectedItem().equals("---")
@@ -256,7 +260,7 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 					Persona persona = new Persona();
 
 					persona.setNombre(textFieldNom.getText());
-					persona.setApoyo(textFieldApoyo.getText());
+					persona.setApoyo((String) comboBoxApoyo.getEditor().getItem());
 					switch ((String) comboBoxFormacion.getSelectedItem()) {
 					case "AT":
 						persona.setFormacion(Formacion.AT);
@@ -431,11 +435,11 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 							this.dispose();
 						} else if (result == JOptionPane.YES_OPTION) {
 							textAreaObservaciones.setText("");
-							textFieldApoyo.setText("");
 							textFieldCVLink.setText("");
 							textFieldNom.setText("");
 							textFieldOtrosIdiomas.setText("");
 							comboBoxAccesibilidad.setSelectedIndex(0);
+							comboBoxApoyo.setSelectedIndex(0);
 							comboBoxCertifDiscapacidad.setSelectedIndex(0);
 							comboBoxEspecialidad.setSelectedIndex(0);
 							comboBoxEuskera.setSelectedIndex(0);
