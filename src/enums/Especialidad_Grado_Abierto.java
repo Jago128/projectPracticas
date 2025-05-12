@@ -1,5 +1,0 @@
-package enums;
-
-public enum Especialidad_Grado_Abierto {
-	UNSET, GRADOABIERTO, CIENCIASSOCIALES_JURIDICAS, INGENIERIA_INDUSTRIAL, INGENIERIAS
-}
