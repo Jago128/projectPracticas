@@ -759,7 +759,10 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 						"ERROR", JOptionPane.ERROR_MESSAGE);
 			} else {
 				try {
-					if (textFieldDatosContacto.getText().contains("@")) {
+					if (textFieldDatosContacto.getText().contains("@")
+							&& (textFieldDatosContacto.getText().contains(".com")
+									|| textFieldDatosContacto.getText().contains(".es")
+									|| textFieldDatosContacto.getText().contains(".eus"))) {
 						emailFormatCheck(textFieldDatosContacto.getText());
 					}
 
