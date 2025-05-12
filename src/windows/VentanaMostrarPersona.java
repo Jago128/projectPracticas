@@ -15,8 +15,8 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 	private LoginController cont;
 	// private Usuario user;
 	private JList<String> listNom, listApoyo, listFormacion, listEspecialidad, listSectorInteres, listCVLink,
-	listCertifDiscapacidad, listEuskera, listIngles, listOtrosIdiomas, listLocalidad, listObservaciones,
-	listAccesibilidad;
+			listCertifDiscapacidad, listEuskera, listIngles, listOtrosIdiomas, listLocalidad, listObservaciones,
+			listAccesibilidad;
 	private JButton btnModificarPersona;
 
 	public VentanaMostrarPersona(JDialog parent, LoginController cont, Usuario user) {
@@ -140,7 +140,6 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		modelLocalidad.addElement("Localidad");
 		modelAccesibilidad.addElement("Accesibilidad");
 		modelObservaciones.addElement("Observaciones");
-
 		if (!personas.isEmpty()) {
 			for (Persona p : personas.values()) {
 				switch (p.getFormacion()) {
@@ -190,7 +189,6 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 
 				default:
 					System.out.println("Tipo invalido");
-
 				}
 
 				// Especialidades, SectorInteres [TBD]
@@ -312,6 +310,7 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 				modelOtrosIdiomas.addElement(p.getOtrosIdiomas());
 				modelObservaciones.addElement(p.getObservaciones());
 			}
+			
 			listNom.setModel(modelNom);
 			listApoyo.setModel(modelApoyo);
 			listFormacion.setModel(modelFormacion);
@@ -326,8 +325,10 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 			listAccesibilidad.setModel(modelAccesibilidad);
 			listObservaciones.setModel(modelObservaciones);
 		} else {
-			JOptionPane.showMessageDialog(null, "No hay ninguna persona para visualizar."
-					+ "\nPor favor, añada una persona anter the abrir esta ventana.", "AVISO!", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null,
+					"No hay ninguna persona para visualizar."
+							+ "\nPor favor, añada una persona anter the abrir esta ventana.",
+					"AVISO!", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
 		}
 	}
@@ -337,7 +338,8 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		if (e.getSource() == btnModificarPersona) {
 			if (!listNom.isSelectionEmpty()) {
 				if (!listNom.getSelectedValue().equals("Nombre")) {
-					VentanaModificarPersona dialog = new VentanaModificarPersona(this, cont, cont.getPersona(listNom.getSelectedValue()));
+					VentanaModificarPersona dialog = new VentanaModificarPersona(this, cont,
+							cont.getPersona(listNom.getSelectedValue()));
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} else {

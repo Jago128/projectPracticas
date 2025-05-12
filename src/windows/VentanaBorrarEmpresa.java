@@ -53,15 +53,16 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 		DefaultListModel<String> modelEmpresas = new DefaultListModel<>();
 
 		listEmpresas.removeAll();
-
 		if (!empresas.isEmpty()) {
 			for (Empresa emp : empresas.values()) {
 				modelEmpresas.addElement(emp.getNom_empresa());
 			}
 			listEmpresas.setModel(modelEmpresas);
 		} else {
-			JOptionPane.showMessageDialog(null, "No hay ninguna empresa para visualizar."
-					+ "\nPor favor, añada una empresa anter the abrir esta ventana.", "AVISO!", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null,
+					"No hay ninguna empresa para visualizar."
+							+ "\nPor favor, añada una empresa anter the abrir esta ventana.",
+					"AVISO!", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
 		}
 	}
@@ -70,12 +71,14 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnBorrar) {
 			if (!listEmpresas.isSelectionEmpty()) {
-				int result = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que quieras borrar la empresa '"+listEmpresas.getSelectedValue()+"'?",
+				int result = JOptionPane.showConfirmDialog(null,
+						"¿Esta seguro de que quieras borrar la empresa '" + listEmpresas.getSelectedValue() + "'?",
 						"Confirmacion", JOptionPane.YES_NO_OPTION);
 
 				if (result == JOptionPane.YES_OPTION) {
 					if (cont.eliminarEmpresa(listEmpresas.getSelectedValue())) {
-						result = JOptionPane.showConfirmDialog(null, "La empresa ha sido borrada correctamente. ¿Quiere borrar mas empresas?",
+						result = JOptionPane.showConfirmDialog(null,
+								"La empresa ha sido borrada correctamente. ¿Quiere borrar mas empresas?",
 								"Empresa eliminada.", JOptionPane.YES_NO_OPTION);
 						if (result == JOptionPane.NO_OPTION) {
 							this.dispose();
@@ -89,8 +92,9 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 					}
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "No hay ninguna seleccion hecha. Por favor, selecciona una empresa de la lista.",
-						"ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null,
+						"No hay ninguna seleccion hecha. Por favor, selecciona una empresa de la lista.", "ERROR",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

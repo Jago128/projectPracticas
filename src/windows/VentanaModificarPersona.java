@@ -421,7 +421,7 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 
 	public boolean errorChecks(int errorID) {
 		boolean error = false;
-		
+
 		switch (errorID) {
 		case 1:
 			error = addError();
@@ -537,7 +537,6 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 					+ "\nLa informacion cambiada correctamente se actualizara en el recuadro de infomacion de la persona.",
 					"ERROR", JOptionPane.ERROR_MESSAGE);
 		}
-
 		return check;
 	}
 

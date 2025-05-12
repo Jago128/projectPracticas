@@ -4,17 +4,7 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
-import enums.Accesibilidad;
-import enums.Discapacidad;
-import enums.Estado;
-import enums.Euskera;
-import enums.Formacion;
-import enums.Ingles;
-import enums.Localidad;
-import enums.ResultadoFinal;
-import enums.ResultadoUltimoContacto;
-import enums.Sector;
-import enums.SectorInteres;
+import enums.*;
 
 public class BDImplementacion implements ApnabiDAO {
 	private Connection con;
@@ -71,7 +61,6 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUPDATEACCESIBILIDAD = "UPDATE PERSONA SET ACCESIBILIDAD=? WHERE NOM_P=?";
 	final String SQLUPDATEPERSONAOBSERVACIONES = "UPDATE PERSONA SET OBSERVACIONES=? WHERE NOM_P=?";
 
-
 	public BDImplementacion() {
 		this.configFile = ResourceBundle.getBundle("model.classConfig");
 		this.driverBD = this.configFile.getString("Driver");
@@ -111,7 +100,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return existe;
 	}
 
@@ -136,7 +125,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return existe;
 	}
 
@@ -154,6 +143,7 @@ public class BDImplementacion implements ApnabiDAO {
 					user.setNombre(rs.getString("NOMBRE"));
 					user.setContraseña(rs.getString("CONTRASEÑA"));
 				}
+				rs.close();
 				stmt.close();
 				con.close();
 			} catch (SQLException e) {
@@ -161,7 +151,7 @@ public class BDImplementacion implements ApnabiDAO {
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
-			} 
+			}
 		}
 		return user;
 	}
@@ -187,21 +177,20 @@ public class BDImplementacion implements ApnabiDAO {
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
-			} 
+			}
 		}
 		return registro;
 	}
 
 	@Override
 	public Map<String, Empresa> mostrarEmpresas() {
-		ResultSet rs = null;
 		Empresa empresa;
 		Map<String, Empresa> empresas = new TreeMap<>();
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLEMPRESAS);
-			rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				empresa = new Empresa();
 				empresa.setCodEmpresa(rs.getInt("COD_EMPRESA"));
@@ -222,20 +211,19 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return empresas;
 	}
 
 	@Override
 	public Map<String, Empresa> mostrarNomEmpresas() {
-		ResultSet rs = null;
 		Empresa empresa;
 		Map<String, Empresa> empresas = new TreeMap<>();
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLNOMEMPRESAS);
-			rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				empresa = new Empresa();
 				empresa.setNom_empresa(rs.getString("NOM_EMPRESA"));
@@ -249,20 +237,19 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return empresas;
 	}
 
 	@Override
 	public Empresa getEmpresa(String nom) {
-		ResultSet rs = null;
 		Empresa empresa = new Empresa();
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLSELECTEMPRESA);
 			stmt.setString(1, nom);
-			rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				empresa.setCodEmpresa(rs.getInt("COD_EMPRESA"));
 				empresa.setNom_empresa(rs.getString("NOM_EMPRESA"));
@@ -281,7 +268,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return empresa;
 	}
 
@@ -305,7 +292,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return existe;
 	}
 
@@ -329,7 +316,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return cod;
 	}
 
@@ -461,7 +448,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -488,7 +475,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -515,7 +502,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -542,7 +529,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -552,43 +539,38 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
-			if (estado != null) {
-				switch (estado) {
+			switch (estado) {
+			case "Valorando/interesado":
+				estado = "Valorando_Interesado";
+				break;
 
-				case "Valorando/interesado":
-					estado = "Valorando_Interesado";
-					break;
+			case "Planificando inserciones":
+				estado = "PlanificandoInserciones";
+				break;
 
-				case "Planificando inserciones":
-					estado = "PlanificandoInserciones";
-					break;
+			case "Proximo año":
+				estado = "ProximoAño";
+				break;
 
-				case "Proximo año":
-					estado = "ProximoAño";
-					break;
+			case "No interesado":
+				estado = "NoInteresado";
+				break;
+			}
 
-				case "No interesado":
-					estado = "NoInteresado";
-					break;
-				}
-
-				stmt = con.prepareStatement(SQLUPDATEESTADO);
-				stmt.setString(1, estado);
-				stmt.setString(2, nom);
-				if (stmt.executeUpdate() > 0) {
-					check = true;
-				}
-				stmt.close();
-			} else {
+			stmt = con.prepareStatement(SQLUPDATEESTADO);
+			stmt.setString(1, estado);
+			stmt.setString(2, nom);
+			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
+			stmt.close();
 			con.close();
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la empresa.");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -610,7 +592,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -626,37 +608,40 @@ public class BDImplementacion implements ApnabiDAO {
 			if (rs.next()) {
 				cont.setCodContacto(rs.getInt("COD_CONTACTO"));
 				cont.setContacto1(rs.getDate("CONTACTO1").toString());
-				if (rs.getDate("CONTACTO2")==null) {
+				if (rs.getDate("CONTACTO2") == null) {
 					cont.setContacto2(null);
 				} else {
 					cont.setContacto2(rs.getDate("CONTACTO2").toString());
 				}
 
-				if (rs.getDate("CONTACTO3")==null) {
+				if (rs.getDate("CONTACTO3") == null) {
 					cont.setContacto3(null);
 				} else {
 					cont.setContacto3(rs.getDate("CONTACTO3").toString());
 				}
 
-				if (rs.getDate("CONTACTO4")==null) {
+				if (rs.getDate("CONTACTO4") == null) {
 					cont.setContacto4(null);
 				} else {
 					cont.setContacto4(rs.getDate("CONTACTO4").toString());
 				}
+
 				cont.setObservaciones(rs.getString("OBSERVACIONES"));
-				if (rs.getString("RESULTADOULTIMO")!=null) {
-					cont.setResultadoUltimoContacto(ResultadoUltimoContacto.valueOf(rs.getString("RESULTADOULTIMO").toUpperCase()));
+				if (rs.getString("RESULTADOULTIMO") != null) {
+					cont.setResultadoUltimoContacto(
+							ResultadoUltimoContacto.valueOf(rs.getString("RESULTADOULTIMO").toUpperCase()));
 				} else {
 					cont.setResultadoUltimoContacto(null);
 				}
-				cont.setInfoUltimo(rs.getString("INFOULTIMO"));
 
-				if (rs.getString("RESULTADOFINAL")!=null) {
+				cont.setInfoUltimo(rs.getString("INFOULTIMO"));
+				if (rs.getString("RESULTADOFINAL") != null) {
 					cont.setResultadoFinal(ResultadoFinal.valueOf(rs.getString("RESULTADOFINAL").toUpperCase()));
 				} else {
 					cont.setResultadoFinal(null);
 				}
-				if (rs.getDate("FECHARESOLUCION")==null) {
+
+				if (rs.getDate("FECHARESOLUCION") == null) {
 					cont.setFechaResolucion(null);
 				} else {
 					cont.setFechaResolucion(rs.getDate("FECHARESOLUCION").toString());
@@ -671,15 +656,15 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return cont;
 	}
 
 	@Override
 	public boolean añadirContacto(Contacto cont, int id) {
 		boolean check = false;
-		this.openConnection();
 
+		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLINSERTCONTACTO);
 			stmt.setString(1, cont.getContacto1());
@@ -708,8 +693,8 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt.setString(6, "Reunion_Programada");
 				break;
 
-			case UNSET:
-				stmt.setString(6, null);
+			default:
+				System.out.println("Tipo incorrecto.");
 				break;
 			}
 
@@ -735,9 +720,8 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt.setString(8, "Relacion_Pospuesta");
 				break;
 
-			case UNSET:
-				stmt.setString(8, null);
-				break;
+			default:
+				System.out.println("Tipo incorrecto.");
 			}
 
 			stmt.setDate(9, Date.valueOf(cont.getFechaResolucion()));
@@ -745,7 +729,6 @@ public class BDImplementacion implements ApnabiDAO {
 			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
-
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
@@ -780,7 +763,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -807,7 +790,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -834,7 +817,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -861,7 +844,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -888,7 +871,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -938,7 +921,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -965,7 +948,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1014,7 +997,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1041,7 +1024,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1079,7 +1062,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return personas;
 	}
 
@@ -1105,20 +1088,19 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return personas;
 	}
 
 	@Override
 	public Persona getPersona(String nom) {
-		ResultSet rs = null;
 		Persona persona = new Persona();
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLNOMPERSONAS);
 			stmt.setString(1, nom);
-			rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				persona.setNombre(rs.getString("NOM_P"));
 				persona.setApoyo(rs.getString("APOYO"));
@@ -1142,15 +1124,15 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return persona;
 	}
-	
+
 	@Override
 	public boolean verificarPersona(String nom) {
 		boolean existe = false;
-		this.openConnection();
 
+		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLSELECTPERSONA);
 			stmt.setString(1, nom);
@@ -1173,8 +1155,8 @@ public class BDImplementacion implements ApnabiDAO {
 	@Override
 	public boolean añadirPersona(Persona persona) {
 		boolean check = false;
-		this.openConnection();
 
+		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLINSERTEMPRESA);
 			stmt.setString(1, persona.getNombre());
@@ -1360,7 +1342,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1387,7 +1369,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1401,7 +1383,6 @@ public class BDImplementacion implements ApnabiDAO {
 				if (formacion.equals("FP Basica")) {
 					formacion = "FP_Basica";
 				}
-				
 				stmt = con.prepareStatement(SQLUPDATEFORMACION);
 				stmt.setString(1, formacion);
 				stmt.setString(2, nom);
@@ -1418,7 +1399,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1446,7 +1427,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1457,7 +1438,9 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!sectorI.isBlank()) {
-				// Handling TBD
+				switch (sectorI) {
+					// TBD
+				}
 				stmt = con.prepareStatement(SQLUPDATESECTORINTERES);
 				stmt.setString(1, sectorI);
 				stmt.setString(2, nom);
@@ -1474,7 +1457,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1501,7 +1484,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1515,7 +1498,6 @@ public class BDImplementacion implements ApnabiDAO {
 				if (discap.equals("No sabe")) {
 					discap = "No_Sabe";
 				}
-				
 				stmt = con.prepareStatement(SQLUPDATEDISCAPACIDAD);
 				stmt.setString(1, discap);
 				stmt.setString(2, nom);
@@ -1532,7 +1514,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1546,7 +1528,6 @@ public class BDImplementacion implements ApnabiDAO {
 				if (nivel.equals("Conocimiento, pero sin acreditar")) {
 					nivel = "Conocimiento_NoAcreditado";
 				}
-				
 				stmt = con.prepareStatement(SQLUPDATE_EUSKERA);
 				stmt.setString(1, nivel);
 				stmt.setString(2, nom);
@@ -1563,7 +1544,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1577,7 +1558,6 @@ public class BDImplementacion implements ApnabiDAO {
 				if (nivel.equals("Conocimiento, pero sin acreditar")) {
 					nivel = "Conocimiento_NoAcreditado";
 				}
-				
 				stmt = con.prepareStatement(SQLUPDATEINGLES);
 				stmt.setString(1, nivel);
 				stmt.setString(2, nom);
@@ -1594,7 +1574,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1621,7 +1601,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1633,7 +1613,7 @@ public class BDImplementacion implements ApnabiDAO {
 		try {
 			if (!localidad.isBlank()) {
 				switch (localidad) {
-
+					// TBD
 				}
 				stmt = con.prepareStatement(SQLUPDATELOCALIDAD);
 				stmt.setString(1, localidad);
@@ -1651,7 +1631,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1665,12 +1645,11 @@ public class BDImplementacion implements ApnabiDAO {
 			case "Carnet + coche":
 				accesibilidad = "Carnet_Coche";
 				break;
-				
+
 			case "Transporte publico":
 				accesibilidad = "Transporte_Publico";
 				break;
 			}
-
 			if (!accesibilidad.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATEACCESIBILIDAD);
 				stmt.setString(1, accesibilidad);
@@ -1688,7 +1667,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 
@@ -1715,7 +1694,7 @@ public class BDImplementacion implements ApnabiDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return check;
 	}
 }

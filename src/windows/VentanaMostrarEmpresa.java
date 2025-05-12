@@ -15,8 +15,8 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 	private LoginController cont;
 	// private Usuario user;
 	private JList<String> listSectores, listEmpresas, listPuestos, listDatosContacto, listContactosEmpresa,
-	listContactosApnabi, listEstados, listContacto1, listContacto2, listContacto3, listContacto4, listObservaciones,
-	listResultadoUltimoContacto, listInfoUltimo, listResultadoFinal, listFechaResolucion;
+			listContactosApnabi, listEstados, listContacto1, listContacto2, listContacto3, listContacto4,
+			listObservaciones, listResultadoUltimoContacto, listInfoUltimo, listResultadoFinal, listFechaResolucion;
 	private JButton btnModificarEmpresa;
 
 	public VentanaMostrarEmpresa(JDialog parent, LoginController cont, Usuario user) {
@@ -285,6 +285,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 				} else {
 					modelPuestos.addElement(emp.getPuesto());
 				}
+				
 				modelDatosContacto.addElement(emp.getDatosContacto());
 				modelContactosEmpresa.addElement(emp.getContactoEmpresa());
 				modelContactosApnabi.addElement(emp.getContactoApnabi());
@@ -401,8 +402,10 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 			listResultadoFinal.setModel(modelResultadoFinal);
 			listFechaResolucion.setModel(modelFechaResolucion);
 		} else {
-			JOptionPane.showMessageDialog(null, "No hay ninguna empresa para visualizar."
-					+ "\nPor favor, añada una empresa anter the abrir esta ventana.", "AVISO!", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null,
+					"No hay ninguna empresa para visualizar."
+							+ "\nPor favor, añada una empresa anter the abrir esta ventana.",
+					"AVISO!", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
 		}
 	}
@@ -412,7 +415,8 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 		if (e.getSource() == btnModificarEmpresa) {
 			if (!listEmpresas.isSelectionEmpty()) {
 				if (!listEmpresas.getSelectedValue().equals("Empresas")) {
-					VentanaModificarEmpresa dialog = new VentanaModificarEmpresa(this, cont, cont.getEmpresa(listEmpresas.getSelectedValue()));
+					VentanaModificarEmpresa dialog = new VentanaModificarEmpresa(this, cont,
+							cont.getEmpresa(listEmpresas.getSelectedValue()));
 					dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} else {
@@ -421,6 +425,6 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 			} else {
 				JOptionPane.showMessageDialog(null, "[ERROR] Elija una empresa de la lista de empresas.");
 			}
-		} 
+		}
 	}
 }

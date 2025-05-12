@@ -19,8 +19,8 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 
 	private LoginController cont;
 	private JTextField textFieldNombre, textFieldPuesto, textFieldDatosContacto, textFieldContactoEmpresa,
-	textFieldContacto1, textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldPersonaContacto,
-	textFieldFechaResolucion;
+			textFieldContacto1, textFieldContacto2, textFieldContacto3, textFieldContacto4, textFieldPersonaContacto,
+			textFieldFechaResolucion;
 	private JTextArea textAreaObservaciones, textAreaInfoUltimoCont;
 	private JComboBox<String> comboBoxSector, comboBoxResultadoUltimoContacto, comboBoxEstado, comboBoxResultadoFinal;
 	private JButton btnAñadir;
@@ -342,9 +342,9 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
 				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
 				.toFormatter();
-		LocalDate cont1 = LocalDate.parse("0000-1-1", format), cont2 = LocalDate.parse("0000-1-1", format),
-				cont3 = LocalDate.parse("0000-1-1", format), cont4 = LocalDate.parse("0000-1-1", format),
-				fecRes = LocalDate.parse("0000-1-1", format);
+		LocalDate cont1 = LocalDate.parse("9999-1-1", format), cont2 = LocalDate.parse("9999-1-1", format),
+				cont3 = LocalDate.parse("9999-1-1", format), cont4 = LocalDate.parse("9999-1-1", format),
+				fecRes = LocalDate.parse("9999-1-1", format);
 
 		cont1 = LocalDate.parse(textFieldContacto1.getText(), format);
 		if (!textFieldContacto2.getText().isBlank()) {
@@ -387,7 +387,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 			return true;
 		}
 
-		if (textAreaObservaciones.getText().length() > 500) {
+		if (textAreaInfoUltimoCont.getText().length() > 500) {
 			return true;
 		}
 		return false;
@@ -398,8 +398,8 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		if (event.getSource() == btnAñadir) {
 			if (textFieldNombre.getText().isBlank() || comboBoxSector.getSelectedItem().equals("---")
 					|| textFieldDatosContacto.getText().isBlank() || textFieldContactoEmpresa.getText().isBlank()
-					|| textFieldPersonaContacto.getText().isBlank()
-					|| comboBoxEstado.getSelectedItem().equals("---") || textFieldContacto1.getText().isBlank()) {
+					|| textFieldPersonaContacto.getText().isBlank() || comboBoxEstado.getSelectedItem().equals("---")
+					|| textFieldContacto1.getText().isBlank()) {
 				JOptionPane.showMessageDialog(null, "Por favor, rellena toda todos los campos obligatorios.",
 						"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
 			} else if (cont.verificarEmpresa(textFieldNombre.getText())) {
@@ -421,13 +421,12 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 						if (textFieldContacto1.getText().isBlank()) {
 							JOptionPane.showMessageDialog(null,
 									"Una o varias de las fechas introducidas no estan en orden cronologico."
-											+ "\nComprueba la fecha del 1. Contacto del recuadro de informacion de empresa si tienes dudas, y compruba el orden de las fechas.",
-											"ERROR", JOptionPane.ERROR_MESSAGE);
+											+ "\nComprueba la fecha del 1. Contacto del recuadro de informacion de empresa si tienes dudas.",
+									"ERROR", JOptionPane.ERROR_MESSAGE);
 						} else {
 							JOptionPane.showMessageDialog(null,
-									"Una o varias de las fechas introducidas no estan en orden cronologico."
-											+ "\nComprueba el orden de las fechas.",
-											"ERROR", JOptionPane.ERROR_MESSAGE);
+									"Una o varias de las fechas introducidas no estan en orden cronologico.", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
 						}
 					} else if (errorChecks(4)) {
 						JOptionPane.showMessageDialog(null,

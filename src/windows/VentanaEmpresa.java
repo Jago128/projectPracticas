@@ -21,7 +21,7 @@ public class VentanaEmpresa extends JDialog implements ActionListener {
 		super(parent, true);
 		this.cont = cont;
 		this.user = user;
-		
+
 		setResizable(false);
 		setTitle("Empresas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

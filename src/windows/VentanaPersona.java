@@ -21,7 +21,7 @@ public class VentanaPersona extends JDialog implements ActionListener {
 		super(parent, true);
 		this.cont = cont;
 		this.user = user;
-		
+
 		setResizable(false);
 		setTitle("Personas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -319,15 +319,15 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 					case "Si":
 						persona.setCerfificadoDiscapacidad(Discapacidad.SI);
 						break;
-						
+
 					case "No":
 						persona.setCerfificadoDiscapacidad(Discapacidad.NO);
 						break;
-						
+
 					case "No sabe":
 						persona.setCerfificadoDiscapacidad(Discapacidad.NO_SABE);
 						break;
-						
+
 					case "Tramitando":
 						persona.setCerfificadoDiscapacidad(Discapacidad.TRAMITANDO);
 						break;
@@ -338,27 +338,27 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 						case "A1":
 							persona.setEuskera(Euskera.A1);
 							break;
-							
+
 						case "A2":
 							persona.setEuskera(Euskera.A2);
 							break;
-							
+
 						case "B1":
 							persona.setEuskera(Euskera.B1);
 							break;
-							
+
 						case "B2":
 							persona.setEuskera(Euskera.B2);
 							break;
-							
+
 						case "C1":
 							persona.setEuskera(Euskera.C1);
 							break;
-							
+
 						case "C2":
 							persona.setEuskera(Euskera.C2);
 							break;
-							
+
 						case "Conocimiento, pero sin acreditar":
 							persona.setEuskera(Euskera.CONOCIMIENTO_NOACREDITADO);
 							break;
@@ -370,27 +370,27 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 						case "A1":
 							persona.setIngles(Ingles.A1);
 							break;
-							
+
 						case "A2":
 							persona.setIngles(Ingles.A2);
 							break;
-							
+
 						case "B1":
 							persona.setIngles(Ingles.B1);
 							break;
-							
+
 						case "B2":
 							persona.setIngles(Ingles.B2);
 							break;
-							
+
 						case "C1":
 							persona.setIngles(Ingles.C1);
 							break;
-							
+
 						case "C2":
 							persona.setIngles(Ingles.C2);
 							break;
-							
+
 						case "Conocimiento, pero sin acreditar":
 							persona.setIngles(Ingles.CONOCIMIENTO_NOACREDITADO);
 							break;
@@ -402,23 +402,23 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 					}
 
 					switch ((String) comboBoxLocalidad.getSelectedItem()) {
-						// TBD
+					// TBD
 					}
 
 					switch ((String) comboBoxAccesibilidad.getSelectedItem()) {
 					case "Carnet + coche":
 						persona.setAccesibilidad(Accesibilidad.CARNET_COCHE);
 						break;
-						
+
 					case "Carnet":
 						persona.setAccesibilidad(Accesibilidad.CARNET);
 						break;
-						
+
 					case "Transporte publico":
 						persona.setAccesibilidad(Accesibilidad.TRANSPORTE_PUBLICO);
 						break;
 					}
-					
+
 					if (!textAreaObservaciones.getText().isBlank()) {
 						persona.setObservaciones(textAreaObservaciones.getText());
 					}

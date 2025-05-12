@@ -7,7 +7,6 @@ import javax.swing.*;
 
 import controller.LoginController;
 import model.Usuario;
-import model.VentanaPrincipal;
 
 public class VentanaLogin extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -87,7 +86,7 @@ public class VentanaLogin extends JDialog implements ActionListener {
 					if (cont.verificarContraseñaUsuario(user)) {
 						user = cont.getUsuario(user);
 						lblMensaje.setText("Se ha iniciado sesion correctamente.");
-						JOptionPane.showMessageDialog(null, "Bienvenido, "+user.getNombre());
+						JOptionPane.showMessageDialog(null, "Bienvenido, " + user.getNombre());
 						VentanaPrincipal frame = new VentanaPrincipal(cont, user);
 						frame.setVisible(true);
 						this.dispose();
@@ -99,7 +98,7 @@ public class VentanaLogin extends JDialog implements ActionListener {
 				} else {
 					lblMensaje.setText("No existe el usuario introducido.");
 					JOptionPane.showMessageDialog(null,
-							"No existe el usuario "+user.getNombre()+". Registrase para iniciar sesion.", "ERROR",
+							"No existe el usuario " + user.getNombre() + ". Registrase para iniciar sesion.", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}

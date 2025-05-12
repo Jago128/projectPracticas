@@ -1,4 +1,4 @@
-package model;
+package windows;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -6,8 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import controller.LoginController;
-import windows.VentanaEmpresa;
-import windows.VentanaPersona;
+import model.Usuario;
 
 public class VentanaPrincipal extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -21,7 +20,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		this.cont = cont;
 		this.user = user;
 
-		setTitle("Bienvenido, "+user.getNombre());
+		setTitle("Bienvenido, " + user.getNombre());
 		setBounds(100, 100, 450, 150);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +41,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		btnPersona.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnPersona.setBounds(230, 50, 145, 45);
 		getContentPane().add(btnPersona);
-		
+
 		btnEmpresa.addActionListener(this);
 		btnPersona.addActionListener(this);
 	}

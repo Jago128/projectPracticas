@@ -10,7 +10,7 @@ import model.Usuario;
 
 public class VentanaRegistro extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	
+
 	private JTextField textFieldNombre;
 	private JPasswordField passwordField;
 	private JButton btnRegistro;
@@ -18,7 +18,7 @@ public class VentanaRegistro extends JDialog implements ActionListener {
 
 	public VentanaRegistro(LoginController cont) {
 		this.cont = cont;
-		
+
 		setResizable(false);
 		setTitle("Registro de nuevo usuario");
 		setBounds(100, 100, 380, 230);
@@ -63,7 +63,8 @@ public class VentanaRegistro extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnRegistro) {
 			if (!textFieldNombre.getText().isBlank() && !new String(passwordField.getPassword()).isBlank()) {
-				if (cont.registrarUsuario(new Usuario(textFieldNombre.getText(), new String(passwordField.getPassword())))) {
+				if (cont.registrarUsuario(
+						new Usuario(textFieldNombre.getText(), new String(passwordField.getPassword())))) {
 					JOptionPane.showMessageDialog(null, "Se ha registrado el usuario correctamente.");
 					LoginController cont = new LoginController();
 					cont.showWindow();
