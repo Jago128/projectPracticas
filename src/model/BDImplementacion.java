@@ -2146,6 +2146,7 @@ public class BDImplementacion implements ApnabiDAO {
 					localidad = "ZiortzaBolibar";
 					break;
 				}
+				
 				stmt = con.prepareStatement(SQLUPDATELOCALIDAD);
 				stmt.setString(1, localidad);
 				stmt.setString(2, nom);

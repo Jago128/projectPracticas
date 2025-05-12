@@ -67,7 +67,8 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblFormacion);
 
 		comboBoxFormacion = new JComboBox<>();
-		comboBoxFormacion.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
+		comboBoxFormacion.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO", "EPA",
+				"FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacion.setSelectedIndex(0);
 		comboBoxFormacion.setBounds(726, 44, 163, 21);
 
