@@ -669,9 +669,9 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
 				.toFormatter();
 		Contacto con = cont.getContacto(emp.getCodEmpresa());
-		LocalDate cont1 = LocalDate.parse("0000-1-1", format), cont2 = LocalDate.parse("0000-1-1", format),
-				cont3 = LocalDate.parse("0000-1-1", format), cont4 = LocalDate.parse("0000-1-1", format),
-				fecRes = LocalDate.parse("0000-1-1", format);
+		LocalDate cont1 = LocalDate.parse("9999-1-1", format), cont2 = LocalDate.parse("9999-1-1", format),
+				cont3 = LocalDate.parse("9999-1-1", format), cont4 = LocalDate.parse("9999-1-1", format),
+				fecRes = LocalDate.parse("9999-1-1", format);
 
 		if (!textFieldContacto1.getText().isBlank()) {
 			cont1 = LocalDate.parse(textFieldContacto1.getText(), format);
@@ -723,11 +723,11 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 	}
 
 	public boolean lengthCheck() { // ErrorID: 4
-		if (textAreaInfoUltimoCont.getText().length() > 500) {
+		if (textAreaObservaciones.getText().length() > 500) {
 			return true;
 		}
 
-		if (textAreaObservaciones.getText().length() > 500) {
+		if (textAreaInfoUltimoCont.getText().length() > 500) {
 			return true;
 		}
 		return false;
