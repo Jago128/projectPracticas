@@ -2182,6 +2182,7 @@ public class BDImplementacion implements ApnabiDAO {
 				accesibilidad = "Transporte_Publico";
 				break;
 			}
+			
 			if (!accesibilidad.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATEACCESIBILIDAD);
 				stmt.setString(1, accesibilidad);
