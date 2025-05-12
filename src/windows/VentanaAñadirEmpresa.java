@@ -280,7 +280,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 
 	public void emailFormatCheck(String email) throws EmailFormatException {
 		Pattern modelo = Pattern.compile(
-				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{3,})$");
+				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 		Matcher matcher = modelo.matcher(email);
 		if (!matcher.matches()) {
 			throw new EmailFormatException();
