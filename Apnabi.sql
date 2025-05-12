@@ -127,3 +127,6 @@ INSERT INTO CONTACTO (CONTACTO1, CONTACTO2, CONTACTO3, CONTACTO4, OBSERVACIONES,
 ("2024-10-23", null, null, null, null, "Comunicacion_SinRespuesta", "Reunión el 08/05/2025", null, null, 1),
 ("2024-09-16", "2024-09-24", "2024-10-18", null, null, "Respuesta_Pospuesta", "Tras reunión y presentación se les envía correo y responden que están valorando próximo contacto en mayo.", null, "2023-10-11", 2),
 ("2024-10-23", null, null, null, "Propuesta de prácticas","Reunion_Programada","5 de mayo firma de convenio en oficinas de apnabi.","Convenio_Colaboracion", "2023-10-6", 3);
+
+INSERT INTO PERSONA VALUES
+();
