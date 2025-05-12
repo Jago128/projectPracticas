@@ -639,8 +639,8 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 									textFieldNombre.setText("");
 									textFieldPersonaContacto.setText("");
 									textFieldPuesto.setText("");
-									comboBoxEstado.setSelectedIndex(-1);
-									comboBoxSector.setSelectedIndex(-1);
+									comboBoxEstado.setSelectedIndex(0);
+									comboBoxSector.setSelectedIndex(0);
 								}
 							} else {
 								errorChecks(1);

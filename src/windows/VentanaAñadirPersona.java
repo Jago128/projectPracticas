@@ -24,7 +24,7 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		this.cont = cont;
 
 		setResizable(false);
-		setTitle("Añadir empresa");
+		setTitle("Añadir persona");
 		setBounds(100, 100, 690, 430);
 		getContentPane().setLayout(null);
 
@@ -418,15 +418,31 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 						persona.setAccesibilidad(Accesibilidad.TRANSPORTE_PUBLICO);
 						break;
 					}
+					
+					if (!textAreaObservaciones.getText().isBlank()) {
+						persona.setObservaciones(textAreaObservaciones.getText());
+					}
 
 					if (cont.añadirPersona(persona)) {
 						result = JOptionPane.showConfirmDialog(null,
-								"La empresa ha sido añadida correctamente. Quiere añadir mas empresas?", "",
+								"La persona ha sido añadida correctamente. Quiere añadir mas personas?", "",
 								JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 						if (result == JOptionPane.NO_OPTION) {
 							this.dispose();
 						} else if (result == JOptionPane.YES_OPTION) {
 							textAreaObservaciones.setText("");
+							textFieldApoyo.setText("");
+							textFieldCVLink.setText("");
+							textFieldNom.setText("");
+							textFieldOtrosIdiomas.setText("");
+							comboBoxAccesibilidad.setSelectedIndex(0);
+							comboBoxCertifDiscapacidad.setSelectedIndex(0);
+							comboBoxEspecialidad.setSelectedIndex(0);
+							comboBoxEuskera.setSelectedIndex(0);
+							comboBoxFormacion.setSelectedIndex(0);
+							comboBoxIngles.setSelectedIndex(0);
+							comboBoxLocalidad.setSelectedIndex(0);
+							comboBoxSectorInteres.setSelectedIndex(0);
 						}
 					} else {
 						errorChecks(1);
