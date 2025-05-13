@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.util.*;
 
 import enums.*;
-import windows.AnalisisPuesto;
 
 public class BDImplementacion implements ApnabiDAO {
 	private Connection con;

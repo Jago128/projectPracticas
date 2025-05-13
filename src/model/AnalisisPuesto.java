@@ -1,4 +1,4 @@
-package windows;
+package model;
 
 import enums.*;
 

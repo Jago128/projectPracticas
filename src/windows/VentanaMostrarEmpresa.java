@@ -155,22 +155,22 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 		Contacto con;
 
 		if (!empresas.isEmpty()) {
-			modelSectores.addElement("Sectores");
+			modelSectores.addElement("Sector");
 			modelEmpresas.addElement("Empresas");
 			modelPuestos.addElement("Puestos");
-			modelDatosContacto.addElement("Datos de contacto");
-			modelContactosEmpresa.addElement("Contacto en la empresa");
-			modelContactosApnabi.addElement("Persona de contacto");
-			modelEstados.addElement("Estado");
+			modelDatosContacto.addElement("Datos de contactos");
+			modelContactosEmpresa.addElement("Contactos en la empresas");
+			modelContactosApnabi.addElement("Personas de contactos");
+			modelEstados.addElement("Estados");
 			modelContactos1.addElement("1. contacto");
 			modelContactos2.addElement("2. contacto");
 			modelContactos3.addElement("3. contacto");
 			modelContactos4.addElement("4. contacto");
 			modelObservaciones.addElement("Observaciones");
-			modelResultadoUltimoCont.addElement("Resultado ultimo contacto");
+			modelResultadoUltimoCont.addElement("Resultados del ultimo contacto");
 			modelInfoUltimo.addElement("Informacion ultimo contacto");
-			modelResultadoFinal.addElement("Resultado final prospeccion");
-			modelFechaResolucion.addElement("Fecha resolucion");
+			modelResultadoFinal.addElement("Resultados finales prospeccion");
+			modelFechaResolucion.addElement("Fechas de resoluciones");
 			for (Empresa emp : empresas.values()) {
 				con = cont.getContacto(emp.getCodEmpresa());
 				switch (emp.getSector()) {

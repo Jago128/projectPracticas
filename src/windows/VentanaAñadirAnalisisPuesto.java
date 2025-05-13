@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import controller.LoginController;
 import enums.*;
+import model.AnalisisPuesto;
 
 public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;

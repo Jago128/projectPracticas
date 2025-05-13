@@ -5,7 +5,6 @@ import java.util.Map;
 import javax.swing.JDialog;
 
 import model.*;
-import windows.AnalisisPuesto;
 import windows.VentanaLogin;
 
 public class LoginController {

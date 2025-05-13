@@ -127,17 +127,17 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		DefaultListModel<String> modelAccesibilidad = new DefaultListModel<>();
 		DefaultListModel<String> modelObservaciones = new DefaultListModel<>();
 
-		modelNom.addElement("Nombre");
+		modelNom.addElement("Nombres");
 		modelApoyo.addElement("Apoyo");
 		modelFormacion.addElement("Formacion");
-		modelEspecialidad.addElement("Especialidad");
+		modelEspecialidad.addElement("Especialidad (descripciones)");
 		modelSectorInteres.addElement("Sector de interes");
-		modelCVLink.addElement("CV Link");
-		modelCertificadoDiscapacidad.addElement("Certificado de discapacidad");
+		modelCVLink.addElement("Links de CVs");
+		modelCertificadoDiscapacidad.addElement("Certificado de discapacidade");
 		modelEuskera.addElement("Euskera");
 		modelIngles.addElement("Ingles");
 		modelOtrosIdiomas.addElement("Otros idiomas");
-		modelLocalidad.addElement("Localidad");
+		modelLocalidad.addElement("Localidades");
 		modelAccesibilidad.addElement("Accesibilidad");
 		modelObservaciones.addElement("Observaciones");
 		if (!personas.isEmpty()) {

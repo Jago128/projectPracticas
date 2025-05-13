@@ -2,8 +2,6 @@ package model;
 
 import java.util.Map;
 
-import windows.AnalisisPuesto;
-
 public interface ApnabiDAO {
 	// Usuarios
 	public boolean verificarUsuario(Usuario user);

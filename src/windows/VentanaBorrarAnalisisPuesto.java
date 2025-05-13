@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.swing.*;
 
 import controller.LoginController;
+import model.AnalisisPuesto;
 import model.Usuario;
 
 public class VentanaBorrarAnalisisPuesto extends JDialog implements ActionListener {
