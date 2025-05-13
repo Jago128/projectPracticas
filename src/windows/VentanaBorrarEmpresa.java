@@ -62,7 +62,7 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 			JOptionPane.showMessageDialog(null,
 					"No hay ninguna empresa para visualizar."
 							+ "\nPor favor, añada una empresa anter the abrir esta ventana.",
-					"AVISO!", JOptionPane.INFORMATION_MESSAGE);
+							"AVISO!", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
 		}
 	}
@@ -76,15 +76,20 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 						"Confirmacion", JOptionPane.YES_NO_OPTION);
 
 				if (result == JOptionPane.YES_OPTION) {
-					if (cont.eliminarEmpresa(listEmpresas.getSelectedValue())) {
-						result = JOptionPane.showConfirmDialog(null,
-								"La empresa ha sido borrada correctamente. ¿Quiere borrar mas empresas?",
-								"Empresa eliminada.", JOptionPane.YES_NO_OPTION);
-						if (result == JOptionPane.NO_OPTION) {
-							this.dispose();
-						} else if (result == JOptionPane.YES_OPTION) {
-							addNomEmpresas();
-							listEmpresas.setSelectedIndex(-1);
+					if (cont.eliminarContacto(cont.getCodEmpresa(listEmpresas.getSelectedValue()))) {
+						if (cont.eliminarEmpresa(listEmpresas.getSelectedValue())) {
+							result = JOptionPane.showConfirmDialog(null,
+									"La empresa ha sido borrada correctamente. ¿Quiere borrar mas empresas?",
+									"Empresa eliminada.", JOptionPane.YES_NO_OPTION);
+							if (result == JOptionPane.NO_OPTION) {
+								this.dispose();
+							} else if (result == JOptionPane.YES_OPTION) {
+								addNomEmpresas();
+								listEmpresas.setSelectedIndex(-1);
+							}
+						} else {
+							JOptionPane.showMessageDialog(null, "La empresa que estas intentando borrar no existe.",
+									"ERROR", JOptionPane.ERROR_MESSAGE);
 						}
 					} else {
 						JOptionPane.showMessageDialog(null, "La empresa que estas intentando borrar no existe.",

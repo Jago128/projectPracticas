@@ -2,6 +2,8 @@ package model;
 
 import java.util.Map;
 
+import windows.AnalisisPuesto;
+
 public interface ApnabiDAO {
 	// Usuarios
 	public boolean verificarUsuario(Usuario user);
@@ -35,7 +37,7 @@ public interface ApnabiDAO {
 
 	public boolean eliminarEmpresa(String nom);
 
-	// Contactos	
+	// Contactos
 	public Contacto getContacto(int empId);
 
 	public boolean añadirContacto(Contacto cont, int id);
@@ -57,14 +59,16 @@ public interface ApnabiDAO {
 	public boolean modificarResultadoFinal(String resultadoF, int id);
 
 	public boolean modificarFechaResolucion(String fecResolucion, int id);
+	
+	public boolean eliminarContacto(int id);
 
 	// Personas
 	public Map<String, Persona> mostrarPersonas();
-	
+
 	public Map<String, Persona> mostrarNomPersonas();
-	
+
 	public Persona getPersona(String nom);
-	
+
 	public boolean verificarPersona(String nom);
 
 	public boolean añadirPersona(Persona persona);
@@ -74,7 +78,7 @@ public interface ApnabiDAO {
 	public boolean modificarFormacion(String formacion, String nom);
 
 	public boolean modificarEspecialidad(String especialidad, String nom);
-	
+
 	public boolean modificarSectorInteres(String sectorI, String nom);
 
 	public boolean modificarCVLink(String link, String nom);
@@ -92,4 +96,18 @@ public interface ApnabiDAO {
 	public boolean modificarAccesibilidad(String accesibilidad, String nom);
 
 	public boolean modificarPersonaObservaciones(String observaciones, String nom);
+	
+	public boolean eliminarPersona(String nom);
+
+	// Analisis de puestos
+
+	public Map<String, AnalisisPuesto> mostrarAnalisisPuestos();
+
+	public AnalisisPuesto getAnalisisPuesto(String nom);
+
+	public boolean añadirAnalisisPuesto(AnalisisPuesto aP);
+
+	// public boolean modificarPH();
+	
+	public boolean eliminarAnalisisPuesto(String emp); 
 }

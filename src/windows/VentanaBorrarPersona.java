@@ -75,7 +75,7 @@ public class VentanaBorrarPersona extends JDialog implements ActionListener {
 						"¿Esta seguro de que quieras borrar la persona '" + listPersonas.getSelectedValue() + "'?",
 						"Confirmacion", JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
-					if (cont.eliminarEmpresa(listPersonas.getSelectedValue())) {
+					if (cont.eliminarPersona(listPersonas.getSelectedValue())) {
 						result = JOptionPane.showConfirmDialog(null,
 								"La persona ha sido borrada correctamente. ¿Quiere borrar mas personas?",
 								"Persona eliminada.", JOptionPane.YES_NO_OPTION);

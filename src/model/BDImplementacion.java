@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.*;
 
 import enums.*;
+import windows.AnalisisPuesto;
 
 public class BDImplementacion implements ApnabiDAO {
 	private Connection con;
@@ -30,7 +31,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUPDATECONTACTOEMPRESA = "UPDATE EMPRESA SET CONTACTOEMPRESA=? WHERE NOM_EMPRESA=?";
 	final String SQLUPDATECONTACTOAPNABI = "UPDATE EMPRESA SET CONTACTOAPNABI=? WHERE NOM_EMPRESA=?";
 	final String SQLUPDATEESTADO = "UPDATE EMPRESA SET ESTADO=? WHERE NOM_EMPRESA=?";
-	final String SQLDELETE_EMPRESA = "DELETE FROM EMPRESA WHERE NOM_EMPRESA = ?";
+	final String SQLDELETE_EMPRESA = "DELETE FROM EMPRESA WHERE NOM_EMPRESA=?";
 
 	final String SQLSELECTCONTACTOS = "SELECT * FROM CONTACTO WHERE COD_EMPRESA=?";
 	final String SQLINSERTCONTACTO = "INSERT INTO CONTACTO (CONTACTO1, CONTACTO2, CONTACTO3, CONTACTO4, OBSERVACIONES, RESULTADOULTIMO, INFOULTIMO, RESULTADOFINAL, FECHARESOLUCION, COD_EMPRESA) VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -43,6 +44,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUPDATEINFOULTIMO = "UPDATE CONTACTO SET INFOULTIMO=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATERESULTADOFINAL = "UPDATE CONTACTO SET RESULTADOFINAL=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATEFECHARESOLUCION = "UPDATE CONTACTO SET FECHARESOLUCION=? WHERE COD_CONTACTO=?";
+	final String SQLDELETECONTACTO = "DELETE FROM CONTACTO WHERE COD_EMPRESA=?";
 
 	final String SQLPERSONAS = "SELECT * FROM PERSONA";
 	final String SQLNOMPERSONAS = "SELECT NOM_P FROM PERSONA";
@@ -60,6 +62,12 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUPDATELOCALIDAD = "UPDATE PERSONA SET LOCALIDAD=? WHERE NOM_P=?";
 	final String SQLUPDATEACCESIBILIDAD = "UPDATE PERSONA SET ACCESIBILIDAD=? WHERE NOM_P=?";
 	final String SQLUPDATEPERSONAOBSERVACIONES = "UPDATE PERSONA SET OBSERVACIONES=? WHERE NOM_P=?";
+	final String SQLDELETEPERSONA = "DELETE FROM PERSONA WHERE NOM_P=?";
+
+	final String SQLANALISISPERSONAS = "SELECT * FROM ANALISISPUESTO";
+	final String SQLSELECTANALISISPUESTO = "SELECT * FROM ANALISISPUESTO WHERE EMPRESA=?";
+
+	final String SQLDELETEANALISISPUESTO = "DELETE FROM ANALISISPUESTO WHERE EMPRESA=?";
 
 	public BDImplementacion() {
 		this.configFile = ResourceBundle.getBundle("model.classConfig");
@@ -323,8 +331,8 @@ public class BDImplementacion implements ApnabiDAO {
 	@Override
 	public boolean añadirEmpresa(Empresa emp) {
 		boolean check = false;
-		this.openConnection();
 
+		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLINSERTEMPRESA);
 			stmt.setString(1, emp.getNom_empresa());
@@ -1029,6 +1037,28 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
+	public boolean eliminarContacto(int id) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLDELETECONTACTO);
+			stmt.setInt(1, id);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("El contacto no se pudo borrar.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
 	public Map<String, Persona> mostrarPersonas() {
 		Persona persona;
 		Map<String, Persona> personas = new TreeMap<>();
@@ -1212,7 +1242,81 @@ public class BDImplementacion implements ApnabiDAO {
 
 			stmt.setString(4, persona.getEspecialidad());
 			switch (persona.getSectorInteres()) {
-			// TBD
+			case AGRICULTURA_GANADERIA:
+				stmt.setString(5, "Agricultura y ganadería");
+				break;
+
+			case BIENESCONSUMO:
+				stmt.setString(5, "Bienes de consumo");
+				break;
+
+			case COMERCIOELECTRONICO:
+				stmt.setString(5, "Comercio electrónico");
+				break;
+
+			case COMERCIO_ESTABLECIMIENTOS:
+				stmt.setString(5, "Comercio y establecimientos");
+				break;
+
+			case CONSTRUCCION:
+				stmt.setString(5, "Construcción");
+				break;
+
+			case DEPORTE_OCIO:
+				stmt.setString(5, "Deporte y ocio");
+				break;
+
+			case ENERGIA_MEDIOAMBIENTE:
+				stmt.setString(5, "Energía y medio ambiente");
+				break;
+
+			case FINANZAS_SEGUROS_BIENESINMUEBLES:
+				stmt.setString(5, "Finanzas, seguros y bienes inmuebles");
+				break;
+
+			case INTERNET:
+				stmt.setString(5, "Internet");
+				break;
+
+			case LOGISTICA_TRANSPORTE:
+				stmt.setString(5, "Logística y transporte");
+				break;
+
+			case MEDIOSCOMUNICACION_MARKETING:
+				stmt.setString(5, "Medios de comunicación y marketing");
+				break;
+
+			case METALURGIA_ELECTRONICA:
+				stmt.setString(5, "Metalurgia y electrónica");
+				break;
+
+			case PRODUCTOSQUIMICOS_MATERIASPRIMAS:
+				stmt.setString(5, "Productos químicos y materias primas");
+				break;
+
+			case SALUD_INDUSTRIAFARMACEUTICA:
+				stmt.setString(5, "Salud e industria farmacéutica");
+				break;
+
+			case SERVICIOS:
+				stmt.setString(5, "Servicios");
+				break;
+
+			case SOCIEDAD:
+				stmt.setString(5, "Sociedad");
+				break;
+
+			case TECNOLOGIA_TELECOMUNICACIONES:
+				stmt.setString(5, "Tecnología y telecomunicaciones");
+				break;
+
+			case TURISMO_HOSTELERIA:
+				stmt.setString(5, "Turismo y hostelería");
+				break;
+
+			case VIDA:
+				stmt.setString(5, "Vida");
+				break;
 
 			default:
 				System.out.println("Tipo invalido.");
@@ -1787,7 +1891,7 @@ public class BDImplementacion implements ApnabiDAO {
 			case ZORNOTZA:
 				stmt.setString(11, "Zornotza");
 				break;
-			
+
 			default:
 				System.out.println("Tipo invalido.");
 			}
@@ -1916,7 +2020,61 @@ public class BDImplementacion implements ApnabiDAO {
 		try {
 			if (!sectorI.isBlank()) {
 				switch (sectorI) {
-					// TBD
+				case "Agricultura y Ganaderia":
+					sectorI = "Agricultura_Ganaderia";
+					break;
+
+				case "Bienes de Consumo":
+					sectorI = "BienesConsumo";
+					break;
+
+				case "Comercio electronico":
+					sectorI = "ComercioElectronico";
+					break;
+
+				case "Comercio y establecimientos":
+					sectorI = "Comercio_Establecimientos";
+					break;
+
+				case "Deporte y ocio":
+					sectorI = "Deporte_Ocio";
+					break;
+
+				case "Energia y medio ambiente":
+					sectorI = "Energia_MedioAmbiente";
+					break;
+
+				case "Finanzas, Seguros y bienes inmuebles":
+					sectorI = "Finanzas_Seguros_BienesInmuebles";
+					break;
+
+				case "Logistica y Transporte":
+					sectorI = "Logistica_Transporte";
+					break;
+
+				case "Medios de comunicacion y marketing":
+					sectorI = "MediosComunicacion_Marketing";
+					break;
+
+				case "Metalurgia y electronica":
+					sectorI = "Metalurgia_Electronica";
+					break;
+
+				case "Productos quimicos y materias primas":
+					sectorI = "ProductosQuimicos_MateriasPrimas";
+					break;
+
+				case "Salud e industria farmaceutica":
+					sectorI = "Salud_IndustriaFarmaceutica";
+					break;
+
+				case "Tecnologia y telecomunicaciones":
+					sectorI = "Tecnologia_Telecomunicaciones";
+					break;
+
+				case "Turismo y hosteleria":
+					sectorI = "Turismo_Hosteleria";
+					break;
 				}
 				stmt = con.prepareStatement(SQLUPDATESECTORINTERES);
 				stmt.setString(1, sectorI);
@@ -2113,7 +2271,7 @@ public class BDImplementacion implements ApnabiDAO {
 				case "Gamiz-Fika":
 					localidad = "GamizFika";
 					break;
-					
+
 				case "Gaztelu-Elexabeitia o Arteaga":
 					localidad = "GazteluElexabeitia_Arteaga";
 					break;
@@ -2146,7 +2304,7 @@ public class BDImplementacion implements ApnabiDAO {
 					localidad = "ZiortzaBolibar";
 					break;
 				}
-				
+
 				stmt = con.prepareStatement(SQLUPDATELOCALIDAD);
 				stmt.setString(1, localidad);
 				stmt.setString(2, nom);
@@ -2182,7 +2340,7 @@ public class BDImplementacion implements ApnabiDAO {
 				accesibilidad = "Transporte_Publico";
 				break;
 			}
-			
+
 			if (!accesibilidad.isBlank()) {
 				stmt = con.prepareStatement(SQLUPDATEACCESIBILIDAD);
 				stmt.setString(1, accesibilidad);
@@ -2224,6 +2382,122 @@ public class BDImplementacion implements ApnabiDAO {
 			con.close();
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public boolean eliminarPersona(String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLDELETEPERSONA);
+			stmt.setString(1, nom);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("La persona no se pudo borrar.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public Map<String, AnalisisPuesto> mostrarAnalisisPuestos() {
+		AnalisisPuesto aP;
+		Map<String, AnalisisPuesto> aPs = new TreeMap<>();
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLEMPRESAS);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				aP = new AnalisisPuesto();
+
+				aPs.put(aP.getEmpresa(), aP);
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger los analisis de puestos.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return aPs;
+	}
+
+	@Override
+	public AnalisisPuesto getAnalisisPuesto(String nom) {
+		AnalisisPuesto aP = new AnalisisPuesto();
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLEMPRESAS);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger el analisis de puesto.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return aP;
+	}
+
+	@Override
+	public boolean añadirAnalisisPuesto(AnalisisPuesto aP) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLINSERTEMPRESA);
+
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha habido un error al intentar añadir la empresa.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+	
+	// Modificar
+	
+	@Override
+	public boolean eliminarAnalisisPuesto(String emp) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLDELETEANALISISPUESTO);
+			stmt.setString(1, emp);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("La empresa no se pudo borrar.");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();

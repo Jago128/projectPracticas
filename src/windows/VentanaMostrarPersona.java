@@ -33,27 +33,27 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		listNom.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		listApoyo = new JList<String>();
+		listApoyo = new JList<>();
 		listApoyo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listApoyo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		listFormacion = new JList<String>();
+		listFormacion = new JList<>();
 		listFormacion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listFormacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		listEspecialidad = new JList<String>();
+		listEspecialidad = new JList<>();
 		listEspecialidad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEspecialidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		listSectorInteres = new JList<String>();
+		listSectorInteres = new JList<>();
 		listSectorInteres.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listSectorInteres.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		listCVLink = new JList<String>();
+		listCVLink = new JList<>();
 		listCVLink.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listCVLink.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		listCertifDiscapacidad = new JList<String>();
+		listCertifDiscapacidad = new JList<>();
 		listCertifDiscapacidad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listCertifDiscapacidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
 

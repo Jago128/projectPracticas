@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.swing.JDialog;
 
 import model.*;
+import windows.AnalisisPuesto;
 import windows.VentanaLogin;
 
 public class LoginController {
@@ -123,6 +124,10 @@ public class LoginController {
 		return dao.modificarFechaResolucion(fecResolucion, id);
 	}
 	
+	public boolean eliminarContacto(int id) {
+		return dao.eliminarContacto(id);
+	}
+	
 	// Personas
 	public Map<String, Persona> mostrarPersonas() {
 		return dao.mostrarPersonas();
@@ -190,5 +195,28 @@ public class LoginController {
 
 	public boolean modificarPersonaObservaciones(String observaciones, String nom) {
 		return dao.modificarPersonaObservaciones(observaciones, nom);
+	}
+	
+	public boolean eliminarPersona(String nom) {
+		return dao.eliminarPersona(nom);
+	}
+	
+	// Analisis de puestos
+	public Map<String, AnalisisPuesto> mostrarAnalisisPuestos() {
+		return dao.mostrarAnalisisPuestos();
+	}
+
+	public AnalisisPuesto getAnalisisPuesto(String nom) {
+		return dao.getAnalisisPuesto(nom);
+	}
+
+	public boolean añadirAnalisisPuesto(AnalisisPuesto aP) {
+		return añadirAnalisisPuesto(aP);
+	}
+	
+	// Modificar
+	
+	public boolean eliminarAnalisisPuesto(String emp) {
+		return dao.eliminarAnalisisPuesto(emp);
 	}
 }
