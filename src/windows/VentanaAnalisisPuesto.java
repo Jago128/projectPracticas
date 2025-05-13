@@ -66,7 +66,9 @@ public class VentanaAnalisisPuesto extends JDialog implements ActionListener {
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnMostrar) {
-			
+			VentanaMostrarAnalisisPuesto dialog = new VentanaMostrarAnalisisPuesto(this, cont, user);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
 		}
 	}
 }
