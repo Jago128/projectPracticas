@@ -102,6 +102,8 @@ public interface ApnabiDAO {
 	// Analisis de puestos
 
 	public Map<String, AnalisisPuesto> mostrarAnalisisPuestos();
+	
+	public Map<String, AnalisisPuesto> mostrarAPEmpresas();
 
 	public AnalisisPuesto getAnalisisPuesto(String nom);
 

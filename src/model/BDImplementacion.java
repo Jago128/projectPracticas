@@ -65,6 +65,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLDELETEPERSONA = "DELETE FROM PERSONA WHERE NOM_P=?";
 
 	final String SQLANALISISPERSONAS = "SELECT * FROM ANALISISPUESTO";
+	final String SQLAP_EMPRESA = "SELECT EMPRESA FROM ANALISISPUESTO";
 	final String SQLSELECTANALISISPUESTO = "SELECT * FROM ANALISISPUESTO WHERE EMPRESA=?";
 
 	final String SQLDELETEANALISISPUESTO = "DELETE FROM ANALISISPUESTO WHERE EMPRESA=?";
@@ -2429,6 +2430,30 @@ public class BDImplementacion implements ApnabiDAO {
 			con.close();
 		} catch (SQLException e) {
 			System.out.println("Un error ha occurrido al intentar recoger los analisis de puestos.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return aPs;
+	}
+	
+	public Map<String, AnalisisPuesto> mostrarAPEmpresas() {
+		AnalisisPuesto aP;
+		Map<String, AnalisisPuesto> aPs = new TreeMap<>();
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLAP_EMPRESA);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				aP = new AnalisisPuesto();
+				aP.setEmpresa(rs.getString("EMPRESA"));
+				aPs.put(aP.getEmpresa(), aP);
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger los nombres de las empresas de los analisis de puestos.");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();

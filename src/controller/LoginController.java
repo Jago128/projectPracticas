@@ -205,6 +205,10 @@ public class LoginController {
 	public Map<String, AnalisisPuesto> mostrarAnalisisPuestos() {
 		return dao.mostrarAnalisisPuestos();
 	}
+	
+	public Map<String, AnalisisPuesto> mostrarAPEmpresas() {
+		return dao.mostrarAPEmpresas();
+	}
 
 	public AnalisisPuesto getAnalisisPuesto(String nom) {
 		return dao.getAnalisisPuesto(nom);

@@ -61,7 +61,7 @@ public class VentanaBorrarPersona extends JDialog implements ActionListener {
 		} else {
 			JOptionPane.showMessageDialog(null,
 					"No hay ninguna persona para visualizar."
-							+ "\nPor favor, añada una persona anter the abrir esta ventana.",
+							+ "\nPor favor, añada una persona anter de abrir esta ventana.",
 					"AVISO!", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
 		}
@@ -78,7 +78,7 @@ public class VentanaBorrarPersona extends JDialog implements ActionListener {
 					if (cont.eliminarPersona(listPersonas.getSelectedValue())) {
 						result = JOptionPane.showConfirmDialog(null,
 								"La persona ha sido borrada correctamente. ¿Quiere borrar mas personas?",
-								"Persona eliminada.", JOptionPane.YES_NO_OPTION);
+								"Persona eliminada", JOptionPane.YES_NO_OPTION);
 						if (result == JOptionPane.NO_OPTION) {
 							this.dispose();
 						} else if (result == JOptionPane.YES_OPTION) {

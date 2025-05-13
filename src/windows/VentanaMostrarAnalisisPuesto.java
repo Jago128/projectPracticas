@@ -90,7 +90,7 @@ public class VentanaMostrarAnalisisPuesto extends JDialog implements ActionListe
 	}
 
 	public void loadAnalisisPuestos() {
-
+		
 	}
 
 	@Override
