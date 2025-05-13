@@ -209,6 +209,10 @@ public class LoginController {
 	public Map<String, AnalisisPuesto> mostrarAPEmpresas() {
 		return dao.mostrarAPEmpresas();
 	}
+	
+	public boolean verificarAP(String nom) {
+		return dao.verificarAP(nom);
+	}
 
 	public AnalisisPuesto getAnalisisPuesto(String nom) {
 		return dao.getAnalisisPuesto(nom);

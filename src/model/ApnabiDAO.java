@@ -104,6 +104,8 @@ public interface ApnabiDAO {
 	public Map<String, AnalisisPuesto> mostrarAnalisisPuestos();
 	
 	public Map<String, AnalisisPuesto> mostrarAPEmpresas();
+	
+	public boolean verificarAP(String nom);
 
 	public AnalisisPuesto getAnalisisPuesto(String nom);
 

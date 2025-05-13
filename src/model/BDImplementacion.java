@@ -2483,6 +2483,30 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return aP;
 	}
+	
+	public boolean verificarAP(String nom) {
+		boolean existe = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLSELECTANALISISPUESTO);
+			stmt.setString(1, nom);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				existe = true;
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger el analisis de puesto.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return existe;
+
+	}
 
 	@Override
 	public boolean añadirAnalisisPuesto(AnalisisPuesto aP) {

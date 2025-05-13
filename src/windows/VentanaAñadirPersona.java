@@ -92,7 +92,7 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblSectorInteres);
 
 		comboBoxSectorInteres = new JComboBox<>();
-		comboBoxSectorInteres.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
+		comboBoxSectorInteres.setModel(new DefaultComboBoxModel<>(new String[] {"---", "Agricultura y Ganaderia", "Bienes de Consumo", "Comercio electronico", "Comercio y establecimientos", "Construccion", "Deporte y ocio", "Energia y medio ambiente", "Finanzas, Seguros y bienes inmuebles", "Internet", "Logistica y Transporte", "Medios de comunicacion y marketing", "Metalurgia y electronica", "Productos quimicos y materias primas", "Salud e industria farmaceutica", "Servicios", "Sociedad", "Tecnologia y telecomunicaciones", "Turismo y hosteleria", "Vida"}));
 		comboBoxSectorInteres.setSelectedIndex(0);
 		comboBoxSectorInteres.setBounds(149, 82, 163, 21);
 		getContentPane().add(comboBoxSectorInteres);
