@@ -194,7 +194,7 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 			} else {
 				if (errorChecks(2)) {
 					JOptionPane.showMessageDialog(null,
-							"Hay mas caracteres que el limite de caracteres en uno de los campos de texto con limite especificado.",
+							"Hay mas caracteres que el limite de caracteres en el campo de horario.",
 							"ERROR", JOptionPane.ERROR_MESSAGE);
 				} else {
 					Sector sector = null;

@@ -22,10 +22,9 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 	private JTextArea textareaEmpresa, textAreaObservaciones, textAreaInfoUltimoCont;
 	private JTextField textFieldDatosContacto, textFieldContactoEmpresa, textFieldContacto1, textFieldContacto2,
 			textFieldContacto3, textFieldContacto4, textFieldFechaResolucion;
-	private JComboBox<String> comboBoxEstado, comboBoxResultadoUltimoContacto, comboBoxResultadoFinal;
+	private JComboBox<String> comboBoxEstado, comboBoxResultadoUltimoContacto, comboBoxResultadoFinal,
+			comboBoxPersonaContacto;
 	private JButton btnModificar;
-
-	private JComboBox<String> comboBoxPersonaContacto;
 
 	public VentanaModificarEmpresa(JDialog parent, LoginController cont, Empresa emp) {
 		super(parent, true);
@@ -268,7 +267,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		String sector = "", estado = "", resultadoFinal = "", resultadoUltimoCont = "";
 		Contacto con = cont.getContacto(emp.getCodEmpresa());
 
-		textareaEmpresa.removeAll();
+		textareaEmpresa.setText("");
 		switch (emp.getSector()) {
 		case AGRICULTURA_GANADERIA:
 			sector = "Agricultura y ganadería";

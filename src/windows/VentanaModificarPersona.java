@@ -235,7 +235,7 @@ public class VentanaModificarPersona extends JDialog implements ActionListener {
 		String formacion = "", sectorInteres = "", discapacidad = "", euskera = "", ingles = "", localidad = "",
 				accesibilidad = "";
 
-		textareaPersona.removeAll();
+		textareaPersona.setText("");
 		switch (persona.getFormacion()) {
 		case AT:
 			formacion = "AT";

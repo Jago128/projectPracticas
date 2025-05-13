@@ -250,6 +250,7 @@ public class VentanaMostrarAnalisisPuesto extends JDialog implements ActionListe
 				modelResponsableApModel.addElement(aP.getResponsableApnabi());
 				modelUbicacion.addElement(aP.getUbicacion());
 			}
+			
 			listContactoEmpresa.setModel(modelContactoEmpresa);
 			listEmpresa.setModel(modelEmpresa);
 			listHorario.setModel(modelHorario);
