@@ -2,7 +2,7 @@ CREATE DATABASE APNABI;
 USE APNABI;
 
 CREATE TABLE USUARIO (
-	NOMBRE VARCHAR(30) PRIMARY KEY,
+	NOMBRE VARCHAR(50) PRIMARY KEY,
     CONTRASEÑA VARCHAR(50) NOT NULL
 );
 
@@ -13,7 +13,7 @@ CREATE TABLE EMPRESA (
 	'Energia_MedioAmbiente', 'Finanzas_Seguros_BienesInmuebles', 'Internet', 'Logistica_Transporte', 'MediosComunicacion_Marketing',
     'Metalurgia_Electronica', 'ProductosQuimicos_MateriasPrimas', 'Salud_IndustriaFarmaceutica', 'Servicios', 'Sociedad', 'Tecnologia_Telecomunicaciones',
     'Turismo_Hosteleria', 'Vida') NOT NULL,
-    PUESTO VARCHAR(30),
+    PUESTO VARCHAR(50),
     DATOSCONTACTO VARCHAR(50) NOT NULL,
     CONTACTOEMPRESA VARCHAR(50) NOT NULL,
     CONTACTOAPNABI VARCHAR(30) NOT NULL,
@@ -38,10 +38,13 @@ CREATE TABLE CONTACTO (
 
 CREATE TABLE PERSONA (
     NOM_P VARCHAR(100) PRIMARY KEY,
-    APOYO VARCHAR(30) NOT NULL,
+    APOYO VARCHAR(50) NOT NULL,
     FORMACION ENUM('AT', 'Primaria', 'ESO', 'EPA', 'FP_Basica', 'GM', 'Bachillerato', 'GS', 'Universidad', 'Master', 'Doctorado') NOT NULL,
     ESPECIALIDAD VARCHAR(500) NOT NULL,
-    SECTORINTERES ENUM("") NOT NULL, # TBD atm
+    SECTORINTERES ENUM('Agricultura_Ganaderia', 'BienesConsumo', 'ComercioElectronico', 'Comercio_Establecimientos', 'Construccion', 'Deporte_Ocio',
+	'Energia_MedioAmbiente', 'Finanzas_Seguros_BienesInmuebles', 'Internet', 'Logistica_Transporte', 'MediosComunicacion_Marketing',
+    'Metalurgia_Electronica', 'ProductosQuimicos_MateriasPrimas', 'Salud_IndustriaFarmaceutica', 'Servicios', 'Sociedad', 'Tecnologia_Telecomunicaciones',
+    'Turismo_Hosteleria', 'Vida') NOT NULL,
     CV VARCHAR(999),
     DISCAPACIDAD ENUM('Si', 'No', 'No_Sabe', 'Tramitando') NOT NULL,
     EUSKERA ENUM('A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Conocimiento_NoAcreditado'),
@@ -58,6 +61,21 @@ CREATE TABLE PERSONA (
     'Zornotza') NOT NULL,
     ACCESIBILIDAD ENUM('Carnet_Coche', 'Carnet', 'Transporte_Publico') NOT NULL,
     OBSERVACIONES VARCHAR(500)
+);
+
+CREATE TABLE ANALISISPUESTO(
+	EMPRESA VARCHAR(100) PRIMARY KEY,
+    PUESTO VARCHAR(50) NOT NULL,
+    HORARIO VARCHAR(100) NOT NULL,
+    MIN_FORMACION ENUM('AT', 'Primaria', 'ESO', 'EPA', 'FP_Basica', 'GM', 'Bachillerato', 'GS', 'Universidad', 'Master', 'Doctorado') NOT NULL,
+    UBICACION VARCHAR(150),
+	SECTOR ENUM('Agricultura_Ganaderia', 'BienesConsumo', 'ComercioElectronico', 'Comercio_Establecimientos', 'Construccion', 'Deporte_Ocio',
+	'Energia_MedioAmbiente', 'Finanzas_Seguros_BienesInmuebles', 'Internet', 'Logistica_Transporte', 'MediosComunicacion_Marketing',
+    'Metalurgia_Electronica', 'ProductosQuimicos_MateriasPrimas', 'Salud_IndustriaFarmaceutica', 'Servicios', 'Sociedad', 'Tecnologia_Telecomunicaciones',
+    'Turismo_Hosteleria', 'Vida') NOT NULL,
+    REQ_IDIOMAS VARCHAR(50),
+	CONTACTOEMPRESA VARCHAR(50) NOT NULL,
+    CONTACTOAPNABI VARCHAR(50) NOT NULL # Apoyo
 );
 
 INSERT INTO USUARIO VALUES

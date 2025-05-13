@@ -15,21 +15,22 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	private Usuario user;
 	private JButton btnEmpresa;
 	private JButton btnPersona;
+	private JButton btnAnalisisPuesto;
 
 	public VentanaPrincipal(LoginController cont, Usuario user) {
 		this.cont = cont;
 		this.user = user;
 
 		setTitle("Bienvenido, " + user.getNombre());
-		setBounds(100, 100, 450, 150);
+		setBounds(100, 100, 450, 200);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
-		JLabel lblOpciones = new JLabel("Elije una de las dos opciones para gestionar:");
+		JLabel lblOpciones = new JLabel("Elije una de las opciones para gestionar, "+user.getNombre()+":");
 		lblOpciones.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOpciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblOpciones.setBounds(80, 10, 268, 30);
+		lblOpciones.setBounds(47, 10, 328, 30);
 		getContentPane().add(lblOpciones);
 
 		btnEmpresa = new JButton("Empresas");
@@ -41,19 +42,29 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		btnPersona.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnPersona.setBounds(230, 50, 145, 45);
 		getContentPane().add(btnPersona);
+		
+		btnAnalisisPuesto = new JButton("Analisis de puesto");
+		btnAnalisisPuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnAnalisisPuesto.setBounds(119, 105, 198, 45);
+		getContentPane().add(btnAnalisisPuesto);
 
 		btnEmpresa.addActionListener(this);
 		btnPersona.addActionListener(this);
+		btnAnalisisPuesto.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnEmpresa) {
 			VentanaEmpresa frame = new VentanaEmpresa(this, cont, user);
-			frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			frame.setVisible(true);
-		} else {
+		} else if (e.getSource() == btnPersona) {
 			VentanaPersona dialog = new VentanaPersona(this, cont, user);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} else {
+			VentanaAnalisisPuesto dialog = new VentanaAnalisisPuesto(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}
