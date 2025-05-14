@@ -73,7 +73,10 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUPDATEUBICACION = "UPDATE ANALISISPUESTO SET UBICACION=? WHERE EMPRESA=?";
 	final String SQLUPDATEREQ_IDIOMA = "UPDATE ANALISISPUESTO SET REQ_IDIOMAS=? WHERE EMPRESA=?";
 	final String SQLUPDATEAPCONTACTOEMPRESA = "UPDATE ANALISISPUESTO SET CONTACTOEMPRESA=? WHERE EMPRESA=?";
+	final String SQLUPDATE_TELEFONO = "UPDATE ANALISISPUESTO SET TELEFONO=? WHERE EMPRESA=?";
+	final String SQLUPDATE_EMAIL = "UPDATE ANALISISPUESTO SET EMAIL=? WHERE EMPRESA=?";
 	final String SQLUPDATERESPONSABLEAPNABI = "UPDATE ANALISISPUESTO SET RESPONSABLEAPNABI=? WHERE EMPRESA=?";
+	final String SQLUPDATECOMUNICACION = "UPDATE ANALISISPUESTO SET COMUNICACION=? WHERE EMPRESA=?";
 	final String SQLDELETEANALISISPUESTO = "DELETE FROM ANALISISPUESTO WHERE EMPRESA=?";
 
 	public BDImplementacion() {
@@ -2917,6 +2920,52 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
+	public boolean modificarNumTelefono(String telefono, String emp) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATE_TELEFONO);
+			stmt.setString(1, telefono);
+			stmt.setString(2, emp);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar el analisis de puesto.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarEmail(String email, String emp) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATE_EMAIL);
+			stmt.setString(1, email);
+			stmt.setString(2, emp);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar el analisis de puesto.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
 	public boolean modificarResponsableApnabi(String persona, String emp) {
 		boolean check = false;
 
@@ -2924,6 +2973,29 @@ public class BDImplementacion implements ApnabiDAO {
 		try {
 			stmt = con.prepareStatement(SQLUPDATERESPONSABLEAPNABI);
 			stmt.setString(1, persona);
+			stmt.setString(2, emp);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar el analisis de puesto.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarComunicacion(String com, String emp) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATECOMUNICACION);
+			stmt.setString(1, com);
 			stmt.setString(2, emp);
 			if (stmt.executeUpdate() > 0) {
 				check = true;

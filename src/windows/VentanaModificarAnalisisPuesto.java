@@ -14,9 +14,10 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 	private LoginController cont;
 	private AnalisisPuesto aP;
 	private JButton btnModificar;
-	private JTextField textFieldPuesto, textFieldUbicacion, textFieldContactoEmpresa;
-	private JTextArea textAreaHorario, textAreaAP;
-	private JComboBox<String> comboBoxFormacionMinima, comboBoxIdiomasReq, comboBoxResponsableApnabi;
+	private JTextField textFieldPuesto, textFieldUbicacion, textFieldTelefono, textFieldEmail, textFieldContactoEmpresa;
+	private JTextArea textAreaAP, textAreaHorario;
+	private JComboBox<String> comboBoxFormacionMinima, comboBoxIdiomasReq, comboBoxResponsableApnabi,
+			comboBoxComunicacion;
 
 	public VentanaModificarAnalisisPuesto(JDialog parent, LoginController cont, AnalisisPuesto aP) {
 		super(parent, true);
@@ -25,12 +26,12 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 
 		setResizable(false);
 		setTitle("Modificar analisis de puesto");
-		setBounds(100, 100, 940, 400);
+		setBounds(100, 100, 940, 480);
 		getContentPane().setLayout(null);
 
 		textAreaAP = new JTextArea();
 		textAreaAP.setLineWrap(true);
-		textAreaAP.setBounds(409, 48, 507, 305);
+		textAreaAP.setBounds(409, 48, 507, 323);
 		getContentPane().add(textAreaAP);
 
 		JLabel lblNota = new JLabel("No hace falta rellenar toda la informacion.");
@@ -44,66 +45,105 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		JLabel lblPuesto = new JLabel("Puesto:");
 		lblPuesto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblPuesto.setBounds(10, 10, 89, 31);
+		lblPuesto.setBounds(45, 13, 89, 31);
 		getContentPane().add(lblPuesto);
 
 		textFieldPuesto = new JTextField();
 		textFieldPuesto.setColumns(10);
-		textFieldPuesto.setBounds(91, 17, 231, 19);
+		textFieldPuesto.setBounds(144, 17, 231, 19);
 		getContentPane().add(textFieldPuesto);
+
+		JLabel lblHorario = new JLabel("Horario:");
+		lblHorario.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHorario.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblHorario.setBounds(39, 65, 78, 21);
+		getContentPane().add(lblHorario);
+
+		JLabel lblmaxCaracteres = new JLabel("(Max 150 caracteres)");
+		lblmaxCaracteres.setHorizontalAlignment(SwingConstants.CENTER);
+		lblmaxCaracteres.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblmaxCaracteres.setBounds(14, 88, 119, 21);
+		getContentPane().add(lblmaxCaracteres);
+
+		textAreaHorario = new JTextArea();
+		textAreaHorario.setLineWrap(true);
+		textAreaHorario.setBounds(144, 54, 254, 66);
+		getContentPane().add(textAreaHorario);
 
 		JLabel lblFormacionMinima = new JLabel("Formacion Minima:");
 		lblFormacionMinima.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFormacionMinima.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblFormacionMinima.setBounds(10, 35, 128, 31);
+		lblFormacionMinima.setBounds(30, 124, 128, 31);
 		getContentPane().add(lblFormacionMinima);
 
 		comboBoxFormacionMinima = new JComboBox<String>();
 		comboBoxFormacionMinima.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO",
 				"EPA", "FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacionMinima.setSelectedIndex(0);
-		comboBoxFormacionMinima.setBounds(150, 41, 224, 21);
+		comboBoxFormacionMinima.setBounds(160, 130, 224, 21);
 		getContentPane().add(comboBoxFormacionMinima);
 
 		JLabel lblUbicacion = new JLabel("Ubicacion:");
 		lblUbicacion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUbicacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblUbicacion.setBounds(20, 67, 89, 31);
+		lblUbicacion.setBounds(46, 160, 89, 31);
 		getContentPane().add(lblUbicacion);
 
 		textFieldUbicacion = new JTextField();
 		textFieldUbicacion.setColumns(10);
-		textFieldUbicacion.setBounds(105, 74, 217, 19);
+		textFieldUbicacion.setBounds(150, 165, 217, 19);
 		getContentPane().add(textFieldUbicacion);
 
 		JLabel lbl_IdiomasReq = new JLabel("Idiomas requeridos:");
 		lbl_IdiomasReq.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_IdiomasReq.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lbl_IdiomasReq.setBounds(9, 96, 133, 31);
+		lbl_IdiomasReq.setBounds(30, 194, 133, 31);
 		getContentPane().add(lbl_IdiomasReq);
 
 		comboBoxIdiomasReq = new JComboBox<String>();
 		comboBoxIdiomasReq.setEditable(true);
 		comboBoxIdiomasReq.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Ingles", "Euskera", "Español" }));
 		comboBoxIdiomasReq.setSelectedIndex(0);
-		comboBoxIdiomasReq.setBounds(152, 102, 222, 21);
+		comboBoxIdiomasReq.setBounds(173, 346, 222, 21);
 		getContentPane().add(comboBoxIdiomasReq);
 
 		JLabel lblContactoEmpresa = new JLabel("Contacto con la empresa:");
 		lblContactoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContactoEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblContactoEmpresa.setBounds(10, 123, 155, 31);
+		lblContactoEmpresa.setBounds(29, 231, 155, 31);
 		getContentPane().add(lblContactoEmpresa);
 
 		textFieldContactoEmpresa = new JTextField();
 		textFieldContactoEmpresa.setColumns(10);
-		textFieldContactoEmpresa.setBounds(175, 130, 163, 19);
+		textFieldContactoEmpresa.setBounds(194, 238, 163, 19);
 		getContentPane().add(textFieldContactoEmpresa);
+
+		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblEmail.setBounds(30, 301, 68, 31);
+		getContentPane().add(lblEmail);
+
+		textFieldEmail = new JTextField();
+		textFieldEmail.setColumns(10);
+		textFieldEmail.setBounds(108, 308, 257, 19);
+		getContentPane().add(textFieldEmail);
+
+		JLabel lblTelefono = new JLabel("Telefono:");
+		lblTelefono.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTelefono.setBounds(48, 267, 84, 31);
+		getContentPane().add(lblTelefono);
+
+		textFieldTelefono = new JTextField();
+		textFieldTelefono.setColumns(10);
+		textFieldTelefono.setBounds(166, 274, 207, 19);
+		getContentPane().add(textFieldTelefono);
 
 		JLabel lblResponsableApnabi = new JLabel("Responsable de Apnabi:");
 		lblResponsableApnabi.setHorizontalAlignment(SwingConstants.CENTER);
 		lblResponsableApnabi.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblResponsableApnabi.setBounds(10, 159, 155, 31);
+		lblResponsableApnabi.setBounds(10, 340, 149, 31);
 		getContentPane().add(lblResponsableApnabi);
 
 		comboBoxResponsableApnabi = new JComboBox<String>();
@@ -111,29 +151,23 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		comboBoxResponsableApnabi.setModel(new DefaultComboBoxModel<>(
 				new String[] { "---", "Alba", "Ellen", "Selene", "Piti", "María", "Gorka", "Rocío" }));
 		comboBoxResponsableApnabi.setSelectedIndex(0);
-		comboBoxResponsableApnabi.setBounds(175, 165, 178, 21);
+		comboBoxResponsableApnabi.setBounds(179, 200, 178, 21);
 		getContentPane().add(comboBoxResponsableApnabi);
 
-		JLabel lblHorario = new JLabel("Horario:");
-		lblHorario.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHorario.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblHorario.setBounds(35, 211, 78, 21);
-		getContentPane().add(lblHorario);
+		JLabel lblComunicacion = new JLabel("Comunicacion:");
+		lblComunicacion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblComunicacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblComunicacion.setBounds(10, 381, 99, 31);
+		getContentPane().add(lblComunicacion);
 
-		JLabel lblmaxCaracteres = new JLabel("(Max 150 caracteres)");
-		lblmaxCaracteres.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmaxCaracteres.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblmaxCaracteres.setBounds(10, 234, 119, 21);
-		getContentPane().add(lblmaxCaracteres);
-
-		textAreaHorario = new JTextArea();
-		textAreaHorario.setLineWrap(true);
-		textAreaHorario.setBounds(140, 200, 254, 66);
-		getContentPane().add(textAreaHorario);
+		comboBoxComunicacion = new JComboBox<String>();
+		comboBoxComunicacion.setSelectedIndex(0);
+		comboBoxComunicacion.setBounds(119, 383, 557, 28);
+		getContentPane().add(comboBoxComunicacion);
 
 		btnModificar = new JButton("Modificar");
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnModificar.setBounds(10, 285, 384, 68);
+		btnModificar.setBounds(695, 381, 209, 47);
 		getContentPane().add(btnModificar);
 		btnModificar.addActionListener(this);
 	}
@@ -394,14 +428,14 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 			infoError.append("Puesto");
 		}
 
-		if (check) {
+		if (textAreaHorario.getText().isBlank() && check) {
 			check = cont.modificarHorario(textAreaHorario.getText(), aP.getEmpresa());
 			if (!check) {
 				infoError.append("Horario");
 			}
 		}
 
-		if (check) {
+		if (comboBoxFormacionMinima.getSelectedItem().equals("---") && check) {
 			check = cont.modificarFormacionMinima(
 					comboBoxFormacionMinima.getItemAt(comboBoxFormacionMinima.getSelectedIndex()), aP.getEmpresa());
 			if (!check) {
@@ -409,32 +443,54 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 			}
 		}
 
-		if (check) {
+		if (textFieldUbicacion.getText().isBlank() && check) {
 			check = cont.modificarUbicacion(textFieldUbicacion.getText(), aP.getEmpresa());
 			if (!check) {
 				infoError.append("Ubicacion");
 			}
 		}
 
-		if (check) {
+		if (comboBoxIdiomasReq.getSelectedItem().equals("---") && check) {
 			check = cont.modificarIdiomaReq((String) comboBoxIdiomasReq.getEditor().getItem(), aP.getEmpresa());
 			if (!check) {
 				infoError.append("Idiomas requeridos");
 			}
 		}
 
-		if (check) {
+		if (textFieldContactoEmpresa.getText().isBlank() && check) {
 			check = cont.modificarAPContactoEmpresa(textFieldContactoEmpresa.getText(), aP.getEmpresa());
 			if (!check) {
 				infoError.append("Contacto con la empresa");
 			}
 		}
 
-		if (check) {
+		if (textFieldTelefono.getText().isBlank() && check) {
+			check = cont.modificarNumTelefono(textFieldTelefono.getText(), aP.getEmpresa());
+			if (!check) {
+				infoError.append("Numero de telefono");
+			}
+		}
+
+		if (textFieldEmail.getText().isBlank() && check) {
+			check = cont.modificarEmail(textFieldEmail.getText(), aP.getEmpresa());
+			if (!check) {
+				infoError.append("Email");
+			}
+		}
+
+		if (comboBoxResponsableApnabi.getEditor().getItem().equals("---") && check) {
 			check = cont.modificarResponsableApnabi((String) comboBoxResponsableApnabi.getEditor().getItem(),
 					aP.getEmpresa());
 			if (!check) {
 				infoError.append("Responsable de Apnabi");
+			}
+		}
+
+		if (comboBoxComunicacion.getSelectedItem().equals("---") && check) {
+			check = cont.modificarComunicacion(comboBoxComunicacion.getItemAt(comboBoxComunicacion.getSelectedIndex()),
+					aP.getEmpresa());
+			if (!check) {
+				infoError.append("Comunicacion");
 			}
 		}
 

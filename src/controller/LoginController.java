@@ -32,7 +32,7 @@ public class LoginController {
 	public boolean registrarUsuario(Usuario user) {
 		return dao.registrarUsuario(user);
 	}
-	
+
 	// Empresas
 	public Map<String, Empresa> mostrarEmpresas() {
 		return dao.mostrarEmpresas();
@@ -45,11 +45,11 @@ public class LoginController {
 	public Empresa getEmpresa(String nom) {
 		return dao.getEmpresa(nom);
 	}
-	
+
 	public int getCodEmpresa(String nom) {
 		return dao.getCodEmpresa(nom);
 	}
-	
+
 	public boolean verificarEmpresa(String nom) {
 		return dao.verificarEmpresa(nom);
 	}
@@ -77,12 +77,12 @@ public class LoginController {
 	public boolean eliminarEmpresa(String nom) {
 		return dao.eliminarEmpresa(nom);
 	}
-	
+
 	// Contactos
 	public Contacto getContacto(int empId) {
 		return dao.getContacto(empId);
 	}
-	
+
 	public boolean añadirContacto(Contacto cont, int id) {
 		return dao.añadirContacto(cont, id);
 	}
@@ -122,24 +122,24 @@ public class LoginController {
 	public boolean modificarFechaResolucion(String fecResolucion, int id) {
 		return dao.modificarFechaResolucion(fecResolucion, id);
 	}
-	
+
 	public boolean eliminarContacto(int id) {
 		return dao.eliminarContacto(id);
 	}
-	
+
 	// Personas
 	public Map<String, Persona> mostrarPersonas() {
 		return dao.mostrarPersonas();
 	}
-	
+
 	public Map<String, Persona> mostrarNomPersonas() {
 		return dao.mostrarNomPersonas();
 	}
-	
+
 	public Persona getPersona(String nom) {
 		return dao.getPersona(nom);
 	}
-	
+
 	public boolean verificarPersona(String nom) {
 		return verificarPersona(nom);
 	}
@@ -159,7 +159,7 @@ public class LoginController {
 	public boolean modificarEspecialidad(String especialidad, String nom) {
 		return dao.modificarEspecialidad(especialidad, nom);
 	}
-	
+
 	public boolean modificarSectorInteres(String sectorI, String nom) {
 		return dao.modificarSectorInteres(sectorI, nom);
 	}
@@ -195,20 +195,20 @@ public class LoginController {
 	public boolean modificarPersonaObservaciones(String observaciones, String nom) {
 		return dao.modificarPersonaObservaciones(observaciones, nom);
 	}
-	
+
 	public boolean eliminarPersona(String nom) {
 		return dao.eliminarPersona(nom);
 	}
-	
+
 	// Analisis de puestos
 	public Map<String, AnalisisPuesto> mostrarAnalisisPuestos() {
 		return dao.mostrarAnalisisPuestos();
 	}
-	
+
 	public Map<String, AnalisisPuesto> mostrarAPEmpresas() {
 		return dao.mostrarAPEmpresas();
 	}
-	
+
 	public boolean verificarAP(String nom) {
 		return dao.verificarAP(nom);
 	}
@@ -220,35 +220,47 @@ public class LoginController {
 	public boolean añadirAnalisisPuesto(AnalisisPuesto aP) {
 		return añadirAnalisisPuesto(aP);
 	}
-	
+
 	public boolean modificarPuesto(String puesto, String emp) {
 		return dao.modificarPuesto(puesto, emp);
 	}
-	
+
 	public boolean modificarHorario(String horario, String emp) {
 		return dao.modificarHorario(horario, emp);
 	}
-	
+
 	public boolean modificarFormacionMinima(String formacion, String emp) {
 		return dao.modificarFormacionMinima(formacion, emp);
 	}
-	
+
 	public boolean modificarUbicacion(String ubicacion, String emp) {
 		return dao.modificarUbicacion(ubicacion, emp);
 	}
-	
+
 	public boolean modificarIdiomaReq(String idioma, String emp) {
 		return dao.modificarIdiomaReq(idioma, emp);
 	}
-	
+
 	public boolean modificarAPContactoEmpresa(String cE, String emp) {
 		return dao.modificarAPContactoEmpresa(cE, emp);
 	}
-	
+
+	public boolean modificarNumTelefono(String telefono, String emp) {
+		return dao.modificarNumTelefono(telefono, emp);
+	}
+
+	public boolean modificarEmail(String email, String emp) {
+		return dao.modificarEmail(email, emp);
+	}
+
 	public boolean modificarResponsableApnabi(String persona, String emp) {
 		return dao.modificarResponsableApnabi(persona, emp);
 	}
-	
+
+	public boolean modificarComunicacion(String com, String emp) {
+		return dao.modificarComunicacion(com, emp);
+	}
+
 	public boolean eliminarAnalisisPuesto(String emp) {
 		return dao.eliminarAnalisisPuesto(emp);
 	}

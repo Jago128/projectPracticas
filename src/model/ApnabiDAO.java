@@ -57,7 +57,7 @@ public interface ApnabiDAO {
 	public boolean modificarResultadoFinal(String resultadoF, int id);
 
 	public boolean modificarFechaResolucion(String fecResolucion, int id);
-	
+
 	public boolean eliminarContacto(int id);
 
 	// Personas
@@ -94,15 +94,15 @@ public interface ApnabiDAO {
 	public boolean modificarAccesibilidad(String accesibilidad, String nom);
 
 	public boolean modificarPersonaObservaciones(String observaciones, String nom);
-	
+
 	public boolean eliminarPersona(String nom);
 
 	// Analisis de puestos
 
 	public Map<String, AnalisisPuesto> mostrarAnalisisPuestos();
-	
+
 	public Map<String, AnalisisPuesto> mostrarAPEmpresas();
-	
+
 	public boolean verificarAP(String nom);
 
 	public AnalisisPuesto getAnalisisPuesto(String nom);
@@ -110,18 +110,24 @@ public interface ApnabiDAO {
 	public boolean añadirAnalisisPuesto(AnalisisPuesto aP);
 
 	public boolean modificarPuesto(String puesto, String emp);
-	
+
 	public boolean modificarHorario(String horario, String emp);
-	
+
 	public boolean modificarFormacionMinima(String formacion, String emp);
-	
+
 	public boolean modificarUbicacion(String ubicacion, String emp);
-	
+
 	public boolean modificarIdiomaReq(String idioma, String emp);
-	
+
 	public boolean modificarAPContactoEmpresa(String cE, String emp);
-	
+
+	public boolean modificarNumTelefono(String telefono, String emp);
+
+	public boolean modificarEmail(String email, String emp);
+
 	public boolean modificarResponsableApnabi(String persona, String emp);
-	
-	public boolean eliminarAnalisisPuesto(String emp); 
+
+	public boolean modificarComunicacion(String com, String emp);
+
+	public boolean eliminarAnalisisPuesto(String emp);
 }
