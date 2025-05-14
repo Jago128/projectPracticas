@@ -6,7 +6,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import controller.LoginController;
-import exceptions.EmailFormatException;
 import model.AnalisisPuesto;
 
 public class VentanaModificarAnalisisPuesto extends JDialog implements ActionListener {
@@ -60,6 +59,8 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		getContentPane().add(lblFormacionMinima);
 
 		comboBoxFormacionMinima = new JComboBox<String>();
+		comboBoxFormacionMinima.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO",
+				"EPA", "FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacionMinima.setSelectedIndex(0);
 		comboBoxFormacionMinima.setBounds(150, 41, 224, 21);
 		getContentPane().add(comboBoxFormacionMinima);
@@ -82,6 +83,8 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		getContentPane().add(lbl_IdiomasReq);
 
 		comboBoxIdiomasReq = new JComboBox<String>();
+		comboBoxIdiomasReq.setEditable(true);
+		comboBoxIdiomasReq.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Ingles", "Euskera", "Español" }));
 		comboBoxIdiomasReq.setSelectedIndex(0);
 		comboBoxIdiomasReq.setBounds(152, 102, 222, 21);
 		getContentPane().add(comboBoxIdiomasReq);
@@ -104,6 +107,9 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		getContentPane().add(lblResponsableApnabi);
 
 		comboBoxResponsableApnabi = new JComboBox<String>();
+		comboBoxResponsableApnabi.setEditable(true);
+		comboBoxResponsableApnabi.setModel(new DefaultComboBoxModel<>(
+				new String[] { "---", "Alba", "Ellen", "Selene", "Piti", "María", "Gorka", "Rocío" }));
 		comboBoxResponsableApnabi.setSelectedIndex(0);
 		comboBoxResponsableApnabi.setBounds(175, 165, 178, 21);
 		getContentPane().add(comboBoxResponsableApnabi);
@@ -111,7 +117,7 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		JLabel lblHorario = new JLabel("Horario:");
 		lblHorario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHorario.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblHorario.setBounds(24, 211, 89, 21);
+		lblHorario.setBounds(35, 211, 78, 21);
 		getContentPane().add(lblHorario);
 
 		JLabel lblmaxCaracteres = new JLabel("(Max 150 caracteres)");
@@ -277,7 +283,7 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		infoAP.append("Responsable de Apnabi: " + aP.getResponsableApnabi());
 		textAreaAP.setText(infoAP.toString());
 	}
-	
+
 	public boolean errorChecks(int errorID) {
 		boolean error = false;
 
@@ -287,14 +293,6 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 			break;
 
 		case 2:
-			error = dateFormatErrorCheck();
-			break;
-
-		case 3:
-			error = dateAfterCheck();
-			break;
-
-		case 4:
 			error = lengthCheck();
 			break;
 		}
@@ -305,10 +303,52 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		boolean check = false;
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 
-		if (!textFieldDatosContacto.getText().isBlank()) {
-			check = cont.modificarDatosContacto(textFieldDatosContacto.getText(), emp.getNom_empresa());
+		check = cont.modificarPuesto(textFieldPuesto.getText(), aP.getEmpresa());
+		if (!check) {
+			infoError.append("Puesto");
+		}
+
+		if (check) {
+			check = cont.modificarHorario(textAreaHorario.getText(), aP.getEmpresa());
 			if (!check) {
-				infoError.append("Datos de contacto");
+				infoError.append("Horario");
+			}
+		}
+
+		if (check) {
+			check = cont.modificarFormacionMinima(
+					comboBoxFormacionMinima.getItemAt(comboBoxFormacionMinima.getSelectedIndex()), aP.getEmpresa());
+			if (!check) {
+				infoError.append("Formacion minima");
+			}
+		}
+
+		if (check) {
+			check = cont.modificarUbicacion(textFieldUbicacion.getText(), aP.getEmpresa());
+			if (!check) {
+				infoError.append("Ubicacion");
+			}
+		}
+
+		if (check) {
+			check = cont.modificarIdiomaReq((String) comboBoxIdiomasReq.getEditor().getItem(), aP.getEmpresa());
+			if (!check) {
+				infoError.append("Idiomas requeridos");
+			}
+		}
+
+		if (check) {
+			check = cont.modificarAPContactoEmpresa(textFieldContactoEmpresa.getText(), aP.getEmpresa());
+			if (!check) {
+				infoError.append("Contacto con la empresa");
+			}
+		}
+
+		if (check) {
+			check = cont.modificarResponsableApnabi((String) comboBoxResponsableApnabi.getEditor().getItem(),
+					aP.getEmpresa());
+			if (!check) {
+				infoError.append("Responsable de Apnabi");
 			}
 		}
 
@@ -320,7 +360,7 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		}
 		return check;
 	}
-	
+
 	public boolean lengthCheck() { // ErrorID: 2
 		if (textAreaHorario.getText().length() > 150) {
 			return true;
@@ -333,8 +373,8 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		if (e.getSource() == btnModificar) {
 			if (errorChecks(2)) {
 				JOptionPane.showMessageDialog(null,
-						"Hay mas caracteres que el limite de caracteres en el campo de horario.",
-						"ERROR", JOptionPane.ERROR_MESSAGE);
+						"Hay mas caracteres que el limite de caracteres en el campo de horario.", "ERROR",
+						JOptionPane.ERROR_MESSAGE);
 			} else {
 				if (!errorChecks(1)) {
 					aP = cont.getAnalisisPuesto(aP.getEmpresa());

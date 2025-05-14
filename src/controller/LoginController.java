@@ -221,7 +221,33 @@ public class LoginController {
 		return añadirAnalisisPuesto(aP);
 	}
 	
-	// Modificar
+	public boolean modificarPuesto(String puesto, String emp) {
+		return dao.modificarPuesto(puesto, emp);
+	}
+	
+	public boolean modificarHorario(String horario, String emp) {
+		return dao.modificarHorario(horario, emp);
+	}
+	
+	public boolean modificarFormacionMinima(String formacion, String emp) {
+		return dao.modificarFormacionMinima(formacion, emp);
+	}
+	
+	public boolean modificarUbicacion(String ubicacion, String emp) {
+		return dao.modificarUbicacion(ubicacion, emp);
+	}
+	
+	public boolean modificarIdiomaReq(String idioma, String emp) {
+		return dao.modificarIdiomaReq(idioma, emp);
+	}
+	
+	public boolean modificarAPContactoEmpresa(String cE, String emp) {
+		return dao.modificarAPContactoEmpresa(cE, emp);
+	}
+	
+	public boolean modificarResponsableApnabi(String persona, String emp) {
+		return dao.modificarResponsableApnabi(persona, emp);
+	}
 	
 	public boolean eliminarAnalisisPuesto(String emp) {
 		return dao.eliminarAnalisisPuesto(emp);

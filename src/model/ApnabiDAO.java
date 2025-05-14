@@ -109,7 +109,19 @@ public interface ApnabiDAO {
 
 	public boolean añadirAnalisisPuesto(AnalisisPuesto aP);
 
-	// public boolean modificarPH();
+	public boolean modificarPuesto(String puesto, String emp);
+	
+	public boolean modificarHorario(String horario, String emp);
+	
+	public boolean modificarFormacionMinima(String formacion, String emp);
+	
+	public boolean modificarUbicacion(String ubicacion, String emp);
+	
+	public boolean modificarIdiomaReq(String idioma, String emp);
+	
+	public boolean modificarAPContactoEmpresa(String cE, String emp);
+	
+	public boolean modificarResponsableApnabi(String persona, String emp);
 	
 	public boolean eliminarAnalisisPuesto(String emp); 
 }

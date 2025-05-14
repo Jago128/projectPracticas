@@ -120,6 +120,7 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 		getContentPane().add(lbl_IdiomasReq);
 
 		comboBoxIdiomasReq = new JComboBox<>();
+		comboBoxIdiomasReq.setEditable(true);
 		comboBoxIdiomasReq.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Ingles", "Euskera", "Español" }));
 		comboBoxIdiomasReq.setSelectedIndex(0);
 		comboBoxIdiomasReq.setBounds(153, 168, 178, 21);
@@ -143,6 +144,7 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 		getContentPane().add(lblResponsableApnabi);
 
 		comboBoxResponsableApnabi = new JComboBox<String>();
+		comboBoxResponsableApnabi.setEditable(true);
 		comboBoxResponsableApnabi.setModel(new DefaultComboBoxModel<>(
 				new String[] { "---", "Alba", "Ellen", "Selene", "Piti", "María", "Gorka", "Rocío" }));
 		comboBoxResponsableApnabi.setSelectedIndex(0);
@@ -185,7 +187,12 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAñadir) {
-			if (textFieldEmpresa.getText().isBlank()) { // Not finished
+			if (textFieldEmpresa.getText().isBlank() || textAreaHorario.getText().isBlank()
+					|| textFieldContactoEmpresa.getText().isBlank() || textFieldPuesto.getText().isBlank()
+					|| textFieldUbicacion.getText().isBlank() || comboBoxFormacionMinima.getSelectedItem().equals("---")
+					|| comboBoxSector.getSelectedItem().equals("---")
+					|| comboBoxIdiomasReq.getEditor().getItem().equals("---")
+					|| comboBoxResponsableApnabi.getEditor().getItem().equals("---")) {
 				JOptionPane.showMessageDialog(null, "Por favor, rellena toda todos los campos obligatorios.",
 						"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
 			} else if (cont.verificarAP(textFieldEmpresa.getText())) {
@@ -194,8 +201,8 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 			} else {
 				if (errorChecks(2)) {
 					JOptionPane.showMessageDialog(null,
-							"Hay mas caracteres que el limite de caracteres en el campo de horario.",
-							"ERROR", JOptionPane.ERROR_MESSAGE);
+							"Hay mas caracteres que el limite de caracteres en el campo de horario.", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
 				} else {
 					Sector sector = null;
 					Formacion formacion = null;

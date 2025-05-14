@@ -66,7 +66,14 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLANALISISPERSONAS = "SELECT * FROM ANALISISPUESTO";
 	final String SQLAP_EMPRESA = "SELECT EMPRESA FROM ANALISISPUESTO";
 	final String SQLSELECTANALISISPUESTO = "SELECT * FROM ANALISISPUESTO WHERE EMPRESA=?";
-
+	
+	final String SQLUPDATEPUESTO = "UPDATE ANALISISPUESTO SET PUESTO=? WHERE EMPRESA=?";
+	final String SQLUPDATEHORARIO = "UPDATE ANALISISPUESTO SET HORARIO=? WHERE EMPRESA=?";
+	final String SQLUPDATEMINFORMACION = "UPDATE ANALISISPUESTO SET MIN_FORMACION=? WHERE EMPRESA=?";
+	final String SQLUPDATEUBICACION = "UPDATE ANALISISPUESTO SET UBICACION=? WHERE EMPRESA=?";
+	final String SQLUPDATEREQ_IDIOMA = "UPDATE ANALISISPUESTO SET REQ_IDIOMAS=? WHERE EMPRESA=?";
+	final String SQLUPDATEAPCONTACTOEMPRESA = "UPDATE ANALISISPUESTO SET CONTACTOEMPRESA=? WHERE EMPRESA=?";
+	final String SQLUPDATERESPONSABLEAPNABI = "UPDATE ANALISISPUESTO SET RESPONSABLEAPNABI=? WHERE EMPRESA=?";
 	final String SQLDELETEANALISISPUESTO = "DELETE FROM ANALISISPUESTO WHERE EMPRESA=?";
 
 	public BDImplementacion() {
@@ -2435,7 +2442,7 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return aPs;
 	}
-	
+
 	public Map<String, AnalisisPuesto> mostrarAPEmpresas() {
 		AnalisisPuesto aP;
 		Map<String, AnalisisPuesto> aPs = new TreeMap<>();
@@ -2482,7 +2489,7 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return aP;
 	}
-	
+
 	public boolean verificarAP(String nom) {
 		boolean existe = false;
 
@@ -2529,8 +2536,167 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 	
-	// Modificar
+	@Override
+	public boolean modificarHorario(String horario, String emp) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEHORARIO);
+			stmt.setString(1, horario);
+			stmt.setString(2, emp);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar el analisis de puesto.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
 	
+	@Override
+	public boolean modificarPuesto(String puesto, String emp) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEPUESTO);
+			stmt.setString(1, puesto);
+			stmt.setString(2, emp);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar el analisis de puesto.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarFormacionMinima(String formacion, String emp) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt.setString(1, formacion);
+			stmt.setString(2, emp);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar el analisis de puesto.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarUbicacion(String ubicacion, String emp) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEUBICACION);
+			stmt.setString(1, ubicacion);
+			stmt.setString(2, emp);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar el analisis de puesto.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarIdiomaReq(String idioma, String emp) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEREQ_IDIOMA);
+			stmt.setString(1, idioma);
+			stmt.setString(2, emp);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar el analisis de puesto.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarAPContactoEmpresa(String cE, String emp) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEAPCONTACTOEMPRESA);
+			stmt.setString(1, cE);
+			stmt.setString(2, emp);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar el analisis de puesto.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarResponsableApnabi(String persona, String emp) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATERESPONSABLEAPNABI);
+			stmt.setString(1, persona);
+			stmt.setString(2, emp);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar el analisis de puesto.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
 	@Override
 	public boolean eliminarAnalisisPuesto(String emp) {
 		boolean check = false;
