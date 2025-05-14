@@ -669,8 +669,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 				.toFormatter();
 		Contacto con = cont.getContacto(emp.getCodEmpresa());
 		LocalDate cont1 = LocalDate.parse("9999-1-1", format), cont2 = LocalDate.parse("9999-1-1", format),
-				cont3 = LocalDate.parse("9999-1-1", format), cont4 = LocalDate.parse("9999-1-1", format),
-				fecRes = LocalDate.parse("9999-1-1", format);
+				cont3 = LocalDate.parse("9999-1-1", format), cont4 = LocalDate.parse("9999-1-1", format);
 
 		if (!textFieldContacto1.getText().isBlank()) {
 			cont1 = LocalDate.parse(textFieldContacto1.getText(), format);
@@ -696,26 +695,15 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 			cont4 = LocalDate.parse(con.getContacto4(), format);
 		}
 
-		if (!textFieldFechaResolucion.getText().isBlank() && con.getFechaResolucion() == null) {
-			fecRes = LocalDate.parse(textFieldFechaResolucion.getText(), format);
-		} else if (con.getFechaResolucion() != null) {
-			fecRes = LocalDate.parse(con.getFechaResolucion(), format);
-		}
-
-		if ((!fecRes.isAfter(cont4) || !fecRes.isAfter(cont3) || !fecRes.isAfter(cont2) || !fecRes.isAfter(cont1))
-				&& !fecRes.equals(cont4)) {
+		if (!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1)) {
 			return false;
 		}
 
-		if ((!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1)) && !fecRes.equals(cont3)) {
+		if (!cont3.isAfter(cont2) || !cont3.isAfter(cont1)) {
 			return false;
 		}
 
-		if ((!cont3.isAfter(cont2) || !cont3.isAfter(cont1)) && !fecRes.equals(cont2)) {
-			return false;
-		}
-
-		if ((!cont2.isAfter(cont1)) && !fecRes.equals(cont1)) {
+		if (!cont2.isAfter(cont1)) {
 			return false;
 		}
 		return true;

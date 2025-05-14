@@ -91,7 +91,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		textFieldDatosContacto.setBounds(166, 152, 163, 19);
 		getContentPane().add(textFieldDatosContacto);
 
-		JLabel lblContactoEmpresa = new JLabel("Contacto en la empresa: *");
+		JLabel lblContactoEmpresa = new JLabel("Contacto en la empresa:");
 		lblContactoEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContactoEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblContactoEmpresa.setBounds(16, 187, 155, 31);
@@ -116,7 +116,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		comboBoxPersonaContacto.setBounds(166, 236, 178, 21);
 		getContentPane().add(comboBoxPersonaContacto);
 
-		JLabel lblEstado = new JLabel("Estado: *");
+		JLabel lblEstado = new JLabel("Estado:");
 		lblEstado.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblEstado.setBounds(60, 271, 89, 31);
@@ -129,7 +129,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		comboBoxEstado.setBounds(166, 277, 178, 21);
 		getContentPane().add(comboBoxEstado);
 
-		JLabel lblContacto1 = new JLabel("1. contacto: *");
+		JLabel lblContacto1 = new JLabel("1. contacto:");
 		lblContacto1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContacto1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblContacto1.setBounds(375, 28, 95, 31);
@@ -319,7 +319,10 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
 				.toFormatter();
 		try {
-			LocalDate.parse(textFieldContacto1.getText(), format);
+			if (!textFieldContacto1.getText().isBlank()) {
+				LocalDate.parse(textFieldContacto1.getText(), format);
+			}
+
 			if (!textFieldContacto2.getText().isBlank()) {
 				LocalDate.parse(textFieldContacto2.getText(), format);
 			}
@@ -346,8 +349,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
 				.toFormatter();
 		LocalDate cont1 = LocalDate.parse("9999-1-1", format), cont2 = LocalDate.parse("9999-1-1", format),
-				cont3 = LocalDate.parse("9999-1-1", format), cont4 = LocalDate.parse("9999-1-1", format),
-				fecRes = LocalDate.parse("9999-1-1", format);
+				cont3 = LocalDate.parse("9999-1-1", format), cont4 = LocalDate.parse("9999-1-1", format);
 
 		cont1 = LocalDate.parse(textFieldContacto1.getText(), format);
 		if (!textFieldContacto2.getText().isBlank()) {
@@ -362,24 +364,15 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 			cont4 = LocalDate.parse(textFieldContacto4.getText(), format);
 		}
 
-		if (!textFieldFechaResolucion.getText().isBlank()) {
-			fecRes = LocalDate.parse(textFieldFechaResolucion.getText(), format);
-		}
-
-		if ((!fecRes.isAfter(cont4) || !fecRes.isAfter(cont3) || !fecRes.isAfter(cont2) || !fecRes.isAfter(cont1))
-				&& !fecRes.equals(cont4)) {
+		if (!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1)) {
 			return false;
 		}
 
-		if ((!cont4.isAfter(cont3) || !cont4.isAfter(cont2) || !cont4.isAfter(cont1)) && !fecRes.equals(cont3)) {
+		if (!cont3.isAfter(cont2) || !cont3.isAfter(cont1)) {
 			return false;
 		}
 
-		if ((!cont3.isAfter(cont2) || !cont3.isAfter(cont1)) && !fecRes.equals(cont2)) {
-			return false;
-		}
-
-		if ((!cont2.isAfter(cont1)) && !fecRes.equals(cont1)) {
+		if (!cont2.isAfter(cont1)) {
 			return false;
 		}
 		return true;
@@ -400,9 +393,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == btnAñadir) {
 			if (textFieldNombre.getText().isBlank() || comboBoxSector.getSelectedItem().equals("---")
-					|| textFieldDatosContacto.getText().isBlank() || textFieldContactoEmpresa.getText().isBlank()
-					|| comboBoxPersonaContacto.getSelectedItem().equals("---")
-					|| comboBoxEstado.getSelectedItem().equals("---") || textFieldContacto1.getText().isBlank()) {
+					|| comboBoxPersonaContacto.getSelectedItem().equals("---")) {
 				JOptionPane.showMessageDialog(null, "Por favor, rellena toda todos los campos obligatorios.",
 						"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
 			} else if (cont.verificarEmpresa(textFieldNombre.getText())) {
@@ -440,6 +431,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 						Estado estado = null;
 						ResultadoUltimoContacto resultadoUltimoCont = null;
 						ResultadoFinal resultadoFinal = null;
+						String contactoEmpresa = "", puesto = "", datosContacto = "";
 						int result = 0;
 
 						switch ((String) comboBoxSector.getSelectedItem()) {
@@ -586,10 +578,25 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 							break;
 						}
 
-						Empresa emp = new Empresa(textFieldNombre.getText(), sector, textFieldPuesto.getText(),
-								textFieldDatosContacto.getText(), textFieldContactoEmpresa.getText(),
-								(String) comboBoxPersonaContacto.getEditor().getItem(), estado);
-						Contacto con = new Contacto(textFieldContacto1.getText());
+						if (!textFieldPuesto.getText().isBlank()) {
+							puesto = textFieldPuesto.getText();
+						}
+
+						if (!textFieldDatosContacto.getText().isBlank()) {
+							datosContacto = textFieldDatosContacto.getText();
+						}
+
+						if (!textFieldContactoEmpresa.getText().isBlank()) {
+							contactoEmpresa = textFieldContactoEmpresa.getText();
+						}
+
+						Empresa emp = new Empresa(textFieldNombre.getText(), sector, puesto, datosContacto,
+								contactoEmpresa, (String) comboBoxPersonaContacto.getEditor().getItem(), estado);
+						Contacto con = new Contacto();
+
+						if (!textFieldContacto1.getText().isBlank()) {
+							con.setContacto1(textFieldContacto1.getText());
+						}
 
 						if (!textFieldContacto2.getText().isBlank()) {
 							con.setContacto2(textFieldContacto2.getText());
@@ -626,8 +633,8 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 						if (cont.añadirEmpresa(emp)) {
 							if (cont.añadirContacto(con, cont.getCodEmpresa(textFieldNombre.getText()))) {
 								result = JOptionPane.showConfirmDialog(null,
-										"La empresa ha sido añadida correctamente. Quiere añadir mas empresas?", "",
-										JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+										"La empresa ha sido añadida correctamente junto a la informacion de contacto. Quiere añadir mas empresas?",
+										"", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 								if (result == JOptionPane.NO_OPTION) {
 									this.dispose();
 								} else if (result == JOptionPane.YES_OPTION) {
