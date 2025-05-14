@@ -67,14 +67,24 @@ CREATE TABLE ANALISISPUESTO(
 	EMPRESA VARCHAR(100) PRIMARY KEY,
     PUESTO VARCHAR(50) NOT NULL,
     HORARIO VARCHAR(150) NOT NULL,
+    FINDE ENUM("Si", "SoloSabados", "SoloDomingos", "No") NOT NULL,
+    TURNOS BOOLEAN NOT NULL,
     MIN_FORMACION ENUM('AT', 'Primaria', 'ESO', 'EPA', 'FP_Basica', 'GM', 'Bachillerato', 'GS', 'Universidad', 'Master', 'Doctorado') NOT NULL,
     UBICACION VARCHAR(150) NOT NULL,
 	SECTOR ENUM('Agricultura_Ganaderia', 'BienesConsumo', 'ComercioElectronico', 'Comercio_Establecimientos', 'Construccion', 'Deporte_Ocio', 'Energia_MedioAmbiente',
     'Finanzas_Seguros_BienesInmuebles', 'Internet', 'Logistica_Transporte', 'MediosComunicacion_Marketing', 'Metalurgia_Electronica', 'ProductosQuimicos_MateriasPrimas',
     'Salud_IndustriaFarmaceutica', 'Servicios', 'Sociedad', 'Tecnologia_Telecomunicaciones', 'Turismo_Hosteleria', 'Vida') NOT NULL,
-    REQ_IDIOMAS VARCHAR(50),
+    REQ_IDIOMAS VARCHAR(50) NOT NULL,
 	CONTACTOEMPRESA VARCHAR(50) NOT NULL,
-    RESPONSABLEAPNABI VARCHAR(50) NOT NULL
+    CARGO VARCHAR(50) NOT NULL,
+    TELEFONO VARCHAR(20) NOT NULL,
+    EMAIL VARCHAR(50) NOT NULL,
+    RESPONSABLEAPNABI VARCHAR(50) NOT NULL,
+    ESFUERZOFISICO BOOLEAN NOT NULL,
+    RESISTENCIA BOOLEAN NOT NULL,
+    COMUNICACION ENUM("SinNecesidadComunicacion", "ComunicacionConPersonalEmpesa", "ComunicacionConPersonasExternasEmpresa",
+    "ComunicacionConPersonalEmpresa_FueraEmpresa") NOT NULL,
+    SENSORIALES ENUM("Ruido", "Luz", "Orden", "Limpieza") NOT NULL
 );
 
 INSERT INTO USUARIO VALUES

@@ -66,7 +66,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLANALISISPERSONAS = "SELECT * FROM ANALISISPUESTO";
 	final String SQLAP_EMPRESA = "SELECT EMPRESA FROM ANALISISPUESTO";
 	final String SQLSELECTANALISISPUESTO = "SELECT * FROM ANALISISPUESTO WHERE EMPRESA=?";
-
+	final String SQLINSERTANALISISPUESTO = "INSERT INTO ANALISISPUESTO VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	final String SQLUPDATEPUESTO = "UPDATE ANALISISPUESTO SET PUESTO=? WHERE EMPRESA=?";
 	final String SQLUPDATEHORARIO = "UPDATE ANALISISPUESTO SET HORARIO=? WHERE EMPRESA=?";
 	final String SQLUPDATEMINFORMACION = "UPDATE ANALISISPUESTO SET MIN_FORMACION=? WHERE EMPRESA=?";
@@ -2431,12 +2431,21 @@ public class BDImplementacion implements ApnabiDAO {
 				aP.setEmpresa(rs.getString("EMPRESA"));
 				aP.setPuesto(rs.getString("PUESTO"));
 				aP.setHorario(rs.getString("HORARIO"));
+				aP.setFinde(Finde.valueOf(rs.getString("FINDE").toUpperCase()));
+				aP.setTurnos(rs.getBoolean("TURNOS"));
 				aP.setMin_Formacion(Formacion.valueOf(rs.getString("MIN_FORMACION").toUpperCase()));
 				aP.setUbicacion(rs.getString("UBICACION"));
 				aP.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
 				aP.setReq_idiomas(rs.getString("REQ_IDIOMAS"));
 				aP.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
+				aP.setCargo(rs.getString("CARGO"));
+				aP.setTelefono(rs.getString("TELEFONO"));
+				aP.setEmail(rs.getString("EMAIL"));
 				aP.setResponsableApnabi(rs.getString("RESPONSABLEAPNABI"));
+				aP.setEsfuerzoFisico(rs.getBoolean("ESFUERZOFISICO"));
+				aP.setResistencia(rs.getBoolean("RESISTENCIA"));
+				aP.setComunicacion(Comunicacion.valueOf(rs.getString("COMUNICACION").toUpperCase()));
+				aP.setCaractersiticasSensoriales(Sensoriales.valueOf(rs.getString("SENSORIALES").toUpperCase()));
 				aPs.put(aP.getEmpresa(), aP);
 			}
 			rs.close();
@@ -2482,17 +2491,26 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLEMPRESAS);
+			stmt = con.prepareStatement(SQLSELECTANALISISPUESTO);
 			ResultSet rs = stmt.executeQuery();
 			aP.setEmpresa(rs.getString("EMPRESA"));
 			aP.setPuesto(rs.getString("PUESTO"));
 			aP.setHorario(rs.getString("HORARIO"));
+			aP.setFinde(Finde.valueOf(rs.getString("FINDE").toUpperCase()));
+			aP.setTurnos(rs.getBoolean("TURNOS"));
 			aP.setMin_Formacion(Formacion.valueOf(rs.getString("MIN_FORMACION").toUpperCase()));
 			aP.setUbicacion(rs.getString("UBICACION"));
 			aP.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
 			aP.setReq_idiomas(rs.getString("REQ_IDIOMAS"));
 			aP.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
+			aP.setCargo(rs.getString("CARGO"));
+			aP.setTelefono(rs.getString("TELEFONO"));
+			aP.setEmail(rs.getString("EMAIL"));
 			aP.setResponsableApnabi(rs.getString("RESPONSABLEAPNABI"));
+			aP.setEsfuerzoFisico(rs.getBoolean("ESFUERZOFISICO"));
+			aP.setResistencia(rs.getBoolean("RESISTENCIA"));
+			aP.setComunicacion(Comunicacion.valueOf(rs.getString("COMUNICACION").toUpperCase()));
+			aP.setCaractersiticasSensoriales(Sensoriales.valueOf(rs.getString("SENSORIALES").toUpperCase()));
 			rs.close();
 			stmt.close();
 			con.close();
@@ -2535,144 +2553,214 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLINSERTEMPRESA);
+			stmt = con.prepareStatement(SQLINSERTANALISISPUESTO);
 			stmt.setString(1, aP.getEmpresa());
 			stmt.setString(2, aP.getPuesto());
 			stmt.setString(3, aP.getHorario());
+			switch (aP.getFinde()) {
+			case SOLODOMINGOS:
+				stmt.setString(4, "SoloDomingos");
+				break;
+
+			case NO:
+				stmt.setString(4, "No");
+				break;
+
+			case SOLOSABADOS:
+				stmt.setString(4, "SoloSabados");
+				break;
+
+			case SI:
+				stmt.setString(4, "Si");
+				break;
+
+			default:
+				System.out.println("Tipo invalido.");
+			}
+
+			stmt.setBoolean(5, aP.isTurnos());
 			switch (aP.getMin_Formacion()) {
 			case AT:
-				stmt.setString(4, "AT");
+				stmt.setString(6, "AT");
 				break;
 
 			case BACHILLERATO:
-				stmt.setString(4, "Bachillerato");
+				stmt.setString(6, "Bachillerato");
 				break;
 
 			case DOCTORADO:
-				stmt.setString(4, "Doctorado");
+				stmt.setString(6, "Doctorado");
 				break;
 
 			case EPA:
-				stmt.setString(4, "EPA");
+				stmt.setString(6, "EPA");
 				break;
 
 			case ESO:
-				stmt.setString(4, "ESO");
+				stmt.setString(6, "ESO");
 				break;
 
 			case FP_BASICA:
-				stmt.setString(4, "FP_Basica");
+				stmt.setString(6, "FP_Basica");
 				break;
 
 			case GM:
-				stmt.setString(4, "GM");
+				stmt.setString(6, "GM");
 				break;
 
 			case GS:
-				stmt.setString(4, "GS");
+				stmt.setString(6, "GS");
 				break;
 
 			case MASTER:
-				stmt.setString(4, "Master");
+				stmt.setString(6, "Master");
 				break;
 
 			case PRIMARIA:
-				stmt.setString(4, "Primaria");
+				stmt.setString(6, "Primaria");
 				break;
 
 			case UNIVERSIDAD:
-				stmt.setString(4, "Universidad");
+				stmt.setString(6, "Universidad");
 				break;
 
 			default:
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(5, aP.getUbicacion());
+			stmt.setString(7, aP.getUbicacion());
 			switch (aP.getSector()) {
 			case AGRICULTURA_GANADERIA:
-				stmt.setString(6, "Agricultura_Ganaderia");
+				stmt.setString(8, "Agricultura_Ganaderia");
 				break;
 
 			case BIENESCONSUMO:
-				stmt.setString(6, "BienesConsumo");
+				stmt.setString(8, "BienesConsumo");
 				break;
 
 			case COMERCIO_ESTABLECIMIENTOS:
-				stmt.setString(6, "Comercio_Establecimientos");
+				stmt.setString(8, "Comercio_Establecimientos");
 				break;
 
 			case COMERCIOELECTRONICO:
-				stmt.setString(6, "ComercioElectronico");
+				stmt.setString(8, "ComercioElectronico");
 				break;
 
 			case CONSTRUCCION:
-				stmt.setString(6, "Construccion");
+				stmt.setString(8, "Construccion");
 				break;
 
 			case DEPORTE_OCIO:
-				stmt.setString(6, "Deporte_Ocio");
+				stmt.setString(8, "Deporte_Ocio");
 				break;
 
 			case ENERGIA_MEDIOAMBIENTE:
-				stmt.setString(6, "Energia_MedioAmbiente");
+				stmt.setString(8, "Energia_MedioAmbiente");
 				break;
 
 			case FINANZAS_SEGUROS_BIENESINMUEBLES:
-				stmt.setString(6, "Finanzas_Seguros_BienesInmuebles");
+				stmt.setString(8, "Finanzas_Seguros_BienesInmuebles");
 				break;
 
 			case INTERNET:
-				stmt.setString(6, "Internet");
+				stmt.setString(8, "Internet");
 				break;
 
 			case LOGISTICA_TRANSPORTE:
-				stmt.setString(6, "Logistica_Transporte");
+				stmt.setString(8, "Logistica_Transporte");
 				break;
 
 			case MEDIOSCOMUNICACION_MARKETING:
-				stmt.setString(6, "MediosComunicacion_Marketing");
+				stmt.setString(8, "MediosComunicacion_Marketing");
 				break;
 
 			case METALURGIA_ELECTRONICA:
-				stmt.setString(6, "Metalurgia_Electronica");
+				stmt.setString(8, "Metalurgia_Electronica");
 				break;
 
 			case PRODUCTOSQUIMICOS_MATERIASPRIMAS:
-				stmt.setString(6, "ProductosQuimicos_MateriasPrimas");
+				stmt.setString(8, "ProductosQuimicos_MateriasPrimas");
 				break;
 
 			case SALUD_INDUSTRIAFARMACEUTICA:
-				stmt.setString(6, "Salud_IndustriaFarmaceutica");
+				stmt.setString(8, "Salud_IndustriaFarmaceutica");
 				break;
 
 			case SERVICIOS:
-				stmt.setString(6, "Servicios");
+				stmt.setString(8, "Servicios");
 				break;
 
 			case SOCIEDAD:
-				stmt.setString(6, "Sociedad");
+				stmt.setString(8, "Sociedad");
 				break;
 
 			case TECNOLOGIA_TELECOMUNICACIONES:
-				stmt.setString(6, "Tecnologia_Telecomunicaciones");
+				stmt.setString(8, "Tecnologia_Telecomunicaciones");
 				break;
 
 			case TURISMO_HOSTELERIA:
-				stmt.setString(6, "Turismo_Hosteleria");
+				stmt.setString(8, "Turismo_Hosteleria");
 				break;
 
 			case VIDA:
-				stmt.setString(6, "Vida");
+				stmt.setString(8, "Vida");
 				break;
 
 			default:
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(7, aP.getReq_idiomas());
-			stmt.setString(8, aP.getContactoEmpresa());
-			stmt.setString(9, aP.getResponsableApnabi());
+			stmt.setString(9, aP.getReq_idiomas());
+			stmt.setString(10, aP.getContactoEmpresa());
+			stmt.setString(11, aP.getCargo());
+			stmt.setString(12, aP.getTelefono());
+			stmt.setString(13, aP.getEmail());
+			stmt.setString(14, aP.getResponsableApnabi());
+			stmt.setBoolean(15, aP.isEsfuerzoFisico());
+			stmt.setBoolean(16, aP.isResistencia());
+			stmt.setString(17, aP.getResponsableApnabi());
+			switch (aP.getComunicacion()) {
+			case COMUNICACIONCONPERSONALEMPESA:
+				stmt.setString(18, "ComunicacionConPersonalEmpesa");
+				break;
+
+			case COMUNICACIONCONPERSONALEMPRESA_FUERAEMPRESA:
+				stmt.setString(18, "ComunicacionConPersonalEmpresa_FueraEmpresa");
+				break;
+
+			case COMUNICACIONCONPERSONASEXTERNASEMPRESA:
+				stmt.setString(18, "ComunicacionConPersonasExternasEmpresa");
+				break;
+
+			case SINNECESIDADCOMUNICACION:
+				stmt.setString(18, "SinNecesidadComunicacion");
+				break;
+
+			default:
+				System.out.println("Tipo invalido.");
+			}
+
+			switch (aP.getCaractersiticasSensoriales()) {
+			case LIMPIEZA:
+				stmt.setString(19, "Limpieza");
+				break;
+
+			case LUZ:
+				stmt.setString(19, "Luz");
+				break;
+
+			case ORDEN:
+				stmt.setString(19, "Orden");
+				break;
+
+			case RUIDO:
+				stmt.setString(19, "Ruido");
+				break;
+
+			default:
+				System.out.println("Tipo invalido.");
+			}
+
 			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}

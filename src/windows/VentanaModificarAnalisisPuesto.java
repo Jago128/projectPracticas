@@ -140,9 +140,30 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 
 	public void loadAPs() {
 		StringBuilder infoAP = new StringBuilder("");
-		String min_Formacion = "", sector = "";
+		String min_Formacion = "", sector = "", finde = "", comunicacion = "", sensoriales = "";
 
 		textAreaAP.setText("");
+		switch (aP.getFinde()) {
+		case SOLODOMINGOS:
+			finde = "Solo domingos";
+			break;
+
+		case NO:
+			finde = "No";
+			break;
+
+		case SOLOSABADOS:
+			finde = "Solo sabados";
+			break;
+
+		case SI:
+			finde = "Si";
+			break;
+
+		default:
+			System.out.println("Tipo incorrecto");
+		}
+
 		switch (aP.getMin_Formacion()) {
 		case AT:
 			min_Formacion = "AT";
@@ -270,17 +291,82 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 			break;
 
 		default:
-			System.out.println("Tipo invalido");
+			System.out.println("Tipo incorrecto");
+		}
+
+		switch (aP.getComunicacion()) {
+		case COMUNICACIONCONPERSONALEMPESA:
+			comunicacion = "Comunicación con personal de la empesa";
+			break;
+
+		case COMUNICACIONCONPERSONALEMPRESA_FUERAEMPRESA:
+			comunicacion = "Comunicacion con personal de la empresa  y fuera de la empresa";
+			break;
+
+		case COMUNICACIONCONPERSONASEXTERNASEMPRESA:
+			comunicacion = "Comunicación con personas externas a la empresa";
+			break;
+
+		case SINNECESIDADCOMUNICACION:
+			comunicacion = "Sin necesidad de comunicacion";
+			break;
+
+		default:
+			System.out.println("Tipo incorrecto");
+		}
+
+		switch (aP.getCaractersiticasSensoriales()) {
+		case LIMPIEZA:
+			sensoriales = "Limpieza";
+			break;
+
+		case LUZ:
+			sensoriales = "Luz";
+			break;
+
+		case ORDEN:
+			sensoriales = "Orden";
+			break;
+
+		case RUIDO:
+			sensoriales = "Ruido";
+			break;
+
+		default:
+			System.out.println("Tipo invalido.");
 		}
 
 		infoAP.append("Empresa: " + aP.getEmpresa()).append("\n");
 		infoAP.append("Puesto: " + aP.getPuesto()).append("\n");
+		infoAP.append("Horario: " + aP.getHorario()).append("\n");
+		infoAP.append("Trabajo de fin de semana: " + finde).append("\n");
+		if (aP.isTurnos()) {
+			infoAP.append("Trabajo de turnos: Si").append("\n");
+		} else {
+			infoAP.append("Trabajo de turnos: No").append("\n");
+		}
 		infoAP.append("Formacion minima: " + min_Formacion).append("\n");
 		infoAP.append("Ubicacion: " + aP.getUbicacion()).append("\n");
 		infoAP.append("Sector: " + sector).append("\n");
-		infoAP.append("Idioma requerido: " + aP.getReq_idiomas()).append("\n");
-		infoAP.append("Contacto con la empresa: " + aP.getContactoEmpresa()).append("\n");
-		infoAP.append("Responsable de Apnabi: " + aP.getResponsableApnabi());
+		infoAP.append("Idiomas requerido: " + aP.getReq_idiomas()).append("\n");
+		infoAP.append("Contacto con las empresa: " + aP.getContactoEmpresa()).append("\n");
+		infoAP.append("Cargo: " + aP.getCargo()).append("\n");
+		infoAP.append("Numero de telefono: " + aP.getTelefono()).append("\n");
+		infoAP.append("Email: " + aP.getEmail()).append("\n");
+		infoAP.append("Responsables de Apnabi: " + aP.getResponsableApnabi()).append("\n");
+		if (aP.isEsfuerzoFisico()) {
+			infoAP.append("Necesidad de esfuerzo fisico: Si").append("\n");
+		} else {
+			infoAP.append("Necesidad de esfuerzo fisico: No").append("\n");
+		}
+
+		if (aP.isResistencia()) {
+			infoAP.append("Necesidad de resistencia: Si").append("\n");
+		} else {
+			infoAP.append("Necesidad de resistencia: No").append("\n");
+		}
+		infoAP.append("Comunicacion: " + comunicacion).append("\n");
+		infoAP.append("Caracteristicas sensoriales: " + sensoriales);
 		textAreaAP.setText(infoAP.toString());
 	}
 
