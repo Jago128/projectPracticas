@@ -66,7 +66,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLANALISISPERSONAS = "SELECT * FROM ANALISISPUESTO";
 	final String SQLAP_EMPRESA = "SELECT EMPRESA FROM ANALISISPUESTO";
 	final String SQLSELECTANALISISPUESTO = "SELECT * FROM ANALISISPUESTO WHERE EMPRESA=?";
-	
+
 	final String SQLUPDATEPUESTO = "UPDATE ANALISISPUESTO SET PUESTO=? WHERE EMPRESA=?";
 	final String SQLUPDATEHORARIO = "UPDATE ANALISISPUESTO SET HORARIO=? WHERE EMPRESA=?";
 	final String SQLUPDATEMINFORMACION = "UPDATE ANALISISPUESTO SET MIN_FORMACION=? WHERE EMPRESA=?";
@@ -2428,7 +2428,15 @@ public class BDImplementacion implements ApnabiDAO {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				aP = new AnalisisPuesto();
-
+				aP.setEmpresa(rs.getString("EMPRESA"));
+				aP.setPuesto(rs.getString("PUESTO"));
+				aP.setHorario(rs.getString("HORARIO"));
+				aP.setMin_Formacion(Formacion.valueOf(rs.getString("MIN_FORMACION").toUpperCase()));
+				aP.setUbicacion(rs.getString("UBICACION"));
+				aP.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
+				aP.setReq_idiomas(rs.getString("REQ_IDIOMAS"));
+				aP.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
+				aP.setResponsableApnabi(rs.getString("RESPONSABLEAPNABI"));
 				aPs.put(aP.getEmpresa(), aP);
 			}
 			rs.close();
@@ -2459,7 +2467,8 @@ public class BDImplementacion implements ApnabiDAO {
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
-			System.out.println("Un error ha occurrido al intentar recoger los nombres de las empresas de los analisis de puestos.");
+			System.out.println(
+					"Un error ha occurrido al intentar recoger los nombres de las empresas de los analisis de puestos.");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -2475,9 +2484,15 @@ public class BDImplementacion implements ApnabiDAO {
 		try {
 			stmt = con.prepareStatement(SQLEMPRESAS);
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-
-			}
+			aP.setEmpresa(rs.getString("EMPRESA"));
+			aP.setPuesto(rs.getString("PUESTO"));
+			aP.setHorario(rs.getString("HORARIO"));
+			aP.setMin_Formacion(Formacion.valueOf(rs.getString("MIN_FORMACION").toUpperCase()));
+			aP.setUbicacion(rs.getString("UBICACION"));
+			aP.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
+			aP.setReq_idiomas(rs.getString("REQ_IDIOMAS"));
+			aP.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
+			aP.setResponsableApnabi(rs.getString("RESPONSABLEAPNABI"));
 			rs.close();
 			stmt.close();
 			con.close();
@@ -2521,21 +2536,157 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLINSERTEMPRESA);
+			stmt.setString(1, aP.getEmpresa());
+			stmt.setString(2, aP.getPuesto());
+			stmt.setString(3, aP.getHorario());
+			switch (aP.getMin_Formacion()) {
+			case AT:
+				stmt.setString(4, "AT");
+				break;
 
+			case BACHILLERATO:
+				stmt.setString(4, "Bachillerato");
+				break;
+
+			case DOCTORADO:
+				stmt.setString(4, "Doctorado");
+				break;
+
+			case EPA:
+				stmt.setString(4, "EPA");
+				break;
+
+			case ESO:
+				stmt.setString(4, "ESO");
+				break;
+
+			case FP_BASICA:
+				stmt.setString(4, "FP_Basica");
+				break;
+
+			case GM:
+				stmt.setString(4, "GM");
+				break;
+
+			case GS:
+				stmt.setString(4, "GS");
+				break;
+
+			case MASTER:
+				stmt.setString(4, "Master");
+				break;
+
+			case PRIMARIA:
+				stmt.setString(4, "Primaria");
+				break;
+
+			case UNIVERSIDAD:
+				stmt.setString(4, "Universidad");
+				break;
+
+			default:
+				System.out.println("Tipo invalido.");
+			}
+
+			stmt.setString(5, aP.getUbicacion());
+			switch (aP.getSector()) {
+			case AGRICULTURA_GANADERIA:
+				stmt.setString(6, "Agricultura_Ganaderia");
+				break;
+
+			case BIENESCONSUMO:
+				stmt.setString(6, "BienesConsumo");
+				break;
+
+			case COMERCIO_ESTABLECIMIENTOS:
+				stmt.setString(6, "Comercio_Establecimientos");
+				break;
+
+			case COMERCIOELECTRONICO:
+				stmt.setString(6, "ComercioElectronico");
+				break;
+
+			case CONSTRUCCION:
+				stmt.setString(6, "Construccion");
+				break;
+
+			case DEPORTE_OCIO:
+				stmt.setString(6, "Deporte_Ocio");
+				break;
+
+			case ENERGIA_MEDIOAMBIENTE:
+				stmt.setString(6, "Energia_MedioAmbiente");
+				break;
+
+			case FINANZAS_SEGUROS_BIENESINMUEBLES:
+				stmt.setString(6, "Finanzas_Seguros_BienesInmuebles");
+				break;
+
+			case INTERNET:
+				stmt.setString(6, "Internet");
+				break;
+
+			case LOGISTICA_TRANSPORTE:
+				stmt.setString(6, "Logistica_Transporte");
+				break;
+
+			case MEDIOSCOMUNICACION_MARKETING:
+				stmt.setString(6, "MediosComunicacion_Marketing");
+				break;
+
+			case METALURGIA_ELECTRONICA:
+				stmt.setString(6, "Metalurgia_Electronica");
+				break;
+
+			case PRODUCTOSQUIMICOS_MATERIASPRIMAS:
+				stmt.setString(6, "ProductosQuimicos_MateriasPrimas");
+				break;
+
+			case SALUD_INDUSTRIAFARMACEUTICA:
+				stmt.setString(6, "Salud_IndustriaFarmaceutica");
+				break;
+
+			case SERVICIOS:
+				stmt.setString(6, "Servicios");
+				break;
+
+			case SOCIEDAD:
+				stmt.setString(6, "Sociedad");
+				break;
+
+			case TECNOLOGIA_TELECOMUNICACIONES:
+				stmt.setString(6, "Tecnologia_Telecomunicaciones");
+				break;
+
+			case TURISMO_HOSTELERIA:
+				stmt.setString(6, "Turismo_Hosteleria");
+				break;
+
+			case VIDA:
+				stmt.setString(6, "Vida");
+				break;
+
+			default:
+				System.out.println("Tipo invalido.");
+			}
+
+			stmt.setString(7, aP.getReq_idiomas());
+			stmt.setString(8, aP.getContactoEmpresa());
+			stmt.setString(9, aP.getResponsableApnabi());
 			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
-			System.out.println("Ha habido un error al intentar añadir la empresa.");
+			System.out.println("Ha habido un error al intentar añadir el analisis de puesto.");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return check;
 	}
-	
+
 	@Override
 	public boolean modificarHorario(String horario, String emp) {
 		boolean check = false;
@@ -2558,7 +2709,7 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
-	
+
 	@Override
 	public boolean modificarPuesto(String puesto, String emp) {
 		boolean check = false;
@@ -2588,6 +2739,9 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
+			if (formacion.equals("FP Basica")) {
+				formacion = "FP_Basica";
+			}
 			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
 			stmt.setString(1, formacion);
 			stmt.setString(2, emp);
@@ -2711,7 +2865,7 @@ public class BDImplementacion implements ApnabiDAO {
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
-			System.out.println("La empresa no se pudo borrar.");
+			System.out.println("El analisis de puesto no se pudo borrar.");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
