@@ -436,11 +436,27 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 			infoEmpresa.append("Puesto: " + emp.getPuesto()).append("\n");
 		}
 
-		infoEmpresa.append("Datos de contacto: " + emp.getDatosContacto()).append("\n");
-		infoEmpresa.append("Contacto en la empresa: " + emp.getContactoEmpresa()).append("\n");
+		if (emp.getDatosContacto() == null) {
+			infoEmpresa.append("Datos de contacto: ---").append("\n");
+		} else {
+			infoEmpresa.append("Datos de contacto: " + emp.getDatosContacto()).append("\n");
+		}
+		
+		if (emp.getContactoEmpresa() == null) {
+			infoEmpresa.append("Contacto en la empresa: ---").append("\n");
+		} else {
+			infoEmpresa.append("Contacto en la empresa: " + emp.getContactoEmpresa()).append("\n");
+		}
+		
 		infoEmpresa.append("Persona de contacto: " + emp.getContactoApnabi()).append("\n");
 		infoEmpresa.append("Estado: " + estado).append("\n");
-		infoEmpresa.append("1. contacto: " + con.getContacto1()).append("\n");
+		
+		if (con.getContacto1() == null) {
+			infoEmpresa.append("1. contacto: ---").append("\n");
+		} else {
+			infoEmpresa.append("1. contacto: " + con.getContacto1()).append("\n");
+		}
+		
 		if (con.getContacto2() == null) {
 			infoEmpresa.append("2. contacto: ---").append("\n");
 		} else {

@@ -80,7 +80,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		textFieldPuesto.setBounds(121, 111, 163, 19);
 		getContentPane().add(textFieldPuesto);
 
-		JLabel lblDatosContacto = new JLabel("Datos de contacto: *");
+		JLabel lblDatosContacto = new JLabel("Datos de contacto:");
 		lblDatosContacto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatosContacto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblDatosContacto.setBounds(20, 145, 129, 31);

@@ -16,9 +16,9 @@ CREATE TABLE EMPRESA (
 	'Energia_MedioAmbiente', 'Finanzas_Seguros_BienesInmuebles', 'Internet', 'Logistica_Transporte', 'MediosComunicacion_Marketing',
     'Metalurgia_Electronica', 'ProductosQuimicos_MateriasPrimas', 'Salud_IndustriaFarmaceutica', 'Servicios', 'Sociedad', 'Tecnologia_Telecomunicaciones',
     'Turismo_Hosteleria', 'Vida') NOT NULL,
-    PUESTO VARCHAR(50),
-    DATOSCONTACTO VARCHAR(50),
-    CONTACTOEMPRESA VARCHAR(50),
+    PUESTO VARCHAR(100),
+    DATOSCONTACTO VARCHAR(200),
+    CONTACTOEMPRESA VARCHAR(100),
     CONTACTOAPNABI VARCHAR(30) NOT NULL,
     ESTADO ENUM('Informado', 'Valorando_Interesado', 'PlanificandoInserciones', 'ProximoAño', 'NoInteresado')
 );
@@ -33,7 +33,12 @@ INSERT INTO EMPRESA (NOM_EMPRESA, SECTOR, PUESTO, DATOSCONTACTO, CONTACTOEMPRESA
 ("Hotel Hesperia", "Turismo_Hosteleria", "Recepcion/Botones", "rheras@hesperia.com", "Raul Heras", "Alba", "Valorando_Interesado"),
 ("Ormazabal", "ProductosQuimicos_MateriasPrimas", "Almacen","mgi@ormazabal.com", "Miren Gutierrez", "Alba", "Valorando_Interesado"),
 ("Goaxen", "Deporte_Ocio", "Puesto multitarea (recepcion, monitor)", "info@goaxen.com", "Adrian Lopez", "Alba", "Valorando_Interesado"),
-("Grupo Cofares", "Logistica_Transporte", "Almacen","vcuesta@cofares.es", "Virginia", "Alba", "Valorando_Interesado");
+("Grupo Cofares", "Logistica_Transporte", "Almacen","vcuesta@cofares.es", "Virginia", "Alba", "Valorando_Interesado"),
+("Cie Automotive", "Servicios", null, "jalvarez@cieautomotive.com", "Javier Alvarez", "Alba", "Informado"),
+("Hotel Oriol", "Turismo_Hosteleria", null, "jeferecepcion.urhoriol@urh-hoteliers.com", "Jesus Garcia", "Gorka", "ProximoAño"),
+("Druni Artea", "Comercio_Establecimientos", "Dependiente", "raquel.peiro@druni.es", "Raquel Peiro", "Gorka", "Informado"),
+("Destination Consultant", "Turismo_Hosteleria", "Auxiliar administrativo", "gorka@basquecountry-spain-dmc.com", "Gorka Marques", "Alba", "Valorando_Interesado"),
+("Estudios Durero", "Sociedad", null, "durero@estudiosdurero.com", "Ander Soriano Melgar", "Selene", "Informado");
 
 CREATE TABLE CONTACTO (
     COD_CONTACTO INT PRIMARY KEY AUTO_INCREMENT,
@@ -65,7 +70,12 @@ INSERT INTO CONTACTO (CONTACTO1, CONTACTO2, CONTACTO3, CONTACTO4, OBSERVACIONES,
 "Relacion_Concluida", "2023-10-8", 8),
 ("2024-9-23", "2024-11-25", null, null, null, null, null, null, "2023-10-9", 9),
 ("2024-9-16", "2024-9-24", "2024-10-18", null, null, "Respuesta_Pospuesta",
-"Tras reunión y presentación se les envía correo y responden que están valorando próximo contacto en mayo.", null, "2023-10-11", 10);
+"Tras reunión y presentación se les envía correo y responden que están valorando próximo contacto en mayo.", null, "2023-10-11", 10),
+("2024-10-21", null, null, null, null, null, null, null, "2023-10-11", 11),
+("2024-10-21", "2025-04-15", null, null, null, null, null, null, null, 12),
+("2024-9-4", "2024-10-21", null, null, null, null, null, null, null, 13),
+("2024-10-24", null, null, null, null, null, null, null, null, 14),
+("2023-10-26", "2024-10-24", null, null, "2º contacto propuesta prácticas", null, null, null, null, 15);
 
 CREATE TABLE PERSONA (
     NOM_P VARCHAR(100) PRIMARY KEY,
