@@ -8,14 +8,14 @@ import javax.swing.*;
 import controller.LoginController;
 import model.Usuario;
 
-public class VentanaPersona extends JDialog implements ActionListener {
+public class VentanaPersonaOrientacion extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
 	private Usuario user;
 	private JButton btnMostrar, btnAñadir, btnBorrar;
 
-	public VentanaPersona(JFrame parent, LoginController cont, Usuario user) {
+	public VentanaPersonaOrientacion(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
 		this.cont = cont;
 		this.user = user;
@@ -58,15 +58,15 @@ public class VentanaPersona extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAñadir) {
-			VentanaAñadirPersona dialog = new VentanaAñadirPersona(this, cont);
+			VentanaAñadirPersonaOrientacion dialog = new VentanaAñadirPersonaOrientacion(this, cont);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnBorrar) {
-			VentanaBorrarPersona dialog = new VentanaBorrarPersona(this, cont, user);
+			VentanaBorrarPersonaOrientacion dialog = new VentanaBorrarPersonaOrientacion(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnMostrar) {
-			VentanaMostrarPersona dialog = new VentanaMostrarPersona(this, cont, user);
+			VentanaMostrarPersonaOrientacion dialog = new VentanaMostrarPersonaOrientacion(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}

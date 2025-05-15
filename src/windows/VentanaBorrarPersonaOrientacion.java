@@ -9,7 +9,7 @@ import javax.swing.*;
 import controller.LoginController;
 import model.*;
 
-public class VentanaBorrarPersona extends JDialog implements ActionListener {
+public class VentanaBorrarPersonaOrientacion extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
@@ -17,19 +17,19 @@ public class VentanaBorrarPersona extends JDialog implements ActionListener {
 	private JButton btnBorrar;
 	private JList<String> listPersonas;
 
-	public VentanaBorrarPersona(JDialog parent, LoginController cont, Usuario user) {
+	public VentanaBorrarPersonaOrientacion(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
 		this.cont = cont;
 		// this.user = user;
 
 		setResizable(false);
-		setTitle("Borrar persona");
-		setBounds(100, 100, 310, 300);
+		setTitle("Borrar personas en orientacion y seguimiento");
+		setBounds(100, 100, 360, 300);
 		getContentPane().setLayout(null);
 
 		listPersonas = new JList<String>();
 		listPersonas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listPersonas.setBounds(63, 43, 188, 163);
+		listPersonas.setBounds(93, 43, 188, 163);
 		listPersonas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		getContentPane().add(listPersonas);
 
@@ -37,24 +37,24 @@ public class VentanaBorrarPersona extends JDialog implements ActionListener {
 
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrar.setBounds(91, 216, 118, 37);
+		btnBorrar.setBounds(115, 216, 118, 37);
 		getContentPane().add(btnBorrar);
 		btnBorrar.addActionListener(this);
 
 		JLabel lblInfo = new JLabel("Seleccione el nombre de la persona a borrar:");
 		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInfo.setBounds(25, 10, 256, 23);
+		lblInfo.setBounds(52, 10, 256, 23);
 		getContentPane().add(lblInfo);
 	}
 
 	public void addNomPersonas() {
-		Map<String, Persona> personas = cont.mostrarNomPersonas();
+		Map<String, PersonaOrientacion> personaOrientacions = cont.mostrarNomPersonas();
 		DefaultListModel<String> modelPersona = new DefaultListModel<>();
 
 		listPersonas.removeAll();
-		if (!personas.isEmpty()) {
-			for (Persona p : personas.values()) {
+		if (!personaOrientacions.isEmpty()) {
+			for (PersonaOrientacion p : personaOrientacions.values()) {
 				modelPersona.addElement(p.getNombre());
 			}
 			listPersonas.setModel(modelPersona);

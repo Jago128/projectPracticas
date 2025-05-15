@@ -3,30 +3,32 @@ package windows;
 import java.awt.*;
 import java.awt.event.*;
 
+import java.time.*;
+import java.time.format.*;
+
 import javax.swing.*;
 
 import controller.LoginController;
 import enums.*;
-import model.Persona;
+import model.PersonaOrientacion;
 
-public class VentanaAñadirPersona extends JDialog implements ActionListener {
+public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
-	private JTextField textFieldCVLink, textFieldOtrosIdiomas, textFieldNom;
+	private JTextField textFieldCVLink, textFieldOtrosIdiomas, textFieldNom, textFieldUltimoAñoTrabajado;
 	private JComboBox<String> comboBoxFormacion, comboBoxSectorInteres, comboBoxCertifDiscapacidad, comboBoxEuskera,
 			comboBoxIngles, comboBoxLocalidad, comboBoxAccesibilidad, comboBoxApoyo;
-	private JTextArea textAreaObservaciones;
+	private JTextArea textAreaObservaciones, textAreaInteresesPersonales, textAreaSituacionActual, textAreaEspecialidad;
 	private JButton btnAñadir;
-	private JTextArea textAreaEspecialidad;
 
-	public VentanaAñadirPersona(JDialog parent, LoginController cont) {
+	public VentanaAñadirPersonaOrientacion(JDialog parent, LoginController cont) {
 		super(parent, true);
 		this.cont = cont;
 
 		setResizable(false);
-		setTitle("Añadir persona");
-		setBounds(100, 100, 960, 430);
+		setTitle("Añadir personas en orientacion y seguimiento");
+		setBounds(100, 100, 960, 650);
 		getContentPane().setLayout(null);
 
 		JLabel lblObligatorio = new JLabel("Los campos con * son obligatorias.");
@@ -76,13 +78,13 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		JLabel lblEspecialidad = new JLabel("Especialidad: * (Describa la especialidad)");
 		lblEspecialidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEspecialidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEspecialidad.setBounds(597, 190, 313, 28);
+		lblEspecialidad.setBounds(607, 410, 313, 28);
 		getContentPane().add(lblEspecialidad);
 
 		textAreaEspecialidad = new JTextArea();
 		textAreaEspecialidad.setLineWrap(true);
 		textAreaEspecialidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaEspecialidad.setBounds(490, 228, 446, 107);
+		textAreaEspecialidad.setBounds(500, 448, 446, 107);
 		getContentPane().add(textAreaEspecialidad);
 
 		JLabel lblSectorInteres = new JLabel("Sector de interes: *");
@@ -92,7 +94,12 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		getContentPane().add(lblSectorInteres);
 
 		comboBoxSectorInteres = new JComboBox<>();
-		comboBoxSectorInteres.setModel(new DefaultComboBoxModel<>(new String[] {"---", "Agricultura y Ganaderia", "Bienes de Consumo", "Comercio electronico", "Comercio y establecimientos", "Construccion", "Deporte y ocio", "Energia y medio ambiente", "Finanzas, Seguros y bienes inmuebles", "Internet", "Logistica y Transporte", "Medios de comunicacion y marketing", "Metalurgia y electronica", "Productos quimicos y materias primas", "Salud e industria farmaceutica", "Servicios", "Sociedad", "Tecnologia y telecomunicaciones", "Turismo y hosteleria", "Vida"}));
+		comboBoxSectorInteres.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Agricultura y Ganaderia",
+				"Bienes de Consumo", "Comercio electronico", "Comercio y establecimientos", "Construccion",
+				"Deporte y ocio", "Energia y medio ambiente", "Finanzas, Seguros y bienes inmuebles", "Internet",
+				"Logistica y Transporte", "Medios de comunicacion y marketing", "Metalurgia y electronica",
+				"Productos quimicos y materias primas", "Salud e industria farmaceutica", "Servicios", "Sociedad",
+				"Tecnologia y telecomunicaciones", "Turismo y hosteleria", "Vida" }));
 		comboBoxSectorInteres.setSelectedIndex(0);
 		comboBoxSectorInteres.setBounds(149, 82, 163, 21);
 		getContentPane().add(comboBoxSectorInteres);
@@ -120,6 +127,41 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		comboBoxCertifDiscapacidad.setSelectedIndex(0);
 		comboBoxCertifDiscapacidad.setBounds(170, 120, 163, 21);
 		getContentPane().add(comboBoxCertifDiscapacidad);
+
+		JLabel lblUltimoAñoTrabajado = new JLabel("Ultimo año trabajado:");
+		lblUltimoAñoTrabajado.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUltimoAñoTrabajado.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblUltimoAñoTrabajado.setBounds(263, 191, 163, 31);
+		getContentPane().add(lblUltimoAñoTrabajado);
+
+		textFieldUltimoAñoTrabajado = new JTextField();
+		textFieldUltimoAñoTrabajado.setColumns(10);
+		textFieldUltimoAñoTrabajado.setBounds(440, 198, 163, 19);
+		getContentPane().add(textFieldUltimoAñoTrabajado);
+
+		textAreaInteresesPersonales = new JTextArea();
+		textAreaInteresesPersonales.setLineWrap(true);
+		textAreaInteresesPersonales.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaInteresesPersonales.setBounds(10, 273, 446, 110);
+		getContentPane().add(textAreaInteresesPersonales);
+
+		JLabel lbl_InteresesPersonales = new JLabel("Intereses personales:");
+		lbl_InteresesPersonales.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_InteresesPersonales.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lbl_InteresesPersonales.setBounds(149, 232, 163, 31);
+		getContentPane().add(lbl_InteresesPersonales);
+
+		textAreaSituacionActual = new JTextArea();
+		textAreaSituacionActual.setLineWrap(true);
+		textAreaSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaSituacionActual.setBounds(500, 273, 446, 110);
+		getContentPane().add(textAreaSituacionActual);
+
+		JLabel lblSituacionActual = new JLabel("Situacion actual:");
+		lblSituacionActual.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSituacionActual.setBounds(649, 236, 152, 31);
+		getContentPane().add(lblSituacionActual);
 
 		JLabel lblEuskera = new JLabel("Euskera:");
 		lblEuskera.setHorizontalAlignment(SwingConstants.CENTER);
@@ -201,24 +243,24 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		JLabel lblObservaciones = new JLabel("Observaciones:");
 		lblObservaciones.setHorizontalAlignment(SwingConstants.CENTER);
 		lblObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblObservaciones.setBounds(159, 189, 108, 31);
+		lblObservaciones.setBounds(169, 409, 108, 31);
 		getContentPane().add(lblObservaciones);
 
-		JLabel lblMaxChars = new JLabel("(Max 500 caracteres para ambos)");
+		JLabel lblMaxChars = new JLabel("(Max 500 caracteres para los cuatro)");
 		lblMaxChars.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMaxChars.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblMaxChars.setBounds(369, 189, 189, 31);
+		lblMaxChars.setBounds(383, 393, 217, 31);
 		getContentPane().add(lblMaxChars);
 
 		textAreaObservaciones = new JTextArea();
 		textAreaObservaciones.setLineWrap(true);
 		textAreaObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaObservaciones.setBounds(10, 226, 446, 110);
+		textAreaObservaciones.setBounds(20, 446, 446, 110);
 		getContentPane().add(textAreaObservaciones);
 
 		btnAñadir = new JButton("Añadir persona");
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		btnAñadir.setBounds(335, 346, 286, 37);
+		btnAñadir.setBounds(345, 566, 286, 37);
 		getContentPane().add(btnAñadir);
 		btnAñadir.addActionListener(this);
 	}
@@ -233,6 +275,10 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 
 		case 2:
 			error = lengthCheck();
+			break;
+
+		case 3:
+			error = yearFormatErrorCheck();
 			break;
 		}
 		return error;
@@ -249,6 +295,15 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 		}
 
 		if (textAreaEspecialidad.getText().length() > 500) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean yearFormatErrorCheck() { // ErrorID: 3
+		try {
+			Year.parse(textFieldUltimoAñoTrabajado.getText());
+		} catch (DateTimeParseException e) {
 			return true;
 		}
 		return false;
@@ -273,9 +328,13 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 					JOptionPane.showMessageDialog(null,
 							"Hay mas caracteres que el limite de caracteres en uno de los campos de texto con limite especificado.",
 							"ERROR", JOptionPane.ERROR_MESSAGE);
+				} else if (errorChecks(3)) {
+					JOptionPane.showMessageDialog(null,
+							"El formato de ultimo año trabajado es incorrecto. Introduce un año numerico y valido.",
+							"ERROR", JOptionPane.ERROR_MESSAGE);
 				} else {
-					String cv = null, oI = null, observaciones = null;
-					int result = 0;
+					String cv = null, oI = null, observaciones = null, intereses = null, situacion = null;
+					int result = 0, year = 0;
 					Accesibilidad accesibilidad = null;
 					Discapacidad discapacidad = null;
 					Euskera eus = null;
@@ -408,10 +467,6 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 						break;
 					}
 
-					if (!textFieldCVLink.getText().isBlank()) {
-						cv = textFieldCVLink.getText();
-					}
-
 					switch ((String) comboBoxCertifDiscapacidad.getSelectedItem()) {
 					case "Si":
 						discapacidad = Discapacidad.SI;
@@ -492,10 +547,6 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 							en = Ingles.CONOCIMIENTO_NOACREDITADO;
 							break;
 						}
-					}
-
-					if (!textFieldOtrosIdiomas.getText().isBlank()) {
-						oI = textFieldOtrosIdiomas.getText();
 					}
 
 					switch ((String) comboBoxLocalidad.getSelectedItem()) {
@@ -994,13 +1045,26 @@ public class VentanaAñadirPersona extends JDialog implements ActionListener {
 						break;
 					}
 
+					if (!textFieldCVLink.getText().isBlank()) {
+						cv = textFieldCVLink.getText();
+					}
+
+					if (!textFieldOtrosIdiomas.getText().isBlank()) {
+						oI = textFieldOtrosIdiomas.getText();
+					}
+
 					if (!textAreaObservaciones.getText().isBlank()) {
 						observaciones = textAreaObservaciones.getText();
 					}
 
-					if (cont.añadirPersona(new Persona(textFieldNom.getText(),
-							(String) comboBoxApoyo.getEditor().getItem(), formacion, textAreaEspecialidad.getText(),
-							sectorInteres, cv, discapacidad, eus, en, oI, localidad, accesibilidad, observaciones))) {
+					if (!textFieldUltimoAñoTrabajado.getText().isBlank()) {
+						year = Integer.parseInt(textFieldUltimoAñoTrabajado.getText());
+					}
+
+					if (cont.añadirPersona(
+							new PersonaOrientacion(textFieldNom.getText(), (String) comboBoxApoyo.getEditor().getItem(), formacion,
+									textAreaEspecialidad.getText(), sectorInteres, cv, discapacidad, year, intereses,
+									situacion, eus, en, oI, localidad, accesibilidad, observaciones))) {
 						result = JOptionPane.showConfirmDialog(null,
 								"La persona ha sido añadida correctamente. Quiere añadir mas personas?", "",
 								JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);

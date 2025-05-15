@@ -48,13 +48,16 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLPERSONAS = "SELECT * FROM PERSONA";
 	final String SQLNOMPERSONAS = "SELECT NOM_P FROM PERSONA";
 	final String SQLSELECTPERSONA = "SELECT * FROM PERSONA WHERE NOM_P=?";
-	final String SQLINSERTPERSONA = "INSERT INTO PERSONA VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	final String SQLINSERTPERSONA = "INSERT INTO PERSONA VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	final String SQLUPDATEAPOYO = "UPDATE PERSONA SET APOYO=? WHERE NOM_P=?";
 	final String SQLUPDATEFORMACION = "UPDATE PERSONA SET FORMACION=? WHERE NOM_P=?";
 	final String SQLUPDATE_ESPECIALIDAD = "UPDATE PERSONA SET ESPECIALIDAD=? WHERE NOM_P=?";
 	final String SQLUPDATESECTORINTERES = "UPDATE PERSONA SET SECTORINTERES=? WHERE NOM_P=?";
 	final String SQLUPDATECVLINK = "UPDATE PERSONA SET CV=? WHERE NOM_P=?";
 	final String SQLUPDATEDISCAPACIDAD = "UPDATE PERSONA SET DISCAPACIDAD=? WHERE NOM_P=?";
+	final String SQLUPDATEULTIMOAÑOTRABAJADO = "UPDATE PERSONA SET ULTIMOAÑOTRABAJADO=? WHERE NOM_P=?";
+	final String SQLUPDATEINTERESESPERSONALES = "UPDATE PERSONA SET INTERESESPERSONALES=? WHERE NOM_P=?";
+	final String SQLUPDATESITUACIONACTUAL = "UPDATE PERSONA SET SITUACIONACTUAL=? WHERE NOM_P=?";
 	final String SQLUPDATE_EUSKERA = "UPDATE PERSONA SET EUSKERA=? WHERE NOM_P=?";
 	final String SQLUPDATEINGLES = "UPDATE PERSONA SET INGLES=? WHERE NOM_P=?";
 	final String SQLUPDATEOTROSIDIOMAS = "UPDATE PERSONA SET OTROSIDIOMAS=? WHERE NOM_P=?";
@@ -1069,30 +1072,33 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public Map<String, Persona> mostrarPersonas() {
-		Persona persona;
-		Map<String, Persona> personas = new TreeMap<>();
+	public Map<String, PersonaOrientacion> mostrarPersonas() {
+		PersonaOrientacion personaOrientacion;
+		Map<String, PersonaOrientacion> personaOrientacions = new TreeMap<>();
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLPERSONAS);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				persona = new Persona();
-				persona.setNombre(rs.getString("NOM_P"));
-				persona.setApoyo(rs.getString("APOYO"));
-				persona.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
-				persona.setEspecialidad(rs.getString("ESPECIALIDAD"));
-				persona.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
-				persona.setCvLink(rs.getString("CV"));
-				persona.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
-				persona.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
-				persona.setIngles(Ingles.valueOf(rs.getString("INGLES")));
-				persona.setOtrosIdiomas(rs.getString("OTROSIDIOMAS"));
-				persona.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
-				persona.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
-				persona.setObservaciones(rs.getString("OBSERVACIONES"));
-				personas.put(persona.getNombre(), persona);
+				personaOrientacion = new PersonaOrientacion();
+				personaOrientacion.setNombre(rs.getString("NOM_P"));
+				personaOrientacion.setApoyo(rs.getString("APOYO"));
+				personaOrientacion.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				personaOrientacion.setEspecialidad(rs.getString("ESPECIALIDAD"));
+				personaOrientacion.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				personaOrientacion.setCvLink(rs.getString("CV"));
+				personaOrientacion.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
+				personaOrientacion.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
+				personaOrientacion.setInteresesPersonales(rs.getString("INTERESESPERSONALES"));
+				personaOrientacion.setSituacionActual(rs.getString("SITUACIONACTUAL"));
+				personaOrientacion.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
+				personaOrientacion.setIngles(Ingles.valueOf(rs.getString("INGLES")));
+				personaOrientacion.setOtrosIdiomas(rs.getString("OTROSIDIOMAS"));
+				personaOrientacion.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
+				personaOrientacion.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				personaOrientacion.setObservaciones(rs.getString("OBSERVACIONES"));
+				personaOrientacions.put(personaOrientacion.getNombre(), personaOrientacion);
 			}
 			rs.close();
 			stmt.close();
@@ -1103,22 +1109,22 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return personas;
+		return personaOrientacions;
 	}
 
 	@Override
-	public Map<String, Persona> mostrarNomPersonas() {
-		Persona persona;
-		Map<String, Persona> personas = new TreeMap<>();
+	public Map<String, PersonaOrientacion> mostrarNomPersonas() {
+		PersonaOrientacion personaOrientacion;
+		Map<String, PersonaOrientacion> personaOrientacions = new TreeMap<>();
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLNOMPERSONAS);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				persona = new Persona();
-				persona.setNombre(rs.getString("NOM_P"));
-				personas.put(persona.getNombre(), persona);
+				personaOrientacion = new PersonaOrientacion();
+				personaOrientacion.setNombre(rs.getString("NOM_P"));
+				personaOrientacions.put(personaOrientacion.getNombre(), personaOrientacion);
 			}
 			rs.close();
 			stmt.close();
@@ -1129,12 +1135,12 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return personas;
+		return personaOrientacions;
 	}
 
 	@Override
-	public Persona getPersona(String nom) {
-		Persona persona = new Persona();
+	public PersonaOrientacion getPersona(String nom) {
+		PersonaOrientacion personaOrientacion = new PersonaOrientacion();
 
 		this.openConnection();
 		try {
@@ -1142,19 +1148,22 @@ public class BDImplementacion implements ApnabiDAO {
 			stmt.setString(1, nom);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				persona.setNombre(rs.getString("NOM_P"));
-				persona.setApoyo(rs.getString("APOYO"));
-				persona.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
-				persona.setEspecialidad(rs.getString("ESPECIALIDAD"));
-				persona.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
-				persona.setCvLink(rs.getString("CV"));
-				persona.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
-				persona.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
-				persona.setIngles(Ingles.valueOf(rs.getString("INGLES")));
-				persona.setOtrosIdiomas(rs.getString("OTROSIDIOMAS"));
-				persona.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
-				persona.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
-				persona.setObservaciones(rs.getString("OBSERVACIONES"));
+				personaOrientacion.setNombre(rs.getString("NOM_P"));
+				personaOrientacion.setApoyo(rs.getString("APOYO"));
+				personaOrientacion.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				personaOrientacion.setEspecialidad(rs.getString("ESPECIALIDAD"));
+				personaOrientacion.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				personaOrientacion.setCvLink(rs.getString("CV"));
+				personaOrientacion.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
+				personaOrientacion.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
+				personaOrientacion.setInteresesPersonales(rs.getString("INTERESESPERSONALES"));
+				personaOrientacion.setSituacionActual(rs.getString("SITUACIONACTUAL"));
+				personaOrientacion.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
+				personaOrientacion.setIngles(Ingles.valueOf(rs.getString("INGLES")));
+				personaOrientacion.setOtrosIdiomas(rs.getString("OTROSIDIOMAS"));
+				personaOrientacion.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
+				personaOrientacion.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				personaOrientacion.setObservaciones(rs.getString("OBSERVACIONES"));
 			}
 			rs.close();
 			stmt.close();
@@ -1165,7 +1174,7 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return persona;
+		return personaOrientacion;
 	}
 
 	@Override
@@ -1193,15 +1202,15 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean añadirPersona(Persona persona) {
+	public boolean añadirPersona(PersonaOrientacion personaOrientacion) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLINSERTEMPRESA);
-			stmt.setString(1, persona.getNombre());
-			stmt.setString(2, persona.getApoyo());
-			switch (persona.getFormacion()) {
+			stmt = con.prepareStatement(SQLINSERTPERSONA);
+			stmt.setString(1, personaOrientacion.getNombre());
+			stmt.setString(2, personaOrientacion.getApoyo());
+			switch (personaOrientacion.getFormacion()) {
 			case AT:
 				stmt.setString(3, "AT");
 				break;
@@ -1250,8 +1259,8 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(4, persona.getEspecialidad());
-			switch (persona.getSectorInteres()) {
+			stmt.setString(4, personaOrientacion.getEspecialidad());
+			switch (personaOrientacion.getSectorInteres()) {
 			case AGRICULTURA_GANADERIA:
 				stmt.setString(5, "Agricultura y ganadería");
 				break;
@@ -1332,8 +1341,8 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(6, persona.getCvLink());
-			switch (persona.getCerfificadoDiscapacidad()) {
+			stmt.setString(6, personaOrientacion.getCvLink());
+			switch (personaOrientacion.getCerfificadoDiscapacidad()) {
 			case NO:
 				stmt.setString(7, "No");
 				break;
@@ -1354,576 +1363,580 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			switch (persona.getEuskera()) {
+			stmt.setInt(8, personaOrientacion.getUltimoAñoTrabajado());
+			stmt.setString(9, personaOrientacion.getInteresesPersonales());
+			stmt.setString(10, personaOrientacion.getSituacionActual());
+
+			switch (personaOrientacion.getEuskera()) {
 			case A1:
-				stmt.setString(8, "A1");
+				stmt.setString(11, "A1");
 				break;
 
 			case A2:
-				stmt.setString(8, "A2");
+				stmt.setString(11, "A2");
 				break;
 
 			case B1:
-				stmt.setString(8, "B1");
+				stmt.setString(11, "B1");
 				break;
 
 			case B2:
-				stmt.setString(8, "B2");
+				stmt.setString(11, "B2");
 				break;
 
 			case C1:
-				stmt.setString(8, "C1");
+				stmt.setString(11, "C1");
 				break;
 
 			case C2:
-				stmt.setString(8, "C1");
+				stmt.setString(11, "C1");
 				break;
 
 			case CONOCIMIENTO_NOACREDITADO:
-				stmt.setString(8, "Conocimiento_NoAcreditado");
+				stmt.setString(11, "Conocimiento_NoAcreditado");
 				break;
 
 			default:
 				System.out.println("Tipo invalido.");
 			}
 
-			switch (persona.getIngles()) {
+			switch (personaOrientacion.getIngles()) {
 			case A1:
-				stmt.setString(9, "A1");
+				stmt.setString(12, "A1");
 				break;
 
 			case A2:
-				stmt.setString(9, "A2");
+				stmt.setString(12, "A2");
 				break;
 
 			case B1:
-				stmt.setString(9, "B1");
+				stmt.setString(12, "B1");
 				break;
 
 			case B2:
-				stmt.setString(9, "B2");
+				stmt.setString(12, "B2");
 				break;
 
 			case C1:
-				stmt.setString(9, "C1");
+				stmt.setString(12, "C1");
 				break;
 
 			case C2:
-				stmt.setString(9, "C1");
+				stmt.setString(12, "C1");
 				break;
 
 			case CONOCIMIENTO_NOACREDITADO:
-				stmt.setString(9, "Conocimiento_NoAcreditado");
+				stmt.setString(12, "Conocimiento_NoAcreditado");
 				break;
 
 			default:
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(10, persona.getOtrosIdiomas());
-			switch (persona.getLocalidad()) {
+			stmt.setString(13, personaOrientacion.getOtrosIdiomas());
+			switch (personaOrientacion.getLocalidad()) {
 			case ABADIÑO:
-				stmt.setString(11, "Abadiño");
+				stmt.setString(14, "Abadiño");
 				break;
 
 			case ABANTO_ZIERBENA:
-				stmt.setString(11, "Abanto_Zierbena");
+				stmt.setString(14, "Abanto_Zierbena");
 				break;
 
 			case AJANGIZ:
-				stmt.setString(11, "Ajangiz");
+				stmt.setString(14, "Ajangiz");
 				break;
 
 			case ALONSOTEGI:
-				stmt.setString(11, "Alonsotegi");
+				stmt.setString(14, "Alonsotegi");
 				break;
 
 			case AMOREBIETA:
-				stmt.setString(11, "Amorebieta");
+				stmt.setString(14, "Amorebieta");
 				break;
 
 			case AMOROTO:
-				stmt.setString(11, "Amoroto");
+				stmt.setString(14, "Amoroto");
 				break;
 
 			case AMURRIO:
-				stmt.setString(11, "Amurrio");
+				stmt.setString(14, "Amurrio");
 				break;
 
 			case ARAKALDO:
-				stmt.setString(11, "Arakaldo");
+				stmt.setString(14, "Arakaldo");
 				break;
 
 			case ARANTZAZU:
-				stmt.setString(11, "Arantzazu");
+				stmt.setString(14, "Arantzazu");
 				break;
 
 			case AREATZA_BILARO:
-				stmt.setString(11, "Areatza_Bilaro");
+				stmt.setString(14, "Areatza_Bilaro");
 				break;
 
 			case ARRANKUDIAGA:
-				stmt.setString(11, "Arrankudiaga");
+				stmt.setString(14, "Arrankudiaga");
 				break;
 
 			case ARRATZU:
-				stmt.setString(11, "Arratzu");
+				stmt.setString(14, "Arratzu");
 				break;
 
 			case ARRIETA:
-				stmt.setString(11, "Arrieta");
+				stmt.setString(14, "Arrieta");
 				break;
 
 			case ARRIGORRIAGA:
-				stmt.setString(11, "Arrigorriaga");
+				stmt.setString(14, "Arrigorriaga");
 				break;
 
 			case ARTZENTALES:
-				stmt.setString(11, "Artzentales");
+				stmt.setString(14, "Artzentales");
 				break;
 
 			case ARTZINIEGA:
-				stmt.setString(11, "Artziniega");
+				stmt.setString(14, "Artziniega");
 				break;
 
 			case AULESTI:
-				stmt.setString(11, "Aulesti");
+				stmt.setString(14, "Aulesti");
 				break;
 
 			case AXPEATXONDO:
-				stmt.setString(11, "AxpeAtxondo");
+				stmt.setString(14, "AxpeAtxondo");
 				break;
 
 			case AYALA_AIARA:
-				stmt.setString(11, "Ayala_Aiara");
+				stmt.setString(14, "Ayala_Aiara");
 				break;
 
 			case BAKIO:
-				stmt.setString(11, "Bakio");
+				stmt.setString(14, "Bakio");
 				break;
 
 			case BALMASEDA:
-				stmt.setString(11, "Balmaseda");
+				stmt.setString(14, "Balmaseda");
 				break;
 
 			case BARAKALDO:
-				stmt.setString(11, "Barakaldo");
+				stmt.setString(14, "Barakaldo");
 				break;
 
 			case BARRIKA:
-				stmt.setString(11, "Barrika");
+				stmt.setString(14, "Barrika");
 				break;
 
 			case BASAURI:
-				stmt.setString(11, "Basauri");
+				stmt.setString(14, "Basauri");
 				break;
 
 			case BEDIA:
-				stmt.setString(11, "Bedia");
+				stmt.setString(14, "Bedia");
 				break;
 
 			case BERANGO:
-				stmt.setString(11, "Berango");
+				stmt.setString(14, "Berango");
 				break;
 
 			case BERMEO:
-				stmt.setString(11, "Bermeo");
+				stmt.setString(14, "Bermeo");
 				break;
 
 			case BERRIATUA:
-				stmt.setString(11, "Berriatua");
+				stmt.setString(14, "Berriatua");
 				break;
 
 			case BERRIZ:
-				stmt.setString(11, "Berriz");
+				stmt.setString(14, "Berriz");
 				break;
 
 			case BILBAO:
-				stmt.setString(11, "Bilbao");
+				stmt.setString(14, "Bilbao");
 				break;
 
 			case BUSTURIA:
-				stmt.setString(11, "Busturia");
+				stmt.setString(14, "Busturia");
 				break;
 
 			case CASTROURDIALES:
-				stmt.setString(11, "CastroUrdiales");
+				stmt.setString(14, "CastroUrdiales");
 				break;
 
 			case DERIO:
-				stmt.setString(11, "Derio");
+				stmt.setString(14, "Derio");
 				break;
 
 			case DIMA:
-				stmt.setString(11, "Dima");
+				stmt.setString(14, "Dima");
 				break;
 
 			case DURANGO:
-				stmt.setString(11, "Durango");
+				stmt.setString(14, "Durango");
 				break;
 
 			case EA:
-				stmt.setString(11, "Ea");
+				stmt.setString(14, "Ea");
 				break;
 
 			case ELANTXOBE:
-				stmt.setString(11, "Elantxobe");
+				stmt.setString(14, "Elantxobe");
 				break;
 
 			case ELORRIO:
-				stmt.setString(11, "Elorrio");
+				stmt.setString(14, "Elorrio");
 				break;
 
 			case ERANDIO:
-				stmt.setString(11, "Erandio");
+				stmt.setString(14, "Erandio");
 				break;
 
 			case EREÑO:
-				stmt.setString(11, "Ereño");
+				stmt.setString(14, "Ereño");
 				break;
 
 			case ERMUA:
-				stmt.setString(11, "Ermua");
+				stmt.setString(14, "Ermua");
 				break;
 
 			case ERRIGOITI:
-				stmt.setString(11, "Errigoiti");
+				stmt.setString(14, "Errigoiti");
 				break;
 
 			case ETXEBARRI:
-				stmt.setString(11, "Etxebarri");
+				stmt.setString(14, "Etxebarri");
 				break;
 
 			case ETXEBARRIA:
-				stmt.setString(11, "Etxebarria");
+				stmt.setString(14, "Etxebarria");
 				break;
 
 			case FORUA:
-				stmt.setString(11, "Forua");
+				stmt.setString(14, "Forua");
 				break;
 
 			case FRUIZ:
-				stmt.setString(11, "Fruiz");
+				stmt.setString(14, "Fruiz");
 				break;
 
 			case GALDAKAO:
-				stmt.setString(11, "Galdakao");
+				stmt.setString(14, "Galdakao");
 				break;
 
 			case GALDAMES:
-				stmt.setString(11, "Galdames");
+				stmt.setString(14, "Galdames");
 				break;
 
 			case GAMIZFIKA:
-				stmt.setString(11, "GamizFika");
+				stmt.setString(14, "GamizFika");
 				break;
 
 			case GARAI:
-				stmt.setString(11, "Garai");
+				stmt.setString(14, "Garai");
 				break;
 
 			case GATIKA:
-				stmt.setString(11, "Gatika");
+				stmt.setString(14, "Gatika");
 				break;
 
 			case GAUTEGIZ:
-				stmt.setString(11, "Gautegiz");
+				stmt.setString(14, "Gautegiz");
 				break;
 
 			case GAZTELUELEXABEITIA_ARTEAGA:
-				stmt.setString(11, "GazteluElexabeitia_Arteaga");
+				stmt.setString(14, "GazteluElexabeitia_Arteaga");
 				break;
 
 			case GERNIKALUMO:
-				stmt.setString(11, "GernikaLumo");
+				stmt.setString(14, "GernikaLumo");
 				break;
 
 			case GETXO:
-				stmt.setString(11, "Getxo");
+				stmt.setString(14, "Getxo");
 				break;
 
 			case GIZABURUAGA:
-				stmt.setString(11, "Gizaburuaga");
+				stmt.setString(14, "Gizaburuaga");
 				break;
 
 			case GORDEXOLA:
-				stmt.setString(11, "Gordexola");
+				stmt.setString(14, "Gordexola");
 				break;
 
 			case GORLIZ:
-				stmt.setString(11, "Gorliz");
+				stmt.setString(14, "Gorliz");
 				break;
 
 			case GUEÑES:
-				stmt.setString(11, "Gueñes");
+				stmt.setString(14, "Gueñes");
 				break;
 
 			case IBARRANGELU:
-				stmt.setString(11, "Ibarrangelu");
+				stmt.setString(14, "Ibarrangelu");
 				break;
 
 			case IGORRE:
-				stmt.setString(11, "Igorre");
+				stmt.setString(14, "Igorre");
 				break;
 
 			case ISPASTER:
-				stmt.setString(11, "Ispaster");
+				stmt.setString(14, "Ispaster");
 				break;
 
 			case IURRETA:
-				stmt.setString(11, "Iurreta");
+				stmt.setString(14, "Iurreta");
 				break;
 
 			case IZURTZA:
-				stmt.setString(11, "Izurtza");
+				stmt.setString(14, "Izurtza");
 				break;
 
 			case KARRANTZAHARANA:
-				stmt.setString(11, "KarrantzaHarana");
+				stmt.setString(14, "KarrantzaHarana");
 				break;
 
 			case KORTEZUBI:
-				stmt.setString(11, "Kortezubi");
+				stmt.setString(14, "Kortezubi");
 				break;
 
 			case LANESTOSA:
-				stmt.setString(11, "Lanestosa");
+				stmt.setString(14, "Lanestosa");
 				break;
 
 			case LARRABETZU:
-				stmt.setString(11, "Larrabetzu");
+				stmt.setString(14, "Larrabetzu");
 				break;
 
 			case LAUDIO_LLODIO:
-				stmt.setString(11, "Laudio_Llodio");
+				stmt.setString(14, "Laudio_Llodio");
 				break;
 
 			case LAUKIZ:
-				stmt.setString(11, "Laukiz");
+				stmt.setString(14, "Laukiz");
 				break;
 
 			case LEIOA:
-				stmt.setString(11, "Leioa");
+				stmt.setString(14, "Leioa");
 				break;
 
 			case LEKEITIO:
-				stmt.setString(11, "Lekeitio");
+				stmt.setString(14, "Lekeitio");
 				break;
 
 			case LEMOA:
-				stmt.setString(11, "Lemoa");
+				stmt.setString(14, "Lemoa");
 				break;
 
 			case LEMOIZ:
-				stmt.setString(11, "Lemoiz");
+				stmt.setString(14, "Lemoiz");
 				break;
 
 			case LEZAMA:
-				stmt.setString(11, "Lezama");
+				stmt.setString(14, "Lezama");
 				break;
 
 			case LOIU:
-				stmt.setString(11, "Loiu");
+				stmt.setString(14, "Loiu");
 				break;
 
 			case MALLABIA:
-				stmt.setString(11, "Mallabia");
+				stmt.setString(14, "Mallabia");
 				break;
 
 			case MARKINAXEMEIN:
-				stmt.setString(11, "MarkinaXemein");
+				stmt.setString(14, "MarkinaXemein");
 				break;
 
 			case MARURI:
-				stmt.setString(11, "Maruri");
+				stmt.setString(14, "Maruri");
 				break;
 
 			case MAÑARIA:
-				stmt.setString(11, "Mañaria");
+				stmt.setString(14, "Mañaria");
 				break;
 
 			case MENDATA:
-				stmt.setString(11, "Mendata");
+				stmt.setString(14, "Mendata");
 				break;
 
 			case MENDEXA:
-				stmt.setString(11, "Mendexa");
+				stmt.setString(14, "Mendexa");
 				break;
 
 			case MEÑAKA:
-				stmt.setString(11, "Meñaka");
+				stmt.setString(14, "Meñaka");
 				break;
 
 			case MORGA:
-				stmt.setString(11, "Morga");
+				stmt.setString(14, "Morga");
 				break;
 
 			case MUNDAKA:
-				stmt.setString(11, "Mundaka");
+				stmt.setString(14, "Mundaka");
 				break;
 
 			case MUNGIA:
-				stmt.setString(11, "Mungia");
+				stmt.setString(14, "Mungia");
 				break;
 
 			case MUNITIBARARBATZEGI_GERRIKAITZ:
-				stmt.setString(11, "MunitibarArbatzegi_Gerrikaitz");
+				stmt.setString(14, "MunitibarArbatzegi_Gerrikaitz");
 				break;
 
 			case MURUETA:
-				stmt.setString(11, "Murueta");
+				stmt.setString(14, "Murueta");
 				break;
 
 			case MUSKIZ:
-				stmt.setString(11, "Muskiz");
+				stmt.setString(14, "Muskiz");
 				break;
 
 			case MUXIKA:
-				stmt.setString(11, "Muxika");
+				stmt.setString(14, "Muxika");
 				break;
 
 			case NABARNIZ:
-				stmt.setString(11, "Nabarniz");
+				stmt.setString(14, "Nabarniz");
 				break;
 
 			case ONDARROA:
-				stmt.setString(11, "Ondarroa");
+				stmt.setString(14, "Ondarroa");
 				break;
 
 			case ORDUÑA:
-				stmt.setString(11, "Orduña");
+				stmt.setString(14, "Orduña");
 				break;
 
 			case OROZKO:
-				stmt.setString(11, "Orozko");
+				stmt.setString(14, "Orozko");
 				break;
 
 			case ORTUELLA:
-				stmt.setString(11, "Ortuella");
+				stmt.setString(14, "Ortuella");
 				break;
 
 			case OTXANDIO:
-				stmt.setString(11, "Otxandio");
+				stmt.setString(14, "Otxandio");
 				break;
 
 			case PLENTZIA:
-				stmt.setString(11, "Plentzia");
+				stmt.setString(14, "Plentzia");
 				break;
 
 			case PORTUGALETE:
-				stmt.setString(11, "Portugalete");
+				stmt.setString(14, "Portugalete");
 				break;
 
 			case SANTURTZI:
-				stmt.setString(11, "Santurtzi");
+				stmt.setString(14, "Santurtzi");
 				break;
 
 			case SESTAO:
-				stmt.setString(11, "Sestao");
+				stmt.setString(14, "Sestao");
 				break;
 
 			case SONDIKA:
-				stmt.setString(11, "Sondika");
+				stmt.setString(14, "Sondika");
 				break;
 
 			case SOPELA:
-				stmt.setString(11, "Sopela");
+				stmt.setString(14, "Sopela");
 				break;
 
 			case SOPUERTA:
-				stmt.setString(11, "Sopuerta");
+				stmt.setString(14, "Sopuerta");
 				break;
 
 			case SUKARRIETA:
-				stmt.setString(11, "Sukarrieta");
+				stmt.setString(14, "Sukarrieta");
 				break;
 
 			case TRAPAGARAN:
-				stmt.setString(11, "Trapagaran");
+				stmt.setString(14, "Trapagaran");
 				break;
 
 			case TURTZIOZ:
-				stmt.setString(11, "Turtzioz");
+				stmt.setString(14, "Turtzioz");
 				break;
 
 			case UBIDE:
-				stmt.setString(11, "Ubide");
+				stmt.setString(14, "Ubide");
 				break;
 
 			case UGAOMIRABALLES:
-				stmt.setString(11, "UgaoMiraballes");
+				stmt.setString(14, "UgaoMiraballes");
 				break;
 
 			case URDULIZ:
-				stmt.setString(11, "Urduliz");
+				stmt.setString(14, "Urduliz");
 				break;
 
 			case URDUÑA:
-				stmt.setString(11, "Urduña");
+				stmt.setString(14, "Urduña");
 				break;
 
 			case USANSOLO:
-				stmt.setString(11, "Usansolo");
+				stmt.setString(14, "Usansolo");
 				break;
 
 			case ZALDIBAR:
-				stmt.setString(11, "Zaldibar");
+				stmt.setString(14, "Zaldibar");
 				break;
 
 			case ZALLA:
-				stmt.setString(11, "Zalla");
+				stmt.setString(14, "Zalla");
 				break;
 
 			case ZAMUDIO:
-				stmt.setString(11, "Zamudio");
+				stmt.setString(14, "Zamudio");
 				break;
 
 			case ZARATAMO:
-				stmt.setString(11, "Zaratamo");
+				stmt.setString(14, "Zaratamo");
 				break;
 
 			case ZEANURI:
-				stmt.setString(11, "Zeanuri");
+				stmt.setString(14, "Zeanuri");
 				break;
 
 			case ZEBERIO:
-				stmt.setString(11, "Zeberio");
+				stmt.setString(14, "Zeberio");
 				break;
 
 			case ZIERBENA:
-				stmt.setString(11, "Zierbena");
+				stmt.setString(14, "Zierbena");
 				break;
 
 			case ZIORTZA_BOLIBAR:
-				stmt.setString(11, "ZiortzaBolibar");
+				stmt.setString(14, "ZiortzaBolibar");
 				break;
 
 			case ZORNOTZA:
-				stmt.setString(11, "Zornotza");
+				stmt.setString(14, "Zornotza");
 				break;
 
 			default:
 				System.out.println("Tipo invalido.");
 			}
 
-			switch (persona.getAccesibilidad()) {
+			switch (personaOrientacion.getAccesibilidad()) {
 			case CARNET:
-				stmt.setString(12, "Carnet");
+				stmt.setString(15, "Carnet");
 				break;
 
 			case CARNET_COCHE:
-				stmt.setString(12, "Carnet_Coche");
+				stmt.setString(15, "Carnet_Coche");
 				break;
 
 			case TRANSPORTE_PUBLICO:
-				stmt.setString(12, "Transporte_Publico");
+				stmt.setString(16, "Transporte_Publico");
 				break;
 
 			default:
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(13, persona.getObservaciones());
+			stmt.setString(17, personaOrientacion.getObservaciones());
 			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
@@ -2145,6 +2158,83 @@ public class BDImplementacion implements ApnabiDAO {
 				}
 				stmt = con.prepareStatement(SQLUPDATEDISCAPACIDAD);
 				stmt.setString(1, discap);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarUltimoAñoTrabajador(int año, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEULTIMOAÑOTRABAJADO);
+			stmt.setInt(1, año);
+			stmt.setString(2, nom);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarInteresesPersonales(String intereses, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!intereses.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEINTERESESPERSONALES);
+				stmt.setString(1, intereses);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarSituacionActual(String situacion, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!situacion.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATESITUACIONACTUAL);
+				stmt.setString(1, situacion);
 				stmt.setString(2, nom);
 				if (stmt.executeUpdate() > 0) {
 					check = true;

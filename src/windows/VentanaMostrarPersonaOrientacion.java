@@ -9,23 +9,23 @@ import javax.swing.*;
 import controller.LoginController;
 import model.*;
 
-public class VentanaMostrarPersona extends JDialog implements ActionListener {
+public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
 	// private Usuario user;
 	private JList<String> listNom, listApoyo, listFormacion, listEspecialidad, listSectorInteres, listCVLink,
 			listCertifDiscapacidad, listEuskera, listIngles, listOtrosIdiomas, listLocalidad, listObservaciones,
-			listAccesibilidad;
+			listAccesibilidad, listInteresesPersonales, listSituacionActual, listUltimoAñoTrabajado;
 	private JButton btnModificarPersona;
 
-	public VentanaMostrarPersona(JDialog parent, LoginController cont, Usuario user) {
+	public VentanaMostrarPersonaOrientacion(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
 		this.cont = cont;
 		// this.user = user;
 
 		setResizable(false);
-		setTitle("Mostrar personas");
+		setTitle("Mostrar personas en orientacion y seguimiento");
 		setBounds(100, 100, 1080, 410);
 		getContentPane().setLayout(null);
 
@@ -56,6 +56,18 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		listCertifDiscapacidad = new JList<>();
 		listCertifDiscapacidad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listCertifDiscapacidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+		listUltimoAñoTrabajado = new JList<>();
+		listUltimoAñoTrabajado.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listUltimoAñoTrabajado.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+		listInteresesPersonales = new JList<>();
+		listInteresesPersonales.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listInteresesPersonales.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+		listSituacionActual = new JList<>();
+		listSituacionActual.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listEuskera = new JList<>();
 		listEuskera.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -92,6 +104,9 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		panel.add(listSectorInteres);
 		panel.add(listCVLink);
 		panel.add(listCertifDiscapacidad);
+		panel.add(listUltimoAñoTrabajado);
+		panel.add(listInteresesPersonales);
+		panel.add(listSituacionActual);
 		panel.add(listEuskera);
 		panel.add(listIngles);
 		panel.add(listOtrosIdiomas);
@@ -112,7 +127,7 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 	}
 
 	public void addPersonas() {
-		Map<String, Persona> personas = cont.mostrarPersonas();
+		Map<String, PersonaOrientacion> personaOrientacions = cont.mostrarPersonas();
 		DefaultListModel<String> modelNom = new DefaultListModel<>();
 		DefaultListModel<String> modelApoyo = new DefaultListModel<>();
 		DefaultListModel<String> modelFormacion = new DefaultListModel<>();
@@ -120,6 +135,9 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		DefaultListModel<String> modelSectorInteres = new DefaultListModel<>();
 		DefaultListModel<String> modelCVLink = new DefaultListModel<>();
 		DefaultListModel<String> modelCertificadoDiscapacidad = new DefaultListModel<>();
+		DefaultListModel<String> modelUltimoAñoTrabajado = new DefaultListModel<>();
+		DefaultListModel<String> modelInteresesPersonales = new DefaultListModel<>();
+		DefaultListModel<String> modelSituacionActual = new DefaultListModel<>();
 		DefaultListModel<String> modelEuskera = new DefaultListModel<>();
 		DefaultListModel<String> modelIngles = new DefaultListModel<>();
 		DefaultListModel<String> modelOtrosIdiomas = new DefaultListModel<>();
@@ -133,15 +151,18 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		modelEspecialidad.addElement("Especialidad (descripciones)");
 		modelSectorInteres.addElement("Sector de interes");
 		modelCVLink.addElement("Links de CVs");
-		modelCertificadoDiscapacidad.addElement("Certificado de discapacidade");
+		modelCertificadoDiscapacidad.addElement("Certificado de discapacidad");
+		modelUltimoAñoTrabajado.addElement("Ultimo año trabajado");
+		modelInteresesPersonales.addElement("Intereses personales");
+		modelSituacionActual.addElement("Situacion actual");
 		modelEuskera.addElement("Euskera");
 		modelIngles.addElement("Ingles");
 		modelOtrosIdiomas.addElement("Otros idiomas");
 		modelLocalidad.addElement("Localidades");
 		modelAccesibilidad.addElement("Accesibilidad");
 		modelObservaciones.addElement("Observaciones");
-		if (!personas.isEmpty()) {
-			for (Persona p : personas.values()) {
+		if (!personaOrientacions.isEmpty()) {
+			for (PersonaOrientacion p : personaOrientacions.values()) {
 				switch (p.getFormacion()) {
 				case AT:
 					modelFormacion.addElement("AT");
@@ -865,8 +886,11 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 				modelNom.addElement(p.getNombre());
 				modelApoyo.addElement(p.getApoyo());
 				modelCVLink.addElement(p.getCvLink());
+				modelInteresesPersonales.addElement(p.getInteresesPersonales());
 				modelOtrosIdiomas.addElement(p.getOtrosIdiomas());
 				modelObservaciones.addElement(p.getObservaciones());
+				modelSituacionActual.addElement(p.getSituacionActual());
+				modelUltimoAñoTrabajado.addElement(""+p.getUltimoAñoTrabajado());
 			}
 
 			listNom.setModel(modelNom);
@@ -876,6 +900,9 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 			listSectorInteres.setModel(modelSectorInteres);
 			listCVLink.setModel(modelCVLink);
 			listCertifDiscapacidad.setModel(modelCertificadoDiscapacidad);
+			listUltimoAñoTrabajado.setModel(modelUltimoAñoTrabajado);
+			listInteresesPersonales.setModel(modelInteresesPersonales);
+			listSituacionActual.setModel(modelSituacionActual);
 			listEuskera.setModel(modelEuskera);
 			listIngles.setModel(modelIngles);
 			listOtrosIdiomas.setModel(modelOtrosIdiomas);
@@ -896,7 +923,7 @@ public class VentanaMostrarPersona extends JDialog implements ActionListener {
 		if (e.getSource() == btnModificarPersona) {
 			if (!listNom.isSelectionEmpty()) {
 				if (!listNom.getSelectedValue().equals("Nombre")) {
-					VentanaModificarPersona dialog = new VentanaModificarPersona(this, cont,
+					VentanaModificarPersonaOrientacion dialog = new VentanaModificarPersonaOrientacion(this, cont,
 							cont.getPersona(listNom.getSelectedValue()));
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);

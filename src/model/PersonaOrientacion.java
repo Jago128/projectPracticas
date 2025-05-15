@@ -2,22 +2,25 @@ package model;
 
 import enums.*;
 
-public class Persona {
+public class PersonaOrientacion {
 	private String nombre;
 	private String apoyo;
 	private Formacion formacion;
 	private String especialidad;
-	private Sector sectorInteres; // TBD
+	private Sector sectorInteres;
 	private String cvLink;
 	private Discapacidad cerfificadoDiscapacidad;
+	private int ultimoAñoTrabajado;
+	private String interesesPersonales;
+	private String situacionActual;
 	private Euskera euskera;
 	private Ingles ingles;
 	private String otrosIdiomas;
 	private Localidad localidad;
 	private Accesibilidad accesibilidad;
 	private String observaciones;
-
-	public Persona() {
+	
+	public PersonaOrientacion() {
 		this.nombre = "";
 		this.apoyo = "";
 		this.formacion = Formacion.UNSET;
@@ -25,6 +28,9 @@ public class Persona {
 		this.sectorInteres = Sector.UNSET;
 		this.cvLink = "";
 		this.cerfificadoDiscapacidad = Discapacidad.UNSET;
+		this.ultimoAñoTrabajado = 0;
+		this.interesesPersonales = "";
+		this.situacionActual = "";
 		this.euskera = Euskera.UNSET;
 		this.ingles = Ingles.UNSET;
 		this.otrosIdiomas = "";
@@ -32,11 +38,11 @@ public class Persona {
 		this.accesibilidad = Accesibilidad.UNSET;
 		this.observaciones = "";
 	}
-
-	public Persona(String nombre, String apoyo, Formacion formacion, String especialidad,
-			Sector sectorInteres, String cvLink, Discapacidad cerfificadoDiscapacidad, Euskera euskera,
-			Ingles ingles, String otrosIdiomas, Localidad localidad, Accesibilidad accesibilidad,
-			String observaciones) {
+	
+	public PersonaOrientacion(String nombre, String apoyo, Formacion formacion, String especialidad, Sector sectorInteres,
+			String cvLink, Discapacidad cerfificadoDiscapacidad, int ultimoAñoTrabajado, String interesesPersonales,
+			String situacionActual, Euskera euskera, Ingles ingles, String otrosIdiomas, Localidad localidad,
+			Accesibilidad accesibilidad, String observaciones) {
 		this.nombre = nombre;
 		this.apoyo = apoyo;
 		this.formacion = formacion;
@@ -44,6 +50,9 @@ public class Persona {
 		this.sectorInteres = sectorInteres;
 		this.cvLink = cvLink;
 		this.cerfificadoDiscapacidad = cerfificadoDiscapacidad;
+		this.ultimoAñoTrabajado = ultimoAñoTrabajado;
+		this.interesesPersonales = interesesPersonales;
+		this.situacionActual = situacionActual;
 		this.euskera = euskera;
 		this.ingles = ingles;
 		this.otrosIdiomas = otrosIdiomas;
@@ -51,7 +60,7 @@ public class Persona {
 		this.accesibilidad = accesibilidad;
 		this.observaciones = observaciones;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -106,6 +115,30 @@ public class Persona {
 
 	public void setCerfificadoDiscapacidad(Discapacidad cerfificadoDiscapacidad) {
 		this.cerfificadoDiscapacidad = cerfificadoDiscapacidad;
+	}
+
+	public int getUltimoAñoTrabajado() {
+		return ultimoAñoTrabajado;
+	}
+
+	public void setUltimoAñoTrabajado(int ultimoAñoTrabajado) {
+		this.ultimoAñoTrabajado = ultimoAñoTrabajado;
+	}
+
+	public String getInteresesPersonales() {
+		return interesesPersonales;
+	}
+
+	public void setInteresesPersonales(String interesesPersonales) {
+		this.interesesPersonales = interesesPersonales;
+	}
+
+	public String getSituacionActual() {
+		return situacionActual;
+	}
+
+	public void setSituacionActual(String situacionActual) {
+		this.situacionActual = situacionActual;
 	}
 
 	public Euskera getEuskera() {

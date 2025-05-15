@@ -128,15 +128,15 @@ public class LoginController {
 	}
 
 	// Personas
-	public Map<String, Persona> mostrarPersonas() {
+	public Map<String, PersonaOrientacion> mostrarPersonas() {
 		return dao.mostrarPersonas();
 	}
 
-	public Map<String, Persona> mostrarNomPersonas() {
+	public Map<String, PersonaOrientacion> mostrarNomPersonas() {
 		return dao.mostrarNomPersonas();
 	}
 
-	public Persona getPersona(String nom) {
+	public PersonaOrientacion getPersona(String nom) {
 		return dao.getPersona(nom);
 	}
 
@@ -144,8 +144,8 @@ public class LoginController {
 		return verificarPersona(nom);
 	}
 
-	public boolean añadirPersona(Persona persona) {
-		return dao.añadirPersona(persona);
+	public boolean añadirPersona(PersonaOrientacion personaOrientacion) {
+		return dao.añadirPersona(personaOrientacion);
 	}
 
 	public boolean modificarApoyo(String apoyo, String nom) {
@@ -170,6 +170,18 @@ public class LoginController {
 
 	public boolean modificarDiscapacidad(String discap, String nom) {
 		return dao.modificarDiscapacidad(discap, nom);
+	}
+	
+	public boolean modificarUltimoAñoTrabajador(int año, String nom) {
+		return dao.modificarUltimoAñoTrabajador(año, nom);
+	}
+	
+	public boolean modificarInteresesPersonales(String intereses, String nom) {
+		return dao.modificarInteresesPersonales(intereses, nom);
+	}
+	
+	public boolean modificarSituacionActual(String situacion, String nom) {
+		return dao.modificarSituacionActual(situacion, nom);
 	}
 
 	public boolean modificarEuskera(String nivel, String nom) {

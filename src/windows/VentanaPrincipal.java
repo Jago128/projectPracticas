@@ -35,17 +35,17 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 		btnEmpresa = new JButton("Empresas");
 		btnEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnEmpresa.setBounds(65, 50, 145, 45);
+		btnEmpresa.setBounds(21, 50, 145, 45);
 		getContentPane().add(btnEmpresa);
 
-		btnPersona = new JButton("Personas");
+		btnPersona = new JButton("Personas en Orientacion y seguimiento");
 		btnPersona.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnPersona.setBounds(230, 50, 145, 45);
+		btnPersona.setBounds(176, 50, 235, 45);
 		getContentPane().add(btnPersona);
 		
 		btnAnalisisPuesto = new JButton("Analisis de puesto");
 		btnAnalisisPuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAnalisisPuesto.setBounds(119, 105, 198, 45);
+		btnAnalisisPuesto.setBounds(21, 105, 198, 45);
 		getContentPane().add(btnAnalisisPuesto);
 
 		btnEmpresa.addActionListener(this);
@@ -60,7 +60,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 			frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			frame.setVisible(true);
 		} else if (e.getSource() == btnPersona) {
-			VentanaPersona dialog = new VentanaPersona(this, cont, user);
+			VentanaPersonaOrientacion dialog = new VentanaPersonaOrientacion(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else {
