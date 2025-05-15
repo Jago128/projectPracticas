@@ -402,9 +402,13 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 			} else {
 				try {
 					if (textFieldDatosContacto.getText().contains("@")
+							&& !textFieldDatosContacto.getText().contains("/")
 							&& (textFieldDatosContacto.getText().contains(".com")
 									|| textFieldDatosContacto.getText().contains(".es")
-									|| textFieldDatosContacto.getText().contains(".eus"))) {
+									|| textFieldDatosContacto.getText().contains(".eus")
+									|| textFieldDatosContacto.getText().contains(".org")
+									|| textFieldDatosContacto.getText().contains(".it")
+									|| textFieldDatosContacto.getText().contains(".eu"))) {
 						emailFormatCheck(textFieldDatosContacto.getText());
 					}
 					if (errorChecks(2)) {
