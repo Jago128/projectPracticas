@@ -3,7 +3,8 @@ package model;
 import enums.*;
 
 public class PersonaInclusion {
-	private String nomApe;
+	private String nombre;
+	private String apellido;
 	private int edad;
 	private Localidad municipio;
 	private Formacion formacion;
@@ -19,7 +20,8 @@ public class PersonaInclusion {
 	private String personaFacilitadora;
 	
 	public PersonaInclusion() {
-		this.nomApe = "";
+		this.nombre = "";
+		this.apellido = "";
 		this.edad = 0;
 		this.municipio = Localidad.UNSET;
 		this.formacion = Formacion.UNSET;
@@ -35,10 +37,11 @@ public class PersonaInclusion {
 		this.personaFacilitadora = "";
 	}
 	
-	public PersonaInclusion(String nomApe, int edad, Localidad municipio, Formacion formacion, String especialidad,
+	public PersonaInclusion(String nombre, String apellido, int edad, Localidad municipio, Formacion formacion, String especialidad,
 			String otros, String idioma, int ultimoAñoTrabajado, Sector sectorInteres, String interesesPersonales,
 			String situacionActual, Accesibilidad accesibilidad, String cv, String personaFacilitadora) {
-		this.nomApe = nomApe;
+		this.nombre = nombre;
+		this.apellido = apellido;
 		this.edad = edad;
 		this.municipio = municipio;
 		this.formacion = formacion;
@@ -54,12 +57,20 @@ public class PersonaInclusion {
 		this.personaFacilitadora = personaFacilitadora;
 	}
 
-	public String getNomApe() {
-		return nomApe;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNomApe(String nomApe) {
-		this.nomApe = nomApe;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public int getEdad() {

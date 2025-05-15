@@ -141,7 +141,7 @@ public class LoginController {
 	}
 
 	public boolean verificarPersona(String nom) {
-		return verificarPersona(nom);
+		return dao.verificarPersona(nom);
 	}
 
 	public boolean añadirPersona(PersonaOrientacion personaOrientacion) {
@@ -211,6 +211,31 @@ public class LoginController {
 	public boolean eliminarPersona(String nom) {
 		return dao.eliminarPersona(nom);
 	}
+	
+	// Personas en inclusion
+	public Map<String, PersonaInclusion> mostrarPersonasInclusion() {
+		return dao.mostrarPersonasInclusion();
+	}
+
+	public Map<String, PersonaInclusion> mostrarNomPersonasInclusion() {
+		return dao.mostrarNomPersonasInclusion();
+	}
+
+	public PersonaInclusion getPersonaInclusion(String nom) {
+		return dao.getPersonaInclusion(nom);
+	}
+
+	public boolean verificarPersonaInclusion(String nom) {
+		return dao.verificarPersonaInclusion(nom);
+	}
+
+	public boolean añadirPersonaInclusion(PersonaInclusion pI) {
+		return dao.añadirPersonaInclusion(pI);
+	}
+	
+	public boolean eliminarPersonaInclusion(String nom) {
+		return dao.eliminarPersonaInclusion(nom);
+	}
 
 	// Analisis de puestos
 	public Map<String, AnalisisPuesto> mostrarAnalisisPuestos() {
@@ -230,7 +255,7 @@ public class LoginController {
 	}
 
 	public boolean añadirAnalisisPuesto(AnalisisPuesto aP) {
-		return añadirAnalisisPuesto(aP);
+		return dao.añadirAnalisisPuesto(aP);
 	}
 
 	public boolean modificarPuesto(String puesto, String emp) {

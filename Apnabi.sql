@@ -270,7 +270,8 @@ CREATE TABLE PERSONA (
 );
 
 CREATE TABLE PERSONAINCLUSION(
-	NOM_APE VARCHAR(100) PRIMARY KEY,
+	NOMBRE VARCHAR(50) PRIMARY KEY,
+    APELLIDO VARCHAR(75) NOT NULL,
     EDAD INT NOT NULL,
     MUNICIPIO ENUM('Abadiño', 'Abanto_Zierbena', 'Ajangiz', 'Alonsotegi', 'Amorebieta', 'Amoroto', 'Amurrio', 'Arakaldo', 'Arantzazu', 'Areatza_Bilaro', 'Arrankudiaga',
     'Arratzu', 'Arrieta', 'Arrigorriaga', 'Artzentales', 'Artziniega', 'Aulesti', 'AxpeAtxondo', 'Ayala_Aiara', 'Bakio', 'Balmaseda', 'Barakaldo', 'Barrika', 'Basauri',
@@ -292,9 +293,9 @@ CREATE TABLE PERSONAINCLUSION(
     'Turismo_Hosteleria', 'Vida'),
 	INTERESESPERSONALES VARCHAR(500),
     SITUACIONACTUAL VARCHAR(500),
-     ACCESIBILIDAD ENUM('Carnet_Coche', 'Carnet', 'Transporte_Publico') NOT NULL,
-     CV VARCHAR(999),
-     PERSONAFACILITADORA VARCHAR(50)
+	ACCESIBILIDAD ENUM('Carnet_Coche', 'Carnet', 'Transporte_Publico') NOT NULL,
+	CV VARCHAR(999),
+	PERSONAFACILITADORA VARCHAR(50)
 );
 
 INSERT INTO PERSONA VALUES

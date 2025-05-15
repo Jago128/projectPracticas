@@ -16,13 +16,14 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	private JButton btnEmpresa;
 	private JButton btnPersona;
 	private JButton btnAnalisisPuesto;
+	private JButton btnPersonaInclusion;
 
 	public VentanaPrincipal(LoginController cont, Usuario user) {
 		this.cont = cont;
 		this.user = user;
 
 		setTitle("Bienvenido, " + user.getNombre());
-		setBounds(100, 100, 450, 200);
+		setBounds(100, 100, 430, 200);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -47,10 +48,16 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		btnAnalisisPuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAnalisisPuesto.setBounds(21, 105, 198, 45);
 		getContentPane().add(btnAnalisisPuesto);
+		
+		btnPersonaInclusion = new JButton("Personas inclusion");
+		btnPersonaInclusion.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnPersonaInclusion.setBounds(243, 105, 145, 45);
+		getContentPane().add(btnPersonaInclusion);
 
 		btnEmpresa.addActionListener(this);
 		btnPersona.addActionListener(this);
 		btnAnalisisPuesto.addActionListener(this);
+		btnPersonaInclusion.addActionListener(this);
 	}
 
 	@Override
@@ -63,8 +70,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 			VentanaPersonaOrientacion dialog = new VentanaPersonaOrientacion(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-		} else {
+		} else if (e.getSource() == btnAnalisisPuesto) {
 			VentanaAnalisisPuesto dialog = new VentanaAnalisisPuesto(this, cont, user);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} else {
+			VentanaPersonaInclusion dialog = new VentanaPersonaInclusion(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}

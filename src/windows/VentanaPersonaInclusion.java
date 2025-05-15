@@ -8,67 +8,61 @@ import javax.swing.*;
 import controller.LoginController;
 import model.Usuario;
 
-public class VentanaPersonaOrientacion extends JDialog implements ActionListener {
+public class VentanaPersonaInclusion extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
 	private Usuario user;
 	private JButton btnMostrar, btnAñadir, btnBorrar;
-
-	public VentanaPersonaOrientacion(JFrame parent, LoginController cont, Usuario user) {
+	
+	public VentanaPersonaInclusion(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
 		this.cont = cont;
 		this.user = user;
 
 		setResizable(false);
-		setTitle("Personas orientacion y seguimiento");
+		setTitle("Personas inclusion");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 650, 180);
+		setBounds(100, 100, 420, 170);
 		getContentPane().setLayout(null);
 
-		btnAñadir = new JButton("Añadir personas orientacion y seguimiento");
+		btnAñadir = new JButton("Añadir personas inclusion");
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAñadir.setBounds(327, 77, 259, 45);
+		btnAñadir.setBounds(224, 67, 161, 45);
 		getContentPane().add(btnAñadir);
 
-		btnBorrar = new JButton("Borrar personas orientacion y seguimiento");
+		btnBorrar = new JButton("Borrar personas inclusion");
 		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrar.setBounds(327, 21, 259, 45);
+		btnBorrar.setBounds(224, 10, 161, 45);
 		getContentPane().add(btnBorrar);
 
-		btnMostrar = new JButton("Mostrar personas orientacion y seguimiento");
+		btnMostrar = new JButton("Mostrar personas inclusion");
 		btnMostrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnMostrar.setBounds(41, 21, 259, 45);
+		btnMostrar.setBounds(35, 10, 169, 45);
 		getContentPane().add(btnMostrar);
 
 		JTextArea textAreaInfoModificar = new JTextArea();
 		textAreaInfoModificar.setEditable(false);
 		textAreaInfoModificar.setBackground(UIManager.getColor("Button.background"));
 		textAreaInfoModificar.setLineWrap(true);
-		textAreaInfoModificar.setText("Se modifican las personas orientacion y seguimiento desde esta ventana.");
+		textAreaInfoModificar.setText("Se modifican las personas inclusion desde esta ventana.");
 		textAreaInfoModificar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaInfoModificar.setBounds(29, 66, 284, 34);
+		textAreaInfoModificar.setBounds(25, 56, 192, 34);
 		getContentPane().add(textAreaInfoModificar);
 
 		btnAñadir.addActionListener(this);
 		btnBorrar.addActionListener(this);
 		btnMostrar.addActionListener(this);
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAñadir) {
-			VentanaAñadirPersonaOrientacion dialog = new VentanaAñadirPersonaOrientacion(this, cont);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			
 		} else if (e.getSource() == btnBorrar) {
-			VentanaBorrarPersonaOrientacion dialog = new VentanaBorrarPersonaOrientacion(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			
 		} else if (e.getSource() == btnMostrar) {
-			VentanaMostrarPersonaOrientacion dialog = new VentanaMostrarPersonaOrientacion(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			
 		}
 	}
 }

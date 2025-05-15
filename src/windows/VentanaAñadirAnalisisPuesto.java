@@ -17,9 +17,9 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 
 	private LoginController cont;
 	private JTextField textFieldEmpresa, textFieldPuesto, textFieldUbicacion, textFieldContactoEmpresa, textFieldCargo,
-	textFieldEmail, textFieldTelefono;
+			textFieldEmail, textFieldTelefono;
 	private JComboBox<String> comboBoxFormacionMinima, comboBoxIdiomasReq, comboBoxResponsableApnabi, comboBoxSector,
-	comboBoxCaracteristicasSensoriales, comboBoxComunicacion, comboBoxFinde;
+			comboBoxCaracteristicasSensoriales, comboBoxComunicacion, comboBoxFinde;
 	private JButton btnAñadir;
 	private JTextArea textAreaHorario;
 	private JCheckBox chckbxEsfuerzoFisico, chckbxTurnos, chckbxResistencia;
@@ -226,7 +226,7 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 		comboBoxComunicacion = new JComboBox<String>();
 		comboBoxComunicacion.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Sin necesidad de comunicacion",
 				"Comunicación con personal de la empesa", "Comunicación con personas externas a la empresa",
-		"Comunicacion con personal de la empresa  y fuera de la empresa" }));
+				"Comunicacion con personal de la empresa  y fuera de la empresa" }));
 		comboBoxComunicacion.setSelectedIndex(0);
 		comboBoxComunicacion.setBounds(377, 230, 557, 28);
 		getContentPane().add(comboBoxComunicacion);
@@ -239,7 +239,7 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 
 		comboBoxCaracteristicasSensoriales = new JComboBox<String>();
 		comboBoxCaracteristicasSensoriales
-		.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Ruido", "Luz", "Orden", "Limpieza" }));
+				.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Ruido", "Luz", "Orden", "Limpieza" }));
 		comboBoxCaracteristicasSensoriales.setSelectedIndex(0);
 		comboBoxCaracteristicasSensoriales.setEditable(true);
 		comboBoxCaracteristicasSensoriales.setBounds(197, 268, 170, 21);
@@ -304,8 +304,9 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 				JOptionPane.showMessageDialog(null, "Por favor, rellena toda todos los campos obligatorios.",
 						"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
 			} else if (cont.verificarAP(textFieldEmpresa.getText())) {
-				JOptionPane.showMessageDialog(null, "Ya existe una empresa con el mismo nombre en la base de datos.",
-						"ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null,
+						"Ya existe un analisis de puesto con el mismo nombre de empresa en la base de datos.", "ERROR",
+						JOptionPane.ERROR_MESSAGE);
 			} else {
 				if (errorChecks(2)) {
 					JOptionPane.showMessageDialog(null,
