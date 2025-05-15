@@ -269,6 +269,34 @@ CREATE TABLE PERSONA (
     OBSERVACIONES VARCHAR(500)
 );
 
+CREATE TABLE PERSONAINCLUSION(
+	NOM_APE VARCHAR(100) PRIMARY KEY,
+    EDAD INT NOT NULL,
+    MUNICIPIO ENUM('Abadiño', 'Abanto_Zierbena', 'Ajangiz', 'Alonsotegi', 'Amorebieta', 'Amoroto', 'Amurrio', 'Arakaldo', 'Arantzazu', 'Areatza_Bilaro', 'Arrankudiaga',
+    'Arratzu', 'Arrieta', 'Arrigorriaga', 'Artzentales', 'Artziniega', 'Aulesti', 'AxpeAtxondo', 'Ayala_Aiara', 'Bakio', 'Balmaseda', 'Barakaldo', 'Barrika', 'Basauri',
+    'Bedia', 'Berango', 'Bermeo', 'Berriatua', 'Berriz', 'Bilbao', 'Busturia', 'CastroUrdiales', 'Galdakao', 'Galdames', 'GamizFika', 'Garai', 'Gatika', 'Gautegiz',
+    'GazteluElexabeitia_Arteaga', 'GernikaLumo', 'Getxo', 'Gizaburuaga', 'Gordexola', 'Gorliz', 'Gueñes', 'Ibarrangelu', 'Igorre', 'Ispaster', 'Iurreta', 'Izurtza',
+    'KarrantzaHarana', 'Kortezubi', 'Lanestosa', 'Larrabetzu', 'Laudio_Llodio', 'Laukiz', 'Leioa', 'Lekeitio', 'Lemoa', 'Lemoiz', 'Lezama', 'Loiu', 'Lallabia', 'Mañaria',
+    'MarkinaXemein', 'Maruri', 'Mendata', 'Mendexa', 'Meñaka', 'Morga', 'Mundaka', 'Mungia', 'MunitibarArbatzegi_Gerrikaitz', 'Murueta', 'Muskiz', 'Muxika', 'Nabarniz',
+    'Ondarroa', 'Orduña', 'Orozko', 'Ortuella', 'Otxandio', 'Plentzia', 'Portugalete', 'Santurtzi', 'Sestao', 'Sondika', 'Sopela', 'Sopuerta', 'Sukarrieta', 'Trapagaran',
+    'Turtzioz', 'Ubide', 'UgaoMiraballes', 'Urduliz', 'Urduña', 'Usansolo', 'Zaldibar', 'Zalla', 'Zamudio', 'Zaratamo', 'Zeanuri', 'Zeberio', 'Zierbena', 'ZiortzaBolibar',
+    'Zornotza') NOT NULL,
+    FORMACION ENUM('AT', 'Primaria', 'ESO', 'EPA', 'FP_Basica', 'GM', 'Bachillerato', 'GS', 'Universidad', 'Master', 'Doctorado') NOT NULL,
+    ESPECIALIDAD VARCHAR(500) NOT NULL,
+    OTROS VARCHAR(500),
+    IDIOMA VARCHAR(50) NOT NULL,
+    ULTIMOAÑOTRABAJADO INT,
+    SECTORINTERES ENUM('Agricultura_Ganaderia', 'BienesConsumo', 'ComercioElectronico', 'Comercio_Establecimientos', 'Construccion', 'Deporte_Ocio',
+	'Energia_MedioAmbiente', 'Finanzas_Seguros_BienesInmuebles', 'Internet', 'Logistica_Transporte', 'MediosComunicacion_Marketing',
+    'Metalurgia_Electronica', 'ProductosQuimicos_MateriasPrimas', 'Salud_IndustriaFarmaceutica', 'Servicios', 'Sociedad', 'Tecnologia_Telecomunicaciones',
+    'Turismo_Hosteleria', 'Vida'),
+	INTERESESPERSONALES VARCHAR(500),
+    SITUACIONACTUAL VARCHAR(500),
+     ACCESIBILIDAD ENUM('Carnet_Coche', 'Carnet', 'Transporte_Publico') NOT NULL,
+     CV VARCHAR(999),
+     PERSONAFACILITADORA VARCHAR(50)
+);
+
 INSERT INTO PERSONA VALUES
 ();
 

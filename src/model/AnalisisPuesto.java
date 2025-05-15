@@ -20,7 +20,7 @@ public class AnalisisPuesto {
 	private boolean esfuerzoFisico;
 	private boolean resistencia;
 	private Comunicacion comunicacion;
-	private Sensoriales CaractersiticasSensoriales;
+	private Sensoriales caractersiticasSensoriales;
 	
 	public AnalisisPuesto() {
 		this.empresa = "";
@@ -40,7 +40,7 @@ public class AnalisisPuesto {
 		this.esfuerzoFisico = false;
 		this.resistencia = false;
 		this.comunicacion = Comunicacion.UNSET;
-		this.CaractersiticasSensoriales = Sensoriales.UNSET;
+		this.caractersiticasSensoriales = Sensoriales.UNSET;
 	}
 
 	public AnalisisPuesto(String empresa, String puesto, String horario, Finde finde, boolean turnos,
@@ -64,7 +64,7 @@ public class AnalisisPuesto {
 		this.esfuerzoFisico = esfuerzoFisico;
 		this.resistencia = resistencia;
 		this.comunicacion = comunicacion;
-		this.CaractersiticasSensoriales = caractersiticasSensoriales;
+		this.caractersiticasSensoriales = caractersiticasSensoriales;
 	}
 
 	public String getEmpresa() {
@@ -204,10 +204,10 @@ public class AnalisisPuesto {
 	}
 
 	public Sensoriales getCaractersiticasSensoriales() {
-		return CaractersiticasSensoriales;
+		return caractersiticasSensoriales;
 	}
 
 	public void setCaractersiticasSensoriales(Sensoriales caractersiticasSensoriales) {
-		CaractersiticasSensoriales = caractersiticasSensoriales;
+		this.caractersiticasSensoriales = caractersiticasSensoriales;
 	}
 }

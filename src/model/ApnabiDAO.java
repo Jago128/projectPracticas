@@ -60,7 +60,7 @@ public interface ApnabiDAO {
 
 	public boolean eliminarContacto(int id);
 
-	// Personas
+	// Personas en orientacion y seguimiento
 	public Map<String, PersonaOrientacion> mostrarPersonas();
 
 	public Map<String, PersonaOrientacion> mostrarNomPersonas();

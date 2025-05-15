@@ -127,7 +127,7 @@ public class LoginController {
 		return dao.eliminarContacto(id);
 	}
 
-	// Personas
+	// Personas en orientacion y seguimiento
 	public Map<String, PersonaOrientacion> mostrarPersonas() {
 		return dao.mostrarPersonas();
 	}
