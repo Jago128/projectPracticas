@@ -127,7 +127,7 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 	}
 
 	public void addPersonas() {
-		Map<String, PersonaOrientacion> personaOrientacions = cont.mostrarPersonas();
+		Map<String, PersonaOrientacion> personasOrientacion = cont.mostrarPersonas();
 		DefaultListModel<String> modelNom = new DefaultListModel<>();
 		DefaultListModel<String> modelApoyo = new DefaultListModel<>();
 		DefaultListModel<String> modelFormacion = new DefaultListModel<>();
@@ -161,8 +161,8 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 		modelLocalidad.addElement("Localidades");
 		modelAccesibilidad.addElement("Accesibilidad");
 		modelObservaciones.addElement("Observaciones");
-		if (!personaOrientacions.isEmpty()) {
-			for (PersonaOrientacion p : personaOrientacions.values()) {
+		if (!personasOrientacion.isEmpty()) {
+			for (PersonaOrientacion p : personasOrientacion.values()) {
 				switch (p.getFormacion()) {
 				case AT:
 					modelFormacion.addElement("AT");

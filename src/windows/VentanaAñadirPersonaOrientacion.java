@@ -1068,6 +1068,14 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 					if (!textFieldUltimoAñoTrabajado.getText().isBlank()) {
 						year = Integer.parseInt(textFieldUltimoAñoTrabajado.getText());
 					}
+					
+					if (!textAreaInteresesPersonales.getText().isBlank()) {
+						intereses = textAreaInteresesPersonales.getText();
+					}
+					
+					if (!textAreaSituacionActual.getText().isBlank()) {
+						situacion = textAreaSituacionActual.getText();
+					}
 
 					if (cont.añadirPersona(
 							new PersonaOrientacion(textFieldNom.getText(), (String) comboBoxApoyo.getEditor().getItem(), formacion,
@@ -1079,14 +1087,17 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 						if (result == JOptionPane.NO_OPTION) {
 							this.dispose();
 						} else if (result == JOptionPane.YES_OPTION) {
+							textAreaEspecialidad.setText("");
+							textAreaInteresesPersonales.setText("");
 							textAreaObservaciones.setText("");
+							textAreaSituacionActual.setText("");
 							textFieldCVLink.setText("");
 							textFieldNom.setText("");
 							textFieldOtrosIdiomas.setText("");
+							textFieldUltimoAñoTrabajado.setText("");
 							comboBoxAccesibilidad.setSelectedIndex(0);
 							comboBoxApoyo.setSelectedIndex(0);
 							comboBoxCertifDiscapacidad.setSelectedIndex(0);
-							comboBoxFormacion.setSelectedIndex(0);
 							comboBoxEuskera.setSelectedIndex(0);
 							comboBoxFormacion.setSelectedIndex(0);
 							comboBoxIngles.setSelectedIndex(0);

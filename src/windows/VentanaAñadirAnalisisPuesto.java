@@ -532,11 +532,17 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 							if (result == JOptionPane.NO_OPTION) {
 								this.dispose();
 							} else if (result == JOptionPane.YES_OPTION) {
-								textFieldContactoEmpresa.setText("");
-								textFieldEmpresa.setText("");
 								textAreaHorario.setText("");
+								textFieldCargo.setText("");
+								textFieldContactoEmpresa.setText("");
+								textFieldEmail.setText("");
+								textFieldEmpresa.setText("");
 								textFieldPuesto.setText("");
+								textFieldTelefono.setText("");
 								textFieldUbicacion.setText("");
+								comboBoxCaracteristicasSensoriales.setSelectedIndex(0);
+								comboBoxComunicacion.setSelectedIndex(0);
+								comboBoxFinde.setSelectedIndex(0);
 								comboBoxFormacionMinima.setSelectedIndex(0);
 								comboBoxIdiomasReq.setSelectedIndex(0);
 								comboBoxResponsableApnabi.setSelectedIndex(0);

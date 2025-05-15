@@ -290,12 +290,12 @@ CREATE TABLE PERSONAINCLUSION(
     SECTORINTERES ENUM('Agricultura_Ganaderia', 'BienesConsumo', 'ComercioElectronico', 'Comercio_Establecimientos', 'Construccion', 'Deporte_Ocio',
 	'Energia_MedioAmbiente', 'Finanzas_Seguros_BienesInmuebles', 'Internet', 'Logistica_Transporte', 'MediosComunicacion_Marketing',
     'Metalurgia_Electronica', 'ProductosQuimicos_MateriasPrimas', 'Salud_IndustriaFarmaceutica', 'Servicios', 'Sociedad', 'Tecnologia_Telecomunicaciones',
-    'Turismo_Hosteleria', 'Vida'),
+    'Turismo_Hosteleria', 'Vida') NOT NULL,
 	INTERESESPERSONALES VARCHAR(500),
     SITUACIONACTUAL VARCHAR(500),
 	ACCESIBILIDAD ENUM('Carnet_Coche', 'Carnet', 'Transporte_Publico') NOT NULL,
 	CV VARCHAR(999),
-	PERSONAFACILITADORA VARCHAR(50)
+	PERSONAFACILITADORA VARCHAR(50) NOT NULL
 );
 
 INSERT INTO PERSONA VALUES
