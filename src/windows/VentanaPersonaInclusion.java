@@ -58,11 +58,17 @@ public class VentanaPersonaInclusion extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAñadir) {
-			
+			VentanaAñadirPersonaInclusion dialog = new VentanaAñadirPersonaInclusion(this, cont);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
 		} else if (e.getSource() == btnBorrar) {
-			
+			VentanaBorrarPersonaInclusion dialog = new VentanaBorrarPersonaInclusion(this, cont, user);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
 		} else if (e.getSource() == btnMostrar) {
-			
+			VentanaMostrarPersonaInclusion dialog = new VentanaMostrarPersonaInclusion(this, cont, user);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
 		}
 	}
 }

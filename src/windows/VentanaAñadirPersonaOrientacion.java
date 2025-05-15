@@ -285,7 +285,7 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 	}
 
 	public void addError() { // ErrorID: 1
-		JOptionPane.showMessageDialog(null, "Ha habido un error al intentar añadir la persona.", "ERROR",
+		JOptionPane.showMessageDialog(null, "Ha habido un error al intentar añadir la persona en orientacion.", "ERROR",
 				JOptionPane.ERROR_MESSAGE);
 	}
 
@@ -295,6 +295,14 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 		}
 
 		if (textAreaEspecialidad.getText().length() > 500) {
+			return true;
+		}
+		
+		if (textAreaInteresesPersonales.getText().length() > 500) {
+			return true;
+		}
+		
+		if (textAreaSituacionActual.getText().length() > 500) {
 			return true;
 		}
 		return false;
@@ -321,7 +329,7 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 				JOptionPane.showMessageDialog(null, "Por favor, rellena toda todos los campos obligatorios.",
 						"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
 			} else if (cont.verificarPersona(textFieldNom.getText())) {
-				JOptionPane.showMessageDialog(null, "Ya existe una persona con el mismo nombre en la base de datos.",
+				JOptionPane.showMessageDialog(null, "Ya existe una persona en orientacion con el mismo nombre en la base de datos.",
 						"ERROR", JOptionPane.ERROR_MESSAGE);
 			} else {
 				if (errorChecks(2)) {
@@ -1066,7 +1074,7 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 									textAreaEspecialidad.getText(), sectorInteres, cv, discapacidad, year, intereses,
 									situacion, eus, en, oI, localidad, accesibilidad, observaciones))) {
 						result = JOptionPane.showConfirmDialog(null,
-								"La persona ha sido añadida correctamente. Quiere añadir mas personas?", "",
+								"La persona en orientacion ha sido añadida correctamente. Quiere añadir mas personas en orientacion?", "",
 								JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 						if (result == JOptionPane.NO_OPTION) {
 							this.dispose();

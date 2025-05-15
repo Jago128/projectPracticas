@@ -35,7 +35,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		setBounds(100, 100, 920, 810);
 		getContentPane().setLayout(null);
 
-		JLabel lblDatosPersona = new JLabel("Informacion de la persona seleccionada:");
+		JLabel lblDatosPersona = new JLabel("Informacion de la persona en orientacion seleccionada:");
 		lblDatosPersona.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatosPersona.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblDatosPersona.setBounds(378, 10, 506, 28);
@@ -1191,9 +1191,9 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		}
 
 		if (!check) {
-			infoError.append(" al intentar actualizar la persona.");
+			infoError.append(" al intentar actualizar la persona en orientacion.");
 			JOptionPane.showMessageDialog(null, infoError.toString()
-					+ "\nLa informacion cambiada correctamente se actualizara en el recuadro de infomacion de la persona.",
+					+ "\nLa informacion cambiada correctamente se actualizara en el recuadro de infomacion de la persona en orientacion.",
 					"ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 		return check;
@@ -1201,6 +1201,18 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 
 	public boolean lengthCheck() { // ErrorID: 2
 		if (textAreaObservaciones.getText().length() > 500) {
+			return true;
+		}
+		
+		if (textAreaEspecialidad.getText().length() > 500) {
+			return true;
+		}
+		
+		if (textAreaInteresesPersonales.getText().length() > 500) {
+			return true;
+		}
+		
+		if (textAreaSituacionActual.getText().length() > 500) {
 			return true;
 		}
 		return false;
@@ -1231,8 +1243,8 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 					personaOrientacion = cont.getPersona(personaOrientacion.getNombre());
 					loadPersona();
 				} else {
-					JOptionPane.showMessageDialog(null, "La persona ha sido modificada correctamente."
-							+ "\nLa informacion en el recuadro de infomacion de la persona se acualizara para reflejar los cambios.");
+					JOptionPane.showMessageDialog(null, "La persona en orientacion ha sido modificada correctamente."
+							+ "\nLa informacion en el recuadro de infomacion de la persona en orientacion se acualizara para reflejar los cambios.");
 					personaOrientacion = cont.getPersona(personaOrientacion.getNombre());
 					loadPersona();
 				}

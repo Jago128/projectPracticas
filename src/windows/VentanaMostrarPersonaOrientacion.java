@@ -119,7 +119,7 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 		scrollPane.setBounds(10, 10, 1033, 267);
 		getContentPane().add(scrollPane);
 
-		btnModificarPersona = new JButton("Modificar persona");
+		btnModificarPersona = new JButton("Modificar persona en orientacion");
 		btnModificarPersona.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificarPersona.setBounds(346, 287, 395, 72);
 		getContentPane().add(btnModificarPersona);
@@ -911,8 +911,8 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 			listObservaciones.setModel(modelObservaciones);
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"No hay ninguna persona para visualizar."
-							+ "\nPor favor, añada una persona anter the abrir esta ventana.",
+					"No hay ninguna persona en orientacion para visualizar."
+							+ "\nPor favor, añada una persona en orientacion anter the abrir esta ventana.",
 					"AVISO!", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
 		}
