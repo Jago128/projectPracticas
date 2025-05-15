@@ -52,7 +52,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		getContentPane().add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 
-		JLabel lblSector = new JLabel("Sector: *");
+		JLabel lblSector = new JLabel("Sector:");
 		lblSector.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSector.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSector.setBounds(30, 69, 80, 31);
@@ -185,7 +185,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		lblObservaciones.setBounds(385, 187, 108, 31);
 		getContentPane().add(lblObservaciones);
 
-		JLabel lblMaxChars = new JLabel("(Max 500 caracteres)");
+		JLabel lblMaxChars = new JLabel("(Max 750 caracteres)");
 		lblMaxChars.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMaxChars.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblMaxChars.setBounds(375, 215, 126, 31);
@@ -379,7 +379,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 	}
 
 	public boolean lengthCheck() { // ErrorID: 4
-		if (textAreaObservaciones.getText().length() > 500) {
+		if (textAreaObservaciones.getText().length() > 750) {
 			return true;
 		}
 
@@ -392,8 +392,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == btnAñadir) {
-			if (textFieldNombre.getText().isBlank() || comboBoxSector.getSelectedItem().equals("---")
-					|| comboBoxPersonaContacto.getSelectedItem().equals("---")) {
+			if (textFieldNombre.getText().isBlank() || comboBoxPersonaContacto.getSelectedItem().equals("---")) {
 				JOptionPane.showMessageDialog(null, "Por favor, rellena toda todos los campos obligatorios.",
 						"Falta informacion", JOptionPane.INFORMATION_MESSAGE);
 			} else if (cont.verificarEmpresa(textFieldNombre.getText())) {
@@ -403,6 +402,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 				try {
 					if (textFieldDatosContacto.getText().contains("@")
 							&& !textFieldDatosContacto.getText().contains("/")
+							&& !textFieldDatosContacto.getText().contains("-")
 							&& (textFieldDatosContacto.getText().contains(".com")
 									|| textFieldDatosContacto.getText().contains(".es")
 									|| textFieldDatosContacto.getText().contains(".eus")

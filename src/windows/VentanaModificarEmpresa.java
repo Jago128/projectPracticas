@@ -5,9 +5,9 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import java.time.LocalDate;
+import java.time.*;
 import java.time.format.*;
-import java.time.temporal.ChronoField;
+import java.time.temporal.*;
 import java.util.regex.*;
 
 import controller.LoginController;
@@ -187,7 +187,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		lblObservaciones.setBounds(370, 348, 108, 31);
 		getContentPane().add(lblObservaciones);
 
-		JLabel lblMaxChars = new JLabel("(Max 500 caracteres)");
+		JLabel lblMaxChars = new JLabel("(Max 750 caracteres)");
 		lblMaxChars.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMaxChars.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblMaxChars.setBounds(360, 376, 126, 31);
@@ -429,7 +429,12 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		}
 
 		infoEmpresa.append("Nombre: " + emp.getNom_empresa()).append("\n");
-		infoEmpresa.append("Sector: " + sector).append("\n");
+		if (emp.getSector() == null) {
+			infoEmpresa.append("Sector: ---").append("\n");
+		} else {
+			infoEmpresa.append("Sector: " + sector).append("\n");
+		}
+
 		if (emp.getPuesto() == null) {
 			infoEmpresa.append("Puesto: ---").append("\n");
 		} else {
@@ -546,6 +551,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		try {
 			if (!textFieldDatosContacto.getText().isBlank()) {
 				if (textFieldDatosContacto.getText().contains("@") && !textFieldDatosContacto.getText().contains("/")
+						&& !textFieldDatosContacto.getText().contains("-")
 						&& (textFieldDatosContacto.getText().contains(".com")
 								|| textFieldDatosContacto.getText().contains(".es")
 								|| textFieldDatosContacto.getText().contains(".eus")
@@ -744,7 +750,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 	}
 
 	public boolean lengthCheck() { // ErrorID: 4
-		if (textAreaObservaciones.getText().length() > 500) {
+		if (textAreaObservaciones.getText().length() > 750) {
 			return true;
 		}
 
