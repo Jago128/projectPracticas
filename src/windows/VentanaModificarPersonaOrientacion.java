@@ -14,21 +14,19 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
-	private PersonaOrientacion personaOrientacion;
-	private JTextArea textareaPersona, textAreaObservaciones;
-	private JTextField textFieldOtrosIdiomas, textFieldCVLink;
+	private PersonaOrientacion pO;
+	private JTextArea textareaPersona, textAreaObservaciones, textAreaEspecialidad, textAreaInteresesPersonales,
+			textAreaSituacionActual;
+	private JTextField textFieldOtrosIdiomas, textFieldCVLink, textFieldUltimoAñoTrabajado;
 	private JComboBox<String> comboBoxSectorInteres, comboBoxLocalidad, comboBoxFormacion, comboBoxCertifDiscapacidad,
 			comboBoxEuskera, comboBoxIngles, comboBoxAccesibilidad, comboBoxApoyo;
 	private JButton btnModificar;
-	private JTextArea textAreaEspecialidad;
-	private JTextField textFieldUltimoAñoTrabajado;
-	private JTextArea textAreaInteresesPersonales;
-	private JTextArea textAreaSituacionActual;
 
-	public VentanaModificarPersonaOrientacion(JDialog parent, LoginController cont, PersonaOrientacion personaOrientacion) {
+	public VentanaModificarPersonaOrientacion(JDialog parent, LoginController cont,
+			PersonaOrientacion personaOrientacion) {
 		super(parent, true);
 		this.cont = cont;
-		this.personaOrientacion = personaOrientacion;
+		this.pO = personaOrientacion;
 
 		setResizable(false);
 		setTitle("Modificar persona en orientacion y seguimiento");
@@ -133,6 +131,47 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		comboBoxCertifDiscapacidad.setBounds(175, 187, 163, 21);
 		getContentPane().add(comboBoxCertifDiscapacidad);
 
+		JLabel lblMaxChars = new JLabel("(Max 500 caracteres para los cuatro)");
+		lblMaxChars.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMaxChars.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblMaxChars.setBounds(347, 561, 217, 31);
+		getContentPane().add(lblMaxChars);
+
+		textAreaInteresesPersonales = new JTextArea();
+		textAreaInteresesPersonales.setLineWrap(true);
+		textAreaInteresesPersonales.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaInteresesPersonales.setBounds(25, 602, 416, 110);
+		getContentPane().add(textAreaInteresesPersonales);
+
+		JLabel lbl_InteresesPersonales = new JLabel("Intereses personales:");
+		lbl_InteresesPersonales.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_InteresesPersonales.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lbl_InteresesPersonales.setBounds(174, 570, 163, 31);
+		getContentPane().add(lbl_InteresesPersonales);
+
+		JLabel lblSituacionActual = new JLabel("Situacion actual:");
+		lblSituacionActual.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSituacionActual.setBounds(613, 570, 152, 31);
+		getContentPane().add(lblSituacionActual);
+
+		textAreaSituacionActual = new JTextArea();
+		textAreaSituacionActual.setLineWrap(true);
+		textAreaSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaSituacionActual.setBounds(451, 602, 433, 110);
+		getContentPane().add(textAreaSituacionActual);
+
+		JLabel lblUltimoAñoTrabajado = new JLabel("Ultimo año trabajado:");
+		lblUltimoAñoTrabajado.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUltimoAñoTrabajado.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblUltimoAñoTrabajado.setBounds(310, 416, 131, 31);
+		getContentPane().add(lblUltimoAñoTrabajado);
+
+		textFieldUltimoAñoTrabajado = new JTextField();
+		textFieldUltimoAñoTrabajado.setColumns(10);
+		textFieldUltimoAñoTrabajado.setBounds(451, 424, 163, 19);
+		getContentPane().add(textFieldUltimoAñoTrabajado);
+
 		JLabel lblEuskera = new JLabel("Euskera:");
 		lblEuskera.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEuskera.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -226,47 +265,6 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificar.setBounds(363, 722, 175, 43);
 		getContentPane().add(btnModificar);
-
-		JLabel lblMaxChars = new JLabel("(Max 500 caracteres para los cuatro)");
-		lblMaxChars.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMaxChars.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblMaxChars.setBounds(347, 561, 217, 31);
-		getContentPane().add(lblMaxChars);
-
-		textAreaInteresesPersonales = new JTextArea();
-		textAreaInteresesPersonales.setLineWrap(true);
-		textAreaInteresesPersonales.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaInteresesPersonales.setBounds(25, 602, 416, 110);
-		getContentPane().add(textAreaInteresesPersonales);
-
-		JLabel lbl_InteresesPersonales = new JLabel("Intereses personales:");
-		lbl_InteresesPersonales.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_InteresesPersonales.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lbl_InteresesPersonales.setBounds(174, 570, 163, 31);
-		getContentPane().add(lbl_InteresesPersonales);
-
-		JLabel lblSituacionActual = new JLabel("Situacion actual:");
-		lblSituacionActual.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSituacionActual.setBounds(613, 570, 152, 31);
-		getContentPane().add(lblSituacionActual);
-
-		textAreaSituacionActual = new JTextArea();
-		textAreaSituacionActual.setLineWrap(true);
-		textAreaSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaSituacionActual.setBounds(451, 602, 433, 110);
-		getContentPane().add(textAreaSituacionActual);
-
-		JLabel lblUltimoAñoTrabajado = new JLabel("Ultimo año trabajado:");
-		lblUltimoAñoTrabajado.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUltimoAñoTrabajado.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblUltimoAñoTrabajado.setBounds(310, 416, 131, 31);
-		getContentPane().add(lblUltimoAñoTrabajado);
-
-		textFieldUltimoAñoTrabajado = new JTextField();
-		textFieldUltimoAñoTrabajado.setColumns(10);
-		textFieldUltimoAñoTrabajado.setBounds(451, 424, 163, 19);
-		getContentPane().add(textFieldUltimoAñoTrabajado);
 		btnModificar.addActionListener(this);
 	}
 
@@ -276,7 +274,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 				accesibilidad = "";
 
 		textareaPersona.setText("");
-		switch (personaOrientacion.getFormacion()) {
+		switch (pO.getFormacion()) {
 		case AT:
 			formacion = "AT";
 			break;
@@ -325,7 +323,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 			System.out.println("Tipo invalido");
 		}
 
-		switch (personaOrientacion.getSectorInteres()) {
+		switch (pO.getSectorInteres()) {
 		case AGRICULTURA_GANADERIA:
 			sectorInteres = "Agricultura y ganadería";
 			break;
@@ -406,7 +404,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 			System.out.println("Tipo invalido");
 		}
 
-		switch (personaOrientacion.getCerfificadoDiscapacidad()) {
+		switch (pO.getCerfificadoDiscapacidad()) {
 		case NO:
 			discapacidad = "No";
 			break;
@@ -427,8 +425,8 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 			System.out.println("Tipo invalido");
 		}
 
-		if (personaOrientacion.getEuskera() != null) {
-			switch (personaOrientacion.getEuskera()) {
+		if (pO.getEuskera() != null) {
+			switch (pO.getEuskera()) {
 			case A1:
 				euskera = "A1";
 				break;
@@ -461,8 +459,8 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 				System.out.println("Tipo invalido");
 			}
 
-			if (personaOrientacion.getIngles() != null) {
-				switch (personaOrientacion.getIngles()) {
+			if (pO.getIngles() != null) {
+				switch (pO.getIngles()) {
 				case A1:
 					ingles = "A1";
 					break;
@@ -496,7 +494,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 				}
 			}
 
-			switch (personaOrientacion.getLocalidad()) {
+			switch (pO.getLocalidad()) {
 			case ABADIÑO:
 				localidad = "Abadiño";
 				break;
@@ -982,7 +980,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 			}
 		}
 
-		switch (personaOrientacion.getAccesibilidad()) {
+		switch (pO.getAccesibilidad()) {
 		case CARNET:
 			accesibilidad = "Carnet";
 			break;
@@ -999,54 +997,54 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 			System.out.println("Tipo invalido");
 		}
 
-		infoPersona.append("Nombre: " + personaOrientacion.getNombre()).append("\n");
-		infoPersona.append("Apoyo: " + personaOrientacion.getApoyo()).append("\n");
+		infoPersona.append("Nombre: " + pO.getNombre()).append("\n");
+		infoPersona.append("Apoyo: " + pO.getApoyo()).append("\n");
 		infoPersona.append("Formacion: " + formacion).append("\n");
-		infoPersona.append("Especialidad: " + personaOrientacion.getEspecialidad()).append("\n");
+		infoPersona.append("Especialidad: " + pO.getEspecialidad()).append("\n");
 		infoPersona.append("Sector de interes: " + sectorInteres).append("\n");
-		infoPersona.append("CV Link: " + personaOrientacion.getCvLink()).append("\n");
+		infoPersona.append("CV Link: " + pO.getCvLink()).append("\n");
 		infoPersona.append("Certificado de discapacidad: " + discapacidad).append("\n");
 
-		if (personaOrientacion.getUltimoAñoTrabajado() != 0) {
-			infoPersona.append("Ultimo año trabajado: " + personaOrientacion.getUltimoAñoTrabajado()).append("\n");
+		if (pO.getUltimoAñoTrabajado() != 0) {
+			infoPersona.append("Ultimo año trabajado: " + pO.getUltimoAñoTrabajado()).append("\n");
 		} else {
 			infoPersona.append("Ultimo año trabajado: ---").append("\n");
 		}
 
-		if (personaOrientacion.getInteresesPersonales() != null) {
-			infoPersona.append("Intereses personales: " + personaOrientacion.getInteresesPersonales()).append("\n");
+		if (pO.getInteresesPersonales() != null) {
+			infoPersona.append("Intereses personales: " + pO.getInteresesPersonales()).append("\n");
 		} else {
 			infoPersona.append("Intereses personales: ---").append("\n");
 		}
 
-		if (personaOrientacion.getSituacionActual() != null) {
-			infoPersona.append("Situacion actual: " + personaOrientacion.getSituacionActual()).append("\n");
+		if (pO.getSituacionActual() != null) {
+			infoPersona.append("Situacion actual: " + pO.getSituacionActual()).append("\n");
 		} else {
 			infoPersona.append("Situacion actual: ---").append("\n");
 		}
 
-		if (personaOrientacion.getEuskera() != null) {
+		if (pO.getEuskera() != null) {
 			infoPersona.append("Euskera: " + euskera).append("\n");
 		} else {
 			infoPersona.append("Euskera: ---").append("\n");
 		}
 
-		if (personaOrientacion.getIngles() != null) {
+		if (pO.getIngles() != null) {
 			infoPersona.append("Ingles: " + ingles).append("\n");
 		} else {
 			infoPersona.append("Ingles: ---").append("\n");
 		}
 
-		if (personaOrientacion.getOtrosIdiomas() != null) {
-			infoPersona.append("Otros idiomas: " + personaOrientacion.getOtrosIdiomas()).append("\n");
+		if (pO.getOtrosIdiomas() != null) {
+			infoPersona.append("Otros idiomas: " + pO.getOtrosIdiomas()).append("\n");
 		} else {
 			infoPersona.append("Otros idiomas: ---").append("\n");
 		}
 
 		infoPersona.append("Localidad: " + localidad).append("\n");
 		infoPersona.append("Accesibilidad: " + accesibilidad).append("\n");
-		if (personaOrientacion.getOtrosIdiomas() != null) {
-			infoPersona.append("Observaciones: " + personaOrientacion.getObservaciones());
+		if (pO.getOtrosIdiomas() != null) {
+			infoPersona.append("Observaciones: " + pO.getObservaciones());
 		} else {
 			infoPersona.append("Observaciones: ---");
 		}
@@ -1077,7 +1075,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 
 		if (!comboBoxApoyo.getEditor().getItem().equals("---")) {
-			check = cont.modificarApoyo((String) comboBoxApoyo.getEditor().getItem(), personaOrientacion.getNombre());
+			check = cont.modificarApoyo((String) comboBoxApoyo.getEditor().getItem(), pO.getNombre());
 			if (!check) {
 				infoError.append("Apoyo");
 			}
@@ -1085,14 +1083,14 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 
 		if (!comboBoxFormacion.getSelectedItem().equals("---") && check) {
 			check = cont.modificarFormacion(comboBoxFormacion.getItemAt(comboBoxFormacion.getSelectedIndex()),
-					personaOrientacion.getNombre());
+					pO.getNombre());
 			if (!check) {
 				infoError.append("Formacion");
 			}
 		}
 
 		if (!textAreaEspecialidad.getText().isBlank() && check) {
-			check = cont.modificarEspecialidad(textAreaEspecialidad.getText(), personaOrientacion.getNombre());
+			check = cont.modificarEspecialidad(textAreaEspecialidad.getText(), pO.getNombre());
 			if (!check) {
 				infoError.append("Especialidad");
 			}
@@ -1100,14 +1098,14 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 
 		if (!comboBoxSectorInteres.getSelectedItem().equals("---") && check) {
 			check = cont.modificarSectorInteres(
-					comboBoxSectorInteres.getItemAt(comboBoxSectorInteres.getSelectedIndex()), personaOrientacion.getNombre());
+					comboBoxSectorInteres.getItemAt(comboBoxSectorInteres.getSelectedIndex()), pO.getNombre());
 			if (!check) {
 				infoError.append("Sector de interes");
 			}
 		}
 
 		if (!textFieldCVLink.getText().isBlank() && check) {
-			check = cont.modificarCVLink(textFieldCVLink.getText(), personaOrientacion.getNombre());
+			check = cont.modificarCVLink(textFieldCVLink.getText(), pO.getNombre());
 			if (!check) {
 				infoError.append("CV Link");
 			}
@@ -1116,7 +1114,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		if (!comboBoxCertifDiscapacidad.getSelectedItem().equals("---") && check) {
 			check = cont.modificarDiscapacidad(
 					comboBoxCertifDiscapacidad.getItemAt(comboBoxCertifDiscapacidad.getSelectedIndex()),
-					personaOrientacion.getNombre());
+					pO.getNombre());
 			if (!check) {
 				infoError.append("Certificado de discapacidad");
 			}
@@ -1124,21 +1122,21 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 
 		if (!textFieldUltimoAñoTrabajado.getText().isBlank() && check) {
 			check = cont.modificarUltimoAñoTrabajador(Integer.parseInt(textFieldUltimoAñoTrabajado.getText()),
-					personaOrientacion.getNombre());
+					pO.getNombre());
 			if (!check) {
 				infoError.append("Ultimo año trabajado");
 			}
 		}
 
 		if (!textAreaInteresesPersonales.getText().isBlank() && check) {
-			check = cont.modificarInteresesPersonales(textAreaInteresesPersonales.getText(), personaOrientacion.getNombre());
+			check = cont.modificarInteresesPersonales(textAreaInteresesPersonales.getText(), pO.getNombre());
 			if (!check) {
 				infoError.append("Intereses personales");
 			}
 		}
 
 		if (!textAreaSituacionActual.getText().isBlank() && check) {
-			check = cont.modificarInteresesPersonales(textAreaSituacionActual.getText(), personaOrientacion.getNombre());
+			check = cont.modificarSituacionActual(textAreaSituacionActual.getText(), pO.getNombre());
 			if (!check) {
 				infoError.append("Situacion actual");
 			}
@@ -1146,22 +1144,21 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 
 		if (!comboBoxEuskera.getSelectedItem().equals("---") && check) {
 			check = cont.modificarEuskera(comboBoxEuskera.getItemAt(comboBoxEuskera.getSelectedIndex()),
-					personaOrientacion.getNombre());
+					pO.getNombre());
 			if (!check) {
 				infoError.append("Euskera");
 			}
 		}
 
 		if (!comboBoxIngles.getSelectedItem().equals("---") && check) {
-			check = cont.modificarIngles(comboBoxIngles.getItemAt(comboBoxIngles.getSelectedIndex()),
-					personaOrientacion.getNombre());
+			check = cont.modificarIngles(comboBoxIngles.getItemAt(comboBoxIngles.getSelectedIndex()), pO.getNombre());
 			if (!check) {
 				infoError.append("Ingles");
 			}
 		}
 
 		if (!textFieldOtrosIdiomas.getText().isBlank() && check) {
-			check = cont.modificarOtrosIdiomas(textFieldOtrosIdiomas.getText(), personaOrientacion.getNombre());
+			check = cont.modificarOtrosIdiomas(textFieldOtrosIdiomas.getText(), pO.getNombre());
 			if (!check) {
 				infoError.append("Otros idiomas");
 			}
@@ -1169,7 +1166,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 
 		if (!comboBoxLocalidad.getSelectedItem().equals("---") && check) {
 			check = cont.modificarLocalidad(comboBoxLocalidad.getItemAt(comboBoxLocalidad.getSelectedIndex()),
-					personaOrientacion.getNombre());
+					pO.getNombre());
 			if (!check) {
 				infoError.append("Localidad");
 			}
@@ -1177,14 +1174,14 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 
 		if (!comboBoxAccesibilidad.getSelectedItem().equals("---") && check) {
 			check = cont.modificarAccesibilidad(
-					comboBoxAccesibilidad.getItemAt(comboBoxAccesibilidad.getSelectedIndex()), personaOrientacion.getNombre());
+					comboBoxAccesibilidad.getItemAt(comboBoxAccesibilidad.getSelectedIndex()), pO.getNombre());
 			if (!check) {
 				infoError.append("Sector de interes");
 			}
 		}
 
 		if (!textAreaObservaciones.getText().isBlank() && check) {
-			check = cont.modificarPersonaObservaciones(textAreaObservaciones.getText(), personaOrientacion.getNombre());
+			check = cont.modificarPersonaObservaciones(textAreaObservaciones.getText(), pO.getNombre());
 			if (!check) {
 				infoError.append("Observaciones");
 			}
@@ -1203,15 +1200,15 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		if (textAreaObservaciones.getText().length() > 500) {
 			return true;
 		}
-		
+
 		if (textAreaEspecialidad.getText().length() > 500) {
 			return true;
 		}
-		
+
 		if (textAreaInteresesPersonales.getText().length() > 500) {
 			return true;
 		}
-		
+
 		if (textAreaSituacionActual.getText().length() > 500) {
 			return true;
 		}
@@ -1240,12 +1237,12 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 						"ERROR", JOptionPane.ERROR_MESSAGE);
 			} else {
 				if (!errorChecks(1)) {
-					personaOrientacion = cont.getPersona(personaOrientacion.getNombre());
+					pO = cont.getPersona(pO.getNombre());
 					loadPersona();
 				} else {
 					JOptionPane.showMessageDialog(null, "La persona en orientacion ha sido modificada correctamente."
 							+ "\nLa informacion en el recuadro de infomacion de la persona en orientacion se acualizara para reflejar los cambios.");
-					personaOrientacion = cont.getPersona(personaOrientacion.getNombre());
+					pO = cont.getPersona(pO.getNombre());
 					loadPersona();
 				}
 			}

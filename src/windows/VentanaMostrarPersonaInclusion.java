@@ -15,9 +15,9 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 
 	private LoginController cont;
 	// private Usuario user;
-	private JList<String> listNom, listApoyo, listFormacion, listEspecialidad, listSectorInteres, listCVLink,
-			listCertifDiscapacidad, listEuskera, listIngles, listOtrosIdiomas, listLocalidad, listObservaciones,
-			listAccesibilidad, listInteresesPersonales, listSituacionActual, listUltimoAñoTrabajado;
+	private JList<String> listNom, listPersonaFacilitadora, listFormacion, listEspecialidad, listSectorInteres, listCV,
+			listOtros, listIdioma, listMunicipio, listAccesibilidad, listInteresesPersonales, listSituacionActual,
+			listUltimoAñoTrabajado, listApellido, listEdad;
 	private JButton btnModificarPersona;
 
 	public VentanaMostrarPersonaInclusion(JDialog parent, LoginController cont, Usuario user) {
@@ -34,9 +34,17 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 		listNom.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		listApoyo = new JList<>();
-		listApoyo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listApoyo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		listApellido = new JList<>();
+		listApellido.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listApellido.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+		listEdad = new JList<String>();
+		listEdad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listEdad.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+		listMunicipio = new JList<>();
+		listMunicipio.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listMunicipio.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listFormacion = new JList<>();
 		listFormacion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -46,21 +54,21 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 		listEspecialidad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEspecialidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		listSectorInteres = new JList<>();
-		listSectorInteres.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listSectorInteres.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		listOtros = new JList<>();
+		listOtros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listOtros.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		listCVLink = new JList<>();
-		listCVLink.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listCVLink.setFont(new Font("Tahoma", Font.PLAIN, 12));
-
-		listCertifDiscapacidad = new JList<>();
-		listCertifDiscapacidad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listCertifDiscapacidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		listIdioma = new JList<>();
+		listIdioma.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listIdioma.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listUltimoAñoTrabajado = new JList<>();
 		listUltimoAñoTrabajado.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listUltimoAñoTrabajado.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+		listSectorInteres = new JList<>();
+		listSectorInteres.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listSectorInteres.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listInteresesPersonales = new JList<>();
 		listInteresesPersonales.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -70,50 +78,37 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 		listSituacionActual.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		listEuskera = new JList<>();
-		listEuskera.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listEuskera.setFont(new Font("Tahoma", Font.PLAIN, 12));
-
-		listIngles = new JList<>();
-		listIngles.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listIngles.setFont(new Font("Tahoma", Font.PLAIN, 12));
-
-		listOtrosIdiomas = new JList<>();
-		listOtrosIdiomas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listOtrosIdiomas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-
-		listLocalidad = new JList<>();
-		listLocalidad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listLocalidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-
 		listAccesibilidad = new JList<>();
 		listAccesibilidad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listAccesibilidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		listObservaciones = new JList<>();
-		listObservaciones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		listCV = new JList<>();
+		listCV.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listCV.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+		listPersonaFacilitadora = new JList<>();
+		listPersonaFacilitadora.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listPersonaFacilitadora.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		addPersonas();
 
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 10, 1033, 267);
 		panel.add(listNom);
-		panel.add(listApoyo);
+		panel.add(listApellido);
+		panel.add(listEdad);
+		panel.add(listMunicipio);
 		panel.add(listFormacion);
 		panel.add(listEspecialidad);
-		panel.add(listSectorInteres);
-		panel.add(listCVLink);
-		panel.add(listCertifDiscapacidad);
+		panel.add(listOtros);
+		panel.add(listIdioma);
 		panel.add(listUltimoAñoTrabajado);
+		panel.add(listSectorInteres);
 		panel.add(listInteresesPersonales);
 		panel.add(listSituacionActual);
-		panel.add(listEuskera);
-		panel.add(listIngles);
-		panel.add(listOtrosIdiomas);
-		panel.add(listLocalidad);
 		panel.add(listAccesibilidad);
-		panel.add(listObservaciones);
+		panel.add(listCV);
+		panel.add(listPersonaFacilitadora);
 		getContentPane().add(panel);
 
 		JScrollPane scrollPane = new JScrollPane(panel);
@@ -211,7 +206,6 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 					System.out.println("Tipo invalido");
 				}
 
-				modelEspecialidad.addElement(p.getEspecialidad());
 				switch (p.getSectorInteres()) {
 				case AGRICULTURA_GANADERIA:
 					modelSectorInteres.addElement("Agricultura y ganadería");
@@ -796,10 +790,11 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 				}
 				modelNom.addElement(p.getNombre());
 				modelApellido.addElement(p.getApellido());
-				modelEdad.addElement(""+p.getEdad());
+				modelEdad.addElement("" + p.getEdad());
+				modelEspecialidad.addElement(p.getEspecialidad());
 				modelOtros.addElement(p.getOtros());
 				modelIdioma.addElement(p.getIdioma());
-				modelUltimoAñoTrabajado.addElement(""+p.getUltimoAñoTrabajado());
+				modelUltimoAñoTrabajado.addElement("" + p.getUltimoAñoTrabajado());
 				modelInteresesPersonales.addElement(p.getInteresesPersonales());
 				modelSituacionActual.addElement(p.getSituacionActual());
 				modelCV.addElement(p.getCv());
@@ -807,7 +802,20 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 			}
 
 			listNom.setModel(modelNom);
-			
+			listApellido.setModel(modelApellido);
+			listEdad.setModel(modelEdad);
+			listMunicipio.setModel(modelMunicipio);
+			listFormacion.setModel(modelEspecialidad);
+			listEspecialidad.setModel(modelEspecialidad);
+			listOtros.setModel(modelOtros);
+			listIdioma.setModel(modelIdioma);
+			listUltimoAñoTrabajado.setModel(modelUltimoAñoTrabajado);
+			listSectorInteres.setModel(modelSectorInteres);
+			listInteresesPersonales.setModel(modelInteresesPersonales);
+			listSituacionActual.setModel(modelSituacionActual);
+			listAccesibilidad.setModel(modelAccesibilidad);
+			listCV.setModel(modelCV);
+			listPersonaFacilitadora.setModel(modelPersonaFacilitadora);
 		} else {
 			JOptionPane.showMessageDialog(null,
 					"No hay ninguna persona en inclusion para visualizar."
@@ -822,8 +830,8 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 		if (e.getSource() == btnModificarPersona) {
 			if (!listNom.isSelectionEmpty()) {
 				if (!listNom.getSelectedValue().equals("Nombre")) {
-					VentanaModificarPersonaOrientacion dialog = new VentanaModificarPersonaOrientacion(this, cont,
-							cont.getPersona(listNom.getSelectedValue()));
+					VentanaModificarPersonaInclusion dialog = new VentanaModificarPersonaInclusion(this, cont,
+							cont.getPersonaInclusion(listNom.getSelectedValue()));
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} else {

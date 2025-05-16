@@ -233,6 +233,58 @@ public class LoginController {
 		return dao.añadirPersonaInclusion(pI);
 	}
 	
+	public boolean modificarEdad(int edad, String nom) {
+		return dao.modificarEdad(edad, nom);
+	}
+
+	public boolean modificarMunicipio(String municipio, String nom) {
+		return dao.modificarMunicipio(municipio, nom);
+	}
+	
+	public boolean modificarFormacionPI(String formacion, String nom) {
+		return dao.modificarFormacionPI(formacion, nom);
+	}
+
+	public boolean modificarEspecialidadPI(String especialidad, String nom) {
+		return dao.modificarEspecialidadPI(especialidad, nom);
+	}
+	
+	public boolean modificarOtros(String otros, String nom) {
+		return dao.modificarOtros(otros, nom);
+	}
+	
+	public boolean modificarIdioma(String idioma, String nom) {
+		return dao.modificarIdioma(idioma, nom);
+	}
+	
+	public boolean modificarUltimoAñoTrabajadorPI(int año, String nom) {
+		return dao.modificarUltimoAñoTrabajadorPI(año, nom);
+	}
+
+	public boolean modificarSectorInteresPI(String sectorI, String nom) {
+		return dao.modificarSectorInteresPI(sectorI, nom);
+	}
+	
+	public boolean modificarInteresesPersonalesPI(String intereses, String nom) {
+		return dao.modificarInteresesPersonalesPI(intereses, nom);
+	}
+	
+	public boolean modificarSituacionActualPI(String situacion, String nom) {
+		return dao.modificarSituacionActualPI(situacion, nom);
+	}
+
+	public boolean modificarAccesibilidadPI(String accesibilidad, String nom) {
+		return dao.modificarAccesibilidadPI(accesibilidad, nom);
+	}
+
+	public boolean modificarCV(String link, String nom) {
+		return dao.modificarCV(link, nom);
+	}
+	
+	public boolean modificarPersonaFacilitadora(String persona, String nom) {
+		return dao.modificarPersonaFacilitadora(persona, nom);
+	}
+	
 	public boolean eliminarPersonaInclusion(String nom) {
 		return dao.eliminarPersonaInclusion(nom);
 	}

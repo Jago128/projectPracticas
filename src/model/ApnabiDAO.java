@@ -114,6 +114,32 @@ public interface ApnabiDAO {
 
 	public boolean añadirPersonaInclusion(PersonaInclusion pI);
 	
+	public boolean modificarEdad(int edad, String nom);
+
+	public boolean modificarMunicipio(String municipio, String nom);
+
+	public boolean modificarFormacionPI(String formacion, String nom);
+
+	public boolean modificarEspecialidadPI(String especialidad, String nom);
+	
+	public boolean modificarOtros(String otros, String nom);
+
+	public boolean modificarIdioma(String idioma, String nom);
+
+	public boolean modificarUltimoAñoTrabajadorPI(int año, String nom);
+
+	public boolean modificarSectorInteresPI(String sectorI, String nom);
+
+	public boolean modificarInteresesPersonalesPI(String intereses, String nom);
+
+	public boolean modificarSituacionActualPI(String situacion, String nom);
+
+	public boolean modificarAccesibilidadPI(String accesibilidad, String nom);
+
+	public boolean modificarCV(String link, String nom);
+
+	public boolean modificarPersonaFacilitadora(String persona, String nom);
+
 	public boolean eliminarPersonaInclusion(String nom);
 
 	// Analisis de puestos

@@ -65,12 +65,24 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUPDATEACCESIBILIDAD = "UPDATE PERSONA SET ACCESIBILIDAD=? WHERE NOM_P=?";
 	final String SQLUPDATEPERSONAOBSERVACIONES = "UPDATE PERSONA SET OBSERVACIONES=? WHERE NOM_P=?";
 	final String SQLDELETEPERSONA = "DELETE FROM PERSONA WHERE NOM_P=?";
-	
+
 	final String SQLPERSONASINCLUSION = "SELECT * FROM PERSONASINCLUSION";
 	final String SQLNOMPERSONASINCLUSION = "SELECT NOMBRE FROM PERSONASINCLUSION";
 	final String SQLSELECTPERSONAINCLUSION = "SELECT * FROM PERSONASINCLUSION WHERE NOMBRE=?";
 	final String SQLINSERTPERSONAINCLUSION = "INSERT INTO PERSONASINCLUSION VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	// final String SQLUPDATEAPOYO = "UPDATE PERSONASINCLUSION SET APOYO=? WHERE NOMBRE=?";
+	final String SQLUPDATE_EDAD = "UPDATE PERSONASINCLUSION SET EDAD=? WHERE NOMBRE=?";
+	final String SQLUPDATEMUNICIPIO = "UPDATE PERSONASINCLUSION SET MUNICIPIO=? WHERE NOMBRE=?";
+	final String SQLUPDATEFORMACIONPI = "UPDATE PERSONASINCLUSION SET FORMACION=? WHERE NOMBRE=?";
+	final String SQLUPDATE_ESPECIALIDADPI = "UPDATE PERSONASINCLUSION SET ESPECIALIDAD=? WHERE NOMBRE=?";
+	final String SQLUPDATEOTROS = "UPDATE PERSONASINCLUSION SET OTROS=? WHERE NOMBRE=?";
+	final String SQLUPDATEIDIOMA = "UPDATE PERSONASINCLUSION SET IDIOMA=? WHERE NOMBRE=?";
+	final String SQLUPDATEULTIMOAÑOTRABAJADOPI = "UPDATE PERSONASINCLUSION SET ULTIMOAÑOTRABAJADO=? WHERE NOMBRE=?";
+	final String SQLUPDATESECTORINTERESPI = "UPDATE PERSONASINCLUSION SET SECTORINTERES=? WHERE NOMBRE=?";
+	final String SQLUPDATEINTERESESPERSONALESPI = "UPDATE PERSONASINCLUSION SET INTERESESPERSONALES=? WHERE NOMBRE=?";
+	final String SQLUPDATESITUACIONACTUALPI = "UPDATE PERSONASINCLUSION SET SITUACIONACTUAL=? WHERE NOMBRE=?";
+	final String SQLUPDATEACCESIBILIDADPI = "UPDATE PERSONASINCLUSION SET ACCESIBILIDAD=? WHERE NOMBRE=?";
+	final String SQLUPDATECV = "UPDATE PERSONASINCLUSION SET CV=? WHERE NOMBRE=?";
+	final String SQLUPDATEPERSONAFACILITADORA = "UPDATE PERSONASINCLUSION SET PERSONAFACILITADORA=? WHERE NOMBRE=?";
 	final String SQLDELETEPERSONAINCLUSION = "DELETE FROM PERSONASINCLUSION WHERE NOMBRE=?";
 
 	final String SQLANALISISPERSONAS = "SELECT * FROM ANALISISPUESTO";
@@ -1095,7 +1107,8 @@ public class BDImplementacion implements ApnabiDAO {
 				personaOrientacion.setEspecialidad(rs.getString("ESPECIALIDAD"));
 				personaOrientacion.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
 				personaOrientacion.setCvLink(rs.getString("CV"));
-				personaOrientacion.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
+				personaOrientacion
+						.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
 				personaOrientacion.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
 				personaOrientacion.setInteresesPersonales(rs.getString("INTERESESPERSONALES"));
 				personaOrientacion.setSituacionActual(rs.getString("SITUACIONACTUAL"));
@@ -1161,7 +1174,8 @@ public class BDImplementacion implements ApnabiDAO {
 				personaOrientacion.setEspecialidad(rs.getString("ESPECIALIDAD"));
 				personaOrientacion.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
 				personaOrientacion.setCvLink(rs.getString("CV"));
-				personaOrientacion.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
+				personaOrientacion
+						.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
 				personaOrientacion.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
 				personaOrientacion.setInteresesPersonales(rs.getString("INTERESESPERSONALES"));
 				personaOrientacion.setSituacionActual(rs.getString("SITUACIONACTUAL"));
@@ -2516,7 +2530,7 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
-	
+
 	@Override
 	public Map<String, PersonaInclusion> mostrarPersonasInclusion() {
 		PersonaInclusion pI;
@@ -2556,7 +2570,7 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return pIs;
 	}
-	
+
 	@Override
 	public Map<String, PersonaInclusion> mostrarNomPersonasInclusion() {
 		PersonaInclusion pI;
@@ -2585,8 +2599,9 @@ public class BDImplementacion implements ApnabiDAO {
 
 	@Override
 	public PersonaInclusion getPersonaInclusion(String nom) {
-		PersonaInclusion pI = new PersonaInclusion();;
-		
+		PersonaInclusion pI = new PersonaInclusion();
+		;
+
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLSELECTPERSONAINCLUSION);
@@ -3138,7 +3153,7 @@ public class BDImplementacion implements ApnabiDAO {
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			
+
 			switch (pI.getFormacion()) {
 			case AT:
 				stmt.setString(5, "AT");
@@ -3187,7 +3202,7 @@ public class BDImplementacion implements ApnabiDAO {
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			
+
 			stmt.setString(6, pI.getOtros());
 			stmt.setString(7, pI.getIdioma());
 			stmt.setInt(8, pI.getUltimoAñoTrabajado());
@@ -3271,7 +3286,7 @@ public class BDImplementacion implements ApnabiDAO {
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			
+
 			stmt.setString(10, pI.getInteresesPersonales());
 			stmt.setString(11, pI.getSituacionActual());
 			switch (pI.getAccesibilidad()) {
@@ -3290,7 +3305,7 @@ public class BDImplementacion implements ApnabiDAO {
 			default:
 				System.out.println("Tipo invalido.");
 			}
-			
+
 			stmt.setString(13, pI.getCv());
 			stmt.setString(14, pI.getPersonaFacilitadora());
 			if (stmt.executeUpdate() > 0) {
@@ -3306,7 +3321,465 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
+
+	public boolean modificarEdad(int edad, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (edad != 0) {
+				stmt = con.prepareStatement(SQLUPDATE_EDAD);
+				stmt.setInt(1, edad);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public boolean modificarMunicipio(String municipio, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!municipio.isBlank()) {
+				switch (municipio) {
+				case "Abanto-Zierbena":
+					municipio = "Abanto_Zierbena";
+					break;
+
+				case "Areatza o Bilaro":
+					municipio = "Areatza_Bilaro";
+					break;
+
+				case "Axpe Atxondo":
+					municipio = "AxpeAtxondo";
+					break;
+
+				case "Ayala/Aiara":
+					municipio = "Ayala_Aiara";
+					break;
+
+				case "Castro Urdiales":
+					municipio = "CastroUrdiales";
+					break;
+
+				case "Gamiz-Fika":
+					municipio = "GamizFika";
+					break;
+
+				case "Gaztelu-Elexabeitia o Arteaga":
+					municipio = "GazteluElexabeitia_Arteaga";
+					break;
+
+				case "Gernika-Lumo":
+					municipio = "GernikaLumo";
+					break;
+
+				case "Karrantza Harana":
+					municipio = "KarrantzaHarana";
+					break;
+
+				case "Laudio/Llodio":
+					municipio = "Laudio_Llodio";
+					break;
+
+				case "Markina-Xemein":
+					municipio = "MarkinaXemein";
+					break;
+
+				case "Munitibar-Arbatzegi Gerrikaitz":
+					municipio = "MunitibarArbatzegi_Gerrikaitz";
+					break;
+
+				case "Ugao-Miraballes":
+					municipio = "UgaoMiraballes";
+					break;
+
+				case "Ziortza-Bolibar":
+					municipio = "ZiortzaBolibar";
+					break;
+				}
+
+				stmt = con.prepareStatement(SQLUPDATEMUNICIPIO);
+				stmt.setString(1, municipio);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public boolean modificarFormacionPI(String formacion, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (formacion.equals("FP Basica")) {
+				formacion = "FP_Basica";
+			}
+			stmt = con.prepareStatement(SQLUPDATEFORMACION);
+			stmt.setString(1, formacion);
+			stmt.setString(2, nom);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public boolean modificarEspecialidadPI(String especialidad, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!especialidad.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATE_ESPECIALIDADPI);
+				stmt.setString(1, especialidad);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
 	
+	public boolean modificarOtros(String otros, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!otros.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEOTROS);
+				stmt.setString(1, otros);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public boolean modificarIdioma(String idioma, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!idioma.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEIDIOMA);
+				stmt.setString(1, idioma);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public boolean modificarUltimoAñoTrabajadorPI(int año, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEULTIMOAÑOTRABAJADOPI);
+			stmt.setInt(1, año);
+			stmt.setString(2, nom);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public boolean modificarSectorInteresPI(String sectorI, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!sectorI.isBlank()) {
+				switch (sectorI) {
+				case "Agricultura y Ganaderia":
+					sectorI = "Agricultura_Ganaderia";
+					break;
+
+				case "Bienes de Consumo":
+					sectorI = "BienesConsumo";
+					break;
+
+				case "Comercio electronico":
+					sectorI = "ComercioElectronico";
+					break;
+
+				case "Comercio y establecimientos":
+					sectorI = "Comercio_Establecimientos";
+					break;
+
+				case "Deporte y ocio":
+					sectorI = "Deporte_Ocio";
+					break;
+
+				case "Energia y medio ambiente":
+					sectorI = "Energia_MedioAmbiente";
+					break;
+
+				case "Finanzas, Seguros y bienes inmuebles":
+					sectorI = "Finanzas_Seguros_BienesInmuebles";
+					break;
+
+				case "Logistica y Transporte":
+					sectorI = "Logistica_Transporte";
+					break;
+
+				case "Medios de comunicacion y marketing":
+					sectorI = "MediosComunicacion_Marketing";
+					break;
+
+				case "Metalurgia y electronica":
+					sectorI = "Metalurgia_Electronica";
+					break;
+
+				case "Productos quimicos y materias primas":
+					sectorI = "ProductosQuimicos_MateriasPrimas";
+					break;
+
+				case "Salud e industria farmaceutica":
+					sectorI = "Salud_IndustriaFarmaceutica";
+					break;
+
+				case "Tecnologia y telecomunicaciones":
+					sectorI = "Tecnologia_Telecomunicaciones";
+					break;
+
+				case "Turismo y hosteleria":
+					sectorI = "Turismo_Hosteleria";
+					break;
+				}
+				stmt = con.prepareStatement(SQLUPDATESECTORINTERESPI);
+				stmt.setString(1, sectorI);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public boolean modificarInteresesPersonalesPI(String intereses, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!intereses.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEINTERESESPERSONALESPI);
+				stmt.setString(1, intereses);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public boolean modificarSituacionActualPI(String situacion, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!situacion.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATESITUACIONACTUALPI);
+				stmt.setString(1, situacion);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public boolean modificarAccesibilidadPI(String accesibilidad, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			switch (accesibilidad) {
+			case "Carnet + coche":
+				accesibilidad = "Carnet_Coche";
+				break;
+
+			case "Transporte publico":
+				accesibilidad = "Transporte_Publico";
+				break;
+			}
+
+			if (!accesibilidad.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEACCESIBILIDADPI);
+				stmt.setString(1, accesibilidad);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public boolean modificarCV(String link, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!link.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATECV);
+				stmt.setString(1, link);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public boolean modificarPersonaFacilitadora(String persona, String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (!persona.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEPERSONAFACILITADORA);
+				stmt.setString(1, persona);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
 	@Override
 	public boolean eliminarPersonaInclusion(String nom) {
 		boolean check = false;
