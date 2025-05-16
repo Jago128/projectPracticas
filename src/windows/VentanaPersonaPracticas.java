@@ -66,7 +66,9 @@ public class VentanaPersonaPracticas extends JDialog implements ActionListener {
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnMostrar) {
-			
+			VentanaMostrarPersonaPracticas dialog = new VentanaMostrarPersonaPracticas(this, cont, user);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
 		}
 	}
 }
