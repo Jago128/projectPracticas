@@ -912,7 +912,7 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 		} else {
 			JOptionPane.showMessageDialog(null,
 					"No hay ninguna persona en orientacion para visualizar."
-							+ "\nPor favor, añada una persona en orientacion anter the abrir esta ventana.",
+							+ "\nPor favor, añada una persona en orientacion anter de abrir esta ventana.",
 					"AVISO!", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
 		}
