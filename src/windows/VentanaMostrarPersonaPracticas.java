@@ -207,10 +207,7 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 		if (e.getSource() == btnModificarPersona) {
 			if (!listNom.isSelectionEmpty()) {
 				if (!listNom.getSelectedValue().equals("Nombre")) {
-					VentanaModificarPersonaOrientacion dialog = new VentanaModificarPersonaOrientacion(this, cont,
-							cont.getPersona(listNom.getSelectedValue()));
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "[ERROR] No se puede modificar el titulo de la columna.");
 				}
