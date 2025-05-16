@@ -45,7 +45,7 @@ public class VentanaAnalisisPuesto extends JDialog implements ActionListener {
 		textAreaInfoModificar.setEditable(false);
 		textAreaInfoModificar.setBackground(UIManager.getColor("Button.background"));
 		textAreaInfoModificar.setLineWrap(true);
-		textAreaInfoModificar.setText("Se modifican los analisis de puestos desde esta ventana.");
+		textAreaInfoModificar.setText("Se modifican los analisis de puestos\r\ndesde esta ventana.");
 		textAreaInfoModificar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textAreaInfoModificar.setBounds(10, 68, 195, 34);
 		getContentPane().add(textAreaInfoModificar);

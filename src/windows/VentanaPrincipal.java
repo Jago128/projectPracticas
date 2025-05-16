@@ -66,9 +66,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnEmpresa) {
-			VentanaEmpresa frame = new VentanaEmpresa(this, cont, user);
-			frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			frame.setVisible(true);
+			VentanaEmpresa dialog = new VentanaEmpresa(this, cont, user);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
 		} else if (e.getSource() == btnPersona) {
 			VentanaPersonaOrientacion dialog = new VentanaPersonaOrientacion(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -77,8 +77,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 			VentanaAnalisisPuesto dialog = new VentanaAnalisisPuesto(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-		} else {
+		} else if (e.getSource() == btnPersonaInclusion) {
 			VentanaPersonaInclusion dialog = new VentanaPersonaInclusion(this, cont, user);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} else {
+			VentanaPersonaPracticas dialog = new VentanaPersonaPracticas(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}
