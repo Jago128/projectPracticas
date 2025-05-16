@@ -289,6 +289,31 @@ public class LoginController {
 		return dao.eliminarPersonaInclusion(nom);
 	}
 
+	// Personas en inclusion
+	public Map<String, PersonaPracticas> mostrarPersonasPracticas() {
+		return dao.mostrarPersonasPracticas();
+	}
+
+	public Map<String, PersonaPracticas> mostrarNomPersonasPracticas() {
+		return dao.mostrarNomPersonasPracticas();
+	}
+
+	public PersonaPracticas getPersonaPracticas(String nom) {
+		return dao.getPersonaPracticas(nom);
+	}
+
+	public boolean verificarPersonaPracticas(String nom) {
+		return dao.verificarPersonaPracticas(nom);
+	}
+
+	public boolean añadirPersonaPracticas(PersonaPracticas p) {
+		return dao.añadirPersonaPracticas(p);
+	}
+
+	public boolean eliminarPersonaPracticas(String nom) {
+		return dao.eliminarPersonaPracticas(nom);
+	}
+
 	// Analisis de puestos
 	public Map<String, AnalisisPuesto> mostrarAnalisisPuestos() {
 		return dao.mostrarAnalisisPuestos();

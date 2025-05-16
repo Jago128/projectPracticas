@@ -9,7 +9,7 @@ import javax.swing.*;
 import controller.LoginController;
 import model.*;
 
-public class VentanaBorrarPersonaInclusion extends JDialog implements ActionListener {
+public class VentanaBorrarPersonaPracticas extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
@@ -17,13 +17,13 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 	private JButton btnBorrar;
 	private JList<String> listPersonas;
 
-	public VentanaBorrarPersonaInclusion(JDialog parent, LoginController cont, Usuario user) {
+	public VentanaBorrarPersonaPracticas(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
 		this.cont = cont;
 		// this.user = user;
 
 		setResizable(false);
-		setTitle("Borrar personas en inclusion");
+		setTitle("Borrar personas en practicas");
 		setBounds(100, 100, 380, 300);
 		getContentPane().setLayout(null);
 
@@ -41,7 +41,7 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 		getContentPane().add(btnBorrar);
 		btnBorrar.addActionListener(this);
 
-		JLabel lblInfo = new JLabel("Seleccione el nombre de la persona en inclusion a borrar:");
+		JLabel lblInfo = new JLabel("Seleccione el nombre de la persona en practicas a borrar:");
 		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInfo.setBounds(10, 10, 346, 23);
@@ -49,19 +49,19 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 	}
 
 	public void addNomPersonas() {
-		Map<String, PersonaInclusion> personasInclusion = cont.mostrarNomPersonasInclusion();
+		Map<String, PersonaPracticas> personas = cont.mostrarNomPersonasPracticas();
 		DefaultListModel<String> modelPersonas = new DefaultListModel<>();
 
 		listPersonas.removeAll();
-		if (!personasInclusion.isEmpty()) {
-			for (PersonaInclusion p : personasInclusion.values()) {
+		if (!personas.isEmpty()) {
+			for (PersonaPracticas p : personas.values()) {
 				modelPersonas.addElement(p.getNombre());
 			}
 			listPersonas.setModel(modelPersonas);
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"No hay ninguna persona en inclusion para visualizar."
-							+ "\nPor favor, añada una persona en inclusion anter de abrir esta ventana.",
+					"No hay ninguna persona en practicas para visualizar."
+							+ "\nPor favor, añada una persona en practicas anter de abrir esta ventana.",
 					"AVISO!", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
 		}
@@ -73,14 +73,14 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 			if (!listPersonas.isSelectionEmpty()) {
 				int result = JOptionPane
 						.showConfirmDialog(null,
-								"¿Esta seguro de que quieras borrar la persona en inclusion '"
+								"¿Esta seguro de que quieras borrar la persona en practicas '"
 										+ listPersonas.getSelectedValue() + "'?",
 								"Confirmacion", JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
 					if (cont.eliminarPersonaInclusion(listPersonas.getSelectedValue())) {
 						result = JOptionPane.showConfirmDialog(null,
-								"La persona en inclusion ha sido borrada correctamente. ¿Quiere borrar mas personas en inclusion?",
-								"Persona en inclusion eliminada", JOptionPane.YES_NO_OPTION);
+								"La persona en practicas ha sido borrada correctamente. ¿Quiere borrar mas personas en practicas?",
+								"Persona en practicas eliminada", JOptionPane.YES_NO_OPTION);
 						if (result == JOptionPane.NO_OPTION) {
 							this.dispose();
 						} else if (result == JOptionPane.YES_OPTION) {
@@ -89,13 +89,13 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 						}
 					} else {
 						JOptionPane.showMessageDialog(null,
-								"La persona en inclusion que estas intentando borrar no existe.", "ERROR",
+								"La persona en practicas que estas intentando borrar no existe.", "ERROR",
 								JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			} else {
 				JOptionPane.showMessageDialog(null,
-						"No hay ninguna seleccion hecha. Por favor, selecciona una persona en inclusion de la lista.",
+						"No hay ninguna seleccion hecha. Por favor, selecciona una persona en practicas de la lista.",
 						"ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 		}

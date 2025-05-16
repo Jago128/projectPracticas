@@ -27,7 +27,7 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 		setBounds(100, 100, 310, 300);
 		getContentPane().setLayout(null);
 
-		listEmpresas = new JList<String>();
+		listEmpresas = new JList<>();
 		listEmpresas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEmpresas.setBounds(63, 43, 188, 163);
 		listEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 12));

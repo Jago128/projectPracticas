@@ -142,6 +142,19 @@ public interface ApnabiDAO {
 
 	public boolean eliminarPersonaInclusion(String nom);
 
+	// Personas en inclusion
+	public Map<String, PersonaPracticas> mostrarPersonasPracticas();
+
+	public Map<String, PersonaPracticas> mostrarNomPersonasPracticas();
+
+	public PersonaPracticas getPersonaPracticas(String nom);
+
+	public boolean verificarPersonaPracticas(String nom);
+
+	public boolean añadirPersonaPracticas(PersonaPracticas p);
+
+	public boolean eliminarPersonaPracticas(String nom);
+
 	// Analisis de puestos
 	public Map<String, AnalisisPuesto> mostrarAnalisisPuestos();
 

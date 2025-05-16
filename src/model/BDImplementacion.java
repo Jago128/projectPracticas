@@ -123,8 +123,8 @@ public class BDImplementacion implements ApnabiDAO {
 	@Override
 	public boolean verificarUsuario(Usuario user) {
 		boolean existe = false;
-		this.openConnection();
 
+		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLUSUARIO);
 			stmt.setString(1, user.getNombre());
@@ -1223,15 +1223,15 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean añadirPersona(PersonaOrientacion personaOrientacion) {
+	public boolean añadirPersona(PersonaOrientacion pO) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLINSERTPERSONA);
-			stmt.setString(1, personaOrientacion.getNombre());
-			stmt.setString(2, personaOrientacion.getApoyo());
-			switch (personaOrientacion.getFormacion()) {
+			stmt.setString(1, pO.getNombre());
+			stmt.setString(2, pO.getApoyo());
+			switch (pO.getFormacion()) {
 			case AT:
 				stmt.setString(3, "AT");
 				break;
@@ -1280,8 +1280,8 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(4, personaOrientacion.getEspecialidad());
-			switch (personaOrientacion.getSectorInteres()) {
+			stmt.setString(4, pO.getEspecialidad());
+			switch (pO.getSectorInteres()) {
 			case AGRICULTURA_GANADERIA:
 				stmt.setString(5, "Agricultura y ganadería");
 				break;
@@ -1362,8 +1362,8 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(6, personaOrientacion.getCvLink());
-			switch (personaOrientacion.getCerfificadoDiscapacidad()) {
+			stmt.setString(6, pO.getCvLink());
+			switch (pO.getCerfificadoDiscapacidad()) {
 			case NO:
 				stmt.setString(7, "No");
 				break;
@@ -1384,11 +1384,11 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setInt(8, personaOrientacion.getUltimoAñoTrabajado());
-			stmt.setString(9, personaOrientacion.getInteresesPersonales());
-			stmt.setString(10, personaOrientacion.getSituacionActual());
+			stmt.setInt(8, pO.getUltimoAñoTrabajado());
+			stmt.setString(9, pO.getInteresesPersonales());
+			stmt.setString(10, pO.getSituacionActual());
 
-			switch (personaOrientacion.getEuskera()) {
+			switch (pO.getEuskera()) {
 			case A1:
 				stmt.setString(11, "A1");
 				break;
@@ -1421,7 +1421,7 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			switch (personaOrientacion.getIngles()) {
+			switch (pO.getIngles()) {
 			case A1:
 				stmt.setString(12, "A1");
 				break;
@@ -1454,8 +1454,8 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(13, personaOrientacion.getOtrosIdiomas());
-			switch (personaOrientacion.getLocalidad()) {
+			stmt.setString(13, pO.getOtrosIdiomas());
+			switch (pO.getLocalidad()) {
 			case ABADIÑO:
 				stmt.setString(14, "Abadiño");
 				break;
@@ -1940,7 +1940,7 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			switch (personaOrientacion.getAccesibilidad()) {
+			switch (pO.getAccesibilidad()) {
 			case CARNET:
 				stmt.setString(15, "Carnet");
 				break;
@@ -1957,7 +1957,7 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(16, personaOrientacion.getObservaciones());
+			stmt.setString(16, pO.getObservaciones());
 			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
@@ -3782,6 +3782,143 @@ public class BDImplementacion implements ApnabiDAO {
 
 	@Override
 	public boolean eliminarPersonaInclusion(String nom) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLDELETEPERSONAINCLUSION);
+			stmt.setString(1, nom);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("La persona no se pudo borrar.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public Map<String, PersonaPracticas> mostrarPersonasPracticas() {
+		PersonaPracticas p;
+		Map<String, PersonaPracticas> personas = new TreeMap<>();
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLEMPRESAS);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				p = new PersonaPracticas();
+
+				personas.put(p.getNombre(), p);
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger las personas.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return personas;
+	}
+
+	public Map<String, PersonaPracticas> mostrarNomPersonasPracticas() {
+		PersonaPracticas p;
+		Map<String, PersonaPracticas> personas = new TreeMap<>();
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLEMPRESAS);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				p = new PersonaPracticas();
+
+				personas.put(p.getNombre(), p);
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger las personas.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return personas;
+	}
+
+	public PersonaPracticas getPersonaPracticas(String nom) {
+		PersonaPracticas p = new PersonaPracticas();
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLEMPRESAS);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger la personas.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
+
+	public boolean verificarPersonaPracticas(String nom) {
+		boolean existe = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLSELECTEMPRESA);
+			stmt.setString(1, nom);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				existe = true;
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Un error ha occurrido al intentar recoger la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return existe;
+	}
+
+	public boolean añadirPersonaPracticas(PersonaPracticas p) {
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLINSERTPERSONA);
+
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha habido un error al intentar añadir la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	public boolean eliminarPersonaPracticas(String nom) {
 		boolean check = false;
 
 		this.openConnection();

@@ -27,7 +27,7 @@ public class VentanaBorrarPersonaOrientacion extends JDialog implements ActionLi
 		setBounds(100, 100, 400, 300);
 		getContentPane().setLayout(null);
 
-		listPersonas = new JList<String>();
+		listPersonas = new JList<>();
 		listPersonas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listPersonas.setBounds(77, 43, 251, 163);
 		listPersonas.setFont(new Font("Tahoma", Font.PLAIN, 12));
