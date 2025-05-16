@@ -3802,7 +3802,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
-	public Map<String, PersonaPracticas> mostrarPersonasPracticas() {
+	public Map<String, PersonaPracticas> mostrarPersonasPracticas() { // TODO
 		PersonaPracticas p;
 		Map<String, PersonaPracticas> personas = new TreeMap<>();
 
@@ -3827,7 +3827,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return personas;
 	}
 
-	public Map<String, PersonaPracticas> mostrarNomPersonasPracticas() {
+	public Map<String, PersonaPracticas> mostrarNomPersonasPracticas() { // TODO
 		PersonaPracticas p;
 		Map<String, PersonaPracticas> personas = new TreeMap<>();
 
@@ -3852,7 +3852,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return personas;
 	}
 
-	public PersonaPracticas getPersonaPracticas(String nom) {
+	public PersonaPracticas getPersonaPracticas(String nom) { // TODO
 		PersonaPracticas p = new PersonaPracticas();
 
 		this.openConnection();
@@ -3874,7 +3874,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return p;
 	}
 
-	public boolean verificarPersonaPracticas(String nom) {
+	public boolean verificarPersonaPracticas(String nom) { // TODO
 		boolean existe = false;
 
 		this.openConnection();
@@ -3897,7 +3897,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return existe;
 	}
 
-	public boolean añadirPersonaPracticas(PersonaPracticas p) {
+	public boolean añadirPersonaPracticas(PersonaPracticas p) { // TODO
 		boolean check = false;
 
 		this.openConnection();
@@ -3918,7 +3918,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
-	public boolean eliminarPersonaPracticas(String nom) {
+	public boolean eliminarPersonaPracticas(String nom) { // TODO
 		boolean check = false;
 
 		this.openConnection();

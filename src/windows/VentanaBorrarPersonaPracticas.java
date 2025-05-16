@@ -77,7 +77,7 @@ public class VentanaBorrarPersonaPracticas extends JDialog implements ActionList
 										+ listPersonas.getSelectedValue() + "'?",
 								"Confirmacion", JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
-					if (cont.eliminarPersonaInclusion(listPersonas.getSelectedValue())) {
+					if (cont.eliminarPersonaPracticas(listPersonas.getSelectedValue())) {
 						result = JOptionPane.showConfirmDialog(null,
 								"La persona en practicas ha sido borrada correctamente. ¿Quiere borrar mas personas en practicas?",
 								"Persona en practicas eliminada", JOptionPane.YES_NO_OPTION);

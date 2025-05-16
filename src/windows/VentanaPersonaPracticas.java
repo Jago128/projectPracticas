@@ -58,7 +58,9 @@ public class VentanaPersonaPracticas extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAñadir) {
-			
+			VentanaAñadirPersonaPracticas dialog = new VentanaAñadirPersonaPracticas(this, cont);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
 		} else if (e.getSource() == btnBorrar) {
 			VentanaBorrarPersonaPracticas dialog = new VentanaBorrarPersonaPracticas(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

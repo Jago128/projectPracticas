@@ -547,6 +547,9 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 								comboBoxIdiomasReq.setSelectedIndex(0);
 								comboBoxResponsableApnabi.setSelectedIndex(0);
 								comboBoxSector.setSelectedIndex(0);
+								chckbxEsfuerzoFisico.setSelected(false);
+								chckbxResistencia.setSelected(false);
+								chckbxTurnos.setSelected(false);
 							}
 						} else {
 							errorChecks(1);
