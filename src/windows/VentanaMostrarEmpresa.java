@@ -285,20 +285,19 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 				} else {
 					modelPuestos.addElement(emp.getPuesto());
 				}
-				
+
 				if (emp.getDatosContacto() == null) {
 					modelDatosContacto.addElement("---");
 				} else {
 					modelDatosContacto.addElement(emp.getDatosContacto());
 				}
-				
-				
+
 				if (emp.getContactoEmpresa() == null) {
 					modelContactosEmpresa.addElement("---");
 				} else {
 					modelContactosEmpresa.addElement(emp.getContactoEmpresa());
 				}
-				
+
 				modelContactosApnabi.addElement(emp.getContactoApnabi());
 
 				if (con.getResultadoUltimoContacto() == null) {
@@ -358,13 +357,13 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 						System.out.println("Tipo invalido.");
 					}
 				}
-				
+
 				if (con.getContacto1() == null) {
 					modelContactos1.addElement("---");
 				} else {
 					modelContactos1.addElement(con.getContacto1());
 				}
-				
+
 				if (con.getContacto2() == null) {
 					modelContactos2.addElement("---");
 				} else {

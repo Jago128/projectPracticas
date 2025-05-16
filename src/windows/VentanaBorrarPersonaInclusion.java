@@ -11,12 +11,12 @@ import model.*;
 
 public class VentanaBorrarPersonaInclusion extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	
+
 	private LoginController cont;
 	// private Usuario user;
 	private JButton btnBorrar;
 	private JList<String> listPersonas;
-	
+
 	public VentanaBorrarPersonaInclusion(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
 		this.cont = cont;
@@ -47,7 +47,7 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 		lblInfo.setBounds(10, 10, 346, 23);
 		getContentPane().add(lblInfo);
 	}
-	
+
 	public void addNomPersonas() {
 		Map<String, PersonaInclusion> personasInclusion = cont.mostrarNomPersonasInclusion();
 		DefaultListModel<String> modelPersonas = new DefaultListModel<>();
@@ -71,9 +71,11 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnBorrar) {
 			if (!listPersonas.isSelectionEmpty()) {
-				int result = JOptionPane.showConfirmDialog(null,
-						"¿Esta seguro de que quieras borrar la persona en inclusion '" + listPersonas.getSelectedValue() + "'?",
-						"Confirmacion", JOptionPane.YES_NO_OPTION);
+				int result = JOptionPane
+						.showConfirmDialog(null,
+								"¿Esta seguro de que quieras borrar la persona en inclusion '"
+										+ listPersonas.getSelectedValue() + "'?",
+								"Confirmacion", JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
 					if (cont.eliminarPersonaInclusion(listPersonas.getSelectedValue())) {
 						result = JOptionPane.showConfirmDialog(null,
@@ -86,14 +88,15 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 							listPersonas.setSelectedIndex(-1);
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "La persona en inclusion que estas intentando borrar no existe.",
-								"ERROR", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null,
+								"La persona en inclusion que estas intentando borrar no existe.", "ERROR",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			} else {
 				JOptionPane.showMessageDialog(null,
-						"No hay ninguna seleccion hecha. Por favor, selecciona una persona en inclusion de la lista.", "ERROR",
-						JOptionPane.ERROR_MESSAGE);
+						"No hay ninguna seleccion hecha. Por favor, selecciona una persona en inclusion de la lista.",
+						"ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

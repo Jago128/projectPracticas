@@ -13,10 +13,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 	private LoginController cont;
 	private Usuario user;
-	private JButton btnEmpresa;
-	private JButton btnPersona;
-	private JButton btnAnalisisPuesto;
-	private JButton btnPersonaInclusion;
+	private JButton btnEmpresa, btnPersona, btnAnalisisPuesto, btnPersonaInclusion, btnPersonaPracticas;
 
 	public VentanaPrincipal(LoginController cont, Usuario user) {
 		this.cont = cont;
@@ -28,7 +25,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
-		JLabel lblOpciones = new JLabel("Elije una de las opciones para gestionar, "+user.getNombre()+":");
+		JLabel lblOpciones = new JLabel("Elije una de las opciones para gestionar, " + user.getNombre() + ":");
 		lblOpciones.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOpciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblOpciones.setBounds(47, 10, 328, 30);
@@ -43,18 +40,18 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		btnPersona.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnPersona.setBounds(176, 50, 235, 45);
 		getContentPane().add(btnPersona);
-		
+
 		btnAnalisisPuesto = new JButton("Analisis de puesto");
 		btnAnalisisPuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAnalisisPuesto.setBounds(21, 105, 198, 45);
 		getContentPane().add(btnAnalisisPuesto);
-		
+
 		btnPersonaInclusion = new JButton("Personas en inclusion");
 		btnPersonaInclusion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnPersonaInclusion.setBounds(229, 105, 177, 45);
 		getContentPane().add(btnPersonaInclusion);
-		
-		JButton btnPersonaPracticas = new JButton("Personas en practicas");
+
+		btnPersonaPracticas = new JButton("Personas en practicas");
 		btnPersonaPracticas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnPersonaPracticas.setBounds(87, 160, 235, 45);
 		getContentPane().add(btnPersonaPracticas);
@@ -63,6 +60,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		btnPersona.addActionListener(this);
 		btnAnalisisPuesto.addActionListener(this);
 		btnPersonaInclusion.addActionListener(this);
+		btnPersonaPracticas.addActionListener(this);
 	}
 
 	@Override

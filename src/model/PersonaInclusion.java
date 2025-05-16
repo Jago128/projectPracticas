@@ -18,7 +18,7 @@ public class PersonaInclusion {
 	private Accesibilidad accesibilidad;
 	private String cv;
 	private String personaFacilitadora;
-	
+
 	public PersonaInclusion() {
 		this.nombre = "";
 		this.apellido = "";
@@ -36,10 +36,11 @@ public class PersonaInclusion {
 		this.cv = "";
 		this.personaFacilitadora = "";
 	}
-	
-	public PersonaInclusion(String nombre, String apellido, int edad, Localidad municipio, Formacion formacion, String especialidad,
-			String otros, String idioma, int ultimoAñoTrabajado, Sector sectorInteres, String interesesPersonales,
-			String situacionActual, Accesibilidad accesibilidad, String cv, String personaFacilitadora) {
+
+	public PersonaInclusion(String nombre, String apellido, int edad, Localidad municipio, Formacion formacion,
+			String especialidad, String otros, String idioma, int ultimoAñoTrabajado, Sector sectorInteres,
+			String interesesPersonales, String situacionActual, Accesibilidad accesibilidad, String cv,
+			String personaFacilitadora) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.edad = edad;

@@ -62,7 +62,7 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 			JOptionPane.showMessageDialog(null,
 					"No hay ninguna empresa para visualizar."
 							+ "\nPor favor, añada una empresa anter de abrir esta ventana.",
-							"AVISO!", JOptionPane.INFORMATION_MESSAGE);
+					"AVISO!", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
 		}
 	}

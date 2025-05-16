@@ -14,7 +14,7 @@ public class VentanaPersonaInclusion extends JDialog implements ActionListener {
 	private LoginController cont;
 	private Usuario user;
 	private JButton btnMostrar, btnAñadir, btnBorrar;
-	
+
 	public VentanaPersonaInclusion(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
 		this.cont = cont;
@@ -54,7 +54,7 @@ public class VentanaPersonaInclusion extends JDialog implements ActionListener {
 		btnBorrar.addActionListener(this);
 		btnMostrar.addActionListener(this);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAñadir) {

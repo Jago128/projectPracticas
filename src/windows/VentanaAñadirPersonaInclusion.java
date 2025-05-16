@@ -15,12 +15,11 @@ public class VentanaAñadirPersonaInclusion extends JDialog implements ActionLis
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
-	private JTextField textFieldCV, textFieldIdioma, textFieldNom, textFieldUltimoAñoTrabajado;
+	private JTextField textFieldCV, textFieldIdioma, textFieldNom, textFieldUltimoAñoTrabajado, textFieldApellidos;
 	private JComboBox<String> comboBoxFormacion, comboBoxSectorInteres, comboBoxMunicipio, comboBoxAccesibilidad,
 			comboBoxPersonaFacilitadora;
 	private JTextArea textAreaOtros, textAreaInteresesPersonales, textAreaSituacionActual, textAreaEspecialidad;
 	private JButton btnAñadir;
-	private JTextField textFieldApellidos;
 	private JSpinner spinnerEdad;
 
 	public VentanaAñadirPersonaInclusion(JDialog parent, LoginController cont) {

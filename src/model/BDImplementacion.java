@@ -3482,7 +3482,7 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
-	
+
 	public boolean modificarOtros(String otros, String nom) {
 		boolean check = false;
 

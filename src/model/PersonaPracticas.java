@@ -12,7 +12,7 @@ public class PersonaPracticas {
 	private String duracion;
 	private String empresaPracticas;
 	private boolean empresaNuestra;
-	
+
 	public PersonaPracticas() {
 		this.nombre = "";
 		this.apoyo = "";
@@ -24,7 +24,7 @@ public class PersonaPracticas {
 		this.empresaPracticas = "";
 		this.empresaNuestra = false;
 	}
-	
+
 	public PersonaPracticas(String nombre, String apoyo, Formacion formacion, int curso, CentrosFormativos centro,
 			String fechas, String duracion, String empresaPracticas, boolean empresaNuestra) {
 		this.nombre = nombre;

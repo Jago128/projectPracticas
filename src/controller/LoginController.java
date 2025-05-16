@@ -171,15 +171,15 @@ public class LoginController {
 	public boolean modificarDiscapacidad(String discap, String nom) {
 		return dao.modificarDiscapacidad(discap, nom);
 	}
-	
+
 	public boolean modificarUltimoAñoTrabajador(int año, String nom) {
 		return dao.modificarUltimoAñoTrabajador(año, nom);
 	}
-	
+
 	public boolean modificarInteresesPersonales(String intereses, String nom) {
 		return dao.modificarInteresesPersonales(intereses, nom);
 	}
-	
+
 	public boolean modificarSituacionActual(String situacion, String nom) {
 		return dao.modificarSituacionActual(situacion, nom);
 	}
@@ -211,7 +211,7 @@ public class LoginController {
 	public boolean eliminarPersona(String nom) {
 		return dao.eliminarPersona(nom);
 	}
-	
+
 	// Personas en inclusion
 	public Map<String, PersonaInclusion> mostrarPersonasInclusion() {
 		return dao.mostrarPersonasInclusion();
@@ -232,7 +232,7 @@ public class LoginController {
 	public boolean añadirPersonaInclusion(PersonaInclusion pI) {
 		return dao.añadirPersonaInclusion(pI);
 	}
-	
+
 	public boolean modificarEdad(int edad, String nom) {
 		return dao.modificarEdad(edad, nom);
 	}
@@ -240,7 +240,7 @@ public class LoginController {
 	public boolean modificarMunicipio(String municipio, String nom) {
 		return dao.modificarMunicipio(municipio, nom);
 	}
-	
+
 	public boolean modificarFormacionPI(String formacion, String nom) {
 		return dao.modificarFormacionPI(formacion, nom);
 	}
@@ -248,15 +248,15 @@ public class LoginController {
 	public boolean modificarEspecialidadPI(String especialidad, String nom) {
 		return dao.modificarEspecialidadPI(especialidad, nom);
 	}
-	
+
 	public boolean modificarOtros(String otros, String nom) {
 		return dao.modificarOtros(otros, nom);
 	}
-	
+
 	public boolean modificarIdioma(String idioma, String nom) {
 		return dao.modificarIdioma(idioma, nom);
 	}
-	
+
 	public boolean modificarUltimoAñoTrabajadorPI(int año, String nom) {
 		return dao.modificarUltimoAñoTrabajadorPI(año, nom);
 	}
@@ -264,11 +264,11 @@ public class LoginController {
 	public boolean modificarSectorInteresPI(String sectorI, String nom) {
 		return dao.modificarSectorInteresPI(sectorI, nom);
 	}
-	
+
 	public boolean modificarInteresesPersonalesPI(String intereses, String nom) {
 		return dao.modificarInteresesPersonalesPI(intereses, nom);
 	}
-	
+
 	public boolean modificarSituacionActualPI(String situacion, String nom) {
 		return dao.modificarSituacionActualPI(situacion, nom);
 	}
@@ -280,11 +280,11 @@ public class LoginController {
 	public boolean modificarCV(String link, String nom) {
 		return dao.modificarCV(link, nom);
 	}
-	
+
 	public boolean modificarPersonaFacilitadora(String persona, String nom) {
 		return dao.modificarPersonaFacilitadora(persona, nom);
 	}
-	
+
 	public boolean eliminarPersonaInclusion(String nom) {
 		return dao.eliminarPersonaInclusion(nom);
 	}

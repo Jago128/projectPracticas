@@ -11,9 +11,7 @@ import model.Usuario;
 public class VentanaEmpresa extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
-	private JButton btnMostrar;
-	private JButton btnAñadir;
-	private JButton btnBorrar;
+	private JButton btnMostrar, btnAñadir, btnBorrar;
 	private LoginController cont;
 	private Usuario user;
 

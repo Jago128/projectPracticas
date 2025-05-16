@@ -28,7 +28,7 @@ public class Contacto {
 		this.fechaResolucion = "";
 		this.codEmpresa = 0;
 	}
-	
+
 	public Contacto(String contacto1) {
 		this.contacto1 = contacto1;
 		this.contacto2 = "";
@@ -41,7 +41,7 @@ public class Contacto {
 		this.fechaResolucion = "";
 		this.codEmpresa = 0;
 	}
-	
+
 	public Contacto(String contacto1, String contacto2, String contacto3, String contacto4, String observaciones,
 			ResultadoUltimoContacto resultadoUltimoContacto, String infoUltimo, ResultadoFinal resultadoFinal,
 			String fechaResolucion, int codEmpresa) {

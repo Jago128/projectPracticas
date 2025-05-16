@@ -71,9 +71,11 @@ public class VentanaBorrarPersonaOrientacion extends JDialog implements ActionLi
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnBorrar) {
 			if (!listPersonas.isSelectionEmpty()) {
-				int result = JOptionPane.showConfirmDialog(null,
-						"¿Esta seguro de que quieras borrar la persona en orientacion '" + listPersonas.getSelectedValue() + "'?",
-						"Confirmacion", JOptionPane.YES_NO_OPTION);
+				int result = JOptionPane
+						.showConfirmDialog(null,
+								"¿Esta seguro de que quieras borrar la persona en orientacion '"
+										+ listPersonas.getSelectedValue() + "'?",
+								"Confirmacion", JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
 					if (cont.eliminarPersona(listPersonas.getSelectedValue())) {
 						result = JOptionPane.showConfirmDialog(null,
@@ -86,14 +88,15 @@ public class VentanaBorrarPersonaOrientacion extends JDialog implements ActionLi
 							listPersonas.setSelectedIndex(-1);
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "La persona en orientacion que estas intentando borrar no existe.",
-								"ERROR", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null,
+								"La persona en orientacion que estas intentando borrar no existe.", "ERROR",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			} else {
 				JOptionPane.showMessageDialog(null,
-						"No hay ninguna seleccion hecha. Por favor, selecciona una persona en orientacion de la lista.", "ERROR",
-						JOptionPane.ERROR_MESSAGE);
+						"No hay ninguna seleccion hecha. Por favor, selecciona una persona en orientacion de la lista.",
+						"ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

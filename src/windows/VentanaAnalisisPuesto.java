@@ -10,7 +10,7 @@ import model.Usuario;
 
 public class VentanaAnalisisPuesto extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	
+
 	private LoginController cont;
 	private Usuario user;
 	private JButton btnMostrar, btnAñadir, btnBorrar;

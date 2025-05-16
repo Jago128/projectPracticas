@@ -890,7 +890,7 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 				modelOtrosIdiomas.addElement(p.getOtrosIdiomas());
 				modelObservaciones.addElement(p.getObservaciones());
 				modelSituacionActual.addElement(p.getSituacionActual());
-				modelUltimoAñoTrabajado.addElement(""+p.getUltimoAñoTrabajado());
+				modelUltimoAñoTrabajado.addElement("" + p.getUltimoAñoTrabajado());
 			}
 
 			listNom.setModel(modelNom);

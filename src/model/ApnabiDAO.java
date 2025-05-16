@@ -82,11 +82,11 @@ public interface ApnabiDAO {
 	public boolean modificarCVLink(String link, String nom);
 
 	public boolean modificarDiscapacidad(String discap, String nom);
-	
+
 	public boolean modificarUltimoAñoTrabajador(int año, String nom);
-	
+
 	public boolean modificarInteresesPersonales(String intereses, String nom);
-	
+
 	public boolean modificarSituacionActual(String situacion, String nom);
 
 	public boolean modificarEuskera(String nivel, String nom);
@@ -102,7 +102,7 @@ public interface ApnabiDAO {
 	public boolean modificarPersonaObservaciones(String observaciones, String nom);
 
 	public boolean eliminarPersona(String nom);
-	
+
 	// Personas en inclusion
 	public Map<String, PersonaInclusion> mostrarPersonasInclusion();
 
@@ -113,7 +113,7 @@ public interface ApnabiDAO {
 	public boolean verificarPersonaInclusion(String nom);
 
 	public boolean añadirPersonaInclusion(PersonaInclusion pI);
-	
+
 	public boolean modificarEdad(int edad, String nom);
 
 	public boolean modificarMunicipio(String municipio, String nom);
@@ -121,7 +121,7 @@ public interface ApnabiDAO {
 	public boolean modificarFormacionPI(String formacion, String nom);
 
 	public boolean modificarEspecialidadPI(String especialidad, String nom);
-	
+
 	public boolean modificarOtros(String otros, String nom);
 
 	public boolean modificarIdioma(String idioma, String nom);

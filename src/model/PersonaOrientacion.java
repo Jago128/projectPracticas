@@ -19,7 +19,7 @@ public class PersonaOrientacion {
 	private Localidad localidad;
 	private Accesibilidad accesibilidad;
 	private String observaciones;
-	
+
 	public PersonaOrientacion() {
 		this.nombre = "";
 		this.apoyo = "";
@@ -38,11 +38,11 @@ public class PersonaOrientacion {
 		this.accesibilidad = Accesibilidad.UNSET;
 		this.observaciones = "";
 	}
-	
-	public PersonaOrientacion(String nombre, String apoyo, Formacion formacion, String especialidad, Sector sectorInteres,
-			String cvLink, Discapacidad cerfificadoDiscapacidad, int ultimoAñoTrabajado, String interesesPersonales,
-			String situacionActual, Euskera euskera, Ingles ingles, String otrosIdiomas, Localidad localidad,
-			Accesibilidad accesibilidad, String observaciones) {
+
+	public PersonaOrientacion(String nombre, String apoyo, Formacion formacion, String especialidad,
+			Sector sectorInteres, String cvLink, Discapacidad cerfificadoDiscapacidad, int ultimoAñoTrabajado,
+			String interesesPersonales, String situacionActual, Euskera euskera, Ingles ingles, String otrosIdiomas,
+			Localidad localidad, Accesibilidad accesibilidad, String observaciones) {
 		this.nombre = nombre;
 		this.apoyo = apoyo;
 		this.formacion = formacion;

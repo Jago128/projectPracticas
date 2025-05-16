@@ -21,7 +21,7 @@ public class AnalisisPuesto {
 	private boolean resistencia;
 	private Comunicacion comunicacion;
 	private Sensoriales caractersiticasSensoriales;
-	
+
 	public AnalisisPuesto() {
 		this.empresa = "";
 		this.puesto = "";
