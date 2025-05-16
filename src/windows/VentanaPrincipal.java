@@ -23,7 +23,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		this.user = user;
 
 		setTitle("Bienvenido, " + user.getNombre());
-		setBounds(100, 100, 430, 200);
+		setBounds(100, 100, 430, 250);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -49,10 +49,15 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		btnAnalisisPuesto.setBounds(21, 105, 198, 45);
 		getContentPane().add(btnAnalisisPuesto);
 		
-		btnPersonaInclusion = new JButton("Personas inclusion");
+		btnPersonaInclusion = new JButton("Personas en inclusion");
 		btnPersonaInclusion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnPersonaInclusion.setBounds(243, 105, 145, 45);
+		btnPersonaInclusion.setBounds(229, 105, 177, 45);
 		getContentPane().add(btnPersonaInclusion);
+		
+		JButton btnPersonaPracticas = new JButton("Personas en practicas");
+		btnPersonaPracticas.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnPersonaPracticas.setBounds(87, 160, 235, 45);
+		getContentPane().add(btnPersonaPracticas);
 
 		btnEmpresa.addActionListener(this);
 		btnPersona.addActionListener(this);
