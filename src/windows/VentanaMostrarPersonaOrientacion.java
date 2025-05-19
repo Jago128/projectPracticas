@@ -922,7 +922,7 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnModificarPersona) {
 			if (!listNom.isSelectionEmpty()) {
-				if (!listNom.getSelectedValue().equals("Nombre")) {
+				if (!listNom.getSelectedValue().equals("Nombres")) {
 					VentanaModificarPersonaOrientacion dialog = new VentanaModificarPersonaOrientacion(this, cont,
 							cont.getPersona(listNom.getSelectedValue()));
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

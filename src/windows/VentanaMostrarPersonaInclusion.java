@@ -829,7 +829,7 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnModificarPersona) {
 			if (!listNom.isSelectionEmpty()) {
-				if (!listNom.getSelectedValue().equals("Nombre")) {
+				if (!listNom.getSelectedValue().equals("Nombres")) {
 					VentanaModificarPersonaInclusion dialog = new VentanaModificarPersonaInclusion(this, cont,
 							cont.getPersonaInclusion(listNom.getSelectedValue()));
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

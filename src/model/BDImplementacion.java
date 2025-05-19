@@ -1164,7 +1164,7 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLNOMPERSONAS);
+			stmt = con.prepareStatement(SQLSELECTPERSONA);
 			stmt.setString(1, nom);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -2510,6 +2510,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean eliminarPersona(String nom) {
 		boolean check = false;
 
@@ -3322,6 +3323,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean modificarEdad(int edad, String nom) {
 		boolean check = false;
 
@@ -3348,6 +3350,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean modificarMunicipio(String municipio, String nom) {
 		boolean check = false;
 
@@ -3432,6 +3435,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean modificarFormacionPI(String formacion, String nom) {
 		boolean check = false;
 
@@ -3457,6 +3461,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean modificarEspecialidadPI(String especialidad, String nom) {
 		boolean check = false;
 
@@ -3483,6 +3488,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean modificarOtros(String otros, String nom) {
 		boolean check = false;
 
@@ -3509,6 +3515,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean modificarIdioma(String idioma, String nom) {
 		boolean check = false;
 
@@ -3535,6 +3542,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean modificarUltimoAñoTrabajadorPI(int año, String nom) {
 		boolean check = false;
 
@@ -3557,6 +3565,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean modificarSectorInteresPI(String sectorI, String nom) {
 		boolean check = false;
 
@@ -3640,6 +3649,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean modificarInteresesPersonalesPI(String intereses, String nom) {
 		boolean check = false;
 
@@ -3666,6 +3676,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean modificarSituacionActualPI(String situacion, String nom) {
 		boolean check = false;
 
@@ -3692,6 +3703,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean modificarAccesibilidadPI(String accesibilidad, String nom) {
 		boolean check = false;
 
@@ -3728,6 +3740,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean modificarCV(String link, String nom) {
 		boolean check = false;
 
@@ -3754,6 +3767,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public boolean modificarPersonaFacilitadora(String persona, String nom) {
 		boolean check = false;
 
@@ -3802,6 +3816,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return check;
 	}
 
+	@Override
 	public Map<String, PersonaPracticas> mostrarPersonasPracticas() { // TODO
 		PersonaPracticas p;
 		Map<String, PersonaPracticas> personas = new TreeMap<>();
@@ -3827,6 +3842,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return personas;
 	}
 
+	@Override
 	public Map<String, PersonaPracticas> mostrarNomPersonasPracticas() { // TODO
 		PersonaPracticas p;
 		Map<String, PersonaPracticas> personas = new TreeMap<>();
@@ -3852,6 +3868,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return personas;
 	}
 
+	@Override
 	public PersonaPracticas getPersonaPracticas(String nom) { // TODO
 		PersonaPracticas p = new PersonaPracticas();
 
@@ -3874,6 +3891,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return p;
 	}
 
+	@Override
 	public boolean verificarPersonaPracticas(String nom) { // TODO
 		boolean existe = false;
 
@@ -3897,6 +3915,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return existe;
 	}
 
+	@Override
 	public boolean añadirPersonaPracticas(PersonaPracticas p) { // TODO
 		boolean check = false;
 
@@ -3917,7 +3936,199 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
+	
+	@Override
+	public boolean modificarApoyoPracticas(String apoyo, String nom) { // TODO
+		boolean check = false;
 
+		this.openConnection();
+		try {
+			if (!apoyo.isBlank()) {
+				stmt = con.prepareStatement(SQLUPDATEAPOYO);
+				stmt.setString(1, apoyo);
+				stmt.setString(2, nom);
+				if (stmt.executeUpdate() > 0) {
+					check = true;
+				}
+				stmt.close();
+			} else {
+				check = true;
+			}
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+	
+	@Override
+	public boolean modificarFormacionPracticas(String formacion, String nom) { // TODO
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			if (formacion.equals("FP Basica")) {
+				formacion = "FP_Basica";
+			}
+			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt.setString(1, formacion);
+			stmt.setString(2, nom);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+	
+	@Override
+	public boolean modificarCurso(int curso, String nom) { // TODO
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt.setInt(1, curso);
+			stmt.setString(2, nom);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+	
+	@Override
+	public boolean modificarCentro(String centro, String nom) { // TODO
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt.setString(1, centro);
+			stmt.setString(2, nom);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarFechas(String fechas, String nom) { // TODO
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt.setString(1, fechas);
+			stmt.setString(2, nom);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarDuracion(String dur, String nom) { // TODO
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt.setString(1, dur);
+			stmt.setString(2, nom);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+	
+	@Override
+	public boolean modificarEmpPracticas(String practicas, String nom) { // TODO
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt.setString(1, practicas);
+			stmt.setString(2, nom);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public boolean modificarEmpApnabi(boolean empNuestro, String nom) { // TODO
+		boolean check = false;
+
+		this.openConnection();
+		try {
+			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt.setBoolean(1, empNuestro);
+			stmt.setString(2, nom);
+			if (stmt.executeUpdate() > 0) {
+				check = true;
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al intentar modificar la persona.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+	
+	@Override
 	public boolean eliminarPersonaPracticas(String nom) { // TODO
 		boolean check = false;
 
@@ -3946,7 +4157,7 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLEMPRESAS);
+			stmt = con.prepareStatement(SQLANALISISPERSONAS);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				aP = new AnalisisPuesto();
@@ -3982,6 +4193,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return aPs;
 	}
 
+	@Override
 	public Map<String, AnalisisPuesto> mostrarAPEmpresas() {
 		AnalisisPuesto aP;
 		Map<String, AnalisisPuesto> aPs = new TreeMap<>();
@@ -4045,6 +4257,7 @@ public class BDImplementacion implements ApnabiDAO {
 		return aP;
 	}
 
+	@Override
 	public boolean verificarAP(String nom) {
 		boolean existe = false;
 

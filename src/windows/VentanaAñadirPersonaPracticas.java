@@ -14,9 +14,9 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 
 	private LoginController cont;
 	private JTextField textFieldPracticas, textFieldDuracion, textFieldNom, textFieldFecha;
-	private JComboBox<String> comboBoxFormacion, comboBoxCurso, comboBoxCentroFormativo;
+	private JComboBox<String> comboBoxFormacion, comboBoxCurso, comboBoxCentroFormativo, comboBoxApoyo;
+
 	private JButton btnAñadir;
-	private JComboBox<String> comboBoxApoyo;
 	private JCheckBox chckbxEmpresaApnabi;
 
 	public VentanaAñadirPersonaPracticas(JDialog parent, LoginController cont) {
@@ -146,11 +146,6 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 		textFieldPracticas.setBounds(424, 163, 172, 19);
 		getContentPane().add(textFieldPracticas);
 
-		btnAñadir = new JButton("Añadir persona en practicas");
-		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		btnAñadir.setBounds(267, 195, 339, 37);
-		getContentPane().add(btnAñadir);
-
 		JLabel lblApoyo = new JLabel("Apoyo: *");
 		lblApoyo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblApoyo.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -168,6 +163,11 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 		chckbxEmpresaApnabi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chckbxEmpresaApnabi.setBounds(63, 193, 163, 33);
 		getContentPane().add(chckbxEmpresaApnabi);
+
+		btnAñadir = new JButton("Añadir persona en practicas");
+		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btnAñadir.setBounds(267, 195, 339, 37);
+		getContentPane().add(btnAñadir);
 		btnAñadir.addActionListener(this);
 	}
 
@@ -259,7 +259,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "CIFP Arratiako Zulaibar Lanbide Ikastegia":
-					centro = CentrosFormativos.CIFP_ARRATIAKOZULAIBARLANBIDEIKASTEGIA;
+					centro = CentrosFormativos.CIFP_ARRATIAKOZULAIBAR_LANBIDEIKASTEGIA;
 					break;
 
 				case "CIFP Uni Eibar Ermua":
@@ -283,7 +283,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "CIFP Costrucción Bizkaia LHII":
-					centro = CentrosFormativos.CIFPCONSTRUCCIÓNBIZKAIA_LHII;
+					centro = CentrosFormativos.CIFP_CONSTRUCCIONBIZKAIA_LHII;
 					break;
 
 				case "CPIFP Barakaldo":
@@ -295,7 +295,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "CIFP Hostelería/Hostalaritza LHII":
-					centro = CentrosFormativos.CIFP_HOSTELERÍA_HOSTALARITZA_LHII;
+					centro = CentrosFormativos.CIFP_HOSTELERIA_HOSTALARITZA_LHII;
 					break;
 
 				case "CIFP Andra Mari BHI":
@@ -323,7 +323,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "CIFP Calasanz Lanbide Ikastegia":
-					centro = CentrosFormativos.CIFP_CALASANZLANBIDEIKASTEGIA;
+					centro = CentrosFormativos.CIFP_CALASANZ_LANBIDEIKASTEGIA;
 					break;
 
 				case "CPIFP Innovación Social Diego Berguices-Otxarkoaga":
@@ -392,10 +392,6 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 
 				case "IES BARRUTIALDE BHI":
 					centro = CentrosFormativos.IES_BARRUTIALDE_BHI;
-					break;
-
-				case "CIFP CONSTRUCCIÓN BIZKAIA LHII":
-					centro = CentrosFormativos.CIFPCONSTRUCCIÓNBIZKAIA_LHII;
 					break;
 
 				case "IES BALMASEDA BHI":

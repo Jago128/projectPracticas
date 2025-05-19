@@ -22,6 +22,7 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 	private JTextArea textAreaOtros, textAreaInteresesPersonales, textAreaSituacionActual, textAreaEspecialidad;
 	private JSpinner spinnerEdad;
 	private JButton btnModificar;
+	private JTextArea textAreaPersona;
 
 	public VentanaModificarPersonaInclusion(JDialog parent, LoginController cont, PersonaInclusion pI) {
 		super(parent, true);
@@ -33,14 +34,14 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 		setBounds(100, 100, 920, 770);
 		getContentPane().setLayout(null);
 
-		JTextArea textareaPersona = new JTextArea();
-		textareaPersona.setText("");
-		textareaPersona.setLineWrap(true);
-		textareaPersona.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textareaPersona.setEditable(false);
-		textareaPersona.setBackground(Color.WHITE);
-		textareaPersona.setBounds(390, 37, 506, 293);
-		getContentPane().add(textareaPersona);
+		textAreaPersona = new JTextArea();
+		textAreaPersona.setText("");
+		textAreaPersona.setLineWrap(true);
+		textAreaPersona.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaPersona.setEditable(false);
+		textAreaPersona.setBackground(Color.WHITE);
+		textAreaPersona.setBounds(390, 37, 506, 293);
+		getContentPane().add(textAreaPersona);
 
 		JLabel lblDatosPersona = new JLabel("Informacion de la persona en inclusion seleccionada:");
 		lblDatosPersona.setHorizontalAlignment(SwingConstants.CENTER);
@@ -887,6 +888,7 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 		infoPersona.append("Accesibilidad:" + accesibilidad);
 		infoPersona.append("CV:" + pI.getCv());
 		infoPersona.append("Persona facilitadora:" + pI.getPersonaFacilitadora());
+		textAreaPersona.setText(infoPersona.toString());
 	}
 
 	public boolean errorChecks(int errorID) {

@@ -53,8 +53,6 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		lblFechaFormato.setBounds(42, 38, 275, 16);
 		getContentPane().add(lblFechaFormato);
 
-		loadEmpresa();
-
 		textareaEmpresa = new JTextArea();
 		textareaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textareaEmpresa.setText("");
@@ -63,6 +61,8 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		textareaEmpresa.setEditable(false);
 		textareaEmpresa.setBounds(388, 37, 506, 299);
 		getContentPane().add(textareaEmpresa);
+		
+		loadEmpresa();
 
 		JLabel lblDatosContacto = new JLabel("Datos de contacto:");
 		lblDatosContacto.setHorizontalAlignment(SwingConstants.CENTER);

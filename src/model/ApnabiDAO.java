@@ -142,7 +142,7 @@ public interface ApnabiDAO {
 
 	public boolean eliminarPersonaInclusion(String nom);
 
-	// Personas en inclusion
+	// Personas en practicas
 	public Map<String, PersonaPracticas> mostrarPersonasPracticas();
 
 	public Map<String, PersonaPracticas> mostrarNomPersonasPracticas();
@@ -152,6 +152,22 @@ public interface ApnabiDAO {
 	public boolean verificarPersonaPracticas(String nom);
 
 	public boolean añadirPersonaPracticas(PersonaPracticas p);
+	
+	public boolean modificarApoyoPracticas(String apoyo, String nom);
+
+	public boolean modificarFormacionPracticas(String formacion, String nom);
+
+	public boolean modificarCurso(int curso, String nom);
+
+	public boolean modificarCentro(String centro, String nom);
+
+	public boolean modificarFechas(String fechas, String nom);
+
+	public boolean modificarDuracion(String dur, String nom);
+
+	public boolean modificarEmpPracticas(String practicas, String nom);
+
+	public boolean modificarEmpApnabi(boolean empNuestro, String nom);
 
 	public boolean eliminarPersonaPracticas(String nom);
 

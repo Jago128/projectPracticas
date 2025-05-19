@@ -428,7 +428,7 @@ public class VentanaMostrarAnalisisPuesto extends JDialog implements ActionListe
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnModificarPersona) {
 			if (!listEmpresa.isSelectionEmpty()) {
-				if (!listEmpresa.getSelectedValue().equals("Nombre")) {
+				if (!listEmpresa.getSelectedValue().equals("Empresas")) {
 					VentanaModificarAnalisisPuesto dialog = new VentanaModificarAnalisisPuesto(this, cont,
 							cont.getAnalisisPuesto(listEmpresa.getSelectedValue()));
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

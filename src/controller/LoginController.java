@@ -289,7 +289,7 @@ public class LoginController {
 		return dao.eliminarPersonaInclusion(nom);
 	}
 
-	// Personas en inclusion
+	// Personas en practicas
 	public Map<String, PersonaPracticas> mostrarPersonasPracticas() {
 		return dao.mostrarPersonasPracticas();
 	}
@@ -304,6 +304,38 @@ public class LoginController {
 
 	public boolean verificarPersonaPracticas(String nom) {
 		return dao.verificarPersonaPracticas(nom);
+	}
+	
+	public boolean modificarApoyoPracticas(String apoyo, String nom) {
+		return dao.modificarApoyoPracticas(apoyo, nom);
+	}
+
+	public boolean modificarFormacionPracticas(String formacion, String nom) {
+		return dao.modificarFormacionPracticas(formacion, nom);
+	}
+
+	public boolean modificarCurso(int curso, String nom) {
+		return dao.modificarCurso(curso, nom);
+	}
+
+	public boolean modificarCentro(String centro, String nom) {
+		return dao.modificarCentro(centro, nom);
+	}
+
+	public boolean modificarFechas(String fechas, String nom) {
+		return dao.modificarFechas(fechas, nom);
+	}
+
+	public boolean modificarDuracion(String dur, String nom) {
+		return dao.modificarDuracion(dur, nom);
+	}
+	
+	public boolean modificarEmpPracticas(String practicas, String nom) {
+		return dao.modificarEmpPracticas(practicas, nom);
+	}
+	
+	public boolean modificarEmpApnabi(boolean empNuestro, String nom) {
+		return dao.modificarEmpApnabi(empNuestro, nom);
 	}
 
 	public boolean añadirPersonaPracticas(PersonaPracticas p) {
