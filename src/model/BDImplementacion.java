@@ -3827,7 +3827,15 @@ public class BDImplementacion implements ApnabiDAO {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				p = new PersonaPracticas();
-
+				p.setNombre(rs.getString("NOM"));
+				p.setApoyo(rs.getString("APOYO"));
+				p.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				p.setCurso(rs.getInt("CURSO"));
+				p.setCentro(CentrosFormativos.valueOf(rs.getString("CENTRO").toUpperCase()));
+				p.setFechas(rs.getString("FECHAS"));
+				p.setDuracion(rs.getString("DURACION"));
+				p.setEmpresaPracticas(rs.getString("EMPRESAPRACTICAS"));
+				p.setEmpresaNuestra(rs.getBoolean("EMPRESANUESTRA"));
 				personas.put(p.getNombre(), p);
 			}
 			rs.close();
@@ -3922,7 +3930,392 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLINSERTPERSONA);
+			
+			switch (p.getCentro()) {
+			case ADSIS_BILBAO_OLHIP:
+				stmt.setString(5, "ADSIS BILBAO OLHIP");
+				break;
 
+			case CEINMARK:
+				stmt.setString(5, "CEINMARK");
+				break;
+
+			case CENTROMIKELDI:
+				stmt.setString(5, "Centro Mikeldi");
+				break;
+
+			case CENTROSANLUIS:
+				stmt.setString(5, "Centro San Luis");
+				break;
+
+			case CIFP_AGRARIODERIO_DERIONEKAZARITZA_LHII:
+				stmt.setString(5, "CIFP AGRARIO DERIO/DERIO NEKAZARITZA LHII");
+				break;
+
+			case CIFP_ANDRA_MARI_BHI:
+				stmt.setString(5, "CIFP Andra Mari BHI");
+				break;
+
+			case CIFP_ARRATIAKOZULAIBAR_LANBIDEIKASTEGIA:
+				stmt.setString(5, "CIFP Arratiako Zulaibar Lanbide Ikastegia");
+				break;
+
+			case CIFP_BIDEBIETA:
+				stmt.setString(5, "CIFP Bidebieta");
+				break;
+
+			case CIFP_CALASANZ_LANBIDEIKASTEGIA:
+				stmt.setString(5, "CIFP Calasanz Lanbide Ikastegia");
+				break;
+
+			case CIFP_CONSTRUCCIONBIZKAIA_LHII:
+				stmt.setString(5, "CIFP CONSTRUCCIÓN BIZKAIA LHII");
+				break;
+
+			case CIFP_ELORRIETAERREKA_MARI_GBLHI:
+				stmt.setString(5, "CIFP Elorrieta Erreka Mari GBLHI");
+				break;
+
+			case CIFP_EMILIOCAMPUZANO:
+				stmt.setString(5, "CIFP Emilio Campuzano");
+				break;
+
+			case CIFP_ESCUELAHOSTELERIA_LHII:
+				stmt.setString(5, "CIFP Escuela de Hostelería LHII");
+				break;
+
+			case CIFP_FADURA_GBLHI:
+				stmt.setString(5, "CIFP Fadura GBLHI");
+				break;
+
+			case CIFP_HOSTELERIA_OSTALARITZA_LHII:
+				stmt.setString(5, "CIFP HOSTELERÍA/OSTALARITZA LHII");
+				break;
+
+			case CIFP_HOSTELERIA_HOSTALARITZA_LHII:
+				stmt.setString(5, "CIFP Hostelería/Hostalaritza LHII");
+				break;
+
+			case CIFP_IBAIONDO:
+				stmt.setString(5, "CIFP Ibaiondo");
+				break;
+
+			case CIFP_IURRETA_GBLHI:
+				stmt.setString(5, "CIFP Iurreta GBLHI");
+				break;
+
+			case CIFP_LEA_ARTIBAI:
+				stmt.setString(5, "CIFP Lea-Artibai");
+				break;
+
+			case CIFP_NAUTICOBERMEO_BERMEOKONAUTIKA_LHII:
+				stmt.setString(5, "CIFP NÁUTICO BERMEO/BERMEOKO NAUTIKA LHII");
+				break;
+
+			case CIFP_REPELEGA_GBLHI:
+				stmt.setString(5, "CIFP Repelega GBLHI");
+				break;
+
+			case CIFP_SANJORGE_GBLHI:
+				stmt.setString(5, "CIFP San Jorge GBLHI");
+				break;
+
+			case CIFP_TARTANGA_GBLHI:
+				stmt.setString(5, "CIFP Tartanga GBLHI");
+				break;
+
+			case CIFP_TXURDINAGA_LHII:
+				stmt.setString(5, "CIFP TXURDINAGA LHII");
+				break;
+
+			case CIFP_UNI_EIBARERMUA:
+				stmt.setString(5, "CIFP Uni Eibar Ermua");
+				break;
+
+			case CIFP_ZORNOTZA_LHII:
+				stmt.setString(5, "CIFP ZORNOTZA LHII");
+				break;
+
+			case CPEIPS_ANGELESCUSTODIOS_HLBHIP:
+				stmt.setString(5, "CPEIPS ANGELES CUSTODIOS HLBHIP");
+				break;
+
+			case CPEIPS_MARISTAS_SANMIGUEL_HLBHIP:
+				stmt.setString(5, "CPEIPS MARISTAS-SAN MIGUEL HLBHIP");
+				break;
+
+			case CPEIPS_NTRA_SRA_DE_LA_ANTIGUA_HLBHIP:
+				stmt.setString(5, "CPEIPS NTRA. SRA. DE LA ANTIGUA HLBHIP");
+				break;
+
+			case CPES_ALMI_BHIP:
+				stmt.setString(5, "CPES ALMI BHIP");
+				break;
+
+			case CPES_ARANGOYA_BHIP:
+				stmt.setString(5, "CPES ARANGOYA BHIP");
+				break;
+
+			case CPES_ARCE_BHIP:
+				stmt.setString(5, "CPES ARCE BHIP");
+				break;
+
+			case CPES_ARMENGOL_BHIP:
+				stmt.setString(5, "CPES ARMENGOL BHIP");
+				break;
+
+			case CPES_BAGABILTZA_BHIP:
+				stmt.setString(5, "CPES BAGABILTZA BHIP");
+				break;
+
+			case CPES_EIDE_BHIP:
+				stmt.setString(5, "CPES EIDE BHIP");
+				break;
+
+			case CPES_ESPERANZA_ALHAMA_BHIP:
+				stmt.setString(5, "CPES ESPERANZA ALHAMA BHIP");
+				break;
+
+			case CPES_IBAIZABAL_IKASTOLA_BHIP:
+				stmt.setString(5, "CPES IBAIZABAL IKASTOLA BHIP");
+				break;
+
+			case CPES_IKASAUTO_BHIP:
+				stmt.setString(5, "CPES IKASAUTO BHIP");
+				break;
+
+			case CPES_NTRA_SRA_DE_LA_ANTIGUA_BHIP:
+				stmt.setString(5, "CPES NTRA. SRA. DE LA ANTIGUA BHIP");
+				break;
+
+			case CPES_ORUE_ESKOLA_BHIP:
+				stmt.setString(5, "CPES ORUE ESKOLA BHIP");
+				break;
+
+			case CPES_XABIER_BHIP:
+				stmt.setString(5, "CPES XABIER BHIP");
+				break;
+
+			case CPFPB_ADSISLEIOA_OLHIP:
+				stmt.setString(5, "CPFPB ADSIS LEIOA OLHIP");
+				break;
+
+			case CPFPB_ADSIS_GETXO_OLHIP:
+				stmt.setString(5, "CPFPB ADSIS GETXO OLHIP");
+				break;
+
+			case CPFPB_MEATZALDEA_OLHIP:
+				stmt.setString(5, "CPFPB MEATZALDEA OLHIP");
+				break;
+
+			case CPFPB_PEÑASCALMARKINA_OLHIP:
+				stmt.setString(5, "CPFPB PEÑASCAL MARKINA OLHIP");
+				break;
+
+			case CPIFP_BARAKALDO:
+				stmt.setString(5, "CPIFP Barakaldo");
+				break;
+
+			case CPIFP_HARROBIA:
+				stmt.setString(5, "CPIFP Harrobia");
+				break;
+
+			case CPIFP_HARROBIA_LHIPI:
+				stmt.setString(5, "CPIFP HARROBIA LHIPI");
+				break;
+
+			case CPIFP_INNOVACIONSOCIALDIEGO_BERGUICES_OTXARKOAGA:
+				stmt.setString(5, "CPIFP Innovación Social Diego Berguices-Otxarkoaga");
+				break;
+
+			case CPIFP_JESUITAKPOLITEKNIKOA:
+				stmt.setString(5, "CPIFP Jesuitak Politeknikoa");
+				break;
+
+			case CPIFP_MARISTAKDURANGO:
+				stmt.setString(5, "CPIFP Maristak Durango");
+				break;
+
+			case CPIFP_PEÑASCAL:
+				stmt.setString(5, "CPIFP Peñascal");
+				break;
+
+			case CPIFP_SALESIANOSDEUSTO:
+				stmt.setString(5, "CPIFP Salesianos Deusto");
+				break;
+
+			case CPIFP_SANVIATOR:
+				stmt.setString(5, "CPIFP San Viator");
+				break;
+
+			case CPIFP_SOMORROSTRO_LHIPI:
+				stmt.setString(5, "CPIFP SOMORROSTRO LHIPI");
+				break;
+
+			case CRUZROJA:
+				stmt.setString(5, "CRUZ ROJA");
+				break;
+
+			case ESCUELASUPERIORHOSTELERIABILBAO:
+				stmt.setString(5, "ESCUELA SUPERIOR DE HOSTELERÍA BILBAO");
+				break;
+
+			case ESCUELAUNIVERSITARIAMAGISTERIO_BAM_BEGOÑAKO_ANDRA_MARI:
+				stmt.setString(5, "Escuela Universitaria de Magisterio BAM – Begoñako Andra Mari");
+				break;
+
+			case FERNANDO_BHIP:
+				stmt.setString(5, "FERNANDO BHIP");
+				break;
+
+			case HERMANOSLARRINAGA_SL_BHIP:
+				stmt.setString(5, "HERMANOS LARRINAGA S.L. BHIP");
+				break;
+
+			case IES_BALMASEDA_BHI:
+				stmt.setString(5, "IES BALMASEDA BHI");
+				break;
+
+			case IES_BARRUTIALDE_BHI:
+				stmt.setString(5, "IES BARRUTIALDE BHI");
+				break;
+
+			case IES_DOLORESIBARRURI_BHI:
+				stmt.setString(5, "IES DOLORES IBARRURI BHI");
+				break;
+
+			case IES_ESKURTZE_BHI:
+				stmt.setString(5, "IES ESKURTZE BHI");
+				break;
+
+			case IES_FRAYJUAN_DE_ZUMARRAGA_DURANGO_BHI:
+				stmt.setString(5, "IES FRAY JUAN DE ZUMARRAGA-DURANGO BHI");
+				break;
+
+			case IES_GERNIKA_BHI:
+				stmt.setString(5, "IES GERNIKA BHI");
+				break;
+
+			case IES_IBARREKOLANDA_BHI:
+				stmt.setString(5, "IES IBARREKOLANDA BHI");
+				break;
+
+			case IES_JOSEMIGUELBARANDIARAN_BHI:
+				stmt.setString(5, "IES JOSE MIGUEL BARANDIARAN BHI");
+				break;
+
+			case IES_JUAN_ANTONIO_ZUNZUNEGUI_BHI:
+				stmt.setString(5, "IES JUAN ANTONIO ZUNZUNEGUI BHI");
+				break;
+
+			case IES_LEKEITIO_BHI:
+				stmt.setString(5, "IES LEKEITIO BHI");
+				break;
+
+			case IES_MARTIN_DE_BERTENDONA_BHI:
+				stmt.setString(5, "IES Martín de Bertendona BHI");
+				break;
+
+			case IES_MUNGIA_BHI:
+				stmt.setString(5, "IES MUNGIA BHI");
+				break;
+
+			case IES_ONDARROA_BHI:
+				stmt.setString(5, "IES ONDARROA BHI");
+				break;
+
+			case IES_SATURNINO_DE_LA_PEÑA_BHI:
+				stmt.setString(5, "IES SATURNINO DE LA PEÑA BHI");
+				break;
+
+			case IMFPB_GERNIKA_LUMO_OLHUI:
+				stmt.setString(5, "IMFPB GERNIKA-LUMO OLHUI");
+				break;
+
+			case IMFPB_BASAURI_OLHUI:
+				stmt.setString(5, "IMFPB BASAURI OLHUI");
+				break;
+
+			case IMFPB_BERMEO_OLHUI:
+				stmt.setString(5, "IMFPB BERMEO OLHUI");
+				break;
+
+			case IMFPB_BITURITXA_BARAKALDO_OLHUI:
+				stmt.setString(5, "IMFPB BITURITXA-BARAKALDO OLHUI");
+				break;
+
+			case IMFPB_DURANGO_OLHUI:
+				stmt.setString(5, "IMFPB DURANGO OLHUI");
+				break;
+
+			case IMFPB_ERANDIO_OLHUI:
+				stmt.setString(5, "IMFPB ERANDIO OLHUI");
+				break;
+
+			case IMFPB_ERMUA_MALLABIA_OLHUI:
+				stmt.setString(5, "IMFPB ERMUA-MALLABIA OLHUI");
+				break;
+
+			case IMFPB_MUNGIA_OLHUI:
+				stmt.setString(5, "IMFPB MUNGIA OLHUI");
+				break;
+
+			case IMFPB_PORTUGALETE_OLHUI:
+				stmt.setString(5, "IMFPB PORTUGALETE OLHUI");
+				break;
+
+			case IMFPB_SANTURTZI_OLHUI:
+				stmt.setString(5, "IMFPB SANTURTZI OLHUI");
+				break;
+
+			case IMFPB_SESTAO_OLHUI:
+				stmt.setString(5, "IMFPB SESTAO OLHUI");
+				break;
+
+			case MARGOTU_OLHIP:
+				stmt.setString(5, "MARGOTU OLHIP");
+				break;
+
+			case MARIA_INMACULADA_BHIP:
+				stmt.setString(5, "MARIA INMACULADA BHIP");
+				break;
+
+			case PASTELERIA_COMERCIOBIZKAIA_OLHIP:
+				stmt.setString(5, "PASTELERÍA Y COMERCIO BIZKAIA OLHIP");
+				break;
+
+			case SOPEÑABILBAO:
+				stmt.setString(5, "Sopeña Bilbao");
+				break;
+
+			case STA_MARIA_DE_ARTAGAN_BHIP:
+				stmt.setString(5, "STA. MARIA DE ARTAGAN BHIP");
+				break;
+
+			case TXORIERRIPOLITEKNIKOA:
+				stmt.setString(5, "Txorierri Politeknikoa");
+				break;
+
+			case UNED_UNIVERSIDADNACIONALESPAÑOLA_A_DISTANCIA:
+				stmt.setString(5, "UNED (Universidad Nacional Española a Distancia)");
+				break;
+
+			case UNIVERSIDAD_DEUSTO:
+				stmt.setString(5, "Universidad de Deusto");
+				break;
+
+			case UPV_EHU:
+				stmt.setString(5, "UPV/EHU");
+				break;
+
+			case ZABALBURUIKASTETXEA_S_COOP:
+				stmt.setString(5, "Zabalburu Ikastetxea S. Coop");
+				break;
+
+			default:
+				System.out.println("Tipo invalido");
+			}
+			
 			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
@@ -4019,6 +4412,384 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
+			switch (centro) {
+			case "CPIFP Jesuitak Politeknikoa":
+				centro = "CPIFP_JesuitakPoliteknikoa";
+				break;
+
+			case "CPIFP Salesianos Deusto":
+				centro = "CPIFP_SalesianosDeusto";
+				break;
+
+			case "CPIFP Peñascal":
+				centro = "CPIFP_Peñascal";
+				break;
+
+			case "CIFP Lea-Artibai":
+				centro = "CIFP_Lea_Artibai";
+				break;
+
+			case "CIFP Arratiako Zulaibar Lanbide Ikastegia":
+				centro = "CIFP_ArratiakoZulaibar_LanbideIkastegia";
+				break;
+
+			case "CIFP Uni Eibar Ermua":
+				centro = "CIFP_Uni_EibarErmua";
+				break;
+
+			case "CIFP Elorrieta Erreka Mari GBLHI":
+				centro = "CIFP_ElorrietaErreka_Mari_GBLHI";
+				break;
+
+			case "CPIFP Harrobia":
+				centro = "CPIFP_Harrobia";
+				break;
+
+			case "CPIFP Maristak Durango":
+				centro = "CPIFP_MaristakDurango";
+				break;
+
+			case "Zabalburu Ikastetxea S. Coop":
+				centro = "ZabalburuIkastetxea_S_Coop";
+				break;
+
+			case "CIFP Construcción Bizkaia LHII":
+				centro = "CIFP_ConstruccionBizkaia_LHII";
+				break;
+
+			case "CPIFP Barakaldo":
+				centro = "CPIFP_Barakaldo";
+				break;
+
+			case "CIFP Tartanga GBLHI":
+				centro = "CIFP_Tartanga_GBLHI";
+				break;
+
+			case "CIFP Hostelería/Hostalaritza LHII":
+				centro = "CIFP_Hosteleria_Hostalaritza_LHII";
+				break;
+
+			case "CIFP Andra Mari BHI":
+				centro = "CIFP_Andra_Mari_BHI";
+				break;
+
+			case "CIFP Fadura GBLHI":
+				centro = "CIFP_Fadura_GBLHI";
+				break;
+
+			case "CIFP Iurreta GBLHI":
+				centro = "CIFP_Iurreta_GBLHI";
+				break;
+
+			case "CIFP Escuela de Hostelería LHII":
+				centro = "CIFP_EscuelaHosteleria_LHII";
+				break;
+
+			case "CIFP Repelega GBLHI":
+				centro = "CIFP_Repelega_GBLHI";
+				break;
+
+			case "CIFP San Jorge GBLHI":
+				centro = "CIFP_SanJorge_GBLHI";
+				break;
+
+			case "CIFP Calasanz Lanbide Ikastegia":
+				centro = "CIFP_Calasanz_LanbideIkastegia";
+				break;
+
+			case "CPIFP Innovación Social Diego Berguices-Otxarkoaga":
+				centro = "CPIFP_InnovacionSocialDiego_Berguices_Otxarkoaga";
+				break;
+
+			case "CPIFP San Viator":
+				centro = "CPIFP_SanViator";
+				break;
+
+			case "UPV/EHU":
+				centro = "UPV_EHU";
+				break;
+
+			case "Universidad de Deusto":
+				centro = "Universidad_Deusto";
+				break;
+
+			case "Escuela Universitaria de Magisterio BAM – Begoñako Andra Mari":
+				centro = "EscuelaUniversitariaMagisterio_BAM_Begoñako_Andra_Mari";
+				break;
+
+			case "UNED (Universidad Nacional Española a Distancia)":
+				centro = "UNED_UniversidadNacionalEspañola_A_Distancia";
+				break;
+
+			case "CIFP Emilio Campuzano":
+				centro = "CIFP_EmilioCampuzano";
+				break;
+
+			case "Centro San Luis":
+				centro = "CentroSanLuis";
+				break;
+
+			case "Centro Mikeldi":
+				centro = "CentroMikeldi";
+				break;
+
+			case "Txorierri Politeknikoa":
+				centro = "TxorierriPoliteknikoa";
+				break;
+
+			case "Sopeña Bilbao":
+				centro = "SopeñaBilbao";
+				break;
+
+			case "CIFP Bidebieta":
+				centro = "CIFP_Bidebieta";
+				break;
+
+			case "CIFP Ibaiondo":
+				centro = "CIFP_Ibaiondo";
+				break;
+
+			case "IES DOLORES IBARRURI BHI":
+				centro = "IES_DOLORESIBARRURI_BHI";
+				break;
+
+			case "CIFP ZORNOTZA LHII":
+				centro = "CIFP_ZORNOTZA_LHII";
+				break;
+
+			case "CPES ORUE ESKOLA BHIP":
+				centro = "CPES_ORUE_ESKOLA_BHIP";
+				break;
+
+			case "IES BARRUTIALDE BHI":
+				centro = "IES_BARRUTIALDE_BHI";
+				break;
+
+			case "IES BALMASEDA BHI":
+				centro = "IES_BALMASEDA_BHI";
+				break;
+
+			case "CPES BAGABILTZA BHIP":
+				centro = "CPES_BAGABILTZA_BHIP";
+				break;
+
+			case "IMFPB BITURITXA-BARAKALDO OLHUI":
+				centro = "IMFPB_BITURITXA_BARAKALDO_OLHUI";
+				break;
+
+			case "CPES IKASAUTO BHIP":
+				centro = "CPES_IKASAUTO_BHIP";
+				break;
+
+			case "IMFPB BASAURI OLHUI":
+				centro = "IMFPB_BASAURI_OLHUI";
+				break;
+
+			case "CIFP NÁUTICO BERMEO/BERMEOKO NAUTIKA LHII":
+				centro = "CIFP_NAUTICOBERMEO_BERMEOKONAUTIKA_LHII";
+				break;
+
+			case "IMFPB BERMEO OLHUI":
+				centro = "IMFPB_BERMEO_OLHUI";
+				break;
+
+			case "CIFP TXURDINAGA LHII":
+				centro = "CIFP_TXURDINAGA_LHII";
+				break;
+
+			case "IES ESKURTZE BHI":
+				centro = "IES_ESKURTZE_BHI";
+				break;
+
+			case "IES IBARREKOLANDA BHI":
+				centro = "IES_IBARREKOLANDA_BHI";
+				break;
+
+			case "CPEIPS ANGELES CUSTODIOS HLBHIP":
+				centro = "CPEIPS_ANGELESCUSTODIOS_HLBHIP";
+				break;
+
+			case "CPES ALMI BHIP":
+				centro = "CPES_ALMI_BHIP";
+				break;
+
+			case "CPES ARANGOYA BHIP":
+				centro = "CPES_ARANGOYA_BHIP";
+				break;
+
+			case "CPES ARCE BHIP":
+				centro = "CPES_ARCE_BHIP";
+				break;
+
+			case "CPES ARMENGOL BHIP":
+				centro = "CPES_ARMENGOL_BHIP";
+				break;
+
+			case "CRUZ ROJA":
+				centro = "CRUZROJA";
+				break;
+
+			case "ESCUELA SUPERIOR DE HOSTELERÍA BILBAO":
+				centro = "ESCUELASUPERIORHOSTELERIABILBAO";
+				break;
+
+			case "FERNANDO BHIP":
+				centro = "FERNANDO_BHIP";
+				break;
+
+			case "HERMANOS LARRINAGA SL BHIP":
+				centro = "HERMANOSLARRINAGA_SL_BHIP";
+				break;
+
+			case "MARIA INMACULADA BHIP":
+				centro = "MARIA_INMACULADA_BHIP";
+				break;
+
+			case "STA MARIA DE ARTAGAN BHIP":
+				centro = "STA_MARIA_DE_ARTAGAN_BHIP";
+				break;
+
+			case "ADSIS BILBAO OLHIP":
+				centro = "ADSIS_BILBAO_OLHIP";
+				break;
+
+			case "PASTELERÍA Y COMERCIO BIZKAIA OLHIP":
+				centro = "PASTELERIA_COMERCIOBIZKAIA_OLHIP";
+				break;
+
+			case "MARGOTU OLHIP":
+				centro = "MARGOTU_OLHIP";
+				break;
+
+			case "CPIFP HARROBIA LHIPI":
+				centro = "CPIFP_HARROBIA_LHIPI";
+				break;
+
+			case "CIFP AGRARIO DERIO/DERIO NEKAZARITZA LHII":
+				centro = "CIFP_AGRARIODERIO_DERIONEKAZARITZA_LHII";
+				break;
+
+			case "IES FRAY JUAN DE ZUMARRAGA-DURANGO BHI":
+				centro = "IES_FRAYJUAN_DE_ZUMARRAGA_DURANGO_BHI";
+				break;
+
+			case "IMFPB DURANGO OLHUI":
+				centro = "IMFPB_DURANGO_OLHUI";
+				break;
+
+			case "CPES IBAIZABAL IKASTOLA BHIP":
+				centro = "CPES_IBAIZABAL_IKASTOLA_BHIP";
+				break;
+
+			case "IMFPB ERANDIO OLHUI":
+				centro = "IMFPB_ERANDIO_OLHUI";
+				break;
+
+			case "CIFP HOSTELERÍA/OSTALARITZA LHII":
+				centro = "CIFP_HOSTELERIA_OSTALARITZA_LHII";
+				break;
+
+			case "IES GERNIKA BHI":
+				centro = "IES_GERNIKA_BHI";
+				break;
+
+			case "IMFPB GERNIKA-LUMO OLHUI":
+				centro = "IMFPB_GERNIKA_LUMO_OLHUI";
+				break;
+
+			case "CPFPB ADSIS GETXO OLHIP":
+				centro = "CPFPB_ADSIS_GETXO_OLHIP";
+				break;
+
+			case "IES JOSE MIGUEL BARANDIARAN BHI":
+				centro = "IES_JOSEMIGUELBARANDIARAN_BHI";
+				break;
+
+			case "CPFPB ADSIS LEIOA OLHIP":
+				centro = "CPFPB_ADSISLEIOA_OLHIP";
+				break;
+
+			case "IES LEKEITIO BHI":
+				centro = "IES_LEKEITIO_BHI";
+				break;
+
+			case "CPES ESPERANZA ALHAMA BHIP":
+				centro = "CPES_ESPERANZA_ALHAMA_BHIP";
+				break;
+
+			case "IMFPB ERMUA-MALLABIA OLHUI":
+				centro = "IMFPB_ERMUA_MALLABIA_OLHUI";
+				break;
+
+			case "CPFPB PEÑASCAL MARKINA OLHIP":
+				centro = "CPFPB_PEÑASCALMARKINA_OLHIP";
+				break;
+
+			case "IES MUNGIA BHI":
+				centro = "IES_MUNGIA_BHI";
+				break;
+
+			case "IMFPB MUNGIA OLHUI":
+				centro = "IMFPB_MUNGIA_OLHUI";
+				break;
+
+			case "CPIFP SOMORROSTRO LHIPI":
+				centro = "CPIFP_SOMORROSTRO_LHIPI";
+				break;
+
+			case "IES ONDARROA BHI":
+				centro = "IES_ONDARROA_BHI";
+				break;
+
+			case "CPES NTRA SRA DE LA ANTIGUA BHIP":
+				centro = "CPES_NTRA_SRA_DE_LA_ANTIGUA_BHIP";
+				break;
+
+			case "CPFPB MEATZALDEA OLHIP":
+				centro = "CPFPB_MEATZALDEA_OLHIP";
+				break;
+
+			case "IES JUAN ANTONIO ZUNZUNEGUI BHI":
+				centro = "IES_JUAN_ANTONIO_ZUNZUNEGUI_BHI";
+				break;
+
+			case "IMFPB PORTUGALETE OLHUI":
+				centro = "IMFPB_PORTUGALETE_OLHUI";
+				break;
+
+			case "CPES XABIER BHIP":
+				centro = "CPES_XABIER_BHIP";
+				break;
+
+			case "IMFPB SANTURTZI OLHUI":
+				centro = "IMFPB_SANTURTZI_OLHUI";
+				break;
+
+			case "CPES EIDE BHIP":
+				centro = "CPES_EIDE_BHIP";
+				break;
+
+			case "IES SATURNINO DE LA PEÑA BHI":
+				centro = "IES_SATURNINO_DE_LA_PEÑA_BHI";
+				break;
+
+			case "IMFPB SESTAO OLHUI":
+				centro = "IMFPB_SESTAO_OLHUI";
+				break;
+
+			case "CPEIPS NTRA SRA DE LA ANTIGUA HLBHIP":
+				centro = "CPEIPS_NTRA_SRA_DE_LA_ANTIGUA_HLBHIP";
+				break;
+
+			case "CPEIPS MARISTAS-SAN MIGUEL HLBHIP":
+				centro = "CPEIPS_MARISTAS_SANMIGUEL_HLBHIP";
+				break;
+
+			case "IES Martín de Bertendona BHI":
+				centro = "IES_MARTIN_DE_BERTENDONA_BHI";
+				break;
+			}
+			
 			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
 			stmt.setString(1, centro);
 			stmt.setString(2, nom);

@@ -18,6 +18,8 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 	private JComboBox<String> comboBoxFormacion, comboBoxCurso, comboBoxCentroFormativo, comboBoxApoyo;
 	private JTextArea textAreaPersona;
 
+	private JCheckBox chckbxEmpresaApnabi;
+
 	public VentanaModificarPersonaPracticas(JDialog parent, LoginController cont, PersonaPracticas persona) {
 		super(parent, true);
 		this.cont = cont;
@@ -25,7 +27,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 
 		setResizable(false);
 		setTitle("Modificar persona en practicas");
-		setBounds(100, 100, 870, 390);
+		setBounds(100, 100, 870, 420);
 		getContentPane().setLayout(null);
 
 		textAreaPersona = new JTextArea();
@@ -34,7 +36,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		textAreaPersona.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textAreaPersona.setEditable(false);
 		textAreaPersona.setBackground(Color.WHITE);
-		textAreaPersona.setBounds(335, 49, 506, 293);
+		textAreaPersona.setBounds(346, 49, 495, 324);
 		getContentPane().add(textAreaPersona);
 
 		JLabel lblDatosPersona = new JLabel("Informacion de la persona en practicas seleccionada:");
@@ -61,7 +63,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		JLabel lblCentroFormativo = new JLabel("Centro Formativo:");
 		lblCentroFormativo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCentroFormativo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCentroFormativo.setBounds(16, 115, 118, 31);
+		lblCentroFormativo.setBounds(10, 115, 118, 31);
 		getContentPane().add(lblCentroFormativo);
 
 		comboBoxCentroFormativo = new JComboBox<>();
@@ -69,7 +71,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 				"CpersonaFP Jesuitak Politeknikoa", "CpersonaFP Salesianos Deusto", "CpersonaFP Peñascal",
 				"CIFP Lea-Artibai", "CIFP Arratiako Zulaibar Lanbide Ikastegia", "CIFP Uni Eibar Ermua",
 				"CIFP Elorrieta Erreka Mari GBLHI", "CpersonaFP Harrobia", "CpersonaFP Maristak Durango",
-				"Zabalburu Ikastetxea S. Coop", "CIFP Costrucción Bizkaia LHII", "CpersonaFP Barakaldo",
+				"Zabalburu Ikastetxea S. Coop", "CIFP Construcción Bizkaia LHII", "CpersonaFP Barakaldo",
 				"CIFP Tartanga GBLHI", "CIFP Hostelería/Hostalaritza LHII", "CIFP Andra Mari BHI", "CIFP Fadura GBLHI",
 				"CIFP Iurreta GBLHI", "CIFP Escuela de Hostelería LHII", "CIFP Repelega GBLHI", "CIFP San Jorge GBLHI",
 				"CIFP Calasanz Lanbide Ikastegia", "CpersonaFP Innovación Social Diego Berguices-Otxarkoaga",
@@ -98,7 +100,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 				"IMFPB SESTAO OLHUI", "CPEIPS NTRA. SRA. DE LA ANTIGUA HLBHIP", "CPEIPS MARISTAS-SAN MIGUEL HLBHIP",
 				"IES Martín de Bertendona BHI" }));
 		comboBoxCentroFormativo.setSelectedIndex(0);
-		comboBoxCentroFormativo.setBounds(138, 121, 181, 21);
+		comboBoxCentroFormativo.setBounds(129, 121, 196, 21);
 		getContentPane().add(comboBoxCentroFormativo);
 
 		JLabel lblFormacion = new JLabel("Formacion:");
@@ -158,10 +160,21 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		textFieldPracticas.setColumns(10);
 		textFieldPracticas.setBounds(138, 239, 172, 19);
 		getContentPane().add(textFieldPracticas);
+		
+		JLabel lblExtraInfo = new JLabel("Si no quieres cambiar esta opcion, no hace falta tocarlo.");
+		lblExtraInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblExtraInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblExtraInfo.setBounds(17, 320, 319, 28);
+		getContentPane().add(lblExtraInfo);
+		
+		chckbxEmpresaApnabi = new JCheckBox("Es empresa nuestra?");
+		chckbxEmpresaApnabi.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		chckbxEmpresaApnabi.setBounds(89, 340, 163, 33);
+		getContentPane().add(chckbxEmpresaApnabi);
 
 		btnModificar = new JButton("Modificar");
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnModificar.setBounds(80, 276, 175, 43);
+		btnModificar.setBounds(82, 271, 175, 43);
 		getContentPane().add(btnModificar);
 		btnModificar.addActionListener(this);
 	}
@@ -268,15 +281,15 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 			centro = "CIFP Emilio Campuzano";
 			break;
 
-		case CIFP_ESCUELAHOSTELERÍA_LHII:
+		case CIFP_ESCUELAHOSTELERIA_LHII:
 			centro = "CIFP Escuela de Hostelería LHII";
 			break;
 
-		case CIFP_FADURA_GB_LHI:
+		case CIFP_FADURA_GBLHI:
 			centro = "CIFP Fadura GBLHI";
 			break;
 
-		case CIFP_HOSTELERIA_OSTALARITZALHII:
+		case CIFP_HOSTELERIA_OSTALARITZA_LHII:
 			centro = "CIFP HOSTELERÍA/OSTALARITZA LHII";
 			break;
 
@@ -296,7 +309,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 			centro = "CIFP Lea-Artibai";
 			break;
 
-		case CIFP_NAUTICOBERMEO_BERMEOKONAUTIKALHII:
+		case CIFP_NAUTICOBERMEO_BERMEOKONAUTIKA_LHII:
 			centro = "CIFP NÁUTICO BERMEO/BERMEOKO NAUTIKA LHII";
 			break;
 
@@ -304,7 +317,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 			centro = "CIFP Repelega GBLHI";
 			break;
 
-		case CIFP_SANJORGE_GB_LHI:
+		case CIFP_SANJORGE_GBLHI:
 			centro = "CIFP San Jorge GBLHI";
 			break;
 
@@ -360,7 +373,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 			centro = "CPES EIDE BHIP";
 			break;
 
-		case CPES_ESPERANZAALHAMA_BHIP:
+		case CPES_ESPERANZA_ALHAMA_BHIP:
 			centro = "CPES ESPERANZA ALHAMA BHIP";
 			break;
 
@@ -412,7 +425,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 			centro = "CPIFP HARROBIA LHIPI";
 			break;
 
-		case CPIFP_INNOVACIÓNSOCIALDIEGO_BERGUICES_OTXARKOAGA:
+		case CPIFP_INNOVACIONSOCIALDIEGO_BERGUICES_OTXARKOAGA:
 			centro = "CPIFP Innovación Social Diego Berguices-Otxarkoaga";
 			break;
 
@@ -492,7 +505,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 			centro = "IES JOSE MIGUEL BARANDIARAN BHI";
 			break;
 
-		case IES_JUANANTONIOZUNZUNEGUI_BHI:
+		case IES_JUAN_ANTONIO_ZUNZUNEGUI_BHI:
 			centro = "IES JUAN ANTONIO ZUNZUNEGUI BHI";
 			break;
 
@@ -500,7 +513,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 			centro = "IES LEKEITIO BHI";
 			break;
 
-		case IES_MARTINDEBERTENDONABHI:
+		case IES_MARTIN_DE_BERTENDONA_BHI:
 			centro = "IES Martín de Bertendona BHI";
 			break;
 
@@ -516,7 +529,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 			centro = "IES SATURNINO DE LA PEÑA BHI";
 			break;
 
-		case IMFPBGERNIKA_LUMO_OLHUI:
+		case IMFPB_GERNIKA_LUMO_OLHUI:
 			centro = "IMFPB GERNIKA-LUMO OLHUI";
 			break;
 
@@ -568,7 +581,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 			centro = "MARIA INMACULADA BHIP";
 			break;
 
-		case PASTELERÍA_COMERCIOBIZKAIA_OLHIP:
+		case PASTELERIA_COMERCIOBIZKAIA_OLHIP:
 			centro = "PASTELERÍA Y COMERCIO BIZKAIA OLHIP";
 			break;
 
@@ -613,8 +626,10 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		infoPersona.append("Empresa Practicas" + persona.getEmpresaPracticas());
 		if (persona.isEmpresaNuestra()) {
 			infoPersona.append("Empresa nuestra? Si");
+			chckbxEmpresaApnabi.setSelected(true);
 		} else {
 			infoPersona.append("Empresa nuestra? No");
+			chckbxEmpresaApnabi.setSelected(false);
 		}
 		textAreaPersona.setText(infoPersona.toString());
 	}
@@ -623,12 +638,56 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		boolean check = false;
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 
-		if (!comboBoxFormacion.getSelectedItem().equals("---") && check) {
-			// check =
-			// cont.modificarFormacionPersona(comboBoxFormacion.getItemAt(comboBoxFormacion.getSelectedIndex()),
-			// persona.getNombre());
+		if (!comboBoxApoyo.getSelectedItem().equals("---") && check) {
+			check = cont.modificarFormacionPracticas(comboBoxFormacion.getItemAt(comboBoxFormacion.getSelectedIndex()),
+					persona.getNombre());
 			if (!check) {
 				infoError.append("Formacion");
+			}
+		}
+		
+		if (!comboBoxFormacion.getSelectedItem().equals("---") && check) {
+			check = cont.modificarFormacionPracticas(comboBoxFormacion.getItemAt(comboBoxFormacion.getSelectedIndex()),
+					persona.getNombre());
+			if (!check) {
+				infoError.append("Formacion");
+			}
+		}
+		
+		if (!comboBoxFormacion.getSelectedItem().equals("---") && check) {
+			check = cont.modificarFormacionPracticas(comboBoxFormacion.getItemAt(comboBoxFormacion.getSelectedIndex()),
+					persona.getNombre());
+			if (!check) {
+				infoError.append("Formacion");
+			}
+		}
+		
+		if (!comboBoxFormacion.getSelectedItem().equals("---") && check) {
+			check = cont.modificarFormacionPracticas(comboBoxFormacion.getItemAt(comboBoxFormacion.getSelectedIndex()),
+					persona.getNombre());
+			if (!check) {
+				infoError.append("Formacion");
+			}
+		}
+		
+		if (!textFieldDuracion.getText().isBlank() && check) {
+			check = cont.modificarDuracion(textFieldDuracion.getText(), persona.getNombre());
+			if (!check) {
+				infoError.append("Duracion");
+			}
+		}
+		
+		if (!textFieldDuracion.getText().isBlank() && check) {
+			check = cont.modificarDuracion(textFieldDuracion.getText(), persona.getNombre());
+			if (!check) {
+				infoError.append("Duracion");
+			}
+		}
+		
+		if (!textFieldDuracion.getText().isBlank() && check) {
+			check = cont.modificarDuracion(textFieldDuracion.getText(), persona.getNombre());
+			if (!check) {
+				infoError.append("Duracion");
 			}
 		}
 

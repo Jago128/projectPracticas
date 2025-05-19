@@ -56,7 +56,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 				"CPIFP Salesianos Deusto", "CPIFP Peñascal", "CIFP Lea-Artibai",
 				"CIFP Arratiako Zulaibar Lanbide Ikastegia", "CIFP Uni Eibar Ermua", "CIFP Elorrieta Erreka Mari GBLHI",
 				"CPIFP Harrobia", "CPIFP Maristak Durango", "Zabalburu Ikastetxea S. Coop",
-				"CIFP Costrucción Bizkaia LHII", "CPIFP Barakaldo", "CIFP Tartanga GBLHI",
+				"CIFP Construcción Bizkaia LHII", "CPIFP Barakaldo", "CIFP Tartanga GBLHI",
 				"CIFP Hostelería/Hostalaritza LHII", "CIFP Andra Mari BHI", "CIFP Fadura GBLHI", "CIFP Iurreta GBLHI",
 				"CIFP Escuela de Hostelería LHII", "CIFP Repelega GBLHI", "CIFP San Jorge GBLHI",
 				"CIFP Calasanz Lanbide Ikastegia", "CPIFP Innovación Social Diego Berguices-Otxarkoaga",
@@ -282,7 +282,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					centro = CentrosFormativos.ZABALBURUIKASTETXEA_S_COOP;
 					break;
 
-				case "CIFP Costrucción Bizkaia LHII":
+				case "CIFP Construcción Bizkaia LHII":
 					centro = CentrosFormativos.CIFP_CONSTRUCCIONBIZKAIA_LHII;
 					break;
 
@@ -303,7 +303,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "CIFP Fadura GBLHI":
-					centro = CentrosFormativos.CIFP_FADURA_GB_LHI;
+					centro = CentrosFormativos.CIFP_FADURA_GBLHI;
 					break;
 
 				case "CIFP Iurreta GBLHI":
@@ -311,7 +311,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "CIFP Escuela de Hostelería LHII":
-					centro = CentrosFormativos.CIFP_ESCUELAHOSTELERÍA_LHII;
+					centro = CentrosFormativos.CIFP_ESCUELAHOSTELERIA_LHII;
 					break;
 
 				case "CIFP Repelega GBLHI":
@@ -319,7 +319,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "CIFP San Jorge GBLHI":
-					centro = CentrosFormativos.CIFP_SANJORGE_GB_LHI;
+					centro = CentrosFormativos.CIFP_SANJORGE_GBLHI;
 					break;
 
 				case "CIFP Calasanz Lanbide Ikastegia":
@@ -327,7 +327,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "CPIFP Innovación Social Diego Berguices-Otxarkoaga":
-					centro = CentrosFormativos.CPIFP_INNOVACIÓNSOCIALDIEGO_BERGUICES_OTXARKOAGA;
+					centro = CentrosFormativos.CPIFP_INNOVACIONSOCIALDIEGO_BERGUICES_OTXARKOAGA;
 					break;
 
 				case "CPIFP San Viator":
@@ -415,7 +415,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "CIFP NÁUTICO BERMEO/BERMEOKO NAUTIKA LHII":
-					centro = CentrosFormativos.CIFP_NAUTICOBERMEO_BERMEOKONAUTIKALHII;
+					centro = CentrosFormativos.CIFP_NAUTICOBERMEO_BERMEOKONAUTIKA_LHII;
 					break;
 
 				case "IMFPB BERMEO OLHUI":
@@ -487,7 +487,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "PASTELERÍA Y COMERCIO BIZKAIA OLHIP":
-					centro = CentrosFormativos.PASTELERÍA_COMERCIOBIZKAIA_OLHIP;
+					centro = CentrosFormativos.PASTELERIA_COMERCIOBIZKAIA_OLHIP;
 					break;
 
 				case "MARGOTU OLHIP":
@@ -519,7 +519,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "CIFP HOSTELERÍA/OSTALARITZA LHII":
-					centro = CentrosFormativos.CIFP_HOSTELERIA_OSTALARITZALHII;
+					centro = CentrosFormativos.CIFP_HOSTELERIA_OSTALARITZA_LHII;
 					break;
 
 				case "IES GERNIKA BHI":
@@ -527,7 +527,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "IMFPB GERNIKA-LUMO OLHUI":
-					centro = CentrosFormativos.IMFPBGERNIKA_LUMO_OLHUI;
+					centro = CentrosFormativos.IMFPB_GERNIKA_LUMO_OLHUI;
 					break;
 
 				case "CPFPB ADSIS GETXO OLHIP":
@@ -547,7 +547,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "CPES ESPERANZA ALHAMA BHIP":
-					centro = CentrosFormativos.CPES_ESPERANZAALHAMA_BHIP;
+					centro = CentrosFormativos.CPES_ESPERANZA_ALHAMA_BHIP;
 					break;
 
 				case "IMFPB ERMUA-MALLABIA OLHUI":
@@ -583,7 +583,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "IES JUAN ANTONIO ZUNZUNEGUI BHI":
-					centro = CentrosFormativos.IES_JUANANTONIOZUNZUNEGUI_BHI;
+					centro = CentrosFormativos.IES_JUAN_ANTONIO_ZUNZUNEGUI_BHI;
 					break;
 
 				case "IMFPB PORTUGALETE OLHUI":
@@ -619,7 +619,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 					break;
 
 				case "IES Martín de Bertendona BHI":
-					centro = CentrosFormativos.IES_MARTINDEBERTENDONABHI;
+					centro = CentrosFormativos.IES_MARTIN_DE_BERTENDONA_BHI;
 					break;
 				}
 

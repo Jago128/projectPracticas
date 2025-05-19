@@ -210,15 +210,15 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 					modelCentro.addElement("CIFP Emilio Campuzano");
 					break;
 
-				case CIFP_ESCUELAHOSTELERÍA_LHII:
+				case CIFP_ESCUELAHOSTELERIA_LHII:
 					modelCentro.addElement("CIFP Escuela de Hostelería LHII");
 					break;
 
-				case CIFP_FADURA_GB_LHI:
+				case CIFP_FADURA_GBLHI:
 					modelCentro.addElement("CIFP Fadura GBLHI");
 					break;
 
-				case CIFP_HOSTELERIA_OSTALARITZALHII:
+				case CIFP_HOSTELERIA_OSTALARITZA_LHII:
 					modelCentro.addElement("CIFP HOSTELERÍA/OSTALARITZA LHII");
 					break;
 
@@ -238,7 +238,7 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 					modelCentro.addElement("CIFP Lea-Artibai");
 					break;
 
-				case CIFP_NAUTICOBERMEO_BERMEOKONAUTIKALHII:
+				case CIFP_NAUTICOBERMEO_BERMEOKONAUTIKA_LHII:
 					modelCentro.addElement("CIFP NÁUTICO BERMEO/BERMEOKO NAUTIKA LHII");
 					break;
 
@@ -246,7 +246,7 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 					modelCentro.addElement("CIFP Repelega GBLHI");
 					break;
 
-				case CIFP_SANJORGE_GB_LHI:
+				case CIFP_SANJORGE_GBLHI:
 					modelCentro.addElement("CIFP San Jorge GBLHI");
 					break;
 
@@ -302,7 +302,7 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 					modelCentro.addElement("CPES EIDE BHIP");
 					break;
 
-				case CPES_ESPERANZAALHAMA_BHIP:
+				case CPES_ESPERANZA_ALHAMA_BHIP:
 					modelCentro.addElement("CPES ESPERANZA ALHAMA BHIP");
 					break;
 
@@ -354,7 +354,7 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 					modelCentro.addElement("CPIFP HARROBIA LHIPI");
 					break;
 
-				case CPIFP_INNOVACIÓNSOCIALDIEGO_BERGUICES_OTXARKOAGA:
+				case CPIFP_INNOVACIONSOCIALDIEGO_BERGUICES_OTXARKOAGA:
 					modelCentro.addElement("CPIFP Innovación Social Diego Berguices-Otxarkoaga");
 					break;
 
@@ -434,7 +434,7 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 					modelCentro.addElement("IES JOSE MIGUEL BARANDIARAN BHI");
 					break;
 
-				case IES_JUANANTONIOZUNZUNEGUI_BHI:
+				case IES_JUAN_ANTONIO_ZUNZUNEGUI_BHI:
 					modelCentro.addElement("IES JUAN ANTONIO ZUNZUNEGUI BHI");
 					break;
 
@@ -442,7 +442,7 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 					modelCentro.addElement("IES LEKEITIO BHI");
 					break;
 
-				case IES_MARTINDEBERTENDONABHI:
+				case IES_MARTIN_DE_BERTENDONA_BHI:
 					modelCentro.addElement("IES Martín de Bertendona BHI");
 					break;
 
@@ -458,7 +458,7 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 					modelCentro.addElement("IES SATURNINO DE LA PEÑA BHI");
 					break;
 
-				case IMFPBGERNIKA_LUMO_OLHUI:
+				case IMFPB_GERNIKA_LUMO_OLHUI:
 					modelCentro.addElement("IMFPB GERNIKA-LUMO OLHUI");
 					break;
 
@@ -510,7 +510,7 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 					modelCentro.addElement("MARIA INMACULADA BHIP");
 					break;
 
-				case PASTELERÍA_COMERCIOBIZKAIA_OLHIP:
+				case PASTELERIA_COMERCIOBIZKAIA_OLHIP:
 					modelCentro.addElement("PASTELERÍA Y COMERCIO BIZKAIA OLHIP");
 					break;
 
