@@ -17,7 +17,6 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 	private JTextField textFieldPracticas, textFieldDuracion, textFieldFecha;
 	private JComboBox<String> comboBoxFormacion, comboBoxCurso, comboBoxCentroFormativo, comboBoxApoyo;
 	private JTextArea textAreaPersona;
-
 	private JCheckBox chckbxEmpresaApnabi;
 
 	public VentanaModificarPersonaPracticas(JDialog parent, LoginController cont, PersonaPracticas persona) {
@@ -160,13 +159,13 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		textFieldPracticas.setColumns(10);
 		textFieldPracticas.setBounds(138, 239, 172, 19);
 		getContentPane().add(textFieldPracticas);
-		
+
 		JLabel lblExtraInfo = new JLabel("Si no quieres cambiar esta opcion, no hace falta tocarlo.");
 		lblExtraInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblExtraInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblExtraInfo.setBounds(17, 320, 319, 28);
 		getContentPane().add(lblExtraInfo);
-		
+
 		chckbxEmpresaApnabi = new JCheckBox("Es empresa nuestra?");
 		chckbxEmpresaApnabi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chckbxEmpresaApnabi.setBounds(89, 340, 163, 33);
@@ -638,14 +637,14 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		boolean check = false;
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 
-		if (!comboBoxApoyo.getSelectedItem().equals("---") && check) {
-			check = cont.modificarFormacionPracticas(comboBoxFormacion.getItemAt(comboBoxFormacion.getSelectedIndex()),
+		if (!comboBoxApoyo.getSelectedItem().equals("---")) {
+			check = cont.modificarApoyoPracticas(comboBoxApoyo.getItemAt(comboBoxApoyo.getSelectedIndex()),
 					persona.getNombre());
 			if (!check) {
-				infoError.append("Formacion");
+				infoError.append("Apoyo");
 			}
 		}
-		
+
 		if (!comboBoxFormacion.getSelectedItem().equals("---") && check) {
 			check = cont.modificarFormacionPracticas(comboBoxFormacion.getItemAt(comboBoxFormacion.getSelectedIndex()),
 					persona.getNombre());
@@ -653,41 +652,48 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 				infoError.append("Formacion");
 			}
 		}
-		
-		if (!comboBoxFormacion.getSelectedItem().equals("---") && check) {
-			check = cont.modificarFormacionPracticas(comboBoxFormacion.getItemAt(comboBoxFormacion.getSelectedIndex()),
+
+		if (!comboBoxCurso.getSelectedItem().equals("---") && check) {
+			check = cont.modificarCurso(Integer.parseInt(comboBoxCurso.getItemAt(comboBoxCurso.getSelectedIndex())),
 					persona.getNombre());
 			if (!check) {
-				infoError.append("Formacion");
+				infoError.append("Curso");
 			}
 		}
-		
+
 		if (!comboBoxFormacion.getSelectedItem().equals("---") && check) {
-			check = cont.modificarFormacionPracticas(comboBoxFormacion.getItemAt(comboBoxFormacion.getSelectedIndex()),
+			check = cont.modificarCentro(comboBoxCentroFormativo.getItemAt(comboBoxCentroFormativo.getSelectedIndex()),
 					persona.getNombre());
 			if (!check) {
-				infoError.append("Formacion");
+				infoError.append("Centro");
 			}
 		}
-		
+
+		if (!textFieldFecha.getText().isBlank() && check) {
+			check = cont.modificarDuracion(textFieldFecha.getText(), persona.getNombre());
+			if (!check) {
+				infoError.append("Fecha");
+			}
+		}
+
 		if (!textFieldDuracion.getText().isBlank() && check) {
 			check = cont.modificarDuracion(textFieldDuracion.getText(), persona.getNombre());
 			if (!check) {
 				infoError.append("Duracion");
 			}
 		}
-		
-		if (!textFieldDuracion.getText().isBlank() && check) {
-			check = cont.modificarDuracion(textFieldDuracion.getText(), persona.getNombre());
+
+		if (!textFieldPracticas.getText().isBlank() && check) {
+			check = cont.modificarEmpPracticas(textFieldPracticas.getText(), persona.getNombre());
 			if (!check) {
-				infoError.append("Duracion");
+				infoError.append("Empresa practicas");
 			}
 		}
-		
-		if (!textFieldDuracion.getText().isBlank() && check) {
-			check = cont.modificarDuracion(textFieldDuracion.getText(), persona.getNombre());
+
+		if (persona.isEmpresaNuestra() != chckbxEmpresaApnabi.isSelected() && check) {
+			check = cont.modificarEmpApnabi(chckbxEmpresaApnabi.isSelected(), persona.getNombre());
 			if (!check) {
-				infoError.append("Duracion");
+				infoError.append("Empresa nuestra");
 			}
 		}
 

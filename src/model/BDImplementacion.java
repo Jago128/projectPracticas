@@ -49,7 +49,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLNOMPERSONAS = "SELECT NOM_P FROM PERSONA";
 	final String SQLSELECTPERSONA = "SELECT * FROM PERSONA WHERE NOM_P=?";
 	final String SQLINSERTPERSONA = "INSERT INTO PERSONA VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	final String SQLUPDATEAPOYO = "UPDATE PERSONA SET APOYO=? WHERE NOM_P=?";
+	final String SQLUPDATE_APOYO = "UPDATE PERSONA SET APOYO=? WHERE NOM_P=?";
 	final String SQLUPDATEFORMACION = "UPDATE PERSONA SET FORMACION=? WHERE NOM_P=?";
 	final String SQLUPDATE_ESPECIALIDAD = "UPDATE PERSONA SET ESPECIALIDAD=? WHERE NOM_P=?";
 	final String SQLUPDATESECTORINTERES = "UPDATE PERSONA SET SECTORINTERES=? WHERE NOM_P=?";
@@ -84,6 +84,20 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUPDATECV = "UPDATE PERSONASINCLUSION SET CV=? WHERE NOMBRE=?";
 	final String SQLUPDATEPERSONAFACILITADORA = "UPDATE PERSONASINCLUSION SET PERSONAFACILITADORA=? WHERE NOMBRE=?";
 	final String SQLDELETEPERSONAINCLUSION = "DELETE FROM PERSONASINCLUSION WHERE NOMBRE=?";
+
+	final String SQLPERSONASPRACTICAS = "SELECT * FROM PERSONAPRACTICAS";
+	final String SQLNOMPERSONASPRACTICAS = "SELECT NOM FROM PERSONAPRACTICAS";
+	final String SQLSELECTPERSONAPRACTICAS = "SELECT * FROM PERSONAPRACTICAS WHERE NOM=?";
+	final String SQLINSERTPERSONAPRACTICAS = "INSERT INTO PERSONAPRACTICAS VALUES (?,?,?,?,?,?,?,?,?)";
+	final String SQLUPDATE_APOYOPRACTICAS = "UPDATE PERSONAPRACTICAS SET APOYO=? WHERE NOM=?";
+	final String SQLUPDATEFORMACIONPRACTICAS = "UPDATE PERSONAPRACTICAS SET FORMACION=? WHERE NOM=?";
+	final String SQLUPDATECURSO = "UPDATE PERSONAPRACTICAS SET CURSO=? WHERE NOM=?";
+	final String SQLUPDATECENTRO = "UPDATE PERSONAPRACTICAS SET CENTRO=? WHERE NOM=?";
+	final String SQLUPDATEFECHAS = "UPDATE PERSONAPRACTICAS SET FECHAS=? WHERE NOM=?";
+	final String SQLUPDATEDURACION = "UPDATE PERSONAPRACTICAS SET DURACION=? WHERE NOM=?";
+	final String SQLUPDATE_EMPRESAPRACTICAS = "UPDATE PERSONAPRACTICAS SET EMPRESAPRACTICAS=? WHERE NOM=?";
+	final String SQLUPDATE_EMPRESANUESTRA = "UPDATE PERSONAPRACTICAS SET EMPRESANUESTRA=? WHERE NOM=?";
+	final String SQLDELETEPERSONAPRACTICAS = "DELETE FROM PERSONAPRACTICAS WHERE NOM=?";
 
 	final String SQLANALISISPERSONAS = "SELECT * FROM ANALISISPUESTO";
 	final String SQLAP_EMPRESA = "SELECT EMPRESA FROM ANALISISPUESTO";
@@ -1979,7 +1993,7 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!apoyo.isBlank()) {
-				stmt = con.prepareStatement(SQLUPDATEAPOYO);
+				stmt = con.prepareStatement(SQLUPDATE_APOYO);
 				stmt.setString(1, apoyo);
 				stmt.setString(2, nom);
 				if (stmt.executeUpdate() > 0) {
@@ -3817,13 +3831,13 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public Map<String, PersonaPracticas> mostrarPersonasPracticas() { // TODO
+	public Map<String, PersonaPracticas> mostrarPersonasPracticas() {
 		PersonaPracticas p;
 		Map<String, PersonaPracticas> personas = new TreeMap<>();
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLEMPRESAS);
+			stmt = con.prepareStatement(SQLPERSONASPRACTICAS);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				p = new PersonaPracticas();
@@ -3851,17 +3865,18 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public Map<String, PersonaPracticas> mostrarNomPersonasPracticas() { // TODO
+	public Map<String, PersonaPracticas> mostrarNomPersonasPracticas() {
 		PersonaPracticas p;
 		Map<String, PersonaPracticas> personas = new TreeMap<>();
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLEMPRESAS);
+			stmt = con.prepareStatement(SQLSELECTPERSONAPRACTICAS);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				p = new PersonaPracticas();
-
+				p.setNombre(rs.getString("NOM"));
+				p.setApoyo(rs.getString("APOYO"));
 				personas.put(p.getNombre(), p);
 			}
 			rs.close();
@@ -3877,21 +3892,29 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public PersonaPracticas getPersonaPracticas(String nom) { // TODO
+	public PersonaPracticas getPersonaPracticas(String nom) {
 		PersonaPracticas p = new PersonaPracticas();
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLEMPRESAS);
+			stmt = con.prepareStatement(SQLSELECTPERSONAPRACTICAS);
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-
+			if (rs.next()) {
+				p.setNombre(rs.getString("NOM"));
+				p.setApoyo(rs.getString("APOYO"));
+				p.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				p.setCurso(rs.getInt("CURSO"));
+				p.setCentro(CentrosFormativos.valueOf(rs.getString("CENTRO").toUpperCase()));
+				p.setFechas(rs.getString("FECHAS"));
+				p.setDuracion(rs.getString("DURACION"));
+				p.setEmpresaPracticas(rs.getString("EMPRESAPRACTICAS"));
+				p.setEmpresaNuestra(rs.getBoolean("EMPRESANUESTRA"));
 			}
 			rs.close();
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
-			System.out.println("Un error ha occurrido al intentar recoger la personas.");
+			System.out.println("Un error ha occurrido al intentar recoger la persona.");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -3900,12 +3923,12 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean verificarPersonaPracticas(String nom) { // TODO
+	public boolean verificarPersonaPracticas(String nom) {
 		boolean existe = false;
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLSELECTEMPRESA);
+			stmt = con.prepareStatement(SQLSELECTPERSONAPRACTICAS);
 			stmt.setString(1, nom);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
@@ -3924,13 +3947,64 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean añadirPersonaPracticas(PersonaPracticas p) { // TODO
+	public boolean añadirPersonaPracticas(PersonaPracticas p) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLINSERTPERSONA);
-			
+			stmt = con.prepareStatement(SQLINSERTPERSONAPRACTICAS);
+			stmt.setString(1, p.getNombre());
+			stmt.setString(2, p.getApoyo());
+			switch (p.getFormacion()) {
+			case AT:
+				stmt.setString(3, "AT");
+				break;
+
+			case BACHILLERATO:
+				stmt.setString(3, "Bachillerato");
+				break;
+
+			case DOCTORADO:
+				stmt.setString(3, "Doctorado");
+				break;
+
+			case EPA:
+				stmt.setString(3, "EPA");
+				break;
+
+			case ESO:
+				stmt.setString(3, "ESO");
+				break;
+
+			case FP_BASICA:
+				stmt.setString(3, "FP_Basica");
+				break;
+
+			case GM:
+				stmt.setString(3, "GM");
+				break;
+
+			case GS:
+				stmt.setString(3, "GS");
+				break;
+
+			case MASTER:
+				stmt.setString(3, "Master");
+				break;
+
+			case PRIMARIA:
+				stmt.setString(3, "Primaria");
+				break;
+
+			case UNIVERSIDAD:
+				stmt.setString(3, "Universidad");
+				break;
+
+			default:
+				System.out.println("Tipo invalido.");
+			}
+
+			stmt.setInt(4, p.getCurso());
 			switch (p.getCentro()) {
 			case ADSIS_BILBAO_OLHIP:
 				stmt.setString(5, "ADSIS BILBAO OLHIP");
@@ -4315,6 +4389,10 @@ public class BDImplementacion implements ApnabiDAO {
 			default:
 				System.out.println("Tipo invalido");
 			}
+			stmt.setString(6, p.getFechas());
+			stmt.setString(7, p.getDuracion());
+			stmt.setString(8, p.getEmpresaPracticas());
+			stmt.setBoolean(9, p.isEmpresaNuestra());
 			
 			if (stmt.executeUpdate() > 0) {
 				check = true;
@@ -4329,15 +4407,15 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
-	
+
 	@Override
-	public boolean modificarApoyoPracticas(String apoyo, String nom) { // TODO
+	public boolean modificarApoyoPracticas(String apoyo, String nom) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
 			if (!apoyo.isBlank()) {
-				stmt = con.prepareStatement(SQLUPDATEAPOYO);
+				stmt = con.prepareStatement(SQLUPDATE_APOYOPRACTICAS);
 				stmt.setString(1, apoyo);
 				stmt.setString(2, nom);
 				if (stmt.executeUpdate() > 0) {
@@ -4356,9 +4434,9 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
-	
+
 	@Override
-	public boolean modificarFormacionPracticas(String formacion, String nom) { // TODO
+	public boolean modificarFormacionPracticas(String formacion, String nom) {
 		boolean check = false;
 
 		this.openConnection();
@@ -4366,7 +4444,7 @@ public class BDImplementacion implements ApnabiDAO {
 			if (formacion.equals("FP Basica")) {
 				formacion = "FP_Basica";
 			}
-			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt = con.prepareStatement(SQLUPDATEFORMACIONPRACTICAS);
 			stmt.setString(1, formacion);
 			stmt.setString(2, nom);
 			if (stmt.executeUpdate() > 0) {
@@ -4382,14 +4460,14 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
-	
+
 	@Override
-	public boolean modificarCurso(int curso, String nom) { // TODO
+	public boolean modificarCurso(int curso, String nom) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt = con.prepareStatement(SQLUPDATECURSO);
 			stmt.setInt(1, curso);
 			stmt.setString(2, nom);
 			if (stmt.executeUpdate() > 0) {
@@ -4405,9 +4483,9 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
-	
+
 	@Override
-	public boolean modificarCentro(String centro, String nom) { // TODO
+	public boolean modificarCentro(String centro, String nom) {
 		boolean check = false;
 
 		this.openConnection();
@@ -4789,8 +4867,8 @@ public class BDImplementacion implements ApnabiDAO {
 				centro = "IES_MARTIN_DE_BERTENDONA_BHI";
 				break;
 			}
-			
-			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+
+			stmt = con.prepareStatement(SQLUPDATECENTRO);
 			stmt.setString(1, centro);
 			stmt.setString(2, nom);
 			if (stmt.executeUpdate() > 0) {
@@ -4808,12 +4886,12 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarFechas(String fechas, String nom) { // TODO
+	public boolean modificarFechas(String fechas, String nom) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt = con.prepareStatement(SQLUPDATEFECHAS);
 			stmt.setString(1, fechas);
 			stmt.setString(2, nom);
 			if (stmt.executeUpdate() > 0) {
@@ -4831,12 +4909,12 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarDuracion(String dur, String nom) { // TODO
+	public boolean modificarDuracion(String dur, String nom) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt = con.prepareStatement(SQLUPDATEDURACION);
 			stmt.setString(1, dur);
 			stmt.setString(2, nom);
 			if (stmt.executeUpdate() > 0) {
@@ -4852,14 +4930,14 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
-	
+
 	@Override
-	public boolean modificarEmpPracticas(String practicas, String nom) { // TODO
+	public boolean modificarEmpPracticas(String practicas, String nom) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt = con.prepareStatement(SQLUPDATE_EMPRESAPRACTICAS);
 			stmt.setString(1, practicas);
 			stmt.setString(2, nom);
 			if (stmt.executeUpdate() > 0) {
@@ -4877,12 +4955,12 @@ public class BDImplementacion implements ApnabiDAO {
 	}
 
 	@Override
-	public boolean modificarEmpApnabi(boolean empNuestro, String nom) { // TODO
+	public boolean modificarEmpApnabi(boolean empNuestro, String nom) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLUPDATEMINFORMACION);
+			stmt = con.prepareStatement(SQLUPDATE_EMPRESANUESTRA);
 			stmt.setBoolean(1, empNuestro);
 			stmt.setString(2, nom);
 			if (stmt.executeUpdate() > 0) {
@@ -4898,14 +4976,14 @@ public class BDImplementacion implements ApnabiDAO {
 		}
 		return check;
 	}
-	
+
 	@Override
-	public boolean eliminarPersonaPracticas(String nom) { // TODO
+	public boolean eliminarPersonaPracticas(String nom) {
 		boolean check = false;
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLDELETEPERSONAINCLUSION);
+			stmt = con.prepareStatement(SQLDELETEPERSONAPRACTICAS);
 			stmt.setString(1, nom);
 			if (stmt.executeUpdate() > 0) {
 				check = true;
