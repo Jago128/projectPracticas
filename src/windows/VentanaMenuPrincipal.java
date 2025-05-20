@@ -8,14 +8,14 @@ import javax.swing.*;
 import controller.LoginController;
 import model.Usuario;
 
-public class VentanaPrincipal extends JFrame implements ActionListener {
+public class VentanaMenuPrincipal extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
 	private Usuario user;
 	private JButton btnEmpresa, btnPersona, btnAnalisisPuesto, btnPersonaInclusion, btnPersonaPracticas;
 
-	public VentanaPrincipal(LoginController cont, Usuario user) {
+	public VentanaMenuPrincipal(LoginController cont, Usuario user) {
 		this.cont = cont;
 		this.user = user;
 
@@ -66,23 +66,23 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnEmpresa) {
-			VentanaEmpresa dialog = new VentanaEmpresa(this, cont, user);
+			VentanaMenuEmpresa dialog = new VentanaMenuEmpresa(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnPersona) {
-			VentanaPersonaOrientacion dialog = new VentanaPersonaOrientacion(this, cont, user);
+			VentanaMenuPersonaOrientacion dialog = new VentanaMenuPersonaOrientacion(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnAnalisisPuesto) {
-			VentanaAnalisisPuesto dialog = new VentanaAnalisisPuesto(this, cont, user);
+			VentanaMenuAnalisisPuesto dialog = new VentanaMenuAnalisisPuesto(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnPersonaInclusion) {
-			VentanaPersonaInclusion dialog = new VentanaPersonaInclusion(this, cont, user);
+			VentanaMenuPersonaInclusion dialog = new VentanaMenuPersonaInclusion(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else {
-			VentanaPersonaPracticas dialog = new VentanaPersonaPracticas(this, cont, user);
+			VentanaMenuPersonaPracticas dialog = new VentanaMenuPersonaPracticas(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}

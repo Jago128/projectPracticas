@@ -8,14 +8,14 @@ import javax.swing.*;
 import controller.LoginController;
 import model.Usuario;
 
-public class VentanaPersonaOrientacion extends JDialog implements ActionListener {
+public class VentanaMenuPersonaPracticas extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
 	private Usuario user;
 	private JButton btnMostrar, btnAñadir, btnBorrar;
 
-	public VentanaPersonaOrientacion(JFrame parent, LoginController cont, Usuario user) {
+	public VentanaMenuPersonaPracticas(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
 		this.cont = cont;
 		this.user = user;
@@ -23,31 +23,31 @@ public class VentanaPersonaOrientacion extends JDialog implements ActionListener
 		setResizable(false);
 		setTitle("Personas orientacion y seguimiento");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 590, 170);
+		setBounds(100, 100, 440, 160);
 		getContentPane().setLayout(null);
 
-		btnAñadir = new JButton("Añadir personas en orientacion y seguimiento");
+		btnAñadir = new JButton("Añadir personas en practicas");
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAñadir.setBounds(262, 77, 275, 45);
+		btnAñadir.setBounds(232, 65, 184, 45);
 		getContentPane().add(btnAñadir);
 
-		btnBorrar = new JButton("Borrar personas en orientacion y seguimiento");
+		btnBorrar = new JButton("Borrar personas en practicas");
 		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrar.setBounds(295, 22, 267, 45);
+		btnBorrar.setBounds(214, 10, 194, 45);
 		getContentPane().add(btnBorrar);
 
-		btnMostrar = new JButton("Mostrar personas en orientacion y seguimiento");
+		btnMostrar = new JButton("Mostrar personas en practicas");
 		btnMostrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnMostrar.setBounds(10, 21, 275, 45);
+		btnMostrar.setBounds(10, 10, 194, 45);
 		getContentPane().add(btnMostrar);
 
 		JTextArea textAreaInfoModificar = new JTextArea();
 		textAreaInfoModificar.setEditable(false);
 		textAreaInfoModificar.setBackground(UIManager.getColor("Button.background"));
 		textAreaInfoModificar.setLineWrap(true);
-		textAreaInfoModificar.setText("Se modifican las personas en orientacion\r\ny seguimiento desde esta ventana.");
+		textAreaInfoModificar.setText("Se modifican las personas en practicas\r\ndesde esta ventana.");
 		textAreaInfoModificar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaInfoModificar.setBounds(20, 67, 232, 34);
+		textAreaInfoModificar.setBounds(10, 58, 212, 34);
 		getContentPane().add(textAreaInfoModificar);
 
 		btnAñadir.addActionListener(this);
@@ -58,15 +58,15 @@ public class VentanaPersonaOrientacion extends JDialog implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAñadir) {
-			VentanaAñadirPersonaOrientacion dialog = new VentanaAñadirPersonaOrientacion(this, cont);
+			VentanaAñadirPersonaPracticas dialog = new VentanaAñadirPersonaPracticas(this, cont);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnBorrar) {
-			VentanaBorrarPersonaOrientacion dialog = new VentanaBorrarPersonaOrientacion(this, cont, user);
+			VentanaBorrarPersonaPracticas dialog = new VentanaBorrarPersonaPracticas(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnMostrar) {
-			VentanaMostrarPersonaOrientacion dialog = new VentanaMostrarPersonaOrientacion(this, cont, user);
+			VentanaMostrarPersonaPracticas dialog = new VentanaMostrarPersonaPracticas(this, cont, user);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}

@@ -87,7 +87,7 @@ public class VentanaLogin extends JDialog implements ActionListener {
 						user = cont.getUsuario(user);
 						lblMensaje.setText("Se ha iniciado sesion correctamente.");
 						JOptionPane.showMessageDialog(null, "Bienvenido, " + user.getNombre());
-						VentanaPrincipal frame = new VentanaPrincipal(cont, user);
+						VentanaMenuPrincipal frame = new VentanaMenuPrincipal(cont, user);
 						frame.setVisible(true);
 						this.dispose();
 					} else {

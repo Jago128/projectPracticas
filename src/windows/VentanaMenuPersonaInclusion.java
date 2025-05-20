@@ -8,14 +8,14 @@ import javax.swing.*;
 import controller.LoginController;
 import model.Usuario;
 
-public class VentanaPersonaInclusion extends JDialog implements ActionListener {
+public class VentanaMenuPersonaInclusion extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private LoginController cont;
 	private Usuario user;
 	private JButton btnMostrar, btnAñadir, btnBorrar;
 
-	public VentanaPersonaInclusion(JFrame parent, LoginController cont, Usuario user) {
+	public VentanaMenuPersonaInclusion(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
 		this.cont = cont;
 		this.user = user;
