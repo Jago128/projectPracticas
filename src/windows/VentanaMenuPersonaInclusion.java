@@ -14,6 +14,7 @@ public class VentanaMenuPersonaInclusion extends JDialog implements ActionListen
 	private LoginController cont;
 	private Usuario user;
 	private JButton btnMostrar, btnAñadir, btnBorrar;
+	private JLabel logo_1;
 
 	public VentanaMenuPersonaInclusion(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
@@ -66,6 +67,11 @@ public class VentanaMenuPersonaInclusion extends JDialog implements ActionListen
 		logo.setBounds(171, 0, 225, 78);
 		panel.add(logo);
 		logo.setIcon(new ImageIcon(VentanaMenuAnalisisPuesto.class.getResource("/img/LOGOAPNABI.png")));
+		
+		logo_1 = new JLabel("");
+		logo_1.setIcon(new ImageIcon(VentanaMenuPersonaInclusion.class.getResource("/img/apnabilan.png")));
+		logo_1.setBounds(113, 0, 325, 78);
+		panel.add(logo_1);
 
 		btnAñadir.addActionListener(this);
 		btnBorrar.addActionListener(this);

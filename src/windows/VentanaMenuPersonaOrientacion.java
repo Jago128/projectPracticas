@@ -66,6 +66,11 @@ public class VentanaMenuPersonaOrientacion extends JDialog implements ActionList
 		logo.setBounds(171, 0, 225, 78);
 		panel.add(logo);
 		logo.setIcon(new ImageIcon(VentanaMenuAnalisisPuesto.class.getResource("/img/LOGOAPNABI.png")));
+		
+		JLabel logo_1 = new JLabel("");
+		logo_1.setIcon(new ImageIcon(VentanaMenuPersonaOrientacion.class.getResource("/img/apnabilan.png")));
+		logo_1.setBounds(111, 0, 325, 78);
+		panel.add(logo_1);
 
 		btnAñadir.addActionListener(this);
 		btnBorrar.addActionListener(this);

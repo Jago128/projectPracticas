@@ -14,6 +14,7 @@ public class VentanaMenuPersonaPracticas extends JDialog implements ActionListen
 	private LoginController cont;
 	private Usuario user;
 	private JButton btnMostrar, btnAñadir, btnBorrar;
+	private JLabel logo;
 
 	public VentanaMenuPersonaPracticas(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
@@ -62,10 +63,10 @@ public class VentanaMenuPersonaPracticas extends JDialog implements ActionListen
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel logo = new JLabel("");
-		logo.setBounds(171, 0, 225, 78);
+		logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaMenuPersonaPracticas.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(119, 0, 325, 78);
 		panel.add(logo);
-		logo.setIcon(new ImageIcon(VentanaMenuAnalisisPuesto.class.getResource("/img/LOGOAPNABI.png")));
 
 		btnAñadir.addActionListener(this);
 		btnBorrar.addActionListener(this);
