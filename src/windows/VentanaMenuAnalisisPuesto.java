@@ -63,9 +63,9 @@ public class VentanaMenuAnalisisPuesto extends JDialog implements ActionListener
 		panel.setLayout(null);
 		
 		JLabel logo = new JLabel("");
-		logo.setBounds(171, 0, 225, 78);
+		logo.setBounds(100, 0, 325, 78);
 		panel.add(logo);
-		logo.setIcon(new ImageIcon(VentanaMenuAnalisisPuesto.class.getResource("/img/LOGOAPNABI.png")));
+		logo.setIcon(new ImageIcon(VentanaMenuAnalisisPuesto.class.getResource("/img/apnabilan.png")));
 
 		btnAñadir.addActionListener(this);
 		btnBorrar.addActionListener(this);
