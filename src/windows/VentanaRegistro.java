@@ -23,41 +23,46 @@ public class VentanaRegistro extends JDialog implements ActionListener {
 
 		setResizable(false);
 		setTitle("Registro de nuevo usuario");
-		setBounds(100, 100, 380, 230);
+		setBounds(100, 100, 380, 270);
 		getContentPane().setLayout(null);
 
 		JLabel lblRegistro = new JLabel("Introduzca la informacion para registrarse:");
 		lblRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblRegistro.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRegistro.setBounds(52, 10, 266, 41);
+		lblRegistro.setBounds(37, 87, 266, 41);
 		getContentPane().add(lblRegistro);
 
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNombre.setBounds(75, 61, 79, 29);
+		lblNombre.setBounds(47, 121, 79, 29);
 		getContentPane().add(lblNombre);
 
 		JLabel lblContraseña = new JLabel("Contraseña:");
 		lblContraseña.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblContraseña.setBounds(64, 94, 90, 29);
+		lblContraseña.setBounds(36, 150, 90, 29);
 		getContentPane().add(lblContraseña);
 
 		textFieldNombre = new JTextField();
-		textFieldNombre.setBounds(164, 67, 96, 19);
+		textFieldNombre.setBounds(136, 127, 150, 19);
 		getContentPane().add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 
 		passwordField = new JPasswordField();
-		passwordField.setBounds(164, 100, 96, 19);
+		passwordField.setBounds(136, 156, 150, 19);
 		getContentPane().add(passwordField);
 
 		btnRegistro = new JButton("Registrarse");
 		btnRegistro.setBackground(new Color(38, 201, 236));
 		btnRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnRegistro.setBounds(112, 133, 110, 29);
+		btnRegistro.setBounds(119, 189, 110, 29);
 		getContentPane().add(btnRegistro);
+		
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaRegistro.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(10, 10, 325, 78);
+		getContentPane().add(logo);
 		btnRegistro.addActionListener(this);
 
 	}

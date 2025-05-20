@@ -16,6 +16,7 @@ public class VentanaLogin extends JDialog implements ActionListener {
 	private JButton btnIniciarSesion, btnRegistro;
 	private LoginController cont;
 	private JLabel lblMensaje;
+	private JLabel logo;
 
 	public VentanaLogin(LoginController cont) {
 		setBackground(new Color(38, 201, 236));
@@ -27,43 +28,37 @@ public class VentanaLogin extends JDialog implements ActionListener {
 		setBounds(100, 100, 410, 260);
 		getContentPane().setLayout(null);
 
-		JLabel lblTitulo = new JLabel("Base de datos Apnabi");
-		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblTitulo.setBounds(126, 10, 138, 30);
-		getContentPane().add(lblTitulo);
-
 		passwordField = new JPasswordField();
-		passwordField.setBounds(203, 98, 96, 19);
+		passwordField.setBounds(211, 138, 96, 19);
 		getContentPane().add(passwordField);
 
 		textFieldNombre = new JTextField();
-		textFieldNombre.setBounds(203, 57, 96, 19);
+		textFieldNombre.setBounds(211, 97, 96, 19);
 		getContentPane().add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNombre.setBounds(67, 50, 126, 30);
+		lblNombre.setBounds(75, 90, 126, 30);
 		getContentPane().add(lblNombre);
 
 		JLabel lblContraseña = new JLabel("Contraseña:");
 		lblContraseña.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblContraseña.setBounds(67, 91, 126, 30);
+		lblContraseña.setBounds(75, 131, 126, 30);
 		getContentPane().add(lblContraseña);
 
 		btnIniciarSesion = new JButton("Iniciar sesion");
 		btnIniciarSesion.setBackground(new Color(38, 201, 236));
 		btnIniciarSesion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnIniciarSesion.setBounds(54, 146, 126, 30);
+		btnIniciarSesion.setBounds(62, 186, 126, 30);
 		getContentPane().add(btnIniciarSesion);
 
 		btnRegistro = new JButton("Registrarse");
 		btnRegistro.setBackground(new Color(38, 201, 236));
 		btnRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnRegistro.setBounds(213, 146, 126, 30);
+		btnRegistro.setBounds(221, 186, 126, 30);
 		getContentPane().add(btnRegistro);
 
 		lblMensaje = new JLabel("");
@@ -71,6 +66,11 @@ public class VentanaLogin extends JDialog implements ActionListener {
 		lblMensaje.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblMensaje.setBounds(39, 186, 308, 30);
 		getContentPane().add(lblMensaje);
+		
+		logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaLogin.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(39, 9, 325, 78);
+		getContentPane().add(logo);
 
 		btnIniciarSesion.addActionListener(this);
 		btnRegistro.addActionListener(this);

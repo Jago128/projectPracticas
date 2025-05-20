@@ -30,52 +30,52 @@ public class VentanaAñadirPersonaInclusion extends JDialog implements ActionLis
 
 		setResizable(false);
 		setTitle("Añadir personas en inclusion");
-		setBounds(100, 100, 960, 610);
+		setBounds(100, 100, 960, 670);
 		getContentPane().setLayout(null);
 
 		JLabel lblObligatorio = new JLabel("Los campos con * son obligatorias.");
 		lblObligatorio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblObligatorio.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblObligatorio.setBounds(369, 10, 241, 24);
+		lblObligatorio.setBounds(188, 24, 241, 24);
 		getContentPane().add(lblObligatorio);
 
 		JLabel lblNom = new JLabel("Nombre: *");
 		lblNom.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNom.setBounds(10, 39, 103, 28);
+		lblNom.setBounds(20, 90, 103, 28);
 		getContentPane().add(lblNom);
 
 		textFieldNom = new JTextField();
 		textFieldNom.setColumns(10);
-		textFieldNom.setBounds(129, 45, 183, 19);
+		textFieldNom.setBounds(139, 96, 183, 19);
 		getContentPane().add(textFieldNom);
 
 		JLabel lblApellidos = new JLabel("Apellidos: *");
 		lblApellidos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblApellidos.setBounds(316, 39, 103, 28);
+		lblApellidos.setBounds(326, 90, 103, 28);
 		getContentPane().add(lblApellidos);
 
 		textFieldApellidos = new JTextField();
 		textFieldApellidos.setColumns(10);
-		textFieldApellidos.setBounds(435, 45, 163, 19);
+		textFieldApellidos.setBounds(445, 96, 163, 19);
 		getContentPane().add(textFieldApellidos);
 
 		JLabel lblEdad = new JLabel("Edad: *");
 		lblEdad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEdad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEdad.setBounds(635, 39, 103, 28);
+		lblEdad.setBounds(645, 90, 103, 28);
 		getContentPane().add(lblEdad);
 
 		SpinnerModel sm = new SpinnerNumberModel(16, 0, null, 1);
 		spinnerEdad = new JSpinner(sm);
 		spinnerEdad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		spinnerEdad.setBounds(731, 38, 179, 31);
+		spinnerEdad.setBounds(741, 89, 179, 31);
 		getContentPane().add(spinnerEdad);
 		JLabel lblMunicipio = new JLabel("Municipio: *");
 		lblMunicipio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMunicipio.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblMunicipio.setBounds(20, 77, 103, 31);
+		lblMunicipio.setBounds(30, 128, 103, 31);
 		getContentPane().add(lblMunicipio);
 
 		comboBoxMunicipio = new JComboBox<>();
@@ -96,78 +96,78 @@ public class VentanaAñadirPersonaInclusion extends JDialog implements ActionLis
 				"Ugao-Miraballes", "Urduliz", "Urduña", "Usansolo", "Zaldibar", "Zalla", "Zamudio", "Zaratamo",
 				"Zeanuri", "Zeberio", "Zierbena", "Ziortza-Bolibar", "Zornotza" }));
 		comboBoxMunicipio.setSelectedIndex(0);
-		comboBoxMunicipio.setBounds(131, 83, 181, 21);
+		comboBoxMunicipio.setBounds(141, 134, 181, 21);
 		getContentPane().add(comboBoxMunicipio);
 
 		JLabel lblFormacion = new JLabel("Formacion: *");
 		lblFormacion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFormacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblFormacion.setBounds(316, 77, 108, 28);
+		lblFormacion.setBounds(326, 128, 108, 28);
 		getContentPane().add(lblFormacion);
 
 		comboBoxFormacion = new JComboBox<>();
 		comboBoxFormacion.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO", "EPA",
 				"FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacion.setSelectedIndex(0);
-		comboBoxFormacion.setBounds(434, 82, 163, 21);
+		comboBoxFormacion.setBounds(444, 133, 163, 21);
 		getContentPane().add(comboBoxFormacion);
 
 		JLabel lblEspecialidad = new JLabel("Especialidad: * (Describa la especialidad)");
 		lblEspecialidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEspecialidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEspecialidad.setBounds(610, 376, 244, 28);
+		lblEspecialidad.setBounds(610, 441, 244, 28);
 		getContentPane().add(lblEspecialidad);
 
 		textAreaEspecialidad = new JTextArea();
 		textAreaEspecialidad.setLineWrap(true);
 		textAreaEspecialidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaEspecialidad.setBounds(476, 414, 460, 107);
+		textAreaEspecialidad.setBounds(476, 479, 460, 107);
 		getContentPane().add(textAreaEspecialidad);
 
 		JLabel lblOtros = new JLabel("Otros titulos, certificados, carnets:");
 		lblOtros.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOtros.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblOtros.setBounds(27, 375, 352, 31);
+		lblOtros.setBounds(27, 440, 352, 31);
 		getContentPane().add(lblOtros);
 
 		JLabel lblMaxChars = new JLabel("(Max 500 caracteres para los cuatro)");
 		lblMaxChars.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMaxChars.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblMaxChars.setBounds(383, 359, 217, 31);
+		lblMaxChars.setBounds(383, 424, 217, 31);
 		getContentPane().add(lblMaxChars);
 
 		textAreaOtros = new JTextArea();
 		textAreaOtros.setLineWrap(true);
 		textAreaOtros.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaOtros.setBounds(20, 412, 446, 110);
+		textAreaOtros.setBounds(20, 477, 446, 110);
 		getContentPane().add(textAreaOtros);
 
 		JLabel lblIdioma = new JLabel("Idiomas: *");
 		lblIdioma.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIdioma.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblIdioma.setBounds(635, 77, 108, 31);
+		lblIdioma.setBounds(645, 128, 108, 31);
 		getContentPane().add(lblIdioma);
 
 		textFieldIdioma = new JTextField();
 		textFieldIdioma.setColumns(10);
-		textFieldIdioma.setBounds(757, 84, 163, 19);
+		textFieldIdioma.setBounds(767, 135, 163, 19);
 		getContentPane().add(textFieldIdioma);
 
 		JLabel lblUltimoAñoTrabajado = new JLabel("Ultimo año trabajado:");
 		lblUltimoAñoTrabajado.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUltimoAñoTrabajado.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblUltimoAñoTrabajado.setBounds(10, 115, 143, 31);
+		lblUltimoAñoTrabajado.setBounds(20, 166, 143, 31);
 		getContentPane().add(lblUltimoAñoTrabajado);
 
 		textFieldUltimoAñoTrabajado = new JTextField();
 		textFieldUltimoAñoTrabajado.setColumns(10);
-		textFieldUltimoAñoTrabajado.setBounds(149, 122, 163, 19);
+		textFieldUltimoAñoTrabajado.setBounds(159, 173, 163, 19);
 		getContentPane().add(textFieldUltimoAñoTrabajado);
 
 		JLabel lblSectorInteres = new JLabel("Sector de interes: *");
 		lblSectorInteres.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSectorInteres.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSectorInteres.setBounds(326, 115, 129, 28);
+		lblSectorInteres.setBounds(336, 166, 129, 28);
 		getContentPane().add(lblSectorInteres);
 
 		comboBoxSectorInteres = new JComboBox<>();
@@ -178,61 +178,61 @@ public class VentanaAñadirPersonaInclusion extends JDialog implements ActionLis
 				"Productos quimicos y materias primas", "Salud e industria farmaceutica", "Servicios", "Sociedad",
 				"Tecnologia y telecomunicaciones", "Turismo y hosteleria", "Vida" }));
 		comboBoxSectorInteres.setSelectedIndex(0);
-		comboBoxSectorInteres.setBounds(465, 120, 163, 21);
+		comboBoxSectorInteres.setBounds(475, 171, 163, 21);
 		getContentPane().add(comboBoxSectorInteres);
 
 		textAreaInteresesPersonales = new JTextArea();
 		textAreaInteresesPersonales.setLineWrap(true);
 		textAreaInteresesPersonales.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaInteresesPersonales.setBounds(20, 239, 446, 110);
+		textAreaInteresesPersonales.setBounds(20, 304, 446, 110);
 		getContentPane().add(textAreaInteresesPersonales);
 
 		JLabel lbl_InteresesPersonales = new JLabel("Intereses personales:");
 		lbl_InteresesPersonales.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_InteresesPersonales.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lbl_InteresesPersonales.setBounds(149, 198, 163, 31);
+		lbl_InteresesPersonales.setBounds(149, 263, 163, 31);
 		getContentPane().add(lbl_InteresesPersonales);
 
 		textAreaSituacionActual = new JTextArea();
 		textAreaSituacionActual.setLineWrap(true);
 		textAreaSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaSituacionActual.setBounds(476, 239, 465, 110);
+		textAreaSituacionActual.setBounds(476, 304, 465, 110);
 		getContentPane().add(textAreaSituacionActual);
 
 		JLabel lblSituacionActual = new JLabel("Situacion actual:");
 		lblSituacionActual.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSituacionActual.setBounds(649, 202, 152, 31);
+		lblSituacionActual.setBounds(649, 267, 152, 31);
 		getContentPane().add(lblSituacionActual);
 
 		JLabel lblAccesibilidad = new JLabel("Accesibilidad: *");
 		lblAccesibilidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAccesibilidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblAccesibilidad.setBounds(645, 115, 120, 31);
+		lblAccesibilidad.setBounds(655, 166, 120, 31);
 		getContentPane().add(lblAccesibilidad);
 
 		comboBoxAccesibilidad = new JComboBox<>();
 		comboBoxAccesibilidad.setModel(
 				new DefaultComboBoxModel<>(new String[] { "---", "Carnet + coche", "Carnet", "Transporte publico" }));
 		comboBoxAccesibilidad.setSelectedIndex(0);
-		comboBoxAccesibilidad.setBounds(778, 121, 163, 21);
+		comboBoxAccesibilidad.setBounds(788, 172, 163, 21);
 		getContentPane().add(comboBoxAccesibilidad);
 
 		JLabel lblCV = new JLabel("CV:");
 		lblCV.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCV.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCV.setBounds(20, 160, 51, 28);
+		lblCV.setBounds(30, 211, 51, 28);
 		getContentPane().add(lblCV);
 
 		textFieldCV = new JTextField();
 		textFieldCV.setColumns(10);
-		textFieldCV.setBounds(82, 166, 524, 19);
+		textFieldCV.setBounds(92, 217, 524, 19);
 		getContentPane().add(textFieldCV);
 
 		JLabel lblPersonaFacilitadora = new JLabel("Persona facilitadora: *");
 		lblPersonaFacilitadora.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPersonaFacilitadora.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblPersonaFacilitadora.setBounds(610, 160, 137, 28);
+		lblPersonaFacilitadora.setBounds(620, 211, 137, 28);
 		getContentPane().add(lblPersonaFacilitadora);
 
 		comboBoxPersonaFacilitadora = new JComboBox<>();
@@ -240,14 +240,19 @@ public class VentanaAñadirPersonaInclusion extends JDialog implements ActionLis
 		comboBoxPersonaFacilitadora.setModel(new DefaultComboBoxModel<>(
 				new String[] { "---", "Alba", "Ellen", "Selene", "Piti", "María", "Gorka", "Rocío" }));
 		comboBoxPersonaFacilitadora.setSelectedIndex(0);
-		comboBoxPersonaFacilitadora.setBounds(757, 165, 179, 21);
+		comboBoxPersonaFacilitadora.setBounds(767, 216, 179, 21);
 		getContentPane().add(comboBoxPersonaFacilitadora);
 
 		btnAñadir = new JButton("Añadir persona en inclusion");
 		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		btnAñadir.setBounds(305, 531, 339, 37);
+		btnAñadir.setBounds(305, 596, 339, 37);
 		getContentPane().add(btnAñadir);
+		
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaAñadirPersonaInclusion.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(464, 8, 325, 78);
+		getContentPane().add(logo);
 		btnAñadir.addActionListener(this);
 	}
 

@@ -16,6 +16,7 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 	// private Usuario user;
 	private JButton btnBorrar;
 	private JList<String> listEmpresas;
+	private JLabel logo;
 
 	public VentanaBorrarEmpresa(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
@@ -26,12 +27,12 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 
 		setResizable(false);
 		setTitle("Borrar empresa");
-		setBounds(100, 100, 310, 300);
+		setBounds(100, 100, 360, 400);
 		getContentPane().setLayout(null);
 
 		listEmpresas = new JList<>();
 		listEmpresas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listEmpresas.setBounds(63, 43, 188, 163);
+		listEmpresas.setBounds(76, 131, 188, 163);
 		listEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		getContentPane().add(listEmpresas);
 
@@ -40,15 +41,20 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.setBackground(new Color(38, 201, 236));
 		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrar.setBounds(91, 216, 118, 37);
+		btnBorrar.setBounds(116, 304, 118, 37);
 		getContentPane().add(btnBorrar);
 		btnBorrar.addActionListener(this);
 
 		JLabel lblInfo = new JLabel("Seleccione el nombre de la empresa a borrar:");
 		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInfo.setBounds(25, 10, 256, 23);
+		lblInfo.setBounds(41, 98, 256, 23);
 		getContentPane().add(lblInfo);
+		
+		logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaBorrarEmpresa.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(10, 10, 325, 78);
+		getContentPane().add(logo);
 	}
 
 	public void addNomEmpresas() {

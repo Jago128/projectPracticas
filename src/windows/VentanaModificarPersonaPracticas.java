@@ -18,6 +18,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 	private JComboBox<String> comboBoxFormacion, comboBoxCurso, comboBoxCentroFormativo, comboBoxApoyo;
 	private JTextArea textAreaPersona;
 	private JCheckBox chckbxEmpresaApnabi;
+	private JLabel logo;
 
 	public VentanaModificarPersonaPracticas(JDialog parent, LoginController cont, PersonaPracticas persona) {
 		super(parent, true);
@@ -28,7 +29,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 
 		setResizable(false);
 		setTitle("Modificar persona en practicas");
-		setBounds(100, 100, 870, 420);
+		setBounds(100, 100, 870, 480);
 		getContentPane().setLayout(null);
 
 		textAreaPersona = new JTextArea();
@@ -37,13 +38,13 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		textAreaPersona.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textAreaPersona.setEditable(false);
 		textAreaPersona.setBackground(Color.WHITE);
-		textAreaPersona.setBounds(346, 49, 495, 324);
+		textAreaPersona.setBounds(337, 49, 495, 324);
 		getContentPane().add(textAreaPersona);
 
 		JLabel lblDatosPersona = new JLabel("Informacion de la persona en practicas seleccionada:");
 		lblDatosPersona.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatosPersona.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblDatosPersona.setBounds(346, 10, 479, 28);
+		lblDatosPersona.setBounds(337, 10, 479, 28);
 		getContentPane().add(lblDatosPersona);
 
 		loadPersona();
@@ -51,20 +52,20 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		JLabel lblApoyo = new JLabel("Apoyo:");
 		lblApoyo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblApoyo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblApoyo.setBounds(37, 11, 68, 28);
+		lblApoyo.setBounds(28, 107, 68, 28);
 		getContentPane().add(lblApoyo);
 
 		comboBoxApoyo = new JComboBox<String>();
 		comboBoxApoyo.setEditable(true);
 		comboBoxApoyo.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
 		comboBoxApoyo.setSelectedIndex(0);
-		comboBoxApoyo.setBounds(138, 16, 163, 21);
+		comboBoxApoyo.setBounds(129, 112, 163, 21);
 		getContentPane().add(comboBoxApoyo);
 
 		JLabel lblCentroFormativo = new JLabel("Centro Formativo:");
 		lblCentroFormativo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCentroFormativo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCentroFormativo.setBounds(10, 115, 118, 31);
+		lblCentroFormativo.setBounds(1, 211, 118, 31);
 		getContentPane().add(lblCentroFormativo);
 
 		comboBoxCentroFormativo = new JComboBox<>();
@@ -101,83 +102,88 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 				"IMFPB SESTAO OLHUI", "CPEIPS NTRA. SRA. DE LA ANTIGUA HLBHIP", "CPEIPS MARISTAS-SAN MIGUEL HLBHIP",
 				"IES Martín de Bertendona BHI" }));
 		comboBoxCentroFormativo.setSelectedIndex(0);
-		comboBoxCentroFormativo.setBounds(129, 121, 196, 21);
+		comboBoxCentroFormativo.setBounds(120, 217, 196, 21);
 		getContentPane().add(comboBoxCentroFormativo);
 
 		JLabel lblFormacion = new JLabel("Formacion:");
 		lblFormacion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFormacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblFormacion.setBounds(26, 47, 87, 28);
+		lblFormacion.setBounds(17, 143, 87, 28);
 		getContentPane().add(lblFormacion);
 
 		comboBoxFormacion = new JComboBox<>();
 		comboBoxFormacion.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO", "EPA",
 				"FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacion.setSelectedIndex(0);
-		comboBoxFormacion.setBounds(138, 52, 163, 21);
+		comboBoxFormacion.setBounds(129, 148, 163, 21);
 		getContentPane().add(comboBoxFormacion);
 
 		JLabel lblDuracion = new JLabel("Duracion:");
 		lblDuracion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDuracion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblDuracion.setBounds(52, 199, 73, 31);
+		lblDuracion.setBounds(43, 295, 73, 31);
 		getContentPane().add(lblDuracion);
 
 		textFieldDuracion = new JTextField();
 		textFieldDuracion.setColumns(10);
-		textFieldDuracion.setBounds(138, 206, 163, 19);
+		textFieldDuracion.setBounds(129, 302, 163, 19);
 		getContentPane().add(textFieldDuracion);
 
 		JLabel lblFechas = new JLabel("Fechas:");
 		lblFechas.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFechas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblFechas.setBounds(53, 158, 68, 31);
+		lblFechas.setBounds(44, 254, 68, 31);
 		getContentPane().add(lblFechas);
 
 		textFieldFecha = new JTextField();
 		textFieldFecha.setColumns(10);
-		textFieldFecha.setBounds(138, 165, 163, 19);
+		textFieldFecha.setBounds(129, 261, 163, 19);
 		getContentPane().add(textFieldFecha);
 
 		JLabel lblCurso = new JLabel("Curso:");
 		lblCurso.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCurso.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCurso.setBounds(45, 85, 60, 28);
+		lblCurso.setBounds(36, 181, 60, 28);
 		getContentPane().add(lblCurso);
 
 		comboBoxCurso = new JComboBox<>();
 		comboBoxCurso.setModel(new DefaultComboBoxModel<>(new String[] { "1", "2" }));
 		comboBoxCurso.setSelectedIndex(0);
-		comboBoxCurso.setBounds(138, 82, 163, 21);
+		comboBoxCurso.setBounds(129, 178, 163, 21);
 		getContentPane().add(comboBoxCurso);
 
 		JLabel lblPracticas = new JLabel("Empresa practicas:");
 		lblPracticas.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPracticas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblPracticas.setBounds(16, 233, 118, 28);
+		lblPracticas.setBounds(7, 329, 118, 28);
 		getContentPane().add(lblPracticas);
 
 		textFieldPracticas = new JTextField();
 		textFieldPracticas.setColumns(10);
-		textFieldPracticas.setBounds(138, 239, 172, 19);
+		textFieldPracticas.setBounds(129, 335, 172, 19);
 		getContentPane().add(textFieldPracticas);
 
 		JLabel lblExtraInfo = new JLabel("Si no quieres cambiar esta opcion, no hace falta tocarlo.");
 		lblExtraInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblExtraInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblExtraInfo.setBounds(17, 320, 319, 28);
+		lblExtraInfo.setBounds(1, 363, 319, 28);
 		getContentPane().add(lblExtraInfo);
 
 		chckbxEmpresaApnabi = new JCheckBox("Es empresa nuestra?");
 		chckbxEmpresaApnabi.setBackground(new Color(38, 201, 236));
 		chckbxEmpresaApnabi.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		chckbxEmpresaApnabi.setBounds(89, 340, 163, 33);
+		chckbxEmpresaApnabi.setBounds(73, 383, 163, 33);
 		getContentPane().add(chckbxEmpresaApnabi);
 
 		btnModificar = new JButton("Modificar");
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnModificar.setBounds(82, 271, 175, 43);
+		btnModificar.setBounds(337, 383, 495, 43);
 		getContentPane().add(btnModificar);
+		
+		logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaModificarPersonaPracticas.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(10, 25, 325, 78);
+		getContentPane().add(logo);
 		btnModificar.addActionListener(this);
 	}
 

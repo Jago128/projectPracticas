@@ -16,6 +16,7 @@ public class VentanaBorrarPersonaOrientacion extends JDialog implements ActionLi
 	// private Usuario user;
 	private JButton btnBorrar;
 	private JList<String> listPersonas;
+	private JLabel logo;
 
 	public VentanaBorrarPersonaOrientacion(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
@@ -26,12 +27,12 @@ public class VentanaBorrarPersonaOrientacion extends JDialog implements ActionLi
 
 		setResizable(false);
 		setTitle("Borrar personas en orientacion y seguimiento");
-		setBounds(100, 100, 400, 300);
+		setBounds(100, 100, 400, 380);
 		getContentPane().setLayout(null);
 
 		listPersonas = new JList<>();
 		listPersonas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listPersonas.setBounds(77, 43, 251, 163);
+		listPersonas.setBounds(78, 125, 251, 163);
 		listPersonas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		getContentPane().add(listPersonas);
 
@@ -40,15 +41,20 @@ public class VentanaBorrarPersonaOrientacion extends JDialog implements ActionLi
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.setBackground(new Color(38, 201, 236));
 		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrar.setBounds(134, 216, 118, 37);
+		btnBorrar.setBounds(135, 298, 118, 37);
 		getContentPane().add(btnBorrar);
 		btnBorrar.addActionListener(this);
 
 		JLabel lblInfo = new JLabel("Seleccione el nombre de la persona en orientacion a borrar:");
 		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInfo.setBounds(23, 10, 352, 23);
+		lblInfo.setBounds(24, 92, 352, 23);
 		getContentPane().add(lblInfo);
+		
+		logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaBorrarPersonaOrientacion.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(32, 10, 325, 78);
+		getContentPane().add(logo);
 	}
 
 	public void addNomPersonas() {

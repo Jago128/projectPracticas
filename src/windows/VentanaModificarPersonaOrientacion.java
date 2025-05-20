@@ -47,13 +47,13 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		textareaPersona.setBackground(new Color(255, 255, 255));
 		textareaPersona.setLineWrap(true);
 		textareaPersona.setEditable(false);
-		textareaPersona.setBounds(388, 37, 506, 369);
+		textareaPersona.setBounds(388, 43, 496, 330);
 		getContentPane().add(textareaPersona);
 
 		JLabel lblNota = new JLabel("No hace falta rellenar toda la informacion.");
 		lblNota.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNota.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNota.setBounds(10, 7, 377, 28);
+		lblNota.setBounds(10, 86, 377, 28);
 		getContentPane().add(lblNota);
 
 		loadPersona();
@@ -61,7 +61,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		JLabel lblApoyo = new JLabel("Apoyo:");
 		lblApoyo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblApoyo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblApoyo.setBounds(25, 37, 140, 28);
+		lblApoyo.setBounds(25, 121, 140, 28);
 		getContentPane().add(lblApoyo);
 
 		comboBoxApoyo = new JComboBox<>();
@@ -69,20 +69,20 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		comboBoxApoyo.setModel(new DefaultComboBoxModel<>(
 				new String[] { "---", "Alba", "Ellen", "Selene", "Piti", "María", "Gorka", "Rocío" }));
 		comboBoxApoyo.setSelectedIndex(0);
-		comboBoxApoyo.setBounds(175, 43, 163, 19);
+		comboBoxApoyo.setBounds(175, 127, 163, 19);
 		getContentPane().add(comboBoxApoyo);
 
 		JLabel lblFormacion = new JLabel("Formacion:");
 		lblFormacion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFormacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblFormacion.setBounds(14, 75, 151, 28);
+		lblFormacion.setBounds(14, 159, 151, 28);
 		getContentPane().add(lblFormacion);
 
 		comboBoxFormacion = new JComboBox<>();
 		comboBoxFormacion.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO", "EPA",
 				"FP Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacion.setSelectedIndex(0);
-		comboBoxFormacion.setBounds(175, 80, 163, 21);
+		comboBoxFormacion.setBounds(175, 164, 163, 21);
 		getContentPane().add(comboBoxFormacion);
 
 		JLabel lblEspecialidad = new JLabel("Especialidad: (Describa la especialidad)");
@@ -100,37 +100,37 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		JLabel lblSectorInteres = new JLabel("Sector interes:");
 		lblSectorInteres.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSectorInteres.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSectorInteres.setBounds(46, 106, 119, 28);
+		lblSectorInteres.setBounds(46, 187, 119, 28);
 		getContentPane().add(lblSectorInteres);
 
 		comboBoxSectorInteres = new JComboBox<>();
 		comboBoxSectorInteres.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
 		comboBoxSectorInteres.setSelectedIndex(0);
-		comboBoxSectorInteres.setBounds(175, 111, 163, 21);
+		comboBoxSectorInteres.setBounds(175, 192, 163, 21);
 		getContentPane().add(comboBoxSectorInteres);
 
 		JLabel lblCVLink = new JLabel("CV Link:");
 		lblCVLink.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCVLink.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCVLink.setBounds(56, 144, 78, 28);
+		lblCVLink.setBounds(46, 219, 78, 28);
 		getContentPane().add(lblCVLink);
 
 		textFieldCVLink = new JTextField();
 		textFieldCVLink.setColumns(10);
-		textFieldCVLink.setBounds(175, 150, 163, 19);
+		textFieldCVLink.setBounds(165, 225, 163, 19);
 		getContentPane().add(textFieldCVLink);
 
 		JLabel lblCertifDiscapacidad = new JLabel("Certificado discapacidad:");
 		lblCertifDiscapacidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCertifDiscapacidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCertifDiscapacidad.setBounds(25, 182, 140, 28);
+		lblCertifDiscapacidad.setBounds(25, 257, 140, 28);
 		getContentPane().add(lblCertifDiscapacidad);
 
 		comboBoxCertifDiscapacidad = new JComboBox<>();
 		comboBoxCertifDiscapacidad
 				.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Si", "No", "No sabe", "Tramitando" }));
 		comboBoxCertifDiscapacidad.setSelectedIndex(0);
-		comboBoxCertifDiscapacidad.setBounds(175, 187, 163, 21);
+		comboBoxCertifDiscapacidad.setBounds(175, 262, 163, 21);
 		getContentPane().add(comboBoxCertifDiscapacidad);
 
 		JLabel lblMaxChars = new JLabel("(Max 500 caracteres para los cuatro)");
@@ -177,44 +177,44 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		JLabel lblEuskera = new JLabel("Euskera:");
 		lblEuskera.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEuskera.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEuskera.setBounds(56, 220, 78, 28);
+		lblEuskera.setBounds(56, 295, 78, 26);
 		getContentPane().add(lblEuskera);
 
 		comboBoxEuskera = new JComboBox<>();
 		comboBoxEuskera.setModel(new DefaultComboBoxModel<>(
 				new String[] { "---", "A1", "A2", "B1", "B2", "C1", "C2", "Conocimiento, pero sin acreditar" }));
 		comboBoxEuskera.setSelectedIndex(0);
-		comboBoxEuskera.setBounds(175, 225, 163, 21);
+		comboBoxEuskera.setBounds(175, 300, 163, 21);
 		getContentPane().add(comboBoxEuskera);
 
 		JLabel lblIngles = new JLabel("Ingles:");
 		lblIngles.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIngles.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblIngles.setBounds(56, 258, 78, 28);
+		lblIngles.setBounds(56, 337, 78, 28);
 		getContentPane().add(lblIngles);
 
 		comboBoxIngles = new JComboBox<>();
 		comboBoxIngles.setModel(new DefaultComboBoxModel<>(
 				new String[] { "---", "A1", "A2", "B1", "B2", "C1", "C2", "Conocimiento, pero sin acreditar" }));
 		comboBoxIngles.setSelectedIndex(0);
-		comboBoxIngles.setBounds(175, 263, 163, 21);
+		comboBoxIngles.setBounds(175, 342, 163, 21);
 		getContentPane().add(comboBoxIngles);
 
 		JLabel lblOtrosIdiomas = new JLabel("Otros idiomas:");
 		lblOtrosIdiomas.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOtrosIdiomas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblOtrosIdiomas.setBounds(25, 296, 126, 31);
+		lblOtrosIdiomas.setBounds(3, 375, 126, 31);
 		getContentPane().add(lblOtrosIdiomas);
 
 		textFieldOtrosIdiomas = new JTextField();
 		textFieldOtrosIdiomas.setColumns(10);
-		textFieldOtrosIdiomas.setBounds(175, 303, 163, 19);
+		textFieldOtrosIdiomas.setBounds(153, 382, 163, 19);
 		getContentPane().add(textFieldOtrosIdiomas);
 
 		JLabel lblLocalidad = new JLabel("Localidad:");
 		lblLocalidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLocalidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblLocalidad.setBounds(14, 338, 163, 31);
+		lblLocalidad.setBounds(273, 383, 163, 31);
 		getContentPane().add(lblLocalidad);
 
 		comboBoxLocalidad = new JComboBox<>();
@@ -235,20 +235,20 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 				"Ugao-Miraballes", "Urduliz", "Urduña", "Usansolo", "Zaldibar", "Zalla", "Zamudio", "Zaratamo",
 				"Zeanuri", "Zeberio", "Zierbena", "Ziortza-Bolibar", "Zornotza" }));
 		comboBoxLocalidad.setSelectedIndex(0);
-		comboBoxLocalidad.setBounds(175, 342, 163, 21);
+		comboBoxLocalidad.setBounds(434, 387, 163, 21);
 		getContentPane().add(comboBoxLocalidad);
 
 		JLabel lblAccesibilidad = new JLabel("Accesibilidad:");
 		lblAccesibilidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAccesibilidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblAccesibilidad.setBounds(42, 379, 120, 31);
+		lblAccesibilidad.setBounds(588, 383, 120, 31);
 		getContentPane().add(lblAccesibilidad);
 
 		comboBoxAccesibilidad = new JComboBox<>();
 		comboBoxAccesibilidad.setModel(
 				new DefaultComboBoxModel<>(new String[] { "---", "Carnet + coche", "Carnet", "Transporte publico" }));
 		comboBoxAccesibilidad.setSelectedIndex(0);
-		comboBoxAccesibilidad.setBounds(175, 385, 163, 21);
+		comboBoxAccesibilidad.setBounds(721, 389, 163, 21);
 		getContentPane().add(comboBoxAccesibilidad);
 
 		JLabel lblObservaciones = new JLabel("Observaciones:");
@@ -268,6 +268,11 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificar.setBounds(363, 722, 175, 43);
 		getContentPane().add(btnModificar);
+		
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaModificarPersonaOrientacion.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(21, 10, 325, 78);
+		getContentPane().add(logo);
 		btnModificar.addActionListener(this);
 	}
 
