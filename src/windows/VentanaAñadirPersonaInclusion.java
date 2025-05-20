@@ -24,6 +24,8 @@ public class VentanaAñadirPersonaInclusion extends JDialog implements ActionLis
 
 	public VentanaAñadirPersonaInclusion(JDialog parent, LoginController cont) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 
 		setResizable(false);
@@ -242,6 +244,7 @@ public class VentanaAñadirPersonaInclusion extends JDialog implements ActionLis
 		getContentPane().add(comboBoxPersonaFacilitadora);
 
 		btnAñadir = new JButton("Añadir persona en inclusion");
+		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(305, 531, 339, 37);
 		getContentPane().add(btnAñadir);

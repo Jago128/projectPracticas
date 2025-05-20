@@ -24,6 +24,8 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 
 	public VentanaAñadirPersonaOrientacion(JDialog parent, LoginController cont) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 
 		setResizable(false);
@@ -259,6 +261,7 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 		getContentPane().add(textAreaObservaciones);
 
 		btnAñadir = new JButton("Añadir persona");
+		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(345, 566, 286, 37);
 		getContentPane().add(btnAñadir);

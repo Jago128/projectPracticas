@@ -21,6 +21,8 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 
 	public VentanaAñadirPersonaPracticas(JDialog parent, LoginController cont) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 
 		setResizable(false);
@@ -160,11 +162,13 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 		getContentPane().add(comboBoxApoyo);
 
 		chckbxEmpresaApnabi = new JCheckBox("Es empresa nuestra?");
+		chckbxEmpresaApnabi.setBackground(new Color(38, 201, 236));
 		chckbxEmpresaApnabi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chckbxEmpresaApnabi.setBounds(63, 193, 163, 33);
 		getContentPane().add(chckbxEmpresaApnabi);
 
 		btnAñadir = new JButton("Añadir persona en practicas");
+		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(267, 195, 339, 37);
 		getContentPane().add(btnAñadir);

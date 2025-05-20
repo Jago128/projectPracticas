@@ -20,6 +20,8 @@ public class VentanaBorrarAnalisisPuesto extends JDialog implements ActionListen
 
 	public VentanaBorrarAnalisisPuesto(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		// this.user = user;
 		setResizable(false);
@@ -29,13 +31,14 @@ public class VentanaBorrarAnalisisPuesto extends JDialog implements ActionListen
 
 		listAnalisisPuestos = new JList<>();
 		listAnalisisPuestos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listAnalisisPuestos.setBounds(100, 43, 255, 163);
+		listAnalisisPuestos.setBounds(92, 43, 255, 163);
 		listAnalisisPuestos.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		getContentPane().add(listAnalisisPuestos);
 
 		btnBorrar = new JButton("Borrar");
+		btnBorrar.setBackground(new Color(38, 201, 236));
 		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrar.setBounds(150, 216, 118, 37);
+		btnBorrar.setBounds(160, 216, 118, 37);
 		getContentPane().add(btnBorrar);
 		btnBorrar.addActionListener(this);
 

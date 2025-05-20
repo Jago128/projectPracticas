@@ -21,6 +21,8 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 
 	public VentanaModificarAnalisisPuesto(JDialog parent, LoginController cont, AnalisisPuesto aP) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		this.aP = aP;
 
@@ -166,6 +168,7 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		getContentPane().add(comboBoxComunicacion);
 
 		btnModificar = new JButton("Modificar");
+		btnModificar.setBackground(new Color(38, 201, 236));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificar.setBounds(695, 381, 209, 47);
 		getContentPane().add(btnModificar);

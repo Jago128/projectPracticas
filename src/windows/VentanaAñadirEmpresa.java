@@ -27,6 +27,8 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 
 	public VentanaAñadirEmpresa(JDialog parent, LoginController cont) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 
 		setResizable(false);
@@ -272,6 +274,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		getContentPane().add(lblmaxChars_1);
 
 		btnAñadir = new JButton("Añadir empresa");
+		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(215, 385, 380, 37);
 		getContentPane().add(btnAñadir);

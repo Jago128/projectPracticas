@@ -26,6 +26,8 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 
 	public VentanaAñadirAnalisisPuesto(JDialog parent, LoginController cont) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 
 		setResizable(false);
@@ -181,6 +183,7 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 		getContentPane().add(comboBoxFinde);
 
 		chckbxTurnos = new JCheckBox("Se trabaja de turnos?");
+		chckbxTurnos.setBackground(new Color(38, 201, 236));
 		chckbxTurnos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chckbxTurnos.setBounds(777, 160, 163, 33);
 		getContentPane().add(chckbxTurnos);
@@ -208,11 +211,13 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 		getContentPane().add(textFieldTelefono);
 
 		chckbxEsfuerzoFisico = new JCheckBox("Es necesario realizar esfuerzo fisico?");
+		chckbxEsfuerzoFisico.setBackground(new Color(38, 201, 236));
 		chckbxEsfuerzoFisico.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chckbxEsfuerzoFisico.setBounds(627, 191, 257, 31);
 		getContentPane().add(chckbxEsfuerzoFisico);
 
 		chckbxResistencia = new JCheckBox("Es necesario tener resistencia?");
+		chckbxResistencia.setBackground(new Color(38, 201, 236));
 		chckbxResistencia.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chckbxResistencia.setBounds(40, 224, 224, 33);
 		getContentPane().add(chckbxResistencia);
@@ -246,6 +251,7 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 		getContentPane().add(comboBoxCaracteristicasSensoriales);
 
 		btnAñadir = new JButton("Añadir analisis de puesto");
+		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(493, 268, 356, 35);
 		getContentPane().add(btnAñadir);

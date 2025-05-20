@@ -21,6 +21,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 
 	public VentanaMostrarEmpresa(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		// this.user = user;
 
@@ -30,72 +31,89 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 		getContentPane().setLayout(null);
 
 		listSectores = new JList<>();
+		listSectores.setBackground(new Color(38, 201, 236));
 		listSectores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listSectores.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listEmpresas = new JList<String>();
+		listEmpresas.setBackground(new Color(38, 201, 236));
 		listEmpresas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listPuestos = new JList<String>();
+		listPuestos.setBackground(new Color(38, 201, 236));
 		listPuestos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listPuestos.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listDatosContacto = new JList<String>();
+		listDatosContacto.setBackground(new Color(38, 201, 236));
 		listDatosContacto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listDatosContacto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContactosEmpresa = new JList<String>();
+		listContactosEmpresa.setBackground(new Color(38, 201, 236));
 		listContactosEmpresa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listContactosEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContactosApnabi = new JList<String>();
+		listContactosApnabi.setBackground(new Color(38, 201, 236));
 		listContactosApnabi.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listContactosApnabi.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listEstados = new JList<String>();
+		listEstados.setBackground(new Color(38, 201, 236));
 		listEstados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEstados.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContacto1 = new JList<>();
+		listContacto1.setBackground(new Color(38, 201, 236));
 		listContacto1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listContacto1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContacto2 = new JList<>();
+		listContacto2.setBackground(new Color(38, 201, 236));
 		listContacto2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listContacto2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContacto3 = new JList<>();
+		listContacto3.setBackground(new Color(38, 201, 236));
 		listContacto3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listContacto3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContacto4 = new JList<>();
+		listContacto4.setBackground(new Color(38, 201, 236));
 		listContacto4.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listContacto4.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listObservaciones = new JList<>();
+		listObservaciones.setBackground(new Color(38, 201, 236));
 		listObservaciones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listResultadoUltimoContacto = new JList<>();
+		listResultadoUltimoContacto.setBackground(new Color(38, 201, 236));
 		listResultadoUltimoContacto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listResultadoUltimoContacto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listInfoUltimo = new JList<>();
+		listInfoUltimo.setBackground(new Color(38, 201, 236));
 		listInfoUltimo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listInfoUltimo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listResultadoFinal = new JList<>();
+		listResultadoFinal.setBackground(new Color(38, 201, 236));
 		listResultadoFinal.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listResultadoFinal.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listFechaResolucion = new JList<>();
+		listFechaResolucion.setBackground(new Color(38, 201, 236));
 		listFechaResolucion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listFechaResolucion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		addEmpresas();
 
 		JPanel panelEmpresas = new JPanel();
+		panelEmpresas.setBackground(new Color(38, 201, 236));
 		panelEmpresas.setBounds(10, 10, 886, 170);
 		panelEmpresas.add(listSectores);
 		panelEmpresas.add(listEmpresas);
@@ -107,6 +125,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 		getContentPane().add(panelEmpresas);
 
 		JPanel panelContactos = new JPanel();
+		panelContactos.setBackground(new Color(38, 201, 236));
 		panelContactos.setBounds(10, 190, 886, 174);
 		panelContactos.add(listContacto1);
 		panelContactos.add(listContacto2);
@@ -128,9 +147,19 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 		getContentPane().add(scrollPaneContactos);
 
 		btnModificarEmpresa = new JButton("Modificar empresa");
+		btnModificarEmpresa.setBackground(new Color(38, 201, 236));
 		btnModificarEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnModificarEmpresa.setBounds(263, 361, 395, 72);
+		btnModificarEmpresa.setBounds(501, 361, 395, 72);
 		getContentPane().add(btnModificarEmpresa);
+		
+		JTextArea textAreaInfo = new JTextArea();
+		textAreaInfo.setText("Selecciona un nombre de empresa, y despues pulsa el boton\r\npara modificar la empresa.");
+		textAreaInfo.setLineWrap(true);
+		textAreaInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textAreaInfo.setEditable(false);
+		textAreaInfo.setBackground(new Color(38, 201, 236));
+		textAreaInfo.setBounds(10, 376, 481, 57);
+		getContentPane().add(textAreaInfo);
 		btnModificarEmpresa.addActionListener(this);
 	}
 

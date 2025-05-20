@@ -21,6 +21,8 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 
 	public VentanaModificarPersonaPracticas(JDialog parent, LoginController cont, PersonaPracticas persona) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		this.persona = persona;
 
@@ -167,6 +169,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		getContentPane().add(lblExtraInfo);
 
 		chckbxEmpresaApnabi = new JCheckBox("Es empresa nuestra?");
+		chckbxEmpresaApnabi.setBackground(new Color(38, 201, 236));
 		chckbxEmpresaApnabi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chckbxEmpresaApnabi.setBounds(89, 340, 163, 33);
 		getContentPane().add(chckbxEmpresaApnabi);

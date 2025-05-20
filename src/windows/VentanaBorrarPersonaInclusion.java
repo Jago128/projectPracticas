@@ -19,6 +19,8 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 
 	public VentanaBorrarPersonaInclusion(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		// this.user = user;
 
@@ -29,15 +31,16 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 
 		listPersonas = new JList<>();
 		listPersonas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listPersonas.setBounds(84, 43, 216, 163);
+		listPersonas.setBounds(76, 43, 236, 163);
 		listPersonas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		getContentPane().add(listPersonas);
 
 		addNomPersonas();
 
 		btnBorrar = new JButton("Borrar");
+		btnBorrar.setBackground(new Color(38, 201, 236));
 		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrar.setBounds(136, 216, 118, 37);
+		btnBorrar.setBounds(131, 216, 118, 37);
 		getContentPane().add(btnBorrar);
 		btnBorrar.addActionListener(this);
 

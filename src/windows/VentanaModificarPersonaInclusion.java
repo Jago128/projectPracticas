@@ -26,6 +26,8 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 
 	public VentanaModificarPersonaInclusion(JDialog parent, LoginController cont, PersonaInclusion pI) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		this.pI = pI;
 
@@ -232,6 +234,7 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 		getContentPane().add(comboBoxPersonaFacilitadora);
 
 		btnModificar = new JButton("Modificar");
+		btnModificar.setBackground(new Color(38, 201, 236));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificar.setBounds(363, 684, 175, 43);
 		getContentPane().add(btnModificar);

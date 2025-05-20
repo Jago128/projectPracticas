@@ -23,32 +23,49 @@ public class VentanaMenuPersonaOrientacion extends JDialog implements ActionList
 		setResizable(false);
 		setTitle("Personas orientacion y seguimiento");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 590, 170);
+		setBounds(100, 100, 570, 230);
 		getContentPane().setLayout(null);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 
-		btnAñadir = new JButton("Añadir personas en orientacion y seguimiento");
+		btnAñadir = new JButton("Añadir");
+		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAñadir.setBounds(262, 77, 275, 45);
+		btnAñadir.setBounds(204, 99, 145, 45);
 		getContentPane().add(btnAñadir);
 
-		btnBorrar = new JButton("Borrar personas en orientacion y seguimiento");
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.setBackground(new Color(38, 201, 236));
 		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrar.setBounds(295, 22, 267, 45);
+		btnBorrar.setBounds(379, 99, 145, 45);
 		getContentPane().add(btnBorrar);
 
-		btnMostrar = new JButton("Mostrar personas en orientacion y seguimiento");
+		btnMostrar = new JButton("Mostrar");
+		btnMostrar.setForeground(new Color(0, 0, 0));
+		btnMostrar.setBackground(new Color(38, 201, 236));
 		btnMostrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnMostrar.setBounds(10, 21, 275, 45);
+		btnMostrar.setBounds(24, 99, 145, 45);
 		getContentPane().add(btnMostrar);
 
 		JTextArea textAreaInfoModificar = new JTextArea();
 		textAreaInfoModificar.setEditable(false);
-		textAreaInfoModificar.setBackground(UIManager.getColor("Button.background"));
+		textAreaInfoModificar.setBackground(new Color(38, 201, 236));
 		textAreaInfoModificar.setLineWrap(true);
-		textAreaInfoModificar.setText("Se modifican las personas en orientacion\r\ny seguimiento desde esta ventana.");
-		textAreaInfoModificar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaInfoModificar.setBounds(20, 67, 232, 34);
+		textAreaInfoModificar.setText("Para acceder a la ventana de modificar, se hace desde la ventana de mostrar.");
+		textAreaInfoModificar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textAreaInfoModificar.setBounds(34, 154, 498, 29);
 		getContentPane().add(textAreaInfoModificar);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(38, 201, 236));
+		panel.setBounds(0, 10, 556, 86);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel logo = new JLabel("");
+		logo.setBounds(171, 0, 225, 78);
+		panel.add(logo);
+		logo.setIcon(new ImageIcon(VentanaMenuAnalisisPuesto.class.getResource("/img/LOGOAPNABI.png")));
 
 		btnAñadir.addActionListener(this);
 		btnBorrar.addActionListener(this);

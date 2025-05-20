@@ -19,6 +19,8 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 
 	public VentanaBorrarEmpresa(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		// this.user = user;
 
@@ -36,6 +38,7 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 		addNomEmpresas();
 
 		btnBorrar = new JButton("Borrar");
+		btnBorrar.setBackground(new Color(38, 201, 236));
 		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnBorrar.setBounds(91, 216, 118, 37);
 		getContentPane().add(btnBorrar);

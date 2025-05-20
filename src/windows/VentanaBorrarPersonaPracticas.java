@@ -19,6 +19,8 @@ public class VentanaBorrarPersonaPracticas extends JDialog implements ActionList
 
 	public VentanaBorrarPersonaPracticas(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		// this.user = user;
 
@@ -36,8 +38,9 @@ public class VentanaBorrarPersonaPracticas extends JDialog implements ActionList
 		addNomPersonas();
 
 		btnBorrar = new JButton("Borrar");
+		btnBorrar.setBackground(new Color(38, 201, 236));
 		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBorrar.setBounds(136, 216, 118, 37);
+		btnBorrar.setBounds(125, 216, 118, 37);
 		getContentPane().add(btnBorrar);
 		btnBorrar.addActionListener(this);
 

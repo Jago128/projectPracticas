@@ -25,6 +25,8 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 	public VentanaModificarPersonaOrientacion(JDialog parent, LoginController cont,
 			PersonaOrientacion personaOrientacion) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		this.pO = personaOrientacion;
 
@@ -262,6 +264,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		getContentPane().add(textAreaObservaciones);
 
 		btnModificar = new JButton("Modificar");
+		btnModificar.setBackground(new Color(38, 201, 236));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificar.setBounds(363, 722, 175, 43);
 		getContentPane().add(btnModificar);

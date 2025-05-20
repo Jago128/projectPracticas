@@ -17,9 +17,12 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 	private JList<String> listNom, listApoyo, listFormacion, listCurso, listCentro, listFechas, listDuracion,
 			listPracticas, listEmpApnabi;
 	private JButton btnModificarPersona;
+	private JTextArea textAreaInfo;
 
 	public VentanaMostrarPersonaPracticas(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		// this.user = user;
 
@@ -29,44 +32,54 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 		getContentPane().setLayout(null);
 
 		listNom = new JList<>();
+		listNom.setBackground(new Color(38, 201, 236));
 		listNom.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listApoyo = new JList<>();
+		listApoyo.setBackground(new Color(38, 201, 236));
 		listApoyo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listApoyo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listFormacion = new JList<>();
+		listFormacion.setBackground(new Color(38, 201, 236));
 		listFormacion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listFormacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listCurso = new JList<>();
+		listCurso.setBackground(new Color(38, 201, 236));
 		listCurso.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listCurso.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listCentro = new JList<>();
+		listCentro.setBackground(new Color(38, 201, 236));
 		listCentro.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listCentro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listFechas = new JList<>();
+		listFechas.setBackground(new Color(38, 201, 236));
 		listFechas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listFechas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listDuracion = new JList<>();
+		listDuracion.setBackground(new Color(38, 201, 236));
 		listDuracion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listDuracion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listPracticas = new JList<>();
+		listPracticas.setBackground(new Color(38, 201, 236));
 		listPracticas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listPracticas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listEmpApnabi = new JList<String>();
+		listEmpApnabi.setBackground(new Color(38, 201, 236));
 		listEmpApnabi.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEmpApnabi.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		addPersonas();
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(38, 201, 236));
 		panel.setBounds(10, 10, 1033, 267);
 		panel.add(listNom);
 		panel.add(listApoyo);
@@ -84,9 +97,19 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 		getContentPane().add(scrollPane);
 
 		btnModificarPersona = new JButton("Modificar persona en practicas");
+		btnModificarPersona.setBackground(new Color(38, 201, 236));
 		btnModificarPersona.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnModificarPersona.setBounds(346, 287, 395, 72);
+		btnModificarPersona.setBounds(575, 287, 395, 72);
 		getContentPane().add(btnModificarPersona);
+		
+		textAreaInfo = new JTextArea();
+		textAreaInfo.setText("Selecciona un nombre, y despues pulsa el boton\r\npara modificar la persona en practicas.");
+		textAreaInfo.setLineWrap(true);
+		textAreaInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textAreaInfo.setEditable(false);
+		textAreaInfo.setBackground(new Color(38, 201, 236));
+		textAreaInfo.setBounds(84, 291, 481, 57);
+		getContentPane().add(textAreaInfo);
 		btnModificarPersona.addActionListener(this);
 	}
 

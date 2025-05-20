@@ -19,9 +19,12 @@ public class VentanaMostrarAnalisisPuesto extends JDialog implements ActionListe
 			listReqIdiomas, listContactoEmpresa, listResponsableApnabi, listFinde, listTurnos, listCargo, listTelefono,
 			listEmail, listEsfuerzoFisico, listResistencia, listComunicacion, listSensoriales;
 	private JButton btnModificarPersona;
+	private JTextArea textAreaInfo;
 
 	public VentanaMostrarAnalisisPuesto(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
+		getContentPane().setBackground(new Color(38, 201, 236));
+		setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		// this.user = user;
 
@@ -31,80 +34,99 @@ public class VentanaMostrarAnalisisPuesto extends JDialog implements ActionListe
 		getContentPane().setLayout(null);
 
 		listEmpresa = new JList<>();
+		listEmpresa.setBackground(new Color(38, 201, 236));
 		listEmpresa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listPuesto = new JList<>();
+		listPuesto.setBackground(new Color(38, 201, 236));
 		listPuesto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listPuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listHorario = new JList<>();
+		listHorario.setBackground(new Color(38, 201, 236));
 		listHorario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listHorario.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listFinde = new JList<>();
+		listFinde.setBackground(new Color(38, 201, 236));
 		listFinde.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listFinde.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listTurnos = new JList<>();
+		listTurnos.setBackground(new Color(38, 201, 236));
 		listTurnos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listTurnos.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listMin_Formacion = new JList<>();
+		listMin_Formacion.setBackground(new Color(38, 201, 236));
 		listMin_Formacion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listMin_Formacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listUbicacion = new JList<>();
+		listUbicacion.setBackground(new Color(38, 201, 236));
 		listUbicacion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listUbicacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listSector = new JList<>();
+		listSector.setBackground(new Color(38, 201, 236));
 		listSector.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listSector.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listReqIdiomas = new JList<>();
+		listReqIdiomas.setBackground(new Color(38, 201, 236));
 		listReqIdiomas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listReqIdiomas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContactoEmpresa = new JList<>();
+		listContactoEmpresa.setBackground(new Color(38, 201, 236));
 		listContactoEmpresa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listContactoEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listCargo = new JList<>();
+		listCargo.setBackground(new Color(38, 201, 236));
 		listCargo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listCargo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listTelefono = new JList<>();
+		listTelefono.setBackground(new Color(38, 201, 236));
 		listTelefono.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listTelefono.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listEmail = new JList<>();
+		listEmail.setBackground(new Color(38, 201, 236));
 		listEmail.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listResponsableApnabi = new JList<>();
+		listResponsableApnabi.setBackground(new Color(38, 201, 236));
 		listResponsableApnabi.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listResponsableApnabi.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listEsfuerzoFisico = new JList<>();
+		listEsfuerzoFisico.setBackground(new Color(38, 201, 236));
 		listEsfuerzoFisico.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEsfuerzoFisico.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listResistencia = new JList<String>();
+		listResistencia.setBackground(new Color(38, 201, 236));
 		listResistencia.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listResistencia.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listComunicacion = new JList<String>();
+		listComunicacion.setBackground(new Color(38, 201, 236));
 		listComunicacion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listComunicacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listSensoriales = new JList<String>();
+		listSensoriales.setBackground(new Color(38, 201, 236));
 		listSensoriales.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listSensoriales.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		loadAnalisisPuestos();
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(38, 201, 236));
 		panel.setBounds(10, 10, 1056, 267);
 		panel.add(listEmpresa);
 		panel.add(listPuesto);
@@ -131,9 +153,19 @@ public class VentanaMostrarAnalisisPuesto extends JDialog implements ActionListe
 		getContentPane().add(scrollPane);
 
 		btnModificarPersona = new JButton("Modificar analisis de puesto");
+		btnModificarPersona.setBackground(new Color(38, 201, 236));
 		btnModificarPersona.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnModificarPersona.setBounds(343, 287, 432, 55);
+		btnModificarPersona.setBounds(570, 287, 432, 55);
 		getContentPane().add(btnModificarPersona);
+		
+		textAreaInfo = new JTextArea();
+		textAreaInfo.setText("Selecciona un nombre de empresa, y despues pulsa el boton\r\npara modificar el analisis de puesto.");
+		textAreaInfo.setLineWrap(true);
+		textAreaInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textAreaInfo.setEditable(false);
+		textAreaInfo.setBackground(new Color(38, 201, 236));
+		textAreaInfo.setBounds(54, 285, 481, 57);
+		getContentPane().add(textAreaInfo);
 		btnModificarPersona.addActionListener(this);
 	}
 

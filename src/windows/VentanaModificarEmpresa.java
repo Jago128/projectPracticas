@@ -28,6 +28,8 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 
 	public VentanaModificarEmpresa(JDialog parent, LoginController cont, Empresa emp) {
 		super(parent, true);
+		getContentPane().setBackground(new Color(38, 201, 236));
+		setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		this.emp = emp;
 
@@ -256,6 +258,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		getContentPane().add(lblmaxChars_1);
 
 		btnModificar = new JButton("Modificar");
+		btnModificar.setBackground(new Color(38, 201, 236));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificar.setBounds(745, 346, 151, 55);
 		getContentPane().add(btnModificar);

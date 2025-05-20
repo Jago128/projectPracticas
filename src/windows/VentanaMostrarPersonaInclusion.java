@@ -19,9 +19,12 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 			listOtros, listIdioma, listMunicipio, listAccesibilidad, listInteresesPersonales, listSituacionActual,
 			listUltimoAñoTrabajado, listApellido, listEdad;
 	private JButton btnModificarPersona;
+	private JTextArea textAreaInfo;
 
 	public VentanaMostrarPersonaInclusion(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		// this.user = user;
 
@@ -31,68 +34,84 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 		getContentPane().setLayout(null);
 
 		listNom = new JList<>();
+		listNom.setBackground(new Color(38, 201, 236));
 		listNom.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listApellido = new JList<>();
+		listApellido.setBackground(new Color(38, 201, 236));
 		listApellido.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listApellido.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listEdad = new JList<String>();
+		listEdad.setBackground(new Color(38, 201, 236));
 		listEdad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEdad.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listMunicipio = new JList<>();
+		listMunicipio.setBackground(new Color(38, 201, 236));
 		listMunicipio.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listMunicipio.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listFormacion = new JList<>();
+		listFormacion.setBackground(new Color(38, 201, 236));
 		listFormacion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listFormacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listEspecialidad = new JList<>();
+		listEspecialidad.setBackground(new Color(38, 201, 236));
 		listEspecialidad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEspecialidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listOtros = new JList<>();
+		listOtros.setBackground(new Color(38, 201, 236));
 		listOtros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listOtros.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listIdioma = new JList<>();
+		listIdioma.setBackground(new Color(38, 201, 236));
 		listIdioma.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listIdioma.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listUltimoAñoTrabajado = new JList<>();
+		listUltimoAñoTrabajado.setBackground(new Color(38, 201, 236));
 		listUltimoAñoTrabajado.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listUltimoAñoTrabajado.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listSectorInteres = new JList<>();
+		listSectorInteres.setBackground(new Color(38, 201, 236));
 		listSectorInteres.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listSectorInteres.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listInteresesPersonales = new JList<>();
+		listInteresesPersonales.setBackground(new Color(38, 201, 236));
 		listInteresesPersonales.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listInteresesPersonales.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listSituacionActual = new JList<>();
+		listSituacionActual.setBackground(new Color(38, 201, 236));
 		listSituacionActual.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listAccesibilidad = new JList<>();
+		listAccesibilidad.setBackground(new Color(38, 201, 236));
 		listAccesibilidad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listAccesibilidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listCV = new JList<>();
+		listCV.setBackground(new Color(38, 201, 236));
 		listCV.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listCV.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listPersonaFacilitadora = new JList<>();
+		listPersonaFacilitadora.setBackground(new Color(38, 201, 236));
 		listPersonaFacilitadora.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listPersonaFacilitadora.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		addPersonas();
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(38, 201, 236));
 		panel.setBounds(10, 10, 1033, 267);
 		panel.add(listNom);
 		panel.add(listApellido);
@@ -116,9 +135,19 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 		getContentPane().add(scrollPane);
 
 		btnModificarPersona = new JButton("Modificar persona en inclusion");
+		btnModificarPersona.setBackground(new Color(38, 201, 236));
 		btnModificarPersona.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnModificarPersona.setBounds(346, 287, 395, 72);
+		btnModificarPersona.setBounds(524, 287, 395, 72);
 		getContentPane().add(btnModificarPersona);
+		
+		textAreaInfo = new JTextArea();
+		textAreaInfo.setText("Selecciona un nombre, y despues pulsa el boton\r\npara modificar la persona en inclusion.");
+		textAreaInfo.setLineWrap(true);
+		textAreaInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textAreaInfo.setEditable(false);
+		textAreaInfo.setBackground(new Color(38, 201, 236));
+		textAreaInfo.setBounds(20, 287, 481, 57);
+		getContentPane().add(textAreaInfo);
 		btnModificarPersona.addActionListener(this);
 	}
 

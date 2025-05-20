@@ -18,6 +18,8 @@ public class VentanaLogin extends JDialog implements ActionListener {
 	private JLabel lblMensaje;
 
 	public VentanaLogin(LoginController cont) {
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 
 		setResizable(false);
@@ -53,11 +55,13 @@ public class VentanaLogin extends JDialog implements ActionListener {
 		getContentPane().add(lblContraseña);
 
 		btnIniciarSesion = new JButton("Iniciar sesion");
+		btnIniciarSesion.setBackground(new Color(38, 201, 236));
 		btnIniciarSesion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnIniciarSesion.setBounds(54, 146, 126, 30);
 		getContentPane().add(btnIniciarSesion);
 
 		btnRegistro = new JButton("Registrarse");
+		btnRegistro.setBackground(new Color(38, 201, 236));
 		btnRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnRegistro.setBounds(213, 146, 126, 30);
 		getContentPane().add(btnRegistro);

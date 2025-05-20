@@ -17,16 +17,16 @@ public class VentanaMenuAnalisisPuesto extends JDialog implements ActionListener
 
 	public VentanaMenuAnalisisPuesto(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
-		setBackground(new Color(38, 201, 236));
-		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		this.user = user;
 
 		setResizable(false);
 		setTitle("Analisis de puestos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 570, 250);
+		setBounds(100, 100, 570, 230);
 		getContentPane().setLayout(null);
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
 
 		btnAñadir = new JButton("Añadir");
 		btnAñadir.setBackground(new Color(38, 201, 236));
@@ -53,17 +53,17 @@ public class VentanaMenuAnalisisPuesto extends JDialog implements ActionListener
 		textAreaInfoModificar.setLineWrap(true);
 		textAreaInfoModificar.setText("Para acceder a la ventana de modificar, se hace desde la ventana de mostrar.");
 		textAreaInfoModificar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textAreaInfoModificar.setBounds(24, 169, 511, 34);
+		textAreaInfoModificar.setBounds(34, 154, 498, 29);
 		getContentPane().add(textAreaInfoModificar);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(38, 201, 236));
-		panel.setBounds(0, 0, 556, 89);
+		panel.setBounds(0, 10, 556, 86);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel logo = new JLabel("");
-		logo.setBounds(165, 10, 225, 78);
+		logo.setBounds(171, 0, 225, 78);
 		panel.add(logo);
 		logo.setIcon(new ImageIcon(VentanaMenuAnalisisPuesto.class.getResource("/img/LOGOAPNABI.png")));
 
