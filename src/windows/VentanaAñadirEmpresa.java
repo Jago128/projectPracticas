@@ -287,7 +287,6 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		getContentPane().add(scrollPane_1);
 
 		btnAñadir = new JButton("Añadir empresa");
-		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(215, 476, 380, 37);
 		getContentPane().add(btnAñadir);

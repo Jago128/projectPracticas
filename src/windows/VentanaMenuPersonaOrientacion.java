@@ -34,20 +34,16 @@ public class VentanaMenuPersonaOrientacion extends JDialog implements ActionList
 		getContentPane().add(logo);
 
 		btnAñadir = new JButton("Añadir");
-		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAñadir.setBounds(204, 99, 145, 45);
 		getContentPane().add(btnAñadir);
 
 		btnBorrar = new JButton("Borrar");
-		btnBorrar.setBackground(new Color(38, 201, 236));
 		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnBorrar.setBounds(379, 99, 145, 45);
 		getContentPane().add(btnBorrar);
 
 		btnMostrar = new JButton("Mostrar");
-		btnMostrar.setForeground(new Color(0, 0, 0));
-		btnMostrar.setBackground(new Color(38, 201, 236));
 		btnMostrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnMostrar.setBounds(24, 99, 145, 45);
 		getContentPane().add(btnMostrar);

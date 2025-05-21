@@ -140,7 +140,6 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 		getContentPane().add(scrollPane);
 
 		btnModificarPersona = new JButton("Modificar persona en orientacion");
-		btnModificarPersona.setBackground(new Color(38, 201, 236));
 		btnModificarPersona.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificarPersona.setBounds(600, 291, 395, 72);
 		getContentPane().add(btnModificarPersona);

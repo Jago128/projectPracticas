@@ -173,7 +173,6 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 		getContentPane().add(chckbxEmpresaApnabi);
 
 		btnAñadir = new JButton("Añadir persona en practicas");
-		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(396, 207, 339, 37);
 		getContentPane().add(btnAñadir);

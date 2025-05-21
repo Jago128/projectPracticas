@@ -39,31 +39,26 @@ public class VentanaMenuPrincipal extends JFrame implements ActionListener {
 		getContentPane().add(lblOpciones);
 
 		btnEmpresa = new JButton("Empresas");
-		btnEmpresa.setBackground(new Color(38, 201, 236));
 		btnEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnEmpresa.setBounds(10, 138, 145, 45);
 		getContentPane().add(btnEmpresa);
 
 		btnPersona = new JButton("Personas en Orientacion y seguimiento");
-		btnPersona.setBackground(new Color(38, 201, 236));
 		btnPersona.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnPersona.setBounds(165, 138, 235, 45);
 		getContentPane().add(btnPersona);
 
 		btnAnalisisPuesto = new JButton("Analisis de puesto");
-		btnAnalisisPuesto.setBackground(new Color(38, 201, 236));
 		btnAnalisisPuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAnalisisPuesto.setBounds(10, 193, 198, 45);
 		getContentPane().add(btnAnalisisPuesto);
 
 		btnPersonaInclusion = new JButton("Personas en inclusion");
-		btnPersonaInclusion.setBackground(new Color(38, 201, 236));
 		btnPersonaInclusion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnPersonaInclusion.setBounds(218, 193, 177, 45);
 		getContentPane().add(btnPersonaInclusion);
 
 		btnPersonaPracticas = new JButton("Personas en practicas");
-		btnPersonaPracticas.setBackground(new Color(38, 201, 236));
 		btnPersonaPracticas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnPersonaPracticas.setBounds(76, 248, 235, 45);
 		getContentPane().add(btnPersonaPracticas);

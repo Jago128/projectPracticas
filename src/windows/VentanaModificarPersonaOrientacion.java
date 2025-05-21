@@ -289,7 +289,6 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		getContentPane().add(scrollPane_4);
 
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBackground(new Color(38, 201, 236));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificar.setBounds(363, 722, 175, 43);
 		getContentPane().add(btnModificar);

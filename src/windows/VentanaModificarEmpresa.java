@@ -275,7 +275,6 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		getContentPane().add(scrollPane_2);
 
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBackground(new Color(38, 201, 236));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificar.setBounds(745, 421, 151, 55);
 		getContentPane().add(btnModificar);

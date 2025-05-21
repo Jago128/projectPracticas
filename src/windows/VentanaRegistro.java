@@ -59,7 +59,6 @@ public class VentanaRegistro extends JDialog implements ActionListener {
 		getContentPane().add(passwordField);
 
 		btnRegistro = new JButton("Registrarse");
-		btnRegistro.setBackground(new Color(38, 201, 236));
 		btnRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnRegistro.setBounds(119, 189, 110, 29);
 		getContentPane().add(btnRegistro);

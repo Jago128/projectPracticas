@@ -153,7 +153,6 @@ public class VentanaMostrarAnalisisPuesto extends JDialog implements ActionListe
 		getContentPane().add(scrollPane);
 
 		btnModificarPersona = new JButton("Modificar analisis de puesto");
-		btnModificarPersona.setBackground(new Color(38, 201, 236));
 		btnModificarPersona.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificarPersona.setBounds(570, 287, 432, 55);
 		getContentPane().add(btnModificarPersona);

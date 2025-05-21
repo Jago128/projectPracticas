@@ -51,7 +51,6 @@ public class VentanaBorrarAnalisisPuesto extends JDialog implements ActionListen
 		getContentPane().add(scrollPane);
 
 		btnBorrar = new JButton("Borrar");
-		btnBorrar.setBackground(new Color(38, 201, 236));
 		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnBorrar.setBounds(160, 292, 118, 37);
 		getContentPane().add(btnBorrar);

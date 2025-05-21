@@ -54,13 +54,11 @@ public class VentanaLogin extends JDialog implements ActionListener {
 		getContentPane().add(lblContraseña);
 
 		btnIniciarSesion = new JButton("Iniciar sesion");
-		btnIniciarSesion.setBackground(new Color(38, 201, 236));
 		btnIniciarSesion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnIniciarSesion.setBounds(62, 186, 126, 30);
 		getContentPane().add(btnIniciarSesion);
 
 		btnRegistro = new JButton("Registrarse");
-		btnRegistro.setBackground(new Color(38, 201, 236));
 		btnRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnRegistro.setBounds(221, 186, 126, 30);
 		getContentPane().add(btnRegistro);

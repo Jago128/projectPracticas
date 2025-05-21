@@ -282,7 +282,6 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 		getContentPane().add(scrollPane_3);
 
 		btnAñadir = new JButton("Añadir persona");
-		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(345, 566, 286, 37);
 		getContentPane().add(btnAñadir);

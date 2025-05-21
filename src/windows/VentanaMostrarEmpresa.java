@@ -147,7 +147,6 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 		getContentPane().add(scrollPaneContactos);
 
 		btnModificarEmpresa = new JButton("Modificar empresa");
-		btnModificarEmpresa.setBackground(new Color(38, 201, 236));
 		btnModificarEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificarEmpresa.setBounds(501, 361, 395, 72);
 		getContentPane().add(btnModificarEmpresa);

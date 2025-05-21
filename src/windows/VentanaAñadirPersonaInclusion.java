@@ -265,7 +265,6 @@ public class VentanaAñadirPersonaInclusion extends JDialog implements ActionLis
 		getContentPane().add(scrollPane_3);
 
 		btnAñadir = new JButton("Añadir persona en inclusion");
-		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(305, 596, 339, 37);
 		getContentPane().add(btnAñadir);

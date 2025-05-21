@@ -97,7 +97,6 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 		getContentPane().add(scrollPane);
 
 		btnModificarPersona = new JButton("Modificar persona en practicas");
-		btnModificarPersona.setBackground(new Color(38, 201, 236));
 		btnModificarPersona.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificarPersona.setBounds(575, 287, 395, 72);
 		getContentPane().add(btnModificarPersona);

@@ -181,7 +181,6 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		getContentPane().add(scrollPane_1);
 
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBackground(new Color(38, 201, 236));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificar.setBounds(706, 438, 209, 47);
 		getContentPane().add(btnModificar);
