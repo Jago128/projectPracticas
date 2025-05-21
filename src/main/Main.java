@@ -8,5 +8,4 @@ public class Main {
 		LoginController cont = new LoginController();
 		cont.showWindow();
 	}
-
 }
