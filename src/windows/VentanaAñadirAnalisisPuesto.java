@@ -50,7 +50,7 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 
 		textFieldEmpresa = new JTextField();
 		textFieldEmpresa.setColumns(10);
-		textFieldEmpresa.setBounds(121, 17, 163, 19);
+		textFieldEmpresa.setBounds(121, 17, 272, 19);
 		getContentPane().add(textFieldEmpresa);
 
 		JLabel lblPuesto = new JLabel("Puesto: *");
@@ -61,7 +61,7 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 
 		textFieldPuesto = new JTextField();
 		textFieldPuesto.setColumns(10);
-		textFieldPuesto.setBounds(131, 58, 163, 19);
+		textFieldPuesto.setBounds(131, 58, 262, 19);
 		getContentPane().add(textFieldPuesto);
 
 		JLabel lblHorario = new JLabel("Horario: *");
@@ -91,7 +91,7 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 		comboBoxFormacionMinima.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO",
 				"EPA", "FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacionMinima.setSelectedIndex(0);
-		comboBoxFormacionMinima.setBounds(160, 93, 178, 21);
+		comboBoxFormacionMinima.setBounds(160, 93, 201, 21);
 		getContentPane().add(comboBoxFormacionMinima);
 
 		JLabel lblUbicacion = new JLabel("Ubicacion: *");
@@ -102,7 +102,7 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 
 		textFieldUbicacion = new JTextField();
 		textFieldUbicacion.setColumns(10);
-		textFieldUbicacion.setBounds(469, 97, 163, 19);
+		textFieldUbicacion.setBounds(469, 97, 195, 19);
 		getContentPane().add(textFieldUbicacion);
 
 		JLabel lblSector = new JLabel("Sector: *");
@@ -149,12 +149,12 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 		JLabel lblCargo = new JLabel("Cargo: *");
 		lblCargo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCargo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCargo.setBounds(374, 166, 76, 31);
+		lblCargo.setBounds(358, 168, 76, 31);
 		getContentPane().add(lblCargo);
 
 		textFieldCargo = new JTextField();
 		textFieldCargo.setColumns(10);
-		textFieldCargo.setBounds(460, 173, 163, 19);
+		textFieldCargo.setBounds(434, 173, 227, 19);
 		getContentPane().add(textFieldCargo);
 
 		JLabel lblResponsableApnabi = new JLabel("Responsable de Apnabi: *");
@@ -208,13 +208,13 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 
 		textFieldTelefono = new JTextField();
 		textFieldTelefono.setColumns(10);
-		textFieldTelefono.setBounds(108, 254, 163, 19);
+		textFieldTelefono.setBounds(108, 254, 181, 19);
 		getContentPane().add(textFieldTelefono);
 
 		chckbxEsfuerzoFisico = new JCheckBox("Es necesario realizar esfuerzo fisico?");
 		chckbxEsfuerzoFisico.setBackground(new Color(38, 201, 236));
 		chckbxEsfuerzoFisico.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		chckbxEsfuerzoFisico.setBounds(666, 167, 257, 31);
+		chckbxEsfuerzoFisico.setBounds(681, 167, 257, 31);
 		getContentPane().add(chckbxEsfuerzoFisico);
 
 		chckbxResistencia = new JCheckBox("Es necesario tener resistencia?");

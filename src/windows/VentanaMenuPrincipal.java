@@ -22,7 +22,7 @@ public class VentanaMenuPrincipal extends JFrame implements ActionListener {
 		this.user = user;
 
 		setTitle("Bienvenido, " + user.getNombre());
-		setBounds(100, 100, 430, 250);
+		setBounds(100, 100, 430, 340);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -30,38 +30,43 @@ public class VentanaMenuPrincipal extends JFrame implements ActionListener {
 		JLabel lblOpciones = new JLabel("Elije una de las opciones para gestionar, " + user.getNombre() + ":");
 		lblOpciones.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOpciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblOpciones.setBounds(47, 10, 328, 30);
+		lblOpciones.setBounds(36, 98, 328, 30);
 		getContentPane().add(lblOpciones);
 
 		btnEmpresa = new JButton("Empresas");
 		btnEmpresa.setBackground(new Color(38, 201, 236));
 		btnEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnEmpresa.setBounds(21, 50, 145, 45);
+		btnEmpresa.setBounds(10, 138, 145, 45);
 		getContentPane().add(btnEmpresa);
 
 		btnPersona = new JButton("Personas en Orientacion y seguimiento");
 		btnPersona.setBackground(new Color(38, 201, 236));
 		btnPersona.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnPersona.setBounds(176, 50, 235, 45);
+		btnPersona.setBounds(165, 138, 235, 45);
 		getContentPane().add(btnPersona);
 
 		btnAnalisisPuesto = new JButton("Analisis de puesto");
 		btnAnalisisPuesto.setBackground(new Color(38, 201, 236));
 		btnAnalisisPuesto.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAnalisisPuesto.setBounds(21, 105, 198, 45);
+		btnAnalisisPuesto.setBounds(10, 193, 198, 45);
 		getContentPane().add(btnAnalisisPuesto);
 
 		btnPersonaInclusion = new JButton("Personas en inclusion");
 		btnPersonaInclusion.setBackground(new Color(38, 201, 236));
 		btnPersonaInclusion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnPersonaInclusion.setBounds(229, 105, 177, 45);
+		btnPersonaInclusion.setBounds(218, 193, 177, 45);
 		getContentPane().add(btnPersonaInclusion);
 
 		btnPersonaPracticas = new JButton("Personas en practicas");
 		btnPersonaPracticas.setBackground(new Color(38, 201, 236));
 		btnPersonaPracticas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnPersonaPracticas.setBounds(87, 160, 235, 45);
+		btnPersonaPracticas.setBounds(76, 248, 235, 45);
 		getContentPane().add(btnPersonaPracticas);
+		
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaMenuPrincipal.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(42, 10, 325, 78);
+		getContentPane().add(logo);
 
 		btnEmpresa.addActionListener(this);
 		btnPersona.addActionListener(this);
