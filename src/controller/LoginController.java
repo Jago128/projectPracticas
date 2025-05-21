@@ -144,8 +144,8 @@ public class LoginController {
 		return dao.verificarPersona(nom);
 	}
 
-	public boolean añadirPersona(PersonaOrientacion personaOrientacion) {
-		return dao.añadirPersona(personaOrientacion);
+	public boolean añadirPersona(PersonaOrientacion pO) {
+		return dao.añadirPersona(pO);
 	}
 
 	public boolean modificarApoyo(String apoyo, String nom) {

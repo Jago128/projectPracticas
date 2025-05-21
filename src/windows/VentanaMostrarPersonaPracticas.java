@@ -103,7 +103,7 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 		getContentPane().add(btnModificarPersona);
 		
 		textAreaInfo = new JTextArea();
-		textAreaInfo.setText("Selecciona un nombre, y despues pulsa el boton\r\npara modificar la persona en practicas.");
+		textAreaInfo.setText("Selecciona un nombre, y despues pulsa el boton\npara modificar la persona en practicas.");
 		textAreaInfo.setLineWrap(true);
 		textAreaInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textAreaInfo.setEditable(false);

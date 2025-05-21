@@ -39,6 +39,11 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 		lblObligatorio.setBounds(369, 10, 241, 24);
 		getContentPane().add(lblObligatorio);
 
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaAñadirPersonaOrientacion.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(611, 10, 325, 78);
+		getContentPane().add(logo);
+
 		JLabel lblNom = new JLabel("Nombre: *");
 		lblNom.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -75,8 +80,8 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 				"FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacion.setSelectedIndex(0);
 		comboBoxFormacion.setBounds(150, 85, 163, 21);
-
 		getContentPane().add(comboBoxFormacion);
+
 		JLabel lblEspecialidad = new JLabel("Especialidad: * (Describa la especialidad)");
 		lblEspecialidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEspecialidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -141,29 +146,33 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 		textFieldUltimoAñoTrabajado.setBounds(671, 197, 163, 19);
 		getContentPane().add(textFieldUltimoAñoTrabajado);
 
-		textAreaInteresesPersonales = new JTextArea();
-		textAreaInteresesPersonales.setLineWrap(true);
-		textAreaInteresesPersonales.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaInteresesPersonales.setBounds(10, 273, 446, 110);
-		getContentPane().add(textAreaInteresesPersonales);
-
 		JLabel lbl_InteresesPersonales = new JLabel("Intereses personales:");
 		lbl_InteresesPersonales.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_InteresesPersonales.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lbl_InteresesPersonales.setBounds(105, 232, 163, 31);
 		getContentPane().add(lbl_InteresesPersonales);
 
-		textAreaSituacionActual = new JTextArea();
-		textAreaSituacionActual.setLineWrap(true);
-		textAreaSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textAreaSituacionActual.setBounds(500, 273, 446, 110);
-		getContentPane().add(textAreaSituacionActual);
+		textAreaInteresesPersonales = new JTextArea();
+		textAreaInteresesPersonales.setLineWrap(true);
+		textAreaInteresesPersonales.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaInteresesPersonales.setBounds(10, 273, 446, 110);
+		getContentPane().add(textAreaInteresesPersonales);
+
+		JScrollPane scrollPane_1 = new JScrollPane(textAreaInteresesPersonales);
+		scrollPane_1.setBounds(10, 273, 446, 110);
+		getContentPane().add(scrollPane_1);
 
 		JLabel lblSituacionActual = new JLabel("Situacion actual:");
 		lblSituacionActual.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSituacionActual.setBounds(649, 236, 152, 31);
 		getContentPane().add(lblSituacionActual);
+
+		textAreaSituacionActual = new JTextArea();
+		textAreaSituacionActual.setLineWrap(true);
+		textAreaSituacionActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaSituacionActual.setBounds(500, 273, 446, 110);
+		getContentPane().add(textAreaSituacionActual);
 
 		JLabel lblEuskera = new JLabel("Euskera:");
 		lblEuskera.setHorizontalAlignment(SwingConstants.CENTER);
@@ -260,16 +269,23 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 		textAreaObservaciones.setBounds(20, 446, 446, 110);
 		getContentPane().add(textAreaObservaciones);
 
+		JScrollPane scrollPane = new JScrollPane(textAreaEspecialidad);
+		scrollPane.setBounds(500, 448, 446, 107);
+		getContentPane().add(scrollPane);
+
+		JScrollPane scrollPane_2 = new JScrollPane(textAreaSituacionActual);
+		scrollPane_2.setBounds(500, 273, 446, 110);
+		getContentPane().add(scrollPane_2);
+
+		JScrollPane scrollPane_3 = new JScrollPane(textAreaObservaciones);
+		scrollPane_3.setBounds(20, 446, 446, 110);
+		getContentPane().add(scrollPane_3);
+
 		btnAñadir = new JButton("Añadir persona");
 		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(345, 566, 286, 37);
 		getContentPane().add(btnAñadir);
-		
-		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaAñadirPersonaOrientacion.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(611, 10, 325, 78);
-		getContentPane().add(logo);
 		btnAñadir.addActionListener(this);
 	}
 

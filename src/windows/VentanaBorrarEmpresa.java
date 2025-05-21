@@ -16,7 +16,6 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 	// private Usuario user;
 	private JButton btnBorrar;
 	private JList<String> listEmpresas;
-	private JLabel logo;
 
 	public VentanaBorrarEmpresa(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
@@ -30,11 +29,26 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 		setBounds(100, 100, 360, 400);
 		getContentPane().setLayout(null);
 
+		JLabel lblInfo = new JLabel("Seleccione el nombre de la empresa a borrar:");
+		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInfo.setBounds(41, 98, 256, 23);
+		getContentPane().add(lblInfo);
+
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaBorrarEmpresa.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(10, 10, 325, 78);
+		getContentPane().add(logo);
+
 		listEmpresas = new JList<>();
 		listEmpresas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEmpresas.setBounds(76, 131, 188, 163);
 		listEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		getContentPane().add(listEmpresas);
+
+		JScrollPane scrollPane = new JScrollPane(listEmpresas);
+		scrollPane.setBounds(76, 131, 188, 163);
+		getContentPane().add(scrollPane);
 
 		addNomEmpresas();
 
@@ -44,17 +58,6 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 		btnBorrar.setBounds(116, 304, 118, 37);
 		getContentPane().add(btnBorrar);
 		btnBorrar.addActionListener(this);
-
-		JLabel lblInfo = new JLabel("Seleccione el nombre de la empresa a borrar:");
-		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInfo.setBounds(41, 98, 256, 23);
-		getContentPane().add(lblInfo);
-		
-		logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaBorrarEmpresa.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(10, 10, 325, 78);
-		getContentPane().add(logo);
 	}
 
 	public void addNomEmpresas() {

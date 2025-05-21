@@ -18,7 +18,6 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 	private JComboBox<String> comboBoxFormacion, comboBoxCurso, comboBoxCentroFormativo, comboBoxApoyo;
 	private JTextArea textAreaPersona;
 	private JCheckBox chckbxEmpresaApnabi;
-	private JLabel logo;
 
 	public VentanaModificarPersonaPracticas(JDialog parent, LoginController cont, PersonaPracticas persona) {
 		super(parent, true);
@@ -31,6 +30,11 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		setTitle("Modificar persona en practicas");
 		setBounds(100, 100, 870, 480);
 		getContentPane().setLayout(null);
+
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaModificarPersonaPracticas.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(10, 25, 325, 78);
+		getContentPane().add(logo);
 
 		textAreaPersona = new JTextArea();
 		textAreaPersona.setText("");
@@ -175,15 +179,14 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		chckbxEmpresaApnabi.setBounds(73, 383, 163, 33);
 		getContentPane().add(chckbxEmpresaApnabi);
 
+		JScrollPane scrollPane = new JScrollPane(textAreaPersona);
+		scrollPane.setBounds(337, 49, 495, 324);
+		getContentPane().add(scrollPane);
+
 		btnModificar = new JButton("Modificar");
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificar.setBounds(337, 383, 495, 43);
 		getContentPane().add(btnModificar);
-		
-		logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaModificarPersonaPracticas.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(10, 25, 325, 78);
-		getContentPane().add(logo);
 		btnModificar.addActionListener(this);
 	}
 

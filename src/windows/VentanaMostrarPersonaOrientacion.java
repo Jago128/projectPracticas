@@ -146,7 +146,7 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 		getContentPane().add(btnModificarPersona);
 		
 		textAreaInfo = new JTextArea();
-		textAreaInfo.setText("Selecciona un nombre, y despues pulsa el boton\r\npara modificar la persona en orientacion y seguimiento.");
+		textAreaInfo.setText("Selecciona un nombre, y despues pulsa el boton\npara modificar la persona en orientacion y seguimiento.");
 		textAreaInfo.setLineWrap(true);
 		textAreaInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textAreaInfo.setEditable(false);

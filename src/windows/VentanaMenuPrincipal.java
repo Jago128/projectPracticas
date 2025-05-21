@@ -27,6 +27,11 @@ public class VentanaMenuPrincipal extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaMenuPrincipal.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(42, 10, 325, 78);
+		getContentPane().add(logo);
+
 		JLabel lblOpciones = new JLabel("Elije una de las opciones para gestionar, " + user.getNombre() + ":");
 		lblOpciones.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOpciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -62,11 +67,6 @@ public class VentanaMenuPrincipal extends JFrame implements ActionListener {
 		btnPersonaPracticas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnPersonaPracticas.setBounds(76, 248, 235, 45);
 		getContentPane().add(btnPersonaPracticas);
-		
-		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaMenuPrincipal.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(42, 10, 325, 78);
-		getContentPane().add(logo);
 
 		btnEmpresa.addActionListener(this);
 		btnPersona.addActionListener(this);

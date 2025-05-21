@@ -18,7 +18,6 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 	private JTextArea textAreaAP, textAreaHorario;
 	private JComboBox<String> comboBoxFormacionMinima, comboBoxIdiomasReq, comboBoxResponsableApnabi,
 			comboBoxComunicacion;
-	private JLabel logo;
 
 	public VentanaModificarAnalisisPuesto(JDialog parent, LoginController cont, AnalisisPuesto aP) {
 		super(parent, true);
@@ -31,6 +30,11 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		setTitle("Modificar analisis de puesto");
 		setBounds(100, 100, 940, 530);
 		getContentPane().setLayout(null);
+
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaModificarAnalisisPuesto.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(66, 10, 325, 78);
+		getContentPane().add(logo);
 
 		textAreaAP = new JTextArea();
 		textAreaAP.setLineWrap(true);
@@ -168,16 +172,19 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		comboBoxComunicacion.setBounds(119, 453, 557, 28);
 		getContentPane().add(comboBoxComunicacion);
 
+		JScrollPane scrollPane = new JScrollPane(textAreaAP);
+		scrollPane.setBounds(408, 48, 507, 380);
+		getContentPane().add(scrollPane);
+
+		JScrollPane scrollPane_1 = new JScrollPane(textAreaHorario);
+		scrollPane_1.setBounds(144, 124, 254, 66);
+		getContentPane().add(scrollPane_1);
+
 		btnModificar = new JButton("Modificar");
 		btnModificar.setBackground(new Color(38, 201, 236));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificar.setBounds(706, 438, 209, 47);
 		getContentPane().add(btnModificar);
-		
-		logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaModificarAnalisisPuesto.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(66, 10, 325, 78);
-		getContentPane().add(logo);
 		btnModificar.addActionListener(this);
 	}
 
@@ -350,7 +357,7 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 			comunicacion = "Comunicación con personas externas a la empresa";
 			break;
 
-		case SINNECESIDADCOMUNICACION:
+		case SIN_NECESIDADCOMUNICACION:
 			comunicacion = "Sin necesidad de comunicacion";
 			break;
 

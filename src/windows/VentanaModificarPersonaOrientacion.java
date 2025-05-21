@@ -15,7 +15,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 
 	private LoginController cont;
 	private PersonaOrientacion pO;
-	private JTextArea textareaPersona, textAreaObservaciones, textAreaEspecialidad, textAreaInteresesPersonales,
+	private JTextArea textAreaPersona, textAreaObservaciones, textAreaEspecialidad, textAreaInteresesPersonales,
 			textAreaSituacionActual;
 	private JTextField textFieldOtrosIdiomas, textFieldCVLink, textFieldUltimoAñoTrabajado;
 	private JComboBox<String> comboBoxSectorInteres, comboBoxLocalidad, comboBoxFormacion, comboBoxCertifDiscapacidad,
@@ -35,20 +35,25 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		setBounds(100, 100, 920, 810);
 		getContentPane().setLayout(null);
 
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaModificarPersonaOrientacion.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(21, 10, 325, 78);
+		getContentPane().add(logo);
+
 		JLabel lblDatosPersona = new JLabel("Informacion de la persona en orientacion seleccionada:");
 		lblDatosPersona.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatosPersona.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblDatosPersona.setBounds(378, 10, 506, 28);
 		getContentPane().add(lblDatosPersona);
 
-		textareaPersona = new JTextArea();
-		textareaPersona.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textareaPersona.setText("");
-		textareaPersona.setBackground(new Color(255, 255, 255));
-		textareaPersona.setLineWrap(true);
-		textareaPersona.setEditable(false);
-		textareaPersona.setBounds(388, 43, 496, 330);
-		getContentPane().add(textareaPersona);
+		textAreaPersona = new JTextArea();
+		textAreaPersona.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaPersona.setText("");
+		textAreaPersona.setBackground(new Color(255, 255, 255));
+		textAreaPersona.setLineWrap(true);
+		textAreaPersona.setEditable(false);
+		textAreaPersona.setBounds(388, 43, 496, 330);
+		getContentPane().add(textAreaPersona);
 
 		JLabel lblNota = new JLabel("No hace falta rellenar toda la informacion.");
 		lblNota.setHorizontalAlignment(SwingConstants.CENTER);
@@ -96,6 +101,10 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		textAreaEspecialidad.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textAreaEspecialidad.setBounds(25, 455, 416, 105);
 		getContentPane().add(textAreaEspecialidad);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(273, 502, 2, 2);
+		getContentPane().add(scrollPane_1);
 
 		JLabel lblSectorInteres = new JLabel("Sector interes:");
 		lblSectorInteres.setHorizontalAlignment(SwingConstants.CENTER);
@@ -263,16 +272,27 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		textAreaObservaciones.setBounds(451, 455, 433, 105);
 		getContentPane().add(textAreaObservaciones);
 
+		JScrollPane scrollPane = new JScrollPane(textAreaPersona);
+		scrollPane.setBounds(388, 43, 496, 330);
+		getContentPane().add(scrollPane);
+
+		JScrollPane scrollPane_2 = new JScrollPane(textAreaInteresesPersonales);
+		scrollPane_2.setBounds(25, 602, 416, 110);
+		getContentPane().add(scrollPane_2);
+
+		JScrollPane scrollPane_3 = new JScrollPane(textAreaSituacionActual);
+		scrollPane_3.setBounds(451, 602, 433, 110);
+		getContentPane().add(scrollPane_3);
+
+		JScrollPane scrollPane_4 = new JScrollPane(textAreaObservaciones);
+		scrollPane_4.setBounds(451, 455, 433, 105);
+		getContentPane().add(scrollPane_4);
+
 		btnModificar = new JButton("Modificar");
 		btnModificar.setBackground(new Color(38, 201, 236));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificar.setBounds(363, 722, 175, 43);
 		getContentPane().add(btnModificar);
-		
-		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaModificarPersonaOrientacion.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(21, 10, 325, 78);
-		getContentPane().add(logo);
 		btnModificar.addActionListener(this);
 	}
 
@@ -281,7 +301,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		String formacion = "", sectorInteres = "", discapacidad = "", euskera = "", ingles = "", localidad = "",
 				accesibilidad = "";
 
-		textareaPersona.setText("");
+		textAreaPersona.setText("");
 		switch (pO.getFormacion()) {
 		case AT:
 			formacion = "AT";
@@ -1056,7 +1076,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		} else {
 			infoPersona.append("Observaciones: ---");
 		}
-		textareaPersona.setText(infoPersona.toString());
+		textAreaPersona.setText(infoPersona.toString());
 	}
 
 	public boolean errorChecks(int errorID) {

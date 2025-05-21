@@ -16,7 +16,6 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 	// private Usuario user;
 	private JButton btnBorrar;
 	private JList<String> listPersonas;
-	private JLabel logo;
 
 	public VentanaBorrarPersonaInclusion(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
@@ -30,11 +29,26 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 		setBounds(100, 100, 380, 380);
 		getContentPane().setLayout(null);
 
+		JLabel lblInfo = new JLabel("Seleccione el nombre de la persona en inclusion a borrar:");
+		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInfo.setBounds(10, 94, 346, 23);
+		getContentPane().add(lblInfo);
+
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaBorrarPersonaInclusion.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(10, 10, 325, 78);
+		getContentPane().add(logo);
+
 		listPersonas = new JList<>();
 		listPersonas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listPersonas.setBounds(76, 127, 236, 163);
 		listPersonas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		getContentPane().add(listPersonas);
+
+		JScrollPane scrollPane = new JScrollPane(listPersonas);
+		scrollPane.setBounds(76, 127, 236, 163);
+		getContentPane().add(scrollPane);
 
 		addNomPersonas();
 
@@ -44,17 +58,6 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 		btnBorrar.setBounds(131, 300, 118, 37);
 		getContentPane().add(btnBorrar);
 		btnBorrar.addActionListener(this);
-
-		JLabel lblInfo = new JLabel("Seleccione el nombre de la persona en inclusion a borrar:");
-		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInfo.setBounds(10, 94, 346, 23);
-		getContentPane().add(lblInfo);
-		
-		logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaBorrarPersonaInclusion.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(10, 10, 325, 78);
-		getContentPane().add(logo);
 	}
 
 	public void addNomPersonas() {

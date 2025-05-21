@@ -26,6 +26,11 @@ public class VentanaRegistro extends JDialog implements ActionListener {
 		setBounds(100, 100, 380, 270);
 		getContentPane().setLayout(null);
 
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaRegistro.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(10, 10, 325, 78);
+		getContentPane().add(logo);
+
 		JLabel lblRegistro = new JLabel("Introduzca la informacion para registrarse:");
 		lblRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblRegistro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -58,13 +63,7 @@ public class VentanaRegistro extends JDialog implements ActionListener {
 		btnRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnRegistro.setBounds(119, 189, 110, 29);
 		getContentPane().add(btnRegistro);
-		
-		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaRegistro.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(10, 10, 325, 78);
-		getContentPane().add(logo);
 		btnRegistro.addActionListener(this);
-
 	}
 
 	@Override

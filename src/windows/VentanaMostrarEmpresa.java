@@ -153,7 +153,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 		getContentPane().add(btnModificarEmpresa);
 		
 		JTextArea textAreaInfo = new JTextArea();
-		textAreaInfo.setText("Selecciona un nombre de empresa, y despues pulsa el boton\r\npara modificar la empresa.");
+		textAreaInfo.setText("Selecciona un nombre de empresa, y despues pulsa el boton\npara modificar la empresa.");
 		textAreaInfo.setLineWrap(true);
 		textAreaInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textAreaInfo.setEditable(false);

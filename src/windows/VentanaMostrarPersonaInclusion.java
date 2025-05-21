@@ -141,7 +141,7 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 		getContentPane().add(btnModificarPersona);
 		
 		textAreaInfo = new JTextArea();
-		textAreaInfo.setText("Selecciona un nombre, y despues pulsa el boton\r\npara modificar la persona en inclusion.");
+		textAreaInfo.setText("Selecciona un nombre, y despues pulsa el boton\npara modificar la persona en inclusion.");
 		textAreaInfo.setLineWrap(true);
 		textAreaInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textAreaInfo.setEditable(false);

@@ -374,7 +374,7 @@ public class VentanaMostrarAnalisisPuesto extends JDialog implements ActionListe
 					modelComunicacion.addElement("Comunicación con personas externas a la empresa");
 					break;
 
-				case SINNECESIDADCOMUNICACION:
+				case SIN_NECESIDADCOMUNICACION:
 					modelComunicacion.addElement("Sin necesidad de comunicacion");
 					break;
 

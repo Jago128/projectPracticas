@@ -39,6 +39,11 @@ public class VentanaAñadirPersonaInclusion extends JDialog implements ActionLis
 		lblObligatorio.setBounds(188, 24, 241, 24);
 		getContentPane().add(lblObligatorio);
 
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaAñadirPersonaInclusion.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(464, 8, 325, 78);
+		getContentPane().add(logo);
+
 		JLabel lblNom = new JLabel("Nombre: *");
 		lblNom.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -243,16 +248,27 @@ public class VentanaAñadirPersonaInclusion extends JDialog implements ActionLis
 		comboBoxPersonaFacilitadora.setBounds(767, 216, 179, 21);
 		getContentPane().add(comboBoxPersonaFacilitadora);
 
+		JScrollPane scrollPane = new JScrollPane(textAreaEspecialidad);
+		scrollPane.setBounds(476, 479, 460, 107);
+		getContentPane().add(scrollPane);
+
+		JScrollPane scrollPane_1 = new JScrollPane(textAreaOtros);
+		scrollPane_1.setBounds(20, 477, 446, 110);
+		getContentPane().add(scrollPane_1);
+
+		JScrollPane scrollPane_2 = new JScrollPane(textAreaInteresesPersonales);
+		scrollPane_2.setBounds(20, 304, 446, 110);
+		getContentPane().add(scrollPane_2);
+
+		JScrollPane scrollPane_3 = new JScrollPane(textAreaSituacionActual);
+		scrollPane_3.setBounds(476, 304, 465, 110);
+		getContentPane().add(scrollPane_3);
+
 		btnAñadir = new JButton("Añadir persona en inclusion");
 		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(305, 596, 339, 37);
 		getContentPane().add(btnAñadir);
-		
-		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaAñadirPersonaInclusion.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(464, 8, 325, 78);
-		getContentPane().add(logo);
 		btnAñadir.addActionListener(this);
 	}
 

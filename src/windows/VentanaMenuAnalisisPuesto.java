@@ -28,6 +28,11 @@ public class VentanaMenuAnalisisPuesto extends JDialog implements ActionListener
 		setBackground(new Color(38, 201, 236));
 		getContentPane().setBackground(new Color(38, 201, 236));
 
+		JLabel logo = new JLabel("");
+		logo.setBounds(100, 0, 325, 78);
+		logo.setIcon(new ImageIcon(VentanaMenuAnalisisPuesto.class.getResource("/img/apnabilan.png")));
+		getContentPane().add(logo);
+
 		btnAñadir = new JButton("Añadir");
 		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -55,17 +60,6 @@ public class VentanaMenuAnalisisPuesto extends JDialog implements ActionListener
 		textAreaInfoModificar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textAreaInfoModificar.setBounds(34, 154, 498, 29);
 		getContentPane().add(textAreaInfoModificar);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(38, 201, 236));
-		panel.setBounds(0, 10, 556, 86);
-		getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		JLabel logo = new JLabel("");
-		logo.setBounds(100, 0, 325, 78);
-		panel.add(logo);
-		logo.setIcon(new ImageIcon(VentanaMenuAnalisisPuesto.class.getResource("/img/apnabilan.png")));
 
 		btnAñadir.addActionListener(this);
 		btnBorrar.addActionListener(this);

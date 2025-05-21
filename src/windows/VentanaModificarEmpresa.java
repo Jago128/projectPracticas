@@ -19,7 +19,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 
 	private LoginController cont;
 	private Empresa emp;
-	private JTextArea textareaEmpresa, textAreaObservaciones, textAreaInfoUltimoCont;
+	private JTextArea textAreaEmpresa, textAreaObservaciones, textAreaInfoUltimoCont;
 	private JTextField textFieldDatosContacto, textFieldContactoEmpresa, textFieldContacto1, textFieldContacto2,
 			textFieldContacto3, textFieldContacto4, textFieldFechaResolucion;
 	private JComboBox<String> comboBoxEstado, comboBoxResultadoUltimoContacto, comboBoxResultadoFinal,
@@ -38,6 +38,11 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		setBounds(100, 100, 920, 600);
 		getContentPane().setLayout(null);
 
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaModificarEmpresa.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(25, 10, 325, 78);
+		getContentPane().add(logo);
+
 		JLabel lblDatosEmpresa = new JLabel("Informacion de la empresa seleccionada:");
 		lblDatosEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatosEmpresa.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -55,15 +60,15 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		lblFechaFormato.setBounds(42, 113, 275, 16);
 		getContentPane().add(lblFechaFormato);
 
-		textareaEmpresa = new JTextArea();
-		textareaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textareaEmpresa.setText("");
-		textareaEmpresa.setBackground(new Color(255, 255, 255));
-		textareaEmpresa.setLineWrap(true);
-		textareaEmpresa.setEditable(false);
-		textareaEmpresa.setBounds(380, 37, 506, 367);
-		getContentPane().add(textareaEmpresa);
-		
+		textAreaEmpresa = new JTextArea();
+		textAreaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textAreaEmpresa.setText("");
+		textAreaEmpresa.setBackground(new Color(255, 255, 255));
+		textAreaEmpresa.setLineWrap(true);
+		textAreaEmpresa.setEditable(false);
+		textAreaEmpresa.setBounds(380, 37, 506, 367);
+		getContentPane().add(textAreaEmpresa);
+
 		loadEmpresa();
 
 		JLabel lblDatosContacto = new JLabel("Datos de contacto:");
@@ -215,12 +220,6 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		comboBoxResultadoUltimoContacto.setBounds(187, 441, 163, 21);
 		getContentPane().add(comboBoxResultadoUltimoContacto);
 
-		JLabel lblInfoUltimoCont = new JLabel("Informacion ultimo contacto:");
-		lblInfoUltimoCont.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInfoUltimoCont.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblInfoUltimoCont.setBounds(352, 492, 177, 31);
-		getContentPane().add(lblInfoUltimoCont);
-
 		JLabel lblResultadoFinal = new JLabel("Resultado final prospeccion:");
 		lblResultadoFinal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblResultadoFinal.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -245,6 +244,12 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		textFieldFechaResolucion.setBounds(175, 529, 163, 19);
 		getContentPane().add(textFieldFechaResolucion);
 
+		JLabel lblInfoUltimoCont = new JLabel("Informacion ultimo contacto:");
+		lblInfoUltimoCont.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInfoUltimoCont.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblInfoUltimoCont.setBounds(352, 492, 177, 31);
+		getContentPane().add(lblInfoUltimoCont);
+
 		textAreaInfoUltimoCont = new JTextArea();
 		textAreaInfoUltimoCont.setLineWrap(true);
 		textAreaInfoUltimoCont.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -257,16 +262,23 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		lblmaxChars_1.setBounds(375, 522, 126, 31);
 		getContentPane().add(lblmaxChars_1);
 
+		JScrollPane scrollPane = new JScrollPane(textAreaEmpresa);
+		scrollPane.setBounds(380, 37, 506, 367);
+		getContentPane().add(scrollPane);
+
+		JScrollPane scrollPane_1 = new JScrollPane(textAreaObservaciones);
+		scrollPane_1.setBounds(496, 421, 230, 61);
+		getContentPane().add(scrollPane_1);
+
+		JScrollPane scrollPane_2 = new JScrollPane(textAreaInfoUltimoCont);
+		scrollPane_2.setBounds(539, 492, 230, 61);
+		getContentPane().add(scrollPane_2);
+
 		btnModificar = new JButton("Modificar");
 		btnModificar.setBackground(new Color(38, 201, 236));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificar.setBounds(745, 421, 151, 55);
 		getContentPane().add(btnModificar);
-		
-		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaModificarEmpresa.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(25, 10, 325, 78);
-		getContentPane().add(logo);
 		btnModificar.addActionListener(this);
 	}
 
@@ -275,7 +287,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		String sector = "", estado = "", resultadoFinal = "", resultadoUltimoCont = "";
 		Contacto con = cont.getContacto(emp.getCodEmpresa());
 
-		textareaEmpresa.setText("");
+		textAreaEmpresa.setText("");
 		switch (emp.getSector()) {
 		case AGRICULTURA_GANADERIA:
 			sector = "Agricultura y ganadería";
@@ -518,7 +530,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 			infoEmpresa.append("Fecha resolucion: " + con.getFechaResolucion());
 		}
 
-		textareaEmpresa.setText(infoEmpresa.toString());
+		textAreaEmpresa.setText(infoEmpresa.toString());
 	}
 
 	public void emailFormatCheck(String email) throws EmailFormatException {

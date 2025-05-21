@@ -43,6 +43,11 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		lblObligatorio.setBounds(20, 90, 721, 19);
 		getContentPane().add(lblObligatorio);
 
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaAñadirEmpresa.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(232, 10, 325, 78);
+		getContentPane().add(logo);
+
 		JLabel lblNombre = new JLabel("Nombre: *");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
@@ -273,16 +278,19 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		lblmaxChars_1.setBounds(385, 403, 126, 31);
 		getContentPane().add(lblmaxChars_1);
 
+		JScrollPane scrollPane = new JScrollPane(textAreaObservaciones);
+		scrollPane.setBounds(511, 284, 230, 61);
+		getContentPane().add(scrollPane);
+
+		JScrollPane scrollPane_1 = new JScrollPane(textAreaInfoUltimoCont);
+		scrollPane_1.setBounds(549, 368, 230, 61);
+		getContentPane().add(scrollPane_1);
+
 		btnAñadir = new JButton("Añadir empresa");
 		btnAñadir.setBackground(new Color(38, 201, 236));
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(215, 476, 380, 37);
 		getContentPane().add(btnAñadir);
-		
-		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaAñadirEmpresa.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(232, 10, 325, 78);
-		getContentPane().add(logo);
 		btnAñadir.addActionListener(this);
 	}
 

@@ -18,7 +18,6 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 
 	private JButton btnAñadir;
 	private JCheckBox chckbxEmpresaApnabi;
-	private JLabel logo;
 
 	public VentanaAñadirPersonaPracticas(JDialog parent, LoginController cont) {
 		super(parent, true);
@@ -36,6 +35,11 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 		lblObligatorio.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblObligatorio.setBounds(199, 10, 241, 24);
 		getContentPane().add(lblObligatorio);
+
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaAñadirPersonaPracticas.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(443, 0, 325, 78);
+		getContentPane().add(logo);
 
 		JLabel lblNom = new JLabel("Nombre: *");
 		lblNom.setHorizontalAlignment(SwingConstants.CENTER);
@@ -129,13 +133,13 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 		JLabel lblCurso = new JLabel("Curso: *");
 		lblCurso.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCurso.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCurso.setBounds(36, 115, 87, 28);
+		lblCurso.setBounds(36, 119, 87, 28);
 		getContentPane().add(lblCurso);
 
 		comboBoxCurso = new JComboBox<>();
 		comboBoxCurso.setModel(new DefaultComboBoxModel<>(new String[] { "1", "2" }));
 		comboBoxCurso.setSelectedIndex(0);
-		comboBoxCurso.setBounds(131, 120, 163, 21);
+		comboBoxCurso.setBounds(131, 124, 163, 21);
 		getContentPane().add(comboBoxCurso);
 
 		JLabel lblPracticas = new JLabel("Empresa practicas: *");
@@ -173,11 +177,6 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		btnAñadir.setBounds(396, 207, 339, 37);
 		getContentPane().add(btnAñadir);
-		
-		logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaAñadirPersonaPracticas.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(443, 0, 325, 78);
-		getContentPane().add(logo);
 		btnAñadir.addActionListener(this);
 	}
 

@@ -3,6 +3,7 @@ package model;
 import java.util.Map;
 
 public interface ApnabiDAO {
+
 	// Usuarios
 	public boolean verificarUsuario(Usuario user);
 
@@ -69,7 +70,7 @@ public interface ApnabiDAO {
 
 	public boolean verificarPersona(String nom);
 
-	public boolean añadirPersona(PersonaOrientacion personaOrientacion);
+	public boolean añadirPersona(PersonaOrientacion pO);
 
 	public boolean modificarApoyo(String apoyo, String nom);
 
@@ -152,7 +153,7 @@ public interface ApnabiDAO {
 	public boolean verificarPersonaPracticas(String nom);
 
 	public boolean añadirPersonaPracticas(PersonaPracticas p);
-	
+
 	public boolean modificarApoyoPracticas(String apoyo, String nom);
 
 	public boolean modificarFormacionPracticas(String formacion, String nom);

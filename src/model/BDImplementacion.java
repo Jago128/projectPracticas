@@ -23,13 +23,13 @@ public class BDImplementacion implements ApnabiDAO {
 
 	final String SQLEMPRESAS = "SELECT * FROM EMPRESA";
 	final String SQLNOMEMPRESAS = "SELECT NOM_EMPRESA FROM EMPRESA";
-	final String SQLCODEMPRESA = "SELECT COD_EMPRESA FROM EMPRESA WHERE NOM_EMPRESA=?";
+	final String SQLCOD_EMPRESA = "SELECT COD_EMPRESA FROM EMPRESA WHERE NOM_EMPRESA=?";
 	final String SQLSELECTEMPRESA = "SELECT * FROM EMPRESA WHERE NOM_EMPRESA=?";
 	final String SQLINSERTEMPRESA = "INSERT INTO EMPRESA (NOM_EMPRESA, SECTOR, PUESTO, DATOSCONTACTO, CONTACTOEMPRESA, CONTACTOAPNABI, ESTADO) VALUES (?,?,?,?,?,?,?)";
-	final String SQLUPDATEDATOS = "UPDATE EMPRESA SET DATOSCONTACTO=? WHERE NOM_EMPRESA=?";
+	final String SQLUPDATEDATOSCONTACTO = "UPDATE EMPRESA SET DATOSCONTACTO=? WHERE NOM_EMPRESA=?";
 	final String SQLUPDATECONTACTOEMPRESA = "UPDATE EMPRESA SET CONTACTOEMPRESA=? WHERE NOM_EMPRESA=?";
 	final String SQLUPDATECONTACTOAPNABI = "UPDATE EMPRESA SET CONTACTOAPNABI=? WHERE NOM_EMPRESA=?";
-	final String SQLUPDATEESTADO = "UPDATE EMPRESA SET ESTADO=? WHERE NOM_EMPRESA=?";
+	final String SQLUPDATE_ESTADO = "UPDATE EMPRESA SET ESTADO=? WHERE NOM_EMPRESA=?";
 	final String SQLDELETE_EMPRESA = "DELETE FROM EMPRESA WHERE NOM_EMPRESA=?";
 
 	final String SQLSELECTCONTACTOS = "SELECT * FROM CONTACTO WHERE COD_EMPRESA=?";
@@ -39,7 +39,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUPDATECONTACTO3 = "UPDATE CONTACTO SET CONTACTO3=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATECONTACTO4 = "UPDATE CONTACTO SET CONTACTO4=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATE_EMPRESAOBSERVACIONES = "UPDATE CONTACTO SET OBSERVACIONES=? WHERE COD_CONTACTO=?";
-	final String SQLUPDATERESULTADOULTIMO = "UPDATE CONTACTO SET RESULTADOULTIMO=? WHERE COD_CONTACTO=?";
+	final String SQLUPDATE_RESULTADOULTIMO = "UPDATE CONTACTO SET RESULTADOULTIMO=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATEINFOULTIMO = "UPDATE CONTACTO SET INFOULTIMO=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATERESULTADOFINAL = "UPDATE CONTACTO SET RESULTADOFINAL=? WHERE COD_CONTACTO=?";
 	final String SQLUPDATEFECHARESOLUCION = "UPDATE CONTACTO SET FECHARESOLUCION=? WHERE COD_CONTACTO=?";
@@ -108,7 +108,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLUPDATEMINFORMACION = "UPDATE ANALISISPUESTO SET MIN_FORMACION=? WHERE EMPRESA=?";
 	final String SQLUPDATEUBICACION = "UPDATE ANALISISPUESTO SET UBICACION=? WHERE EMPRESA=?";
 	final String SQLUPDATEREQ_IDIOMA = "UPDATE ANALISISPUESTO SET REQ_IDIOMAS=? WHERE EMPRESA=?";
-	final String SQLUPDATEAPCONTACTOEMPRESA = "UPDATE ANALISISPUESTO SET CONTACTOEMPRESA=? WHERE EMPRESA=?";
+	final String SQLUPDATECONTACTOEMPRESA_AP = "UPDATE ANALISISPUESTO SET CONTACTOEMPRESA=? WHERE EMPRESA=?";
 	final String SQLUPDATE_TELEFONO = "UPDATE ANALISISPUESTO SET TELEFONO=? WHERE EMPRESA=?";
 	final String SQLUPDATE_EMAIL = "UPDATE ANALISISPUESTO SET EMAIL=? WHERE EMPRESA=?";
 	final String SQLUPDATERESPONSABLEAPNABI = "UPDATE ANALISISPUESTO SET RESPONSABLEAPNABI=? WHERE EMPRESA=?";
@@ -356,7 +356,7 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLCODEMPRESA);
+			stmt = con.prepareStatement(SQLCOD_EMPRESA);
 			stmt.setString(1, nom);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
@@ -513,7 +513,7 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			if (!datos.isBlank()) {
-				stmt = con.prepareStatement(SQLUPDATEDATOS);
+				stmt = con.prepareStatement(SQLUPDATEDATOSCONTACTO);
 				stmt.setString(1, datos);
 				stmt.setString(2, nom);
 				if (stmt.executeUpdate() > 0) {
@@ -611,7 +611,7 @@ public class BDImplementacion implements ApnabiDAO {
 				break;
 			}
 
-			stmt = con.prepareStatement(SQLUPDATEESTADO);
+			stmt = con.prepareStatement(SQLUPDATE_ESTADO);
 			stmt.setString(1, estado);
 			stmt.setString(2, nom);
 			if (stmt.executeUpdate() > 0) {
@@ -959,7 +959,7 @@ public class BDImplementacion implements ApnabiDAO {
 					break;
 				}
 
-				stmt = con.prepareStatement(SQLUPDATERESULTADOULTIMO);
+				stmt = con.prepareStatement(SQLUPDATE_RESULTADOULTIMO);
 				stmt.setString(1, resultadoU);
 				stmt.setInt(2, id);
 				if (stmt.executeUpdate() > 0) {
@@ -1106,33 +1106,32 @@ public class BDImplementacion implements ApnabiDAO {
 
 	@Override
 	public Map<String, PersonaOrientacion> mostrarPersonas() {
-		PersonaOrientacion personaOrientacion;
-		Map<String, PersonaOrientacion> personaOrientacions = new TreeMap<>();
+		PersonaOrientacion pO;
+		Map<String, PersonaOrientacion> pOs = new TreeMap<>();
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLPERSONAS);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				personaOrientacion = new PersonaOrientacion();
-				personaOrientacion.setNombre(rs.getString("NOM_P"));
-				personaOrientacion.setApoyo(rs.getString("APOYO"));
-				personaOrientacion.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
-				personaOrientacion.setEspecialidad(rs.getString("ESPECIALIDAD"));
-				personaOrientacion.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
-				personaOrientacion.setCvLink(rs.getString("CV"));
-				personaOrientacion
-						.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
-				personaOrientacion.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
-				personaOrientacion.setInteresesPersonales(rs.getString("INTERESESPERSONALES"));
-				personaOrientacion.setSituacionActual(rs.getString("SITUACIONACTUAL"));
-				personaOrientacion.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
-				personaOrientacion.setIngles(Ingles.valueOf(rs.getString("INGLES")));
-				personaOrientacion.setOtrosIdiomas(rs.getString("OTROSIDIOMAS"));
-				personaOrientacion.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
-				personaOrientacion.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
-				personaOrientacion.setObservaciones(rs.getString("OBSERVACIONES"));
-				personaOrientacions.put(personaOrientacion.getNombre(), personaOrientacion);
+				pO = new PersonaOrientacion();
+				pO.setNombre(rs.getString("NOM_P"));
+				pO.setApoyo(rs.getString("APOYO"));
+				pO.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				pO.setEspecialidad(rs.getString("ESPECIALIDAD"));
+				pO.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				pO.setCvLink(rs.getString("CV"));
+				pO.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
+				pO.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
+				pO.setInteresesPersonales(rs.getString("INTERESESPERSONALES"));
+				pO.setSituacionActual(rs.getString("SITUACIONACTUAL"));
+				pO.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
+				pO.setIngles(Ingles.valueOf(rs.getString("INGLES")));
+				pO.setOtrosIdiomas(rs.getString("OTROSIDIOMAS"));
+				pO.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
+				pO.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				pO.setObservaciones(rs.getString("OBSERVACIONES"));
+				pOs.put(pO.getNombre(), pO);
 			}
 			rs.close();
 			stmt.close();
@@ -1143,22 +1142,22 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return personaOrientacions;
+		return pOs;
 	}
 
 	@Override
 	public Map<String, PersonaOrientacion> mostrarNomPersonas() {
-		PersonaOrientacion personaOrientacion;
-		Map<String, PersonaOrientacion> personaOrientacions = new TreeMap<>();
+		PersonaOrientacion pO;
+		Map<String, PersonaOrientacion> pOs = new TreeMap<>();
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLNOMPERSONAS);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				personaOrientacion = new PersonaOrientacion();
-				personaOrientacion.setNombre(rs.getString("NOM_P"));
-				personaOrientacions.put(personaOrientacion.getNombre(), personaOrientacion);
+				pO = new PersonaOrientacion();
+				pO.setNombre(rs.getString("NOM_P"));
+				pOs.put(pO.getNombre(), pO);
 			}
 			rs.close();
 			stmt.close();
@@ -1169,12 +1168,12 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return personaOrientacions;
+		return pOs;
 	}
 
 	@Override
 	public PersonaOrientacion getPersona(String nom) {
-		PersonaOrientacion personaOrientacion = new PersonaOrientacion();
+		PersonaOrientacion pO = new PersonaOrientacion();
 
 		this.openConnection();
 		try {
@@ -1182,23 +1181,23 @@ public class BDImplementacion implements ApnabiDAO {
 			stmt.setString(1, nom);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				personaOrientacion.setNombre(rs.getString("NOM_P"));
-				personaOrientacion.setApoyo(rs.getString("APOYO"));
-				personaOrientacion.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
-				personaOrientacion.setEspecialidad(rs.getString("ESPECIALIDAD"));
-				personaOrientacion.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
-				personaOrientacion.setCvLink(rs.getString("CV"));
-				personaOrientacion
+				pO.setNombre(rs.getString("NOM_P"));
+				pO.setApoyo(rs.getString("APOYO"));
+				pO.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				pO.setEspecialidad(rs.getString("ESPECIALIDAD"));
+				pO.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				pO.setCvLink(rs.getString("CV"));
+				pO
 						.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
-				personaOrientacion.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
-				personaOrientacion.setInteresesPersonales(rs.getString("INTERESESPERSONALES"));
-				personaOrientacion.setSituacionActual(rs.getString("SITUACIONACTUAL"));
-				personaOrientacion.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
-				personaOrientacion.setIngles(Ingles.valueOf(rs.getString("INGLES")));
-				personaOrientacion.setOtrosIdiomas(rs.getString("OTROSIDIOMAS"));
-				personaOrientacion.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
-				personaOrientacion.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
-				personaOrientacion.setObservaciones(rs.getString("OBSERVACIONES"));
+				pO.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
+				pO.setInteresesPersonales(rs.getString("INTERESESPERSONALES"));
+				pO.setSituacionActual(rs.getString("SITUACIONACTUAL"));
+				pO.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
+				pO.setIngles(Ingles.valueOf(rs.getString("INGLES")));
+				pO.setOtrosIdiomas(rs.getString("OTROSIDIOMAS"));
+				pO.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
+				pO.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				pO.setObservaciones(rs.getString("OBSERVACIONES"));
 			}
 			rs.close();
 			stmt.close();
@@ -1209,7 +1208,7 @@ public class BDImplementacion implements ApnabiDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return personaOrientacion;
+		return pO;
 	}
 
 	@Override
@@ -3871,7 +3870,7 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLSELECTPERSONAPRACTICAS);
+			stmt = con.prepareStatement(SQLNOMPERSONASPRACTICAS);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				p = new PersonaPracticas();
@@ -4393,7 +4392,7 @@ public class BDImplementacion implements ApnabiDAO {
 			stmt.setString(7, p.getDuracion());
 			stmt.setString(8, p.getEmpresaPracticas());
 			stmt.setBoolean(9, p.isEmpresaNuestra());
-			
+
 			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}
@@ -5315,7 +5314,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt.setString(18, "ComunicacionConPersonasExternasEmpresa");
 				break;
 
-			case SINNECESIDADCOMUNICACION:
+			case SIN_NECESIDADCOMUNICACION:
 				stmt.setString(18, "SinNecesidadComunicacion");
 				break;
 
@@ -5482,7 +5481,7 @@ public class BDImplementacion implements ApnabiDAO {
 
 		this.openConnection();
 		try {
-			stmt = con.prepareStatement(SQLUPDATEAPCONTACTOEMPRESA);
+			stmt = con.prepareStatement(SQLUPDATECONTACTOEMPRESA_AP);
 			stmt.setString(1, cE);
 			stmt.setString(2, emp);
 			if (stmt.executeUpdate() > 0) {

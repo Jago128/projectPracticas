@@ -16,7 +16,6 @@ public class VentanaLogin extends JDialog implements ActionListener {
 	private JButton btnIniciarSesion, btnRegistro;
 	private LoginController cont;
 	private JLabel lblMensaje;
-	private JLabel logo;
 
 	public VentanaLogin(LoginController cont) {
 		setBackground(new Color(38, 201, 236));
@@ -27,6 +26,11 @@ public class VentanaLogin extends JDialog implements ActionListener {
 		setTitle("Inicio de sesion");
 		setBounds(100, 100, 410, 260);
 		getContentPane().setLayout(null);
+
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaLogin.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(39, 9, 325, 78);
+		getContentPane().add(logo);
 
 		passwordField = new JPasswordField();
 		passwordField.setBounds(211, 138, 96, 19);
@@ -66,11 +70,6 @@ public class VentanaLogin extends JDialog implements ActionListener {
 		lblMensaje.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblMensaje.setBounds(39, 186, 308, 30);
 		getContentPane().add(lblMensaje);
-		
-		logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaLogin.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(39, 9, 325, 78);
-		getContentPane().add(logo);
 
 		btnIniciarSesion.addActionListener(this);
 		btnRegistro.addActionListener(this);

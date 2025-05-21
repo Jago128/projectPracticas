@@ -14,7 +14,6 @@ public class VentanaMenuPersonaPracticas extends JDialog implements ActionListen
 	private LoginController cont;
 	private Usuario user;
 	private JButton btnMostrar, btnAñadir, btnBorrar;
-	private JLabel logo;
 
 	public VentanaMenuPersonaPracticas(JFrame parent, LoginController cont, Usuario user) {
 		super(parent, true);
@@ -28,6 +27,11 @@ public class VentanaMenuPersonaPracticas extends JDialog implements ActionListen
 		getContentPane().setLayout(null);
 		setBackground(new Color(38, 201, 236));
 		getContentPane().setBackground(new Color(38, 201, 236));
+
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaMenuPersonaPracticas.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(119, 0, 325, 78);
+		getContentPane().add(logo);
 
 		btnAñadir = new JButton("Añadir");
 		btnAñadir.setBackground(new Color(38, 201, 236));
@@ -56,17 +60,6 @@ public class VentanaMenuPersonaPracticas extends JDialog implements ActionListen
 		textAreaInfoModificar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textAreaInfoModificar.setBounds(34, 154, 498, 29);
 		getContentPane().add(textAreaInfoModificar);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(38, 201, 236));
-		panel.setBounds(0, 10, 556, 86);
-		getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaMenuPersonaPracticas.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(119, 0, 325, 78);
-		panel.add(logo);
 
 		btnAñadir.addActionListener(this);
 		btnBorrar.addActionListener(this);

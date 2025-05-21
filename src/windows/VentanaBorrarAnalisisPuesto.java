@@ -17,7 +17,6 @@ public class VentanaBorrarAnalisisPuesto extends JDialog implements ActionListen
 	// private Usuario user;
 	private JButton btnBorrar;
 	private JList<String> listAnalisisPuestos;
-	private JLabel logo;
 
 	public VentanaBorrarAnalisisPuesto(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
@@ -30,11 +29,26 @@ public class VentanaBorrarAnalisisPuesto extends JDialog implements ActionListen
 		setBounds(100, 100, 450, 390);
 		getContentPane().setLayout(null);
 
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(VentanaBorrarAnalisisPuesto.class.getResource("/img/apnabilan.png")));
+		logo.setBounds(47, 0, 325, 78);
+		getContentPane().add(logo);
+
+		JLabel lblInfo = new JLabel("Seleccione el nombre de una empresa para borrar su analisis de puesto:");
+		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInfo.setBounds(10, 86, 419, 23);
+		getContentPane().add(lblInfo);
+
 		listAnalisisPuestos = new JList<>();
 		listAnalisisPuestos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listAnalisisPuestos.setBounds(92, 119, 255, 163);
 		listAnalisisPuestos.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		getContentPane().add(listAnalisisPuestos);
+
+		JScrollPane scrollPane = new JScrollPane(listAnalisisPuestos);
+		scrollPane.setBounds(92, 119, 255, 163);
+		getContentPane().add(scrollPane);
 
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.setBackground(new Color(38, 201, 236));
@@ -42,17 +56,6 @@ public class VentanaBorrarAnalisisPuesto extends JDialog implements ActionListen
 		btnBorrar.setBounds(160, 292, 118, 37);
 		getContentPane().add(btnBorrar);
 		btnBorrar.addActionListener(this);
-
-		JLabel lblInfo = new JLabel("Seleccione el nombre de una empresa para borrar su analisis de puesto:");
-		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInfo.setBounds(10, 86, 419, 23);
-		getContentPane().add(lblInfo);
-		
-		logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaBorrarAnalisisPuesto.class.getResource("/img/apnabilan.png")));
-		logo.setBounds(47, 0, 325, 78);
-		getContentPane().add(logo);
 	}
 
 	public void loadNomEmpresas() {
