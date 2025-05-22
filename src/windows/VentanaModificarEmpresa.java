@@ -19,6 +19,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 
 	private LoginController cont;
 	private Empresa emp;
+	private Contacto con;
 	private JTextArea textAreaEmpresa, textAreaObservaciones, textAreaInfoUltimoCont;
 	private JTextField textFieldDatosContacto, textFieldContactoEmpresa, textFieldContacto1, textFieldContacto2,
 			textFieldContacto3, textFieldContacto4, textFieldFechaResolucion;
@@ -32,6 +33,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		this.emp = emp;
+		this.con = cont.getContacto(emp.getNom_empresa());
 
 		setResizable(false);
 		setTitle("Modificar empresa");
@@ -285,7 +287,6 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 	public void loadEmpresa() {
 		StringBuilder infoEmpresa = new StringBuilder("");
 		String sector = "", estado = "", resultadoFinal = "", resultadoUltimoCont = "";
-		Contacto con = cont.getContacto(emp.getCodEmpresa());
 
 		textAreaEmpresa.setText("");
 		switch (emp.getSector()) {
@@ -610,42 +611,42 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 			}
 
 			if (!textFieldContacto1.getText().isBlank() && check) {
-				check = cont.modificarContacto1(textFieldContacto1.getText(), emp.getCodEmpresa());
+				check = cont.modificarContacto1(textFieldContacto1.getText(), con.getEmp_Nom());
 				if (!check) {
 					infoError.append("1. contacto");
 				}
 			}
 
 			if (!textFieldContacto2.getText().isBlank() && check) {
-				check = cont.modificarContacto2(textFieldContacto2.getText(), emp.getCodEmpresa());
+				check = cont.modificarContacto2(textFieldContacto2.getText(), con.getEmp_Nom());
 				if (!check) {
 					infoError.append("2. contacto");
 				}
 			}
 
 			if (!textFieldContacto3.getText().isBlank() && check) {
-				check = cont.modificarContacto3(textFieldContacto3.getText(), emp.getCodEmpresa());
+				check = cont.modificarContacto3(textFieldContacto3.getText(), con.getEmp_Nom());
 				if (!check) {
 					infoError.append("3. contacto");
 				}
 			}
 
 			if (!textFieldContacto4.getText().isBlank() && check) {
-				check = cont.modificarContacto4(textFieldContacto4.getText(), emp.getCodEmpresa());
+				check = cont.modificarContacto4(textFieldContacto4.getText(), con.getEmp_Nom());
 				if (!check) {
 					infoError.append("4. contacto");
 				}
 			}
 
 			if (!textAreaObservaciones.getText().isBlank() && check) {
-				check = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
+				check = cont.modificarObservaciones(textAreaObservaciones.getText(), con.getEmp_Nom());
 				if (!check) {
 					infoError.append("Observaciones");
 				}
 			}
 
 			if (!textAreaInfoUltimoCont.getText().isBlank() && check) {
-				check = cont.modificarInformacionUltimoContacto(textAreaInfoUltimoCont.getText(), emp.getCodEmpresa());
+				check = cont.modificarInformacionUltimoContacto(textAreaInfoUltimoCont.getText(), con.getEmp_Nom());
 				if (!check) {
 					infoError.append("Resultado ultimo contacto");
 				}
@@ -654,7 +655,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 			if (!comboBoxResultadoUltimoContacto.getSelectedItem().equals("---") && check) {
 				check = cont.modificarResultadoUltimoContacto(
 						comboBoxResultadoUltimoContacto.getItemAt(comboBoxResultadoUltimoContacto.getSelectedIndex()),
-						emp.getCodEmpresa());
+						con.getEmp_Nom());
 				if (!check) {
 					infoError.append("Informacion ultimo contacto");
 				}
@@ -663,14 +664,14 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 			if (!comboBoxResultadoFinal.getSelectedItem().equals("---") && check) {
 				check = cont.modificarResultadoFinal(
 						comboBoxResultadoFinal.getItemAt(comboBoxResultadoFinal.getSelectedIndex()),
-						emp.getCodEmpresa());
+						con.getEmp_Nom());
 				if (!check) {
 					infoError.append("Resultado final prospeccion");
 				}
 			}
 
 			if (!textFieldFechaResolucion.getText().isBlank() && check) {
-				check = cont.modificarObservaciones(textAreaObservaciones.getText(), emp.getCodEmpresa());
+				check = cont.modificarObservaciones(textAreaObservaciones.getText(), con.getEmp_Nom());
 				if (!check) {
 					infoError.append("Fecha de resolucion");
 				}
@@ -727,7 +728,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 		DateTimeFormatter format = new DateTimeFormatterBuilder().appendValue(ChronoField.YEAR, 4).appendLiteral('-')
 				.appendValue(ChronoField.MONTH_OF_YEAR).appendLiteral('-').appendValue(ChronoField.DAY_OF_MONTH)
 				.toFormatter();
-		Contacto con = cont.getContacto(emp.getCodEmpresa());
+		Contacto con = cont.getContacto(emp.getNom_empresa());
 		LocalDate cont1 = LocalDate.parse("9999-1-1", format), cont2 = LocalDate.parse("9999-1-1", format),
 				cont3 = LocalDate.parse("9999-1-1", format), cont4 = LocalDate.parse("9999-1-1", format);
 

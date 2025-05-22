@@ -88,7 +88,7 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 						"Confirmacion", JOptionPane.YES_NO_OPTION);
 
 				if (result == JOptionPane.YES_OPTION) {
-					if (cont.eliminarContacto(cont.getCodEmpresa(listEmpresas.getSelectedValue()))) {
+					if (cont.eliminarContacto(listEmpresas.getSelectedValue())) {
 						if (cont.eliminarEmpresa(listEmpresas.getSelectedValue())) {
 							result = JOptionPane.showConfirmDialog(null,
 									"La empresa ha sido borrada correctamente. ¿Quiere borrar mas empresas?",

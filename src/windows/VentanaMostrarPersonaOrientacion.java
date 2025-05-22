@@ -144,9 +144,10 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 		btnModificarPersona.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificarPersona.setBounds(600, 291, 395, 72);
 		getContentPane().add(btnModificarPersona);
-		
+
 		textAreaInfo = new JTextArea();
-		textAreaInfo.setText("Selecciona un nombre, y despues pulsa el boton\npara modificar la persona en orientacion y seguimiento.");
+		textAreaInfo.setText(
+				"Selecciona un nombre, y despues pulsa el boton\npara modificar la persona en orientacion y seguimiento.");
 		textAreaInfo.setLineWrap(true);
 		textAreaInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textAreaInfo.setEditable(false);
@@ -345,70 +346,78 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 					System.out.println("Tipo invalido");
 				}
 
-				switch (p.getEuskera()) {
-				case A1:
-					modelEuskera.addElement("A1");
-					break;
+				if (p.getEuskera() != null) {
+					switch (p.getEuskera()) {
+					case A1:
+						modelEuskera.addElement("A1");
+						break;
 
-				case A2:
-					modelEuskera.addElement("A2");
-					break;
+					case A2:
+						modelEuskera.addElement("A2");
+						break;
 
-				case B1:
-					modelEuskera.addElement("B1");
-					break;
+					case B1:
+						modelEuskera.addElement("B1");
+						break;
 
-				case B2:
-					modelEuskera.addElement("B2");
-					break;
+					case B2:
+						modelEuskera.addElement("B2");
+						break;
 
-				case C1:
-					modelEuskera.addElement("C1");
-					break;
+					case C1:
+						modelEuskera.addElement("C1");
+						break;
 
-				case C2:
-					modelEuskera.addElement("C2");
-					break;
+					case C2:
+						modelEuskera.addElement("C2");
+						break;
 
-				case CONOCIMIENTO_NOACREDITADO:
-					modelEuskera.addElement("Conocimiento, pero sin acreditar");
-					break;
+					case CONOCIMIENTO_NOACREDITADO:
+						modelEuskera.addElement("Conocimiento, pero sin acreditar");
+						break;
 
-				default:
-					System.out.println("Tipo invalido");
+					default:
+						System.out.println("Tipo invalido");
+					}
+				} else {
+					modelEuskera.addElement("---");
 				}
 
-				switch (p.getIngles()) {
-				case A1:
-					modelIngles.addElement("A1");
-					break;
+				if (p.getIngles() != null) {
+					switch (p.getIngles()) {
+					case A1:
+						modelIngles.addElement("A1");
+						break;
 
-				case A2:
-					modelIngles.addElement("A2");
-					break;
+					case A2:
+						modelIngles.addElement("A2");
+						break;
 
-				case B1:
-					modelIngles.addElement("B1");
-					break;
+					case B1:
+						modelIngles.addElement("B1");
+						break;
 
-				case B2:
-					modelIngles.addElement("B2");
-					break;
+					case B2:
+						modelIngles.addElement("B2");
+						break;
 
-				case C1:
-					modelIngles.addElement("C1");
-					break;
+					case C1:
+						modelIngles.addElement("C1");
+						break;
 
-				case C2:
-					modelIngles.addElement("C2");
-					break;
+					case C2:
+						modelIngles.addElement("C2");
+						break;
 
-				case CONOCIMIENTO_NOACREDITADO:
-					modelIngles.addElement("Conocimiento, pero sin acreditar");
-					break;
+					case CONOCIMIENTO_NOACREDITADO:
+						modelIngles.addElement("Conocimiento, pero sin acreditar");
+						break;
 
-				default:
-					System.out.println("Tipo invalido");
+					default:
+						System.out.println("Tipo invalido");
+					}
+				} else {
+					modelIngles.addElement("---");
 				}
 
 				switch (p.getLocalidad()) {
@@ -915,12 +924,41 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 
 				modelNom.addElement(p.getNombre());
 				modelApoyo.addElement(p.getApoyo());
-				modelCVLink.addElement(p.getCvLink());
-				modelInteresesPersonales.addElement(p.getInteresesPersonales());
-				modelOtrosIdiomas.addElement(p.getOtrosIdiomas());
-				modelObservaciones.addElement(p.getObservaciones());
-				modelSituacionActual.addElement(p.getSituacionActual());
-				modelUltimoAñoTrabajado.addElement("" + p.getUltimoAñoTrabajado());
+				if (p.getCvLink() == null) {
+					modelCVLink.addElement("---");
+				} else {
+					modelCVLink.addElement(p.getCvLink());
+				}
+
+				if (p.getUltimoAñoTrabajado() == 0) {
+					modelUltimoAñoTrabajado.addElement("---");
+				} else {
+					modelUltimoAñoTrabajado.addElement("" + p.getUltimoAñoTrabajado());
+				}
+
+				if (p.getInteresesPersonales() == null) {
+					modelInteresesPersonales.addElement("---");
+				} else {
+					modelInteresesPersonales.addElement(p.getInteresesPersonales());
+				}
+
+				if (p.getSituacionActual() == null) {
+					modelSituacionActual.addElement("---");
+				} else {
+					modelSituacionActual.addElement(p.getSituacionActual());
+				}
+					
+				if (p.getOtrosIdiomas() == null) {
+					modelOtrosIdiomas.addElement("---");
+				} else {
+					modelOtrosIdiomas.addElement(p.getOtrosIdiomas());
+				}
+
+				if (p.getObservaciones() == null) {
+					modelObservaciones.addElement("---");
+				} else {
+					modelObservaciones.addElement(p.getObservaciones());
+				}
 			}
 
 			listNom.setModel(modelNom);

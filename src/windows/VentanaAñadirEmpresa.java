@@ -367,7 +367,10 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 		LocalDate cont1 = LocalDate.parse("9999-1-1", format), cont2 = LocalDate.parse("9999-1-1", format),
 				cont3 = LocalDate.parse("9999-1-1", format), cont4 = LocalDate.parse("9999-1-1", format);
 
-		cont1 = LocalDate.parse(textFieldContacto1.getText(), format);
+		if (!textFieldContacto1.getText().isBlank()) {
+			cont1 = LocalDate.parse(textFieldContacto1.getText(), format);
+		}
+
 		if (!textFieldContacto2.getText().isBlank()) {
 			cont2 = LocalDate.parse(textFieldContacto2.getText(), format);
 		}
@@ -638,20 +641,14 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 							con.setInfoUltimo(textAreaInfoUltimoCont.getText());
 						}
 
-						if (resultadoUltimoCont != null) {
-							con.setResultadoUltimoContacto(resultadoUltimoCont);
-						}
-
+						con.setResultadoUltimoContacto(resultadoUltimoCont);
 						if (!textFieldFechaResolucion.getText().isBlank()) {
 							con.setFechaResolucion(textFieldFechaResolucion.getText());
 						}
 
-						if (resultadoFinal != null) {
-							con.setResultadoFinal(resultadoFinal);
-						}
-
+						con.setResultadoFinal(resultadoFinal);
 						if (cont.añadirEmpresa(emp)) {
-							if (cont.añadirContacto(con, cont.getCodEmpresa(textFieldNombre.getText()))) {
+							if (cont.añadirContacto(con, textFieldNombre.getText())) {
 								result = JOptionPane.showConfirmDialog(null,
 										"La empresa ha sido añadida correctamente junto a la informacion de contacto. Quiere añadir mas empresas?",
 										"", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -677,6 +674,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 								}
 							} else {
 								errorChecks(1);
+								cont.eliminarEmpresa(textFieldNombre.getText());
 							}
 						} else {
 							errorChecks(1);

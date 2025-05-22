@@ -46,10 +46,6 @@ public class LoginController {
 		return dao.getEmpresa(nom);
 	}
 
-	public int getCodEmpresa(String nom) {
-		return dao.getCodEmpresa(nom);
-	}
-
 	public boolean verificarEmpresa(String nom) {
 		return dao.verificarEmpresa(nom);
 	}
@@ -82,49 +78,53 @@ public class LoginController {
 	public Map<String, Contacto> mostrarContactos() {
 		return dao.mostrarContactos();
 	}
-
-	public boolean añadirContacto(Contacto cont, int id) {
-		return dao.añadirContacto(cont, id);
+	
+	public Contacto getContacto(String nom) {
+		return dao.getContacto(nom);
 	}
 
-	public boolean modificarContacto1(String contacto1, int id) {
-		return dao.modificarContacto1(contacto1, id);
+	public boolean añadirContacto(Contacto cont, String nom) {
+		return dao.añadirContacto(cont, nom);
 	}
 
-	public boolean modificarContacto2(String contacto2, int id) {
-		return dao.modificarContacto2(contacto2, id);
+	public boolean modificarContacto1(String contacto1, String nom) {
+		return dao.modificarContacto1(contacto1, nom);
 	}
 
-	public boolean modificarContacto3(String contacto3, int id) {
-		return dao.modificarContacto3(contacto3, id);
+	public boolean modificarContacto2(String contacto2, String nom) {
+		return dao.modificarContacto2(contacto2, nom);
 	}
 
-	public boolean modificarContacto4(String contacto4, int id) {
-		return dao.modificarContacto4(contacto4, id);
+	public boolean modificarContacto3(String contacto3, String nom) {
+		return dao.modificarContacto3(contacto3, nom);
 	}
 
-	public boolean modificarObservaciones(String observaciones, int id) {
-		return dao.modificarObservaciones(observaciones, id);
+	public boolean modificarContacto4(String contacto4, String nom) {
+		return dao.modificarContacto4(contacto4, nom);
 	}
 
-	public boolean modificarResultadoUltimoContacto(String resultadoU, int id) {
-		return dao.modificarResultadoUltimoContacto(resultadoU, id);
+	public boolean modificarObservaciones(String observaciones, String nom) {
+		return dao.modificarObservaciones(observaciones, nom);
 	}
 
-	public boolean modificarInformacionUltimoContacto(String infoU, int id) {
-		return dao.modificarInformacionUltimoContacto(infoU, id);
+	public boolean modificarResultadoUltimoContacto(String resultadoU, String nom) {
+		return dao.modificarResultadoUltimoContacto(resultadoU, nom);
 	}
 
-	public boolean modificarResultadoFinal(String resultadoF, int id) {
-		return dao.modificarResultadoFinal(resultadoF, id);
+	public boolean modificarInformacionUltimoContacto(String infoU, String nom) {
+		return dao.modificarInformacionUltimoContacto(infoU, nom);
 	}
 
-	public boolean modificarFechaResolucion(String fecResolucion, int id) {
-		return dao.modificarFechaResolucion(fecResolucion, id);
+	public boolean modificarResultadoFinal(String resultadoF, String nom) {
+		return dao.modificarResultadoFinal(resultadoF, nom);
 	}
 
-	public boolean eliminarContacto(int id) {
-		return dao.eliminarContacto(id);
+	public boolean modificarFechaResolucion(String fecResolucion, String nom) {
+		return dao.modificarFechaResolucion(fecResolucion, nom);
+	}
+
+	public boolean eliminarContacto(String nom) {
+		return dao.eliminarContacto(nom);
 	}
 
 	// Personas en orientacion y seguimiento

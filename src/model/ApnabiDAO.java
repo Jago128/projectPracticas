@@ -22,8 +22,6 @@ public interface ApnabiDAO {
 
 	public boolean verificarEmpresa(String nom);
 
-	public int getCodEmpresa(String nom);
-
 	public boolean añadirEmpresa(Empresa emp);
 
 	public boolean modificarDatosContacto(String datos, String nom);
@@ -38,28 +36,30 @@ public interface ApnabiDAO {
 
 	// Contactos
 	public Map<String, Contacto> mostrarContactos();
+	
+	public Contacto getContacto(String nom);
 
-	public boolean añadirContacto(Contacto cont, int id);
+	public boolean añadirContacto(Contacto cont, String nom);
 
-	public boolean modificarContacto1(String contacto1, int id);
+	public boolean modificarContacto1(String contacto1, String nom);
 
-	public boolean modificarContacto2(String contacto2, int id);
+	public boolean modificarContacto2(String contacto2, String nom);
 
-	public boolean modificarContacto3(String contacto3, int id);
+	public boolean modificarContacto3(String contacto3, String nom);
 
-	public boolean modificarContacto4(String contacto4, int id);
+	public boolean modificarContacto4(String contacto4, String nom);
 
-	public boolean modificarObservaciones(String observaciones, int id);
+	public boolean modificarObservaciones(String observaciones, String nom);
 
-	public boolean modificarResultadoUltimoContacto(String resultadoU, int id);
+	public boolean modificarResultadoUltimoContacto(String resultadoU, String nom);
 
-	public boolean modificarInformacionUltimoContacto(String infoU, int id);
+	public boolean modificarInformacionUltimoContacto(String infoU, String nom);
 
-	public boolean modificarResultadoFinal(String resultadoF, int id);
+	public boolean modificarResultadoFinal(String resultadoF, String nom);
 
-	public boolean modificarFechaResolucion(String fecResolucion, int id);
+	public boolean modificarFechaResolucion(String fecResolucion, String nom);
 
-	public boolean eliminarContacto(int id);
+	public boolean eliminarContacto(String nom);
 
 	// Personas en orientacion y seguimiento
 	public Map<String, PersonaOrientacion> mostrarPersonas();

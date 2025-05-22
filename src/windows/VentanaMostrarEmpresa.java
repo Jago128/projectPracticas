@@ -191,7 +191,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 		DefaultListModel<String> modelResultadoFinal = new DefaultListModel<>();
 		DefaultListModel<String> modelFechaResolucion = new DefaultListModel<>();
 
-		if (!empresas.isEmpty() && !conts.isEmpty()) {
+		if (!empresas.isEmpty() || !conts.isEmpty()) {
 			modelSectores.addElement("Sector");
 			modelEmpresas.addElement("Empresas");
 			modelPuestos.addElement("Puestos");

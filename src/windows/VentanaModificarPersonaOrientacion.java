@@ -1099,7 +1099,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 	}
 
 	public boolean addError() { // ErrorID: 1
-		boolean check = false;
+		boolean check = true;
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 
 		if (!comboBoxApoyo.getEditor().getItem().equals("---")) {
@@ -1245,7 +1245,9 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 
 	public boolean yearFormatErrorCheck() { // ErrorID: 3
 		try {
-			Year.parse(textFieldUltimoAñoTrabajado.getText());
+			if (!textFieldUltimoAñoTrabajado.getText().isBlank()) {
+				Year.parse(textFieldUltimoAñoTrabajado.getText());
+			}
 		} catch (DateTimeParseException e) {
 			return true;
 		}
