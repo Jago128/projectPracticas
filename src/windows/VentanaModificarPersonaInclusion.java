@@ -103,7 +103,7 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 
 		comboBoxFormacion = new JComboBox<>();
 		comboBoxFormacion.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO", "EPA",
-				"FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
+				"FP Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacion.setSelectedIndex(0);
 		comboBoxFormacion.setBounds(172, 193, 163, 21);
 		getContentPane().add(comboBoxFormacion);
@@ -288,7 +288,7 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 			break;
 
 		case FP_BASICA:
-			formacion = "FP_Basica";
+			formacion = "FP Basica";
 			break;
 
 		case GM:

@@ -239,7 +239,7 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 			break;
 
 		case FP_BASICA:
-			min_Formacion = "FP_Basica";
+			min_Formacion = "FP Basica";
 			break;
 
 		case GM:

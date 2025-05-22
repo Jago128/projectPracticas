@@ -213,7 +213,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 			break;
 
 		case FP_BASICA:
-			formacion = "FP_Basica";
+			formacion = "FP Basica";
 			break;
 
 		case GM:

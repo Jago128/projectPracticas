@@ -78,7 +78,7 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 
 		comboBoxFormacion = new JComboBox<>();
 		comboBoxFormacion.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO", "EPA",
-				"FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
+				"FP Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacion.setSelectedIndex(0);
 		comboBoxFormacion.setBounds(150, 85, 163, 21);
 		getContentPane().add(comboBoxFormacion);

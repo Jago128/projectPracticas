@@ -70,7 +70,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLPERSONASINCLUSION = "SELECT * FROM PERSONAINCLUSION";
 	final String SQLNOMPERSONASINCLUSION = "SELECT NOMBRE FROM PERSONAINCLUSION";
 	final String SQLSELECTPERSONAINCLUSION = "SELECT * FROM PERSONAINCLUSION WHERE NOMBRE=?";
-	final String SQLINSERTPERSONAINCLUSION = "INSERT INTO PERSONAINCLUSION VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	final String SQLINSERTPERSONAINCLUSION = "INSERT INTO PERSONAINCLUSION VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	final String SQLUPDATE_EDAD = "UPDATE PERSONAINCLUSION SET EDAD=? WHERE NOMBRE=?";
 	final String SQLUPDATEMUNICIPIO = "UPDATE PERSONAINCLUSION SET MUNICIPIO=? WHERE NOMBRE=?";
 	final String SQLUPDATEFORMACIONPI = "UPDATE PERSONAINCLUSION SET FORMACION=? WHERE NOMBRE=?";
@@ -3340,111 +3340,112 @@ public class BDImplementacion implements ApnabiDAO {
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(6, pI.getOtros());
-			stmt.setString(7, pI.getIdioma());
-			stmt.setInt(8, pI.getUltimoAñoTrabajado());
+			stmt.setString(6, pI.getEspecialidad());
+			stmt.setString(7, pI.getOtros());
+			stmt.setString(8, pI.getIdioma());
+			stmt.setInt(9, pI.getUltimoAñoTrabajado());
 			switch (pI.getSectorInteres()) {
 			case AGRICULTURA_GANADERIA:
-				stmt.setString(9, "Agricultura_Ganaderia");
+				stmt.setString(10, "Agricultura_Ganaderia");
 				break;
 
 			case BIENESCONSUMO:
-				stmt.setString(9, "BienesConsumo");
+				stmt.setString(10, "BienesConsumo");
 				break;
 
 			case COMERCIO_ESTABLECIMIENTOS:
-				stmt.setString(9, "Comercio_Establecimientos");
+				stmt.setString(10, "Comercio_Establecimientos");
 				break;
 
 			case COMERCIOELECTRONICO:
-				stmt.setString(9, "ComercioElectronico");
+				stmt.setString(10, "ComercioElectronico");
 				break;
 
 			case CONSTRUCCION:
-				stmt.setString(9, "Construccion");
+				stmt.setString(10, "Construccion");
 				break;
 
 			case DEPORTE_OCIO:
-				stmt.setString(9, "Deporte_Ocio");
+				stmt.setString(10, "Deporte_Ocio");
 				break;
 
 			case ENERGIA_MEDIOAMBIENTE:
-				stmt.setString(9, "Energia_MedioAmbiente");
+				stmt.setString(10, "Energia_MedioAmbiente");
 				break;
 
 			case FINANZAS_SEGUROS_BIENESINMUEBLES:
-				stmt.setString(9, "Finanzas_Seguros_BienesInmuebles");
+				stmt.setString(10, "Finanzas_Seguros_BienesInmuebles");
 				break;
 
 			case INTERNET:
-				stmt.setString(9, "Internet");
+				stmt.setString(10, "Internet");
 				break;
 
 			case LOGISTICA_TRANSPORTE:
-				stmt.setString(9, "Logistica_Transporte");
+				stmt.setString(10, "Logistica_Transporte");
 				break;
 
 			case MEDIOSCOMUNICACION_MARKETING:
-				stmt.setString(9, "MediosComunicacion_Marketing");
+				stmt.setString(10, "MediosComunicacion_Marketing");
 				break;
 
 			case METALURGIA_ELECTRONICA:
-				stmt.setString(9, "Metalurgia_Electronica");
+				stmt.setString(10, "Metalurgia_Electronica");
 				break;
 
 			case PRODUCTOSQUIMICOS_MATERIASPRIMAS:
-				stmt.setString(9, "ProductosQuimicos_MateriasPrimas");
+				stmt.setString(10, "ProductosQuimicos_MateriasPrimas");
 				break;
 
 			case SALUD_INDUSTRIAFARMACEUTICA:
-				stmt.setString(9, "Salud_IndustriaFarmaceutica");
+				stmt.setString(10, "Salud_IndustriaFarmaceutica");
 				break;
 
 			case SERVICIOS:
-				stmt.setString(9, "Servicios");
+				stmt.setString(10, "Servicios");
 				break;
 
 			case SOCIEDAD:
-				stmt.setString(9, "Sociedad");
+				stmt.setString(10, "Sociedad");
 				break;
 
 			case TECNOLOGIA_TELECOMUNICACIONES:
-				stmt.setString(9, "Tecnologia_Telecomunicaciones");
+				stmt.setString(10, "Tecnologia_Telecomunicaciones");
 				break;
 
 			case TURISMO_HOSTELERIA:
-				stmt.setString(9, "Turismo_Hosteleria");
+				stmt.setString(10, "Turismo_Hosteleria");
 				break;
 
 			case VIDA:
-				stmt.setString(9, "Vida");
+				stmt.setString(10, "Vida");
 				break;
 
 			default:
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(10, pI.getInteresesPersonales());
-			stmt.setString(11, pI.getSituacionActual());
+			stmt.setString(11, pI.getInteresesPersonales());
+			stmt.setString(12, pI.getSituacionActual());
 			switch (pI.getAccesibilidad()) {
 			case CARNET:
-				stmt.setString(12, "Carnet");
+				stmt.setString(13, "Carnet");
 				break;
 
 			case CARNET_COCHE:
-				stmt.setString(12, "Carnet_Coche");
+				stmt.setString(13, "Carnet_Coche");
 				break;
 
 			case TRANSPORTE_PUBLICO:
-				stmt.setString(12, "Transporte_Publico");
+				stmt.setString(13, "Transporte_Publico");
 				break;
 
 			default:
 				System.out.println("Tipo invalido.");
 			}
 
-			stmt.setString(13, pI.getCv());
-			stmt.setString(14, pI.getPersonaFacilitadora());
+			stmt.setString(14, pI.getCv());
+			stmt.setString(15, pI.getPersonaFacilitadora());
 			if (stmt.executeUpdate() > 0) {
 				check = true;
 			}

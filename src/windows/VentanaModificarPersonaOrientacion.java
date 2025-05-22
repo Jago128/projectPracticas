@@ -325,7 +325,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 			break;
 
 		case FP_BASICA:
-			formacion = "FP_Basica";
+			formacion = "FP Basica";
 			break;
 
 		case GM:
