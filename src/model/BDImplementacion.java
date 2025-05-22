@@ -103,7 +103,7 @@ public class BDImplementacion implements ApnabiDAO {
 	final String SQLANALISISPERSONAS = "SELECT * FROM ANALISISPUESTO";
 	final String SQLAP_EMPRESA = "SELECT EMPRESA FROM ANALISISPUESTO";
 	final String SQLSELECTANALISISPUESTO = "SELECT * FROM ANALISISPUESTO WHERE EMPRESA=?";
-	final String SQLINSERTANALISISPUESTO = "INSERT INTO ANALISISPUESTO VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	final String SQLINSERTANALISISPUESTO = "INSERT INTO ANALISISPUESTO VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	final String SQLUPDATEPUESTO = "UPDATE ANALISISPUESTO SET PUESTO=? WHERE EMPRESA=?";
 	final String SQLUPDATEHORARIO = "UPDATE ANALISISPUESTO SET HORARIO=? WHERE EMPRESA=?";
 	final String SQLUPDATEMINFORMACION = "UPDATE ANALISISPUESTO SET MIN_FORMACION=? WHERE EMPRESA=?";
@@ -5196,6 +5196,7 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLSELECTANALISISPUESTO);
+			stmt.setString(1, nom);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				aP.setEmpresa(rs.getString("EMPRESA"));
@@ -5424,22 +5425,21 @@ public class BDImplementacion implements ApnabiDAO {
 			stmt.setString(14, aP.getResponsableApnabi());
 			stmt.setBoolean(15, aP.isEsfuerzoFisico());
 			stmt.setBoolean(16, aP.isResistencia());
-			stmt.setString(17, aP.getResponsableApnabi());
 			switch (aP.getComunicacion()) {
 			case COMUNICACIONCONPERSONALEMPESA:
-				stmt.setString(18, "ComunicacionConPersonalEmpesa");
+				stmt.setString(17, "ComunicacionConPersonalEmpesa");
 				break;
 
 			case COMUNICACIONCONPERSONALEMPRESA_FUERAEMPRESA:
-				stmt.setString(18, "ComunicacionConPersonalEmpresa_FueraEmpresa");
+				stmt.setString(17, "ComunicacionConPersonalEmpresa_FueraEmpresa");
 				break;
 
 			case COMUNICACIONCONPERSONASEXTERNASEMPRESA:
-				stmt.setString(18, "ComunicacionConPersonasExternasEmpresa");
+				stmt.setString(17, "ComunicacionConPersonasExternasEmpresa");
 				break;
 
 			case SIN_NECESIDADCOMUNICACION:
-				stmt.setString(18, "SinNecesidadComunicacion");
+				stmt.setString(17, "Sin_NecesidadComunicacion");
 				break;
 
 			default:
@@ -5448,19 +5448,19 @@ public class BDImplementacion implements ApnabiDAO {
 
 			switch (aP.getCaractersiticasSensoriales()) {
 			case LIMPIEZA:
-				stmt.setString(19, "Limpieza");
+				stmt.setString(18, "Limpieza");
 				break;
 
 			case LUZ:
-				stmt.setString(19, "Luz");
+				stmt.setString(18, "Luz");
 				break;
 
 			case ORDEN:
-				stmt.setString(19, "Orden");
+				stmt.setString(18, "Orden");
 				break;
 
 			case RUIDO:
-				stmt.setString(19, "Ruido");
+				stmt.setString(18, "Ruido");
 				break;
 
 			default:

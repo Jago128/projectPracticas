@@ -103,10 +103,6 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		textAreaEspecialidad.setBounds(25, 455, 416, 105);
 		getContentPane().add(textAreaEspecialidad);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(273, 502, 2, 2);
-		getContentPane().add(scrollPane_1);
-
 		JLabel lblSectorInteres = new JLabel("Sector interes:");
 		lblSectorInteres.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSectorInteres.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -272,10 +268,10 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		textAreaObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textAreaObservaciones.setBounds(451, 455, 433, 105);
 		getContentPane().add(textAreaObservaciones);
-
-		JScrollPane scrollPane = new JScrollPane(textAreaPersona);
-		scrollPane.setBounds(388, 43, 496, 330);
-		getContentPane().add(scrollPane);
+		
+		JScrollPane scrollPane_1 = new JScrollPane(textAreaEspecialidad);
+		scrollPane_1.setBounds(25, 455, 416, 105);
+		getContentPane().add(scrollPane_1);
 
 		JScrollPane scrollPane_2 = new JScrollPane(textAreaInteresesPersonales);
 		scrollPane_2.setBounds(25, 602, 416, 110);

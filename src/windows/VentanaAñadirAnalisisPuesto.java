@@ -100,7 +100,7 @@ public class VentanaAñadirAnalisisPuesto extends JDialog implements ActionListe
 
 		comboBoxFormacionMinima = new JComboBox<String>();
 		comboBoxFormacionMinima.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO",
-				"EPA", "FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
+				"EPA", "FP Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacionMinima.setSelectedIndex(0);
 		comboBoxFormacionMinima.setBounds(160, 93, 201, 21);
 		getContentPane().add(comboBoxFormacionMinima);

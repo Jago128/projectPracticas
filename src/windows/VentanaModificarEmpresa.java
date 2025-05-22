@@ -567,7 +567,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 	}
 
 	public boolean addError() { // ErrorID: 1
-		boolean check = false;
+		boolean check = true;
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 		try {
 			if (!textFieldDatosContacto.getText().isBlank()) {

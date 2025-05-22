@@ -239,10 +239,6 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 		comboBoxPersonaFacilitadora.setBounds(409, 375, 179, 21);
 		getContentPane().add(comboBoxPersonaFacilitadora);
 
-		JScrollPane scrollPane = new JScrollPane(textAreaPersona);
-		scrollPane.setBounds(390, 37, 506, 293);
-		getContentPane().add(scrollPane);
-
 		JScrollPane scrollPane_1 = new JScrollPane(textAreaEspecialidad);
 		scrollPane_1.setBounds(10, 567, 424, 107);
 		getContentPane().add(scrollPane_1);
@@ -939,7 +935,7 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 	}
 
 	public boolean addError() { // ErrorID: 1
-		boolean check = false;
+		boolean check = true;
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 
 		if ((Integer) spinnerEdad.getValue() != 0) {

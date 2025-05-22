@@ -104,7 +104,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 
 		comboBoxFormacion = new JComboBox<>();
 		comboBoxFormacion.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO", "EPA",
-				"FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
+				"FP Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacion.setSelectedIndex(0);
 		comboBoxFormacion.setBounds(418, 79, 163, 21);
 		getContentPane().add(comboBoxFormacion);
@@ -162,7 +162,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 
 		comboBoxApoyo = new JComboBox<String>();
 		comboBoxApoyo.setEditable(true);
-		comboBoxApoyo.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
+		comboBoxApoyo.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Alba", "Ellen", "Selene", "Piti", "María", "Gorka", "Rocío" }));
 		comboBoxApoyo.setSelectedIndex(0);
 		comboBoxApoyo.setBounds(127, 82, 163, 21);
 		getContentPane().add(comboBoxApoyo);

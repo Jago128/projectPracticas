@@ -86,7 +86,7 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 
 		comboBoxFormacionMinima = new JComboBox<String>();
 		comboBoxFormacionMinima.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO",
-				"EPA", "FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
+				"EPA", "FP Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacionMinima.setSelectedIndex(0);
 		comboBoxFormacionMinima.setBounds(160, 200, 224, 21);
 		getContentPane().add(comboBoxFormacionMinima);
@@ -170,6 +170,9 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 
 		comboBoxComunicacion = new JComboBox<String>();
 		comboBoxComunicacion.setSelectedIndex(0);
+		comboBoxComunicacion.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Sin necesidad de comunicacion",
+				"Comunicación con personal de la empesa", "Comunicación con personas externas a la empresa",
+				"Comunicacion con personal de la empresa  y fuera de la empresa" }));
 		comboBoxComunicacion.setBounds(119, 453, 557, 28);
 		getContentPane().add(comboBoxComunicacion);
 
@@ -436,12 +439,14 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 	}
 
 	public boolean addError() { // ErrorID: 1
-		boolean check = false;
+		boolean check = true;
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 
-		check = cont.modificarPuesto(textFieldPuesto.getText(), aP.getEmpresa());
-		if (!check) {
-			infoError.append("Puesto");
+		if (!textFieldPuesto.getText().isBlank()) {
+			check = cont.modificarPuesto(textFieldPuesto.getText(), aP.getEmpresa());
+			if (!check) {
+				infoError.append("Puesto");
+			}
 		}
 
 		if (textAreaHorario.getText().isBlank() && check) {

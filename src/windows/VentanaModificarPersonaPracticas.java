@@ -62,7 +62,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 
 		comboBoxApoyo = new JComboBox<String>();
 		comboBoxApoyo.setEditable(true);
-		comboBoxApoyo.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
+		comboBoxApoyo.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Alba", "Ellen", "Selene", "Piti", "María", "Gorka", "Rocío" }));
 		comboBoxApoyo.setSelectedIndex(0);
 		comboBoxApoyo.setBounds(129, 112, 163, 21);
 		getContentPane().add(comboBoxApoyo);
@@ -118,7 +118,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 
 		comboBoxFormacion = new JComboBox<>();
 		comboBoxFormacion.setModel(new DefaultComboBoxModel<>(new String[] { "---", "AT", "Primaria", "ESO", "EPA",
-				"FP_Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
+				"FP Basica", "GM", "Bachillerato", "GS", "Universidad", "Master", "Doctorado" }));
 		comboBoxFormacion.setSelectedIndex(0);
 		comboBoxFormacion.setBounds(129, 148, 163, 21);
 		getContentPane().add(comboBoxFormacion);
@@ -179,10 +179,6 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		chckbxEmpresaApnabi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chckbxEmpresaApnabi.setBounds(73, 383, 163, 33);
 		getContentPane().add(chckbxEmpresaApnabi);
-
-		JScrollPane scrollPane = new JScrollPane(textAreaPersona);
-		scrollPane.setBounds(337, 49, 495, 324);
-		getContentPane().add(scrollPane);
 
 		btnModificar = new JButton("Modificar");
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -647,7 +643,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 	}
 
 	public boolean addError() {
-		boolean check = false;
+		boolean check = true;
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 
 		if (!comboBoxApoyo.getSelectedItem().equals("---")) {
