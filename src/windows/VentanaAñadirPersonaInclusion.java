@@ -317,7 +317,9 @@ public class VentanaAñadirPersonaInclusion extends JDialog implements ActionLis
 
 	public boolean yearFormatErrorCheck() { // ErrorID: 3
 		try {
-			Year.parse(textFieldUltimoAñoTrabajado.getText());
+			if (!textFieldUltimoAñoTrabajado.getText().isBlank()) {
+				Year.parse(textFieldUltimoAñoTrabajado.getText());
+			}
 		} catch (DateTimeParseException e) {
 			return true;
 		}
