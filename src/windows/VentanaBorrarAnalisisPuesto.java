@@ -46,7 +46,9 @@ public class VentanaBorrarAnalisisPuesto extends JDialog implements ActionListen
 		listAnalisisPuestos.setBounds(92, 119, 255, 163);
 		listAnalisisPuestos.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		getContentPane().add(listAnalisisPuestos);
-
+		
+		loadNomEmpresas();
+		
 		JScrollPane scrollPane = new JScrollPane(listAnalisisPuestos);
 		scrollPane.setBounds(92, 119, 255, 163);
 		getContentPane().add(scrollPane);

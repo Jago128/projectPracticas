@@ -723,7 +723,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 				loadPersona();
 			} else {
 				JOptionPane.showMessageDialog(null, "La persona en practicas ha sido modificada correctamente."
-						+ "\nLa informacion en el recuadro de infomacion de la persona en practicas se acualizara para reflejar los cambios.");
+						+ "\nLa informacion en el recuadro de infomacion de la persona en practicas se actualizara para reflejar los cambios.");
 				persona = cont.getPersonaPracticas(persona.getNombre());
 				loadPersona();
 			}

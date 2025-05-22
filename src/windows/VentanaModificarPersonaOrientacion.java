@@ -1272,7 +1272,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 					loadPersona();
 				} else {
 					JOptionPane.showMessageDialog(null, "La persona en orientacion ha sido modificada correctamente."
-							+ "\nLa informacion en el recuadro de infomacion de la persona en orientacion se acualizara para reflejar los cambios.");
+							+ "\nLa informacion en el recuadro de infomacion de la persona en orientacion se actualizara para reflejar los cambios.");
 					pO = cont.getPersona(pO.getNombre());
 					loadPersona();
 				}

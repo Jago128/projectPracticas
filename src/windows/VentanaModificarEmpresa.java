@@ -819,7 +819,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 						loadEmpresa();
 					} else {
 						JOptionPane.showMessageDialog(null, "La empresa ha sido modificada correctamente."
-								+ "\nLa informacion en el recuadro de infomacion de empresa se acualizara para reflejar los cambios.");
+								+ "\nLa informacion en el recuadro de infomacion de empresa se actualizara para reflejar los cambios.");
 						emp = cont.getEmpresa(emp.getNom_empresa());
 						loadEmpresa();
 					}

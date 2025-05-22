@@ -169,10 +169,10 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 		getContentPane().add(lblComunicacion);
 
 		comboBoxComunicacion = new JComboBox<String>();
-		comboBoxComunicacion.setSelectedIndex(0);
 		comboBoxComunicacion.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Sin necesidad de comunicacion",
 				"Comunicación con personal de la empesa", "Comunicación con personas externas a la empresa",
 				"Comunicacion con personal de la empresa  y fuera de la empresa" }));
+		comboBoxComunicacion.setSelectedIndex(0);
 		comboBoxComunicacion.setBounds(119, 453, 557, 28);
 		getContentPane().add(comboBoxComunicacion);
 
@@ -449,14 +449,14 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 			}
 		}
 
-		if (textAreaHorario.getText().isBlank() && check) {
+		if (!textAreaHorario.getText().isBlank() && check) {
 			check = cont.modificarHorario(textAreaHorario.getText(), aP.getEmpresa());
 			if (!check) {
 				infoError.append("Horario");
 			}
 		}
 
-		if (comboBoxFormacionMinima.getSelectedItem().equals("---") && check) {
+		if (!comboBoxFormacionMinima.getSelectedItem().equals("---") && check) {
 			check = cont.modificarFormacionMinima(
 					comboBoxFormacionMinima.getItemAt(comboBoxFormacionMinima.getSelectedIndex()), aP.getEmpresa());
 			if (!check) {
@@ -464,42 +464,42 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 			}
 		}
 
-		if (textFieldUbicacion.getText().isBlank() && check) {
+		if (!textFieldUbicacion.getText().isBlank() && check) {
 			check = cont.modificarUbicacion(textFieldUbicacion.getText(), aP.getEmpresa());
 			if (!check) {
 				infoError.append("Ubicacion");
 			}
 		}
 
-		if (comboBoxIdiomasReq.getSelectedItem().equals("---") && check) {
+		if (!comboBoxIdiomasReq.getSelectedItem().equals("---") && check) {
 			check = cont.modificarIdiomaReq((String) comboBoxIdiomasReq.getEditor().getItem(), aP.getEmpresa());
 			if (!check) {
 				infoError.append("Idiomas requeridos");
 			}
 		}
 
-		if (textFieldContactoEmpresa.getText().isBlank() && check) {
+		if (!textFieldContactoEmpresa.getText().isBlank() && check) {
 			check = cont.modificarAPContactoEmpresa(textFieldContactoEmpresa.getText(), aP.getEmpresa());
 			if (!check) {
 				infoError.append("Contacto con la empresa");
 			}
 		}
 
-		if (textFieldTelefono.getText().isBlank() && check) {
+		if (!textFieldTelefono.getText().isBlank() && check) {
 			check = cont.modificarNumTelefono(textFieldTelefono.getText(), aP.getEmpresa());
 			if (!check) {
 				infoError.append("Numero de telefono");
 			}
 		}
 
-		if (textFieldEmail.getText().isBlank() && check) {
+		if (!textFieldEmail.getText().isBlank() && check) {
 			check = cont.modificarEmail(textFieldEmail.getText(), aP.getEmpresa());
 			if (!check) {
 				infoError.append("Email");
 			}
 		}
 
-		if (comboBoxResponsableApnabi.getEditor().getItem().equals("---") && check) {
+		if (!comboBoxResponsableApnabi.getEditor().getItem().equals("---") && check) {
 			check = cont.modificarResponsableApnabi((String) comboBoxResponsableApnabi.getEditor().getItem(),
 					aP.getEmpresa());
 			if (!check) {
@@ -507,7 +507,7 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 			}
 		}
 
-		if (comboBoxComunicacion.getSelectedItem().equals("---") && check) {
+		if (!comboBoxComunicacion.getSelectedItem().equals("---") && check) {
 			check = cont.modificarComunicacion(comboBoxComunicacion.getItemAt(comboBoxComunicacion.getSelectedIndex()),
 					aP.getEmpresa());
 			if (!check) {
@@ -544,7 +544,7 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 					loadAPs();
 				} else {
 					JOptionPane.showMessageDialog(null, "El analisis de puesto ha sido modificado correctamente."
-							+ "\nLa informacion en el recuadro de infomacion deñ analisis de puesto se acualizara para reflejar los cambios.");
+							+ "\nLa informacion en el recuadro de infomacion del analisis de puesto se actualizara para reflejar los cambios.");
 					aP = cont.getAnalisisPuesto(aP.getEmpresa());
 					loadAPs();
 				}
