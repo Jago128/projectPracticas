@@ -2689,7 +2689,7 @@ public class BDImplementacion implements ApnabiDAO {
 				pI.setIdioma(rs.getString("IDIOMA"));
 				pI.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
 				pI.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
-				pI.setInteresesPersonales(rs.getString("INTERESPERSONALES"));
+				pI.setInteresesPersonales(rs.getString("INTERESESPERSONALES"));
 				pI.setSituacionActual(rs.getString("SITUACIONACTUAL"));
 				pI.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
 				pI.setCv(rs.getString("CV"));
@@ -2737,11 +2737,11 @@ public class BDImplementacion implements ApnabiDAO {
 	@Override
 	public PersonaInclusion getPersonaInclusion(String nom) {
 		PersonaInclusion pI = new PersonaInclusion();
-		;
 
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLSELECTPERSONAINCLUSION);
+			stmt.setString(1, nom);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				pI.setNombre(rs.getString("NOMBRE"));
@@ -2754,7 +2754,7 @@ public class BDImplementacion implements ApnabiDAO {
 				pI.setIdioma(rs.getString("IDIOMA"));
 				pI.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
 				pI.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
-				pI.setInteresesPersonales(rs.getString("INTERESPERSONALES"));
+				pI.setInteresesPersonales(rs.getString("INTERESESPERSONALES"));
 				pI.setSituacionActual(rs.getString("SITUACIONACTUAL"));
 				pI.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
 				pI.setCv(rs.getString("CV"));
@@ -4129,7 +4129,7 @@ public class BDImplementacion implements ApnabiDAO {
 			stmt.setInt(4, p.getCurso());
 			switch (p.getCentro()) {
 			case ADSIS_BILBAO_OLHIP:
-				stmt.setString(5, "ADSIS BILBAO OLHIP");
+				stmt.setString(5, "ADSIS_BILBAO_OLHIP");
 				break;
 
 			case CEINMARK:
@@ -4137,55 +4137,55 @@ public class BDImplementacion implements ApnabiDAO {
 				break;
 
 			case CENTROMIKELDI:
-				stmt.setString(5, "Centro Mikeldi");
+				stmt.setString(5, "CentroMikeldi");
 				break;
 
 			case CENTROSANLUIS:
-				stmt.setString(5, "Centro San Luis");
+				stmt.setString(5, "CentroSanLuis");
 				break;
 
 			case CIFP_AGRARIODERIO_DERIONEKAZARITZA_LHII:
-				stmt.setString(5, "CIFP AGRARIO DERIO/DERIO NEKAZARITZA LHII");
+				stmt.setString(5, "CIFP_AGRARIODERIO_DERIONEKAZARITZA_LHII");
 				break;
 
 			case CIFP_ANDRA_MARI_BHI:
-				stmt.setString(5, "CIFP Andra Mari BHI");
+				stmt.setString(5, "CIFP_Andra_Mari_BHI");
 				break;
 
 			case CIFP_ARRATIAKOZULAIBAR_LANBIDEIKASTEGIA:
-				stmt.setString(5, "CIFP Arratiako Zulaibar Lanbide Ikastegia");
+				stmt.setString(5, "CIFP_ArratiakoZulaibar_LanbideIkastegia");
 				break;
 
 			case CIFP_BIDEBIETA:
-				stmt.setString(5, "CIFP Bidebieta");
+				stmt.setString(5, "CIFP_Bidebieta");
 				break;
 
 			case CIFP_CALASANZ_LANBIDEIKASTEGIA:
-				stmt.setString(5, "CIFP Calasanz Lanbide Ikastegia");
+				stmt.setString(5, "CIFP_Calasanz_LanbideIkastegia");
 				break;
 
 			case CIFP_CONSTRUCCIONBIZKAIA_LHII:
-				stmt.setString(5, "CIFP CONSTRUCCIÓN BIZKAIA LHII");
+				stmt.setString(5, "CIFP_ConstruccionBizkaia_LHII");
 				break;
 
 			case CIFP_ELORRIETAERREKA_MARI_GBLHI:
-				stmt.setString(5, "CIFP Elorrieta Erreka Mari GBLHI");
+				stmt.setString(5, "CIFP_ElorrietaErreka_Mari_GBLHI");
 				break;
 
 			case CIFP_EMILIOCAMPUZANO:
-				stmt.setString(5, "CIFP Emilio Campuzano");
+				stmt.setString(5, "CIFP_EmilioCampuzano");
 				break;
 
 			case CIFP_ESCUELAHOSTELERIA_LHII:
-				stmt.setString(5, "CIFP Escuela de Hostelería LHII");
+				stmt.setString(5, "CIFP_EscuelaHosteleria_LHII");
 				break;
 
 			case CIFP_FADURA_GBLHI:
-				stmt.setString(5, "CIFP Fadura GBLHI");
+				stmt.setString(5, "CIFP_Fadura_GBLHI");
 				break;
 
 			case CIFP_HOSTELERIA_OSTALARITZA_LHII:
-				stmt.setString(5, "CIFP HOSTELERÍA/OSTALARITZA LHII");
+				stmt.setString(5, "CIFP_HOSTELERIA_OSTALARITZA_LHII");
 				break;
 
 			case CIFP_HOSTELERIA_HOSTALARITZA_LHII:
@@ -4193,319 +4193,319 @@ public class BDImplementacion implements ApnabiDAO {
 				break;
 
 			case CIFP_IBAIONDO:
-				stmt.setString(5, "CIFP Ibaiondo");
+				stmt.setString(5, "CIFP_Ibaiondo");
 				break;
 
 			case CIFP_IURRETA_GBLHI:
-				stmt.setString(5, "CIFP Iurreta GBLHI");
+				stmt.setString(5, "CIFP_Iurreta_GBLHI");
 				break;
 
 			case CIFP_LEA_ARTIBAI:
-				stmt.setString(5, "CIFP Lea-Artibai");
+				stmt.setString(5, "CIFP_Lea_Artibai");
 				break;
 
 			case CIFP_NAUTICOBERMEO_BERMEOKONAUTIKA_LHII:
-				stmt.setString(5, "CIFP NÁUTICO BERMEO/BERMEOKO NAUTIKA LHII");
+				stmt.setString(5, "CIFP_NAUTICOBERMEO_BERMEOKONAUTIKA_LHII");
 				break;
 
 			case CIFP_REPELEGA_GBLHI:
-				stmt.setString(5, "CIFP Repelega GBLHI");
+				stmt.setString(5, "CIFP_Repelega_GBLHI");
 				break;
 
 			case CIFP_SANJORGE_GBLHI:
-				stmt.setString(5, "CIFP San Jorge GBLHI");
+				stmt.setString(5, "CIFP_SanJorge_GBLHI");
 				break;
 
 			case CIFP_TARTANGA_GBLHI:
-				stmt.setString(5, "CIFP Tartanga GBLHI");
+				stmt.setString(5, "CIFP_Tartanga_GBLHI");
 				break;
 
 			case CIFP_TXURDINAGA_LHII:
-				stmt.setString(5, "CIFP TXURDINAGA LHII");
+				stmt.setString(5, "CIFP_TXURDINAGA_LHII");
 				break;
 
 			case CIFP_UNI_EIBARERMUA:
-				stmt.setString(5, "CIFP Uni Eibar Ermua");
+				stmt.setString(5, "CIFP_Uni_EibarErmua");
 				break;
 
 			case CIFP_ZORNOTZA_LHII:
-				stmt.setString(5, "CIFP ZORNOTZA LHII");
+				stmt.setString(5, "CIFP_ZORNOTZA_LHII");
 				break;
 
 			case CPEIPS_ANGELESCUSTODIOS_HLBHIP:
-				stmt.setString(5, "CPEIPS ANGELES CUSTODIOS HLBHIP");
+				stmt.setString(5, "CPEIPS_ANGELESCUSTODIOS_HLBHIP");
 				break;
 
 			case CPEIPS_MARISTAS_SANMIGUEL_HLBHIP:
-				stmt.setString(5, "CPEIPS MARISTAS-SAN MIGUEL HLBHIP");
+				stmt.setString(5, "CPEIPS_MARISTAS_SANMIGUEL_HLBHIP");
 				break;
 
 			case CPEIPS_NTRA_SRA_DE_LA_ANTIGUA_HLBHIP:
-				stmt.setString(5, "CPEIPS NTRA. SRA. DE LA ANTIGUA HLBHIP");
+				stmt.setString(5, "CPEIPS_NTRA_SRA_DE_LA_ANTIGUA_HLBHIP");
 				break;
 
 			case CPES_ALMI_BHIP:
-				stmt.setString(5, "CPES ALMI BHIP");
+				stmt.setString(5, "CPES_ALMI_BHIP");
 				break;
 
 			case CPES_ARANGOYA_BHIP:
-				stmt.setString(5, "CPES ARANGOYA BHIP");
+				stmt.setString(5, "CPES_ARANGOYA_BHIP");
 				break;
 
 			case CPES_ARCE_BHIP:
-				stmt.setString(5, "CPES ARCE BHIP");
+				stmt.setString(5, "CPES_ARCE_BHIP");
 				break;
 
 			case CPES_ARMENGOL_BHIP:
-				stmt.setString(5, "CPES ARMENGOL BHIP");
+				stmt.setString(5, "CPES_ARMENGOL_BHIP");
 				break;
 
 			case CPES_BAGABILTZA_BHIP:
-				stmt.setString(5, "CPES BAGABILTZA BHIP");
+				stmt.setString(5, "CPES_BAGABILTZA_BHIP");
 				break;
 
 			case CPES_EIDE_BHIP:
-				stmt.setString(5, "CPES EIDE BHIP");
+				stmt.setString(5, "CPES_EIDE_BHIP");
 				break;
 
 			case CPES_ESPERANZA_ALHAMA_BHIP:
-				stmt.setString(5, "CPES ESPERANZA ALHAMA BHIP");
+				stmt.setString(5, "CPES_ESPERANZA_ALHAMA_BHIP");
 				break;
 
 			case CPES_IBAIZABAL_IKASTOLA_BHIP:
-				stmt.setString(5, "CPES IBAIZABAL IKASTOLA BHIP");
+				stmt.setString(5, "CPES_IBAIZABAL_IKASTOLA_BHIP");
 				break;
 
 			case CPES_IKASAUTO_BHIP:
-				stmt.setString(5, "CPES IKASAUTO BHIP");
+				stmt.setString(5, "CPES_IKASAUTO_BHIP");
 				break;
 
 			case CPES_NTRA_SRA_DE_LA_ANTIGUA_BHIP:
-				stmt.setString(5, "CPES NTRA. SRA. DE LA ANTIGUA BHIP");
+				stmt.setString(5, "CPES_NTRA_SRA_DE_LA_ANTIGUA_BHIP");
 				break;
 
 			case CPES_ORUE_ESKOLA_BHIP:
-				stmt.setString(5, "CPES ORUE ESKOLA BHIP");
+				stmt.setString(5, "CPES_ORUE_ESKOLA_BHIP");
 				break;
 
 			case CPES_XABIER_BHIP:
-				stmt.setString(5, "CPES XABIER BHIP");
+				stmt.setString(5, "CPES_XABIER_BHIP");
 				break;
 
 			case CPFPB_ADSISLEIOA_OLHIP:
-				stmt.setString(5, "CPFPB ADSIS LEIOA OLHIP");
+				stmt.setString(5, "CPFPB_ADSISLEIOA_OLHIP");
 				break;
 
 			case CPFPB_ADSIS_GETXO_OLHIP:
-				stmt.setString(5, "CPFPB ADSIS GETXO OLHIP");
+				stmt.setString(5, "CPFPB_ADSIS_GETXO_OLHIP");
 				break;
 
 			case CPFPB_MEATZALDEA_OLHIP:
-				stmt.setString(5, "CPFPB MEATZALDEA OLHIP");
+				stmt.setString(5, "CPFPB_MEATZALDEA_OLHIP");
 				break;
 
 			case CPFPB_PEÑASCALMARKINA_OLHIP:
-				stmt.setString(5, "CPFPB PEÑASCAL MARKINA OLHIP");
+				stmt.setString(5, "CPFPB_PEÑASCALMARKINA_OLHIP");
 				break;
 
 			case CPIFP_BARAKALDO:
-				stmt.setString(5, "CPIFP Barakaldo");
+				stmt.setString(5, "CPIFP_Barakaldo");
 				break;
 
 			case CPIFP_HARROBIA:
-				stmt.setString(5, "CPIFP Harrobia");
+				stmt.setString(5, "CPIFP_Harrobia");
 				break;
 
 			case CPIFP_HARROBIA_LHIPI:
-				stmt.setString(5, "CPIFP HARROBIA LHIPI");
+				stmt.setString(5, "CPIFP_HARROBIA_LHIPI");
 				break;
 
 			case CPIFP_INNOVACIONSOCIALDIEGO_BERGUICES_OTXARKOAGA:
-				stmt.setString(5, "CPIFP Innovación Social Diego Berguices-Otxarkoaga");
+				stmt.setString(5, "CPIFP_InnovacionSocialDiego_Berguices_Otxarkoaga");
 				break;
 
 			case CPIFP_JESUITAKPOLITEKNIKOA:
-				stmt.setString(5, "CPIFP Jesuitak Politeknikoa");
+				stmt.setString(5, "CPIFP_JesuitakPoliteknikoa");
 				break;
 
 			case CPIFP_MARISTAKDURANGO:
-				stmt.setString(5, "CPIFP Maristak Durango");
+				stmt.setString(5, "CPIFP_MaristakDurango");
 				break;
 
 			case CPIFP_PEÑASCAL:
-				stmt.setString(5, "CPIFP Peñascal");
+				stmt.setString(5, "CPIFP_Peñascal");
 				break;
 
 			case CPIFP_SALESIANOSDEUSTO:
-				stmt.setString(5, "CPIFP Salesianos Deusto");
+				stmt.setString(5, "CPIFP_SalesianosDeusto");
 				break;
 
 			case CPIFP_SANVIATOR:
-				stmt.setString(5, "CPIFP San Viator");
+				stmt.setString(5, "CPIFP_SanViator");
 				break;
 
 			case CPIFP_SOMORROSTRO_LHIPI:
-				stmt.setString(5, "CPIFP SOMORROSTRO LHIPI");
+				stmt.setString(5, "CPIFP_SOMORROSTRO_LHIPI");
 				break;
 
 			case CRUZROJA:
-				stmt.setString(5, "CRUZ ROJA");
+				stmt.setString(5, "CRUZROJA");
 				break;
 
 			case ESCUELASUPERIORHOSTELERIABILBAO:
-				stmt.setString(5, "ESCUELA SUPERIOR DE HOSTELERÍA BILBAO");
+				stmt.setString(5, "ESCUELASUPERIORDEHOSTELERIABILBAO");
 				break;
 
 			case ESCUELAUNIVERSITARIAMAGISTERIO_BAM_BEGOÑAKO_ANDRA_MARI:
-				stmt.setString(5, "Escuela Universitaria de Magisterio BAM – Begoñako Andra Mari");
+				stmt.setString(5, "EscuelaUniversitariaMagisterio_BAM_Begoñako_Andra_Mari");
 				break;
 
 			case FERNANDO_BHIP:
-				stmt.setString(5, "FERNANDO BHIP");
+				stmt.setString(5, "FERNANDO_BHIP");
 				break;
 
 			case HERMANOSLARRINAGA_SL_BHIP:
-				stmt.setString(5, "HERMANOS LARRINAGA S.L. BHIP");
+				stmt.setString(5, "HERMANOSLARRINAGA_SL_BHIP");
 				break;
 
 			case IES_BALMASEDA_BHI:
-				stmt.setString(5, "IES BALMASEDA BHI");
+				stmt.setString(5, "IES_BALMASEDA_BHI");
 				break;
 
 			case IES_BARRUTIALDE_BHI:
-				stmt.setString(5, "IES BARRUTIALDE BHI");
+				stmt.setString(5, "IES_BARRUTIALDE_BHI");
 				break;
 
 			case IES_DOLORESIBARRURI_BHI:
-				stmt.setString(5, "IES DOLORES IBARRURI BHI");
+				stmt.setString(5, "IES_DOLORESIBARRURI_BHI");
 				break;
 
 			case IES_ESKURTZE_BHI:
-				stmt.setString(5, "IES ESKURTZE BHI");
+				stmt.setString(5, "IES_ESKURTZE_BHI");
 				break;
 
 			case IES_FRAYJUAN_DE_ZUMARRAGA_DURANGO_BHI:
-				stmt.setString(5, "IES FRAY JUAN DE ZUMARRAGA-DURANGO BHI");
+				stmt.setString(5, "IES_FRAYJUAN_DE_ZUMARRAGA_DURANGO_BHI");
 				break;
 
 			case IES_GERNIKA_BHI:
-				stmt.setString(5, "IES GERNIKA BHI");
+				stmt.setString(5, "IES_GERNIKA_BHI");
 				break;
 
 			case IES_IBARREKOLANDA_BHI:
-				stmt.setString(5, "IES IBARREKOLANDA BHI");
+				stmt.setString(5, "IES_IBARREKOLANDA_BHI");
 				break;
 
 			case IES_JOSEMIGUELBARANDIARAN_BHI:
-				stmt.setString(5, "IES JOSE MIGUEL BARANDIARAN BHI");
+				stmt.setString(5, "IES_JOSEMIGUELBARANDIARAN_BHI");
 				break;
 
 			case IES_JUAN_ANTONIO_ZUNZUNEGUI_BHI:
-				stmt.setString(5, "IES JUAN ANTONIO ZUNZUNEGUI BHI");
+				stmt.setString(5, "IES_JUAN_ANTONIO_ZUNZUNEGUI_BHI");
 				break;
 
 			case IES_LEKEITIO_BHI:
-				stmt.setString(5, "IES LEKEITIO BHI");
+				stmt.setString(5, "IES_LEKEITIO_BHI");
 				break;
 
 			case IES_MARTIN_DE_BERTENDONA_BHI:
-				stmt.setString(5, "IES Martín de Bertendona BHI");
+				stmt.setString(5, "IES_Martin_de_Bertendona_BHI");
 				break;
 
 			case IES_MUNGIA_BHI:
-				stmt.setString(5, "IES MUNGIA BHI");
+				stmt.setString(5, "IES_MUNGIA_BHI");
 				break;
 
 			case IES_ONDARROA_BHI:
-				stmt.setString(5, "IES ONDARROA BHI");
+				stmt.setString(5, "IES_ONDARROA_BHI");
 				break;
 
 			case IES_SATURNINO_DE_LA_PEÑA_BHI:
-				stmt.setString(5, "IES SATURNINO DE LA PEÑA BHI");
+				stmt.setString(5, "IES_SATURNINO_DE_LA_PEÑA_BHI");
 				break;
 
 			case IMFPB_GERNIKA_LUMO_OLHUI:
-				stmt.setString(5, "IMFPB GERNIKA-LUMO OLHUI");
+				stmt.setString(5, "IMFPB_GERNIKA_LUMO_OLHUI");
 				break;
 
 			case IMFPB_BASAURI_OLHUI:
-				stmt.setString(5, "IMFPB BASAURI OLHUI");
+				stmt.setString(5, "IMFPB_BASAURI_OLHUI");
 				break;
 
 			case IMFPB_BERMEO_OLHUI:
-				stmt.setString(5, "IMFPB BERMEO OLHUI");
+				stmt.setString(5, "IMFPB_BERMEO_OLHUI");
 				break;
 
 			case IMFPB_BITURITXA_BARAKALDO_OLHUI:
-				stmt.setString(5, "IMFPB BITURITXA-BARAKALDO OLHUI");
+				stmt.setString(5, "IMFPB_BITURITXA_BARAKALDO_OLHUI");
 				break;
 
 			case IMFPB_DURANGO_OLHUI:
-				stmt.setString(5, "IMFPB DURANGO OLHUI");
+				stmt.setString(5, "IMFPB_DURANGO_OLHUI");
 				break;
 
 			case IMFPB_ERANDIO_OLHUI:
-				stmt.setString(5, "IMFPB ERANDIO OLHUI");
+				stmt.setString(5, "IMFPB_ERANDIO_OLHUI");
 				break;
 
 			case IMFPB_ERMUA_MALLABIA_OLHUI:
-				stmt.setString(5, "IMFPB ERMUA-MALLABIA OLHUI");
+				stmt.setString(5, "IMFPB_ERMUA_MALLABIA_OLHUI");
 				break;
 
 			case IMFPB_MUNGIA_OLHUI:
-				stmt.setString(5, "IMFPB MUNGIA OLHUI");
+				stmt.setString(5, "IMFPB_MUNGIA_OLHUI");
 				break;
 
 			case IMFPB_PORTUGALETE_OLHUI:
-				stmt.setString(5, "IMFPB PORTUGALETE OLHUI");
+				stmt.setString(5, "IMFPB_PORTUGALETE_OLHUI");
 				break;
 
 			case IMFPB_SANTURTZI_OLHUI:
-				stmt.setString(5, "IMFPB SANTURTZI OLHUI");
+				stmt.setString(5, "IMFPB_SANTURTZI_OLHUI");
 				break;
 
 			case IMFPB_SESTAO_OLHUI:
-				stmt.setString(5, "IMFPB SESTAO OLHUI");
+				stmt.setString(5, "IMFPB_SESTAO_OLHUI");
 				break;
 
 			case MARGOTU_OLHIP:
-				stmt.setString(5, "MARGOTU OLHIP");
+				stmt.setString(5, "MARGOTU_OLHIP");
 				break;
 
 			case MARIA_INMACULADA_BHIP:
-				stmt.setString(5, "MARIA INMACULADA BHIP");
+				stmt.setString(5, "MARIA_INMACULADA_BHIP");
 				break;
 
 			case PASTELERIA_COMERCIOBIZKAIA_OLHIP:
-				stmt.setString(5, "PASTELERÍA Y COMERCIO BIZKAIA OLHIP");
+				stmt.setString(5, "PASTELERIA_COMERCIOBIZKAIA_OLHIP");
 				break;
 
 			case SOPEÑABILBAO:
-				stmt.setString(5, "Sopeña Bilbao");
+				stmt.setString(5, "SopeñaBilbao");
 				break;
 
 			case STA_MARIA_DE_ARTAGAN_BHIP:
-				stmt.setString(5, "STA. MARIA DE ARTAGAN BHIP");
+				stmt.setString(5, "STA_MARIA_DE_ARTAGAN_BHIP");
 				break;
 
 			case TXORIERRIPOLITEKNIKOA:
-				stmt.setString(5, "Txorierri Politeknikoa");
+				stmt.setString(5, "TxorierriPoliteknikoa");
 				break;
 
 			case UNED_UNIVERSIDADNACIONALESPAÑOLA_A_DISTANCIA:
-				stmt.setString(5, "UNED (Universidad Nacional Española a Distancia)");
+				stmt.setString(5, "UNED_UniversidadNacionalEspañola_A_Distancia");
 				break;
 
 			case UNIVERSIDAD_DEUSTO:
-				stmt.setString(5, "Universidad de Deusto");
+				stmt.setString(5, "Universidad_Deusto");
 				break;
 
 			case UPV_EHU:
-				stmt.setString(5, "UPV/EHU");
+				stmt.setString(5, "UPV_EHU");
 				break;
 
 			case ZABALBURUIKASTETXEA_S_COOP:
-				stmt.setString(5, "Zabalburu Ikastetxea S. Coop");
+				stmt.setString(5, "ZabalburuIkastetxea_S_Coop");
 				break;
 
 			default:

@@ -640,7 +640,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 
 				if (cont.añadirPersonaPracticas(
 						new PersonaPracticas(textFieldNom.getText(), (String) comboBoxApoyo.getEditor().getItem(),
-								formacion, (Integer) comboBoxCurso.getSelectedItem(), centro, textFieldFecha.getText(),
+								formacion, Integer.parseInt((String)comboBoxCurso.getSelectedItem()), centro, textFieldFecha.getText(),
 								textFieldDuracion.getText(), textFieldPracticas.getText(), empresaApnabi))) {
 					result = JOptionPane.showConfirmDialog(null,
 							"La persona en practicas ha sido añadida correctamente. Quiere añadir mas personas en practicas?",

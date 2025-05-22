@@ -51,6 +51,8 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 		textAreaPersona.setBounds(390, 37, 506, 293);
 		getContentPane().add(textAreaPersona);
 
+		loadPersona();
+		
 		JLabel lblDatosPersona = new JLabel("Informacion de la persona en inclusion seleccionada:");
 		lblDatosPersona.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatosPersona.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -897,21 +899,21 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 		default:
 			System.out.println("Tipo invalido");
 		}
-		infoPersona.append("Nombre:" + pI.getNombre());
-		infoPersona.append("Apellido:" + pI.getApellido());
-		infoPersona.append("Edad:" + pI.getEdad());
-		infoPersona.append("Municipio:" + municipio);
-		infoPersona.append("Formacion:" + formacion);
-		infoPersona.append("Especialidad:" + pI.getEspecialidad());
-		infoPersona.append("Otros titulos, certificados, carnets:" + pI.getOtros());
-		infoPersona.append("Idioma:" + pI.getIdioma());
-		infoPersona.append("Ultimo año trabajando:" + pI.getUltimoAñoTrabajado());
-		infoPersona.append("Sector interes:" + sectorInteres);
-		infoPersona.append("Intereses personales:" + pI.getInteresesPersonales());
-		infoPersona.append("Situacion actual:" + pI.getSituacionActual());
-		infoPersona.append("Accesibilidad:" + accesibilidad);
-		infoPersona.append("CV:" + pI.getCv());
-		infoPersona.append("Persona facilitadora:" + pI.getPersonaFacilitadora());
+		infoPersona.append("Nombre: " + pI.getNombre()).append("\n");
+		infoPersona.append("Apellido: " + pI.getApellido()).append("\n");
+		infoPersona.append("Edad: " + pI.getEdad()).append("\n");
+		infoPersona.append("Municipio: " + municipio).append("\n");
+		infoPersona.append("Formacion: " + formacion).append("\n");
+		infoPersona.append("Especialidad: " + pI.getEspecialidad()).append("\n");
+		infoPersona.append("Otros titulos, certificados, carnets: " + pI.getOtros()).append("\n");
+		infoPersona.append("Idioma: " + pI.getIdioma()).append("\n");
+		infoPersona.append("Ultimo año trabajando: " + pI.getUltimoAñoTrabajado()).append("\n");
+		infoPersona.append("Sector interes: " + sectorInteres).append("\n");
+		infoPersona.append("Intereses personales: " + pI.getInteresesPersonales()).append("\n");
+		infoPersona.append("Situacion actual: " + pI.getSituacionActual()).append("\n");
+		infoPersona.append("Accesibilidad: " + accesibilidad).append("\n");
+		infoPersona.append("CV: " + pI.getCv()).append("\n");
+		infoPersona.append("Persona facilitadora: " + pI.getPersonaFacilitadora());
 		textAreaPersona.setText(infoPersona.toString());
 	}
 

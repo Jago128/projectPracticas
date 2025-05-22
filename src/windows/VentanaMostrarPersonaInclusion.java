@@ -139,7 +139,7 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 		btnModificarPersona.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificarPersona.setBounds(524, 287, 395, 72);
 		getContentPane().add(btnModificarPersona);
-		
+
 		textAreaInfo = new JTextArea();
 		textAreaInfo.setText("Selecciona un nombre, y despues pulsa el boton\npara modificar la persona en inclusion.");
 		textAreaInfo.setLineWrap(true);
@@ -821,12 +821,35 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 				modelApellido.addElement(p.getApellido());
 				modelEdad.addElement("" + p.getEdad());
 				modelEspecialidad.addElement(p.getEspecialidad());
-				modelOtros.addElement(p.getOtros());
+				if (p.getOtros() == null) {
+					modelOtros.addElement("---");
+				} else {
+					modelOtros.addElement(p.getOtros());
+				}
 				modelIdioma.addElement(p.getIdioma());
-				modelUltimoAñoTrabajado.addElement("" + p.getUltimoAñoTrabajado());
-				modelInteresesPersonales.addElement(p.getInteresesPersonales());
-				modelSituacionActual.addElement(p.getSituacionActual());
-				modelCV.addElement(p.getCv());
+				if (p.getUltimoAñoTrabajado() == 0) {
+					modelUltimoAñoTrabajado.addElement("---");
+				} else {
+					modelUltimoAñoTrabajado.addElement("" + p.getUltimoAñoTrabajado());
+				}
+				
+				if (p.getInteresesPersonales() == null) {
+					modelInteresesPersonales.addElement("---");
+				} else {
+					modelInteresesPersonales.addElement(p.getInteresesPersonales());
+				}
+				
+				if (p.getSituacionActual() == null) {
+					modelSituacionActual.addElement("---");
+				} else {
+					modelSituacionActual.addElement(p.getSituacionActual());
+				}
+				
+				if (p.getCv() == null) {
+					modelCV.addElement("---");
+				} else {
+					modelCV.addElement(p.getCv());
+				}
 				modelPersonaFacilitadora.addElement(p.getPersonaFacilitadora());
 			}
 
