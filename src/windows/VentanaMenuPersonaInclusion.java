@@ -22,7 +22,6 @@ public class VentanaMenuPersonaInclusion extends JDialog implements ActionListen
 
 		setResizable(false);
 		setTitle("Personas inclusion");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 230);
 		getContentPane().setLayout(null);
 		setBackground(new Color(38, 201, 236));
@@ -66,15 +65,15 @@ public class VentanaMenuPersonaInclusion extends JDialog implements ActionListen
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAñadir) {
 			VentanaAñadirPersonaInclusion dialog = new VentanaAñadirPersonaInclusion(this, cont);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnBorrar) {
 			VentanaBorrarPersonaInclusion dialog = new VentanaBorrarPersonaInclusion(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnMostrar) {
 			VentanaMostrarPersonaInclusion dialog = new VentanaMostrarPersonaInclusion(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}
 	}

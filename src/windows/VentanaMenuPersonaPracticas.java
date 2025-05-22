@@ -22,7 +22,6 @@ public class VentanaMenuPersonaPracticas extends JDialog implements ActionListen
 
 		setResizable(false);
 		setTitle("Personas orientacion y seguimiento");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 230);
 		getContentPane().setLayout(null);
 		setBackground(new Color(38, 201, 236));
@@ -66,15 +65,15 @@ public class VentanaMenuPersonaPracticas extends JDialog implements ActionListen
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAñadir) {
 			VentanaAñadirPersonaPracticas dialog = new VentanaAñadirPersonaPracticas(this, cont);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnBorrar) {
 			VentanaBorrarPersonaPracticas dialog = new VentanaBorrarPersonaPracticas(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnMostrar) {
 			VentanaMostrarPersonaPracticas dialog = new VentanaMostrarPersonaPracticas(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}
 	}

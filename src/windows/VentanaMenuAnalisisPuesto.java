@@ -22,7 +22,6 @@ public class VentanaMenuAnalisisPuesto extends JDialog implements ActionListener
 
 		setResizable(false);
 		setTitle("Analisis de puestos");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 230);
 		getContentPane().setLayout(null);
 		setBackground(new Color(38, 201, 236));
@@ -66,15 +65,15 @@ public class VentanaMenuAnalisisPuesto extends JDialog implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAñadir) {
 			VentanaAñadirAnalisisPuesto dialog = new VentanaAñadirAnalisisPuesto(this, cont);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnBorrar) {
 			VentanaBorrarAnalisisPuesto dialog = new VentanaBorrarAnalisisPuesto(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnMostrar) {
 			VentanaMostrarAnalisisPuesto dialog = new VentanaMostrarAnalisisPuesto(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}
 	}

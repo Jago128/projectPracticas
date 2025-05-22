@@ -24,7 +24,6 @@ public class VentanaMenuPrincipal extends JFrame implements ActionListener {
 		setTitle("Bienvenido, " + user.getNombre());
 		setBounds(100, 100, 440, 340);
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
 		JLabel logo = new JLabel("");
@@ -74,23 +73,23 @@ public class VentanaMenuPrincipal extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnEmpresa) {
 			VentanaMenuEmpresa dialog = new VentanaMenuEmpresa(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnPersona) {
 			VentanaMenuPersonaOrientacion dialog = new VentanaMenuPersonaOrientacion(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnAnalisisPuesto) {
 			VentanaMenuAnalisisPuesto dialog = new VentanaMenuAnalisisPuesto(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnPersonaInclusion) {
 			VentanaMenuPersonaInclusion dialog = new VentanaMenuPersonaInclusion(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else {
 			VentanaMenuPersonaPracticas dialog = new VentanaMenuPersonaPracticas(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}
 	}

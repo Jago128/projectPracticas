@@ -22,7 +22,6 @@ public class VentanaMenuPersonaOrientacion extends JDialog implements ActionList
 
 		setResizable(false);
 		setTitle("Personas orientacion y seguimiento");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 230);
 		getContentPane().setLayout(null);
 		setBackground(new Color(38, 201, 236));
@@ -66,15 +65,15 @@ public class VentanaMenuPersonaOrientacion extends JDialog implements ActionList
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAñadir) {
 			VentanaAñadirPersonaOrientacion dialog = new VentanaAñadirPersonaOrientacion(this, cont);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnBorrar) {
 			VentanaBorrarPersonaOrientacion dialog = new VentanaBorrarPersonaOrientacion(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} else if (e.getSource() == btnMostrar) {
 			VentanaMostrarPersonaOrientacion dialog = new VentanaMostrarPersonaOrientacion(this, cont, user);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		}
 	}
