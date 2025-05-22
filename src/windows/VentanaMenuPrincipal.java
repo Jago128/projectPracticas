@@ -22,7 +22,7 @@ public class VentanaMenuPrincipal extends JFrame implements ActionListener {
 		this.user = user;
 
 		setTitle("Bienvenido, " + user.getNombre());
-		setBounds(100, 100, 430, 340);
+		setBounds(100, 100, 440, 340);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -45,7 +45,7 @@ public class VentanaMenuPrincipal extends JFrame implements ActionListener {
 
 		btnPersona = new JButton("Personas en Orientacion y seguimiento");
 		btnPersona.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnPersona.setBounds(165, 138, 235, 45);
+		btnPersona.setBounds(165, 138, 251, 45);
 		getContentPane().add(btnPersona);
 
 		btnAnalisisPuesto = new JButton("Analisis de puesto");
@@ -55,12 +55,12 @@ public class VentanaMenuPrincipal extends JFrame implements ActionListener {
 
 		btnPersonaInclusion = new JButton("Personas en inclusion");
 		btnPersonaInclusion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnPersonaInclusion.setBounds(218, 193, 177, 45);
+		btnPersonaInclusion.setBounds(218, 193, 198, 45);
 		getContentPane().add(btnPersonaInclusion);
 
 		btnPersonaPracticas = new JButton("Personas en practicas");
 		btnPersonaPracticas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnPersonaPracticas.setBounds(76, 248, 235, 45);
+		btnPersonaPracticas.setBounds(76, 248, 278, 45);
 		getContentPane().add(btnPersonaPracticas);
 
 		btnEmpresa.addActionListener(this);

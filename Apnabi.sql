@@ -11,7 +11,7 @@ INSERT INTO USUARIO VALUES
 
 CREATE TABLE EMPRESA (
     COD_EMPRESA INT PRIMARY KEY AUTO_INCREMENT,
-    NOM_EMPRESA VARCHAR(100) UNIQUE NOT NULL,
+    NOM_EMPRESA VARCHAR(100) NOT NULL,
     SECTOR ENUM("Agricultura_Ganaderia", "BienesConsumo", "ComercioElectronico", "Comercio_Establecimientos", "Construccion", "Deporte_Ocio",
 	"Energia_MedioAmbiente", "Finanzas_Seguros_BienesInmuebles", "Internet", "Logistica_Transporte", "MediosComunicacion_Marketing",
     "Metalurgia_Electronica", "ProductosQuimicos_MateriasPrimas", "Salud_IndustriaFarmaceutica", "Servicios", "Sociedad", "Tecnologia_Telecomunicaciones",
