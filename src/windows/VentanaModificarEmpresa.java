@@ -367,7 +367,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 			break;
 
 		default:
-			System.out.println("Tipo incorrecto");
+			sector = "---";
 		}
 
 		switch (emp.getEstado()) {
@@ -392,69 +392,61 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 			break;
 
 		default:
-			System.out.println("Tipo invalido.");
+			estado = "---";
 		}
 
-		if (con.getResultadoUltimoContacto() != null) {
-			switch (con.getResultadoUltimoContacto()) {
-			case COMUNICACION_SINRESPUESTA:
-				resultadoUltimoCont = "Comunicacion sin respuesta";
-				break;
+		switch (con.getResultadoUltimoContacto()) {
+		case COMUNICACION_SINRESPUESTA:
+			resultadoUltimoCont = "Comunicacion sin respuesta";
+			break;
 
-			case INICIO_VALORACIONOFERTA:
-				resultadoUltimoCont = "Inicio valoracion oferta";
-				break;
+		case INICIO_VALORACIONOFERTA:
+			resultadoUltimoCont = "Inicio valoracion oferta";
+			break;
 
-			case RESPUESTA_NOCONCLUYENTE:
-				resultadoUltimoCont = "Respuesta no concluyente";
-				break;
+		case RESPUESTA_NOCONCLUYENTE:
+			resultadoUltimoCont = "Respuesta no concluyente";
+			break;
 
-			case RESPUESTA_POSPUESTA:
-				resultadoUltimoCont = "Nos pospone la respuesta";
-				break;
+		case RESPUESTA_POSPUESTA:
+			resultadoUltimoCont = "Nos pospone la respuesta";
+			break;
 
-			case REUNION_PROGRAMADA:
-				resultadoUltimoCont = "Programada reunion";
-				break;
+		case REUNION_PROGRAMADA:
+			resultadoUltimoCont = "Programada reunion";
+			break;
 
-			default:
-				System.out.println("Tipo invalido.");
-			}
+		default:
+			resultadoUltimoCont = "---";
 		}
 
-		if (con.getResultadoFinal() != null) {
-			switch (con.getResultadoFinal()) {
-			case CONVENIO_COLABORACION:
-				resultadoFinal = "Convenio de colaboracion";
-				break;
+		switch (con.getResultadoFinal()) {
+		case CONVENIO_COLABORACION:
+			resultadoFinal = "Convenio de colaboracion";
+			break;
 
-			case MEDIDAS_ALTERNATIVAS:
-				resultadoFinal = "Medidas alternativas";
-				break;
+		case MEDIDAS_ALTERNATIVAS:
+			resultadoFinal = "Medidas alternativas";
+			break;
 
-			case OFERTA_EMPLEO:
-				resultadoFinal = "Oferta de empleo";
-				break;
+		case OFERTA_EMPLEO:
+			resultadoFinal = "Oferta de empleo";
+			break;
 
-			case RELACION_CONCLUIDA:
-				resultadoFinal = "Relacion concluida";
-				break;
+		case RELACION_CONCLUIDA:
+			resultadoFinal = "Relacion concluida";
+			break;
 
-			case RELACION_POSPUESTA:
-				resultadoFinal = "Relacion pospuesta";
-				break;
+		case RELACION_POSPUESTA:
+			resultadoFinal = "Relacion pospuesta";
+			break;
 
-			default:
-				System.out.println("Tipo invalido.");
-			}
+		default:
+			resultadoFinal = "---";
 		}
 
 		infoEmpresa.append("Nombre: " + emp.getNom_empresa()).append("\n");
-		if (emp.getSector() == null) {
-			infoEmpresa.append("Sector: ---").append("\n");
-		} else {
-			infoEmpresa.append("Sector: " + sector).append("\n");
-		}
+		infoEmpresa.append("Sector: " + sector).append("\n");
 
 		if (emp.getPuesto() == null) {
 			infoEmpresa.append("Puesto: ---").append("\n");
@@ -507,30 +499,19 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 			infoEmpresa.append("Observaciones: " + con.getObservaciones()).append("\n");
 		}
 
-		if (con.getResultadoUltimoContacto() == null) {
-			infoEmpresa.append("Resultado ultimo contacto: ---").append("\n");
-		} else {
-			infoEmpresa.append("Resultado ultimo contacto: " + resultadoUltimoCont).append("\n");
-		}
-
+		infoEmpresa.append("Resultado ultimo contacto: " + resultadoUltimoCont).append("\n");
 		if (con.getInfoUltimo() == null) {
 			infoEmpresa.append("Informacion ultimo contacto: ---").append("\n");
 		} else {
 			infoEmpresa.append("Informacion ultimo contacto: " + con.getInfoUltimo()).append("\n");
 		}
 
-		if (con.getResultadoFinal() == null) {
-			infoEmpresa.append("Resultado final prospeccion: ---").append("\n");
-		} else {
-			infoEmpresa.append("Resultado final prospeccion: " + resultadoFinal).append("\n");
-		}
-
+		infoEmpresa.append("Resultado final prospeccion: " + resultadoFinal).append("\n");
 		if (con.getFechaResolucion() == null) {
 			infoEmpresa.append("Fecha resolucion: ---");
 		} else {
 			infoEmpresa.append("Fecha resolucion: " + con.getFechaResolucion());
 		}
-
 		textAreaEmpresa.setText(infoEmpresa.toString());
 	}
 
@@ -663,8 +644,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 
 			if (!comboBoxResultadoFinal.getSelectedItem().equals("---") && check) {
 				check = cont.modificarResultadoFinal(
-						comboBoxResultadoFinal.getItemAt(comboBoxResultadoFinal.getSelectedIndex()),
-						con.getEmp_Nom());
+						comboBoxResultadoFinal.getItemAt(comboBoxResultadoFinal.getSelectedIndex()), con.getEmp_Nom());
 				if (!check) {
 					infoError.append("Resultado final prospeccion");
 				}

@@ -4020,6 +4020,7 @@ public class BDImplementacion implements ApnabiDAO {
 		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQLSELECTPERSONAPRACTICAS);
+			stmt.setString(1, nom);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				p.setNombre(rs.getString("NOM"));

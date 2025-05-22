@@ -128,6 +128,7 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 		modelNom.addElement("Nombres");
 		modelApoyo.addElement("Apoyo");
 		modelFormacion.addElement("Formacion");
+		modelCurso.addElement("Curso");
 		modelCentro.addElement("Centro");
 		modelFechas.addElement("Fechas");
 		modelDuracion.addElement("Duracion");

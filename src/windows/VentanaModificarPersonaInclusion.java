@@ -52,7 +52,7 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 		getContentPane().add(textAreaPersona);
 
 		loadPersona();
-		
+
 		JLabel lblDatosPersona = new JLabel("Informacion de la persona en inclusion seleccionada:");
 		lblDatosPersona.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatosPersona.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -907,12 +907,32 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 		infoPersona.append("Especialidad: " + pI.getEspecialidad()).append("\n");
 		infoPersona.append("Otros titulos, certificados, carnets: " + pI.getOtros()).append("\n");
 		infoPersona.append("Idioma: " + pI.getIdioma()).append("\n");
-		infoPersona.append("Ultimo año trabajando: " + pI.getUltimoAñoTrabajado()).append("\n");
+		if (pI.getUltimoAñoTrabajado() == 0) {
+			infoPersona.append("Ultimo año trabajando: ---").append("\n");
+		} else {
+			infoPersona.append("Ultimo año trabajando: " + pI.getUltimoAñoTrabajado()).append("\n");
+		}
+
 		infoPersona.append("Sector interes: " + sectorInteres).append("\n");
-		infoPersona.append("Intereses personales: " + pI.getInteresesPersonales()).append("\n");
-		infoPersona.append("Situacion actual: " + pI.getSituacionActual()).append("\n");
+		if (pI.getInteresesPersonales() == null) {
+			infoPersona.append("Intereses personales: ---").append("\n");
+		} else {
+			infoPersona.append("Intereses personales: " + pI.getInteresesPersonales()).append("\n");
+		}
+
+		if (pI.getSituacionActual() == null) {
+			infoPersona.append("Situacion actual: ---").append("\n");
+		} else {
+			infoPersona.append("Situacion actual: " + pI.getSituacionActual()).append("\n");
+		}
+
 		infoPersona.append("Accesibilidad: " + accesibilidad).append("\n");
-		infoPersona.append("CV: " + pI.getCv()).append("\n");
+		if (pI.getCv() == null) {
+			infoPersona.append("CV: ---").append("\n");
+		} else {
+			infoPersona.append("CV: " + pI.getCv()).append("\n");
+		}
+
 		infoPersona.append("Persona facilitadora: " + pI.getPersonaFacilitadora());
 		textAreaPersona.setText(infoPersona.toString());
 	}

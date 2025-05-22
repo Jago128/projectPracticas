@@ -454,559 +454,555 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 			System.out.println("Tipo invalido");
 		}
 
-		if (pO.getEuskera() != null) {
-			switch (pO.getEuskera()) {
-			case A1:
-				euskera = "A1";
-				break;
-
-			case A2:
-				euskera = "A2";
-				break;
-
-			case B1:
-				euskera = "B1";
-				break;
-
-			case B2:
-				euskera = "B2";
-				break;
-
-			case C1:
-				euskera = "C1";
-				break;
-
-			case C2:
-				euskera = "C2";
-				break;
-
-			case CONOCIMIENTO_NOACREDITADO:
-				euskera = "Conocimiento, pero sin acreditar";
-				break;
-
-			default:
-				System.out.println("Tipo invalido");
-			}
-
-			if (pO.getIngles() != null) {
-				switch (pO.getIngles()) {
-				case A1:
-					ingles = "A1";
-					break;
-
-				case A2:
-					ingles = "A2";
-					break;
-
-				case B1:
-					ingles = "B1";
-					break;
-
-				case B2:
-					ingles = "B2";
-					break;
-
-				case C1:
-					ingles = "C1";
-					break;
-
-				case C2:
-					ingles = "C2";
-					break;
-
-				case CONOCIMIENTO_NOACREDITADO:
-					ingles = "Conocimiento, pero sin acreditar";
-					break;
-
-				default:
-					System.out.println("Tipo invalido");
-				}
-			}
-
-			switch (pO.getLocalidad()) {
-			case ABADIÑO:
-				localidad = "Abadiño";
-				break;
-
-			case ABANTO_ZIERBENA:
-				localidad = "Abanto-Zierbena";
-				break;
-
-			case AJANGIZ:
-				localidad = "Ajangiz";
-				break;
-
-			case ALONSOTEGI:
-				localidad = "Alonsotegi";
-				break;
-
-			case AMOREBIETA:
-				localidad = "Amorebieta";
-				break;
-
-			case AMOROTO:
-				localidad = "Amoroto";
-				break;
-
-			case AMURRIO:
-				localidad = "Amurrio";
-				break;
-
-			case ARAKALDO:
-				localidad = "Arakaldo";
-				break;
-
-			case ARANTZAZU:
-				localidad = "Arantzazu";
-				break;
-
-			case AREATZA_BILARO:
-				localidad = "Areatza o Bilaro";
-				break;
-
-			case ARRANKUDIAGA:
-				localidad = "Arrankudiaga";
-				break;
-
-			case ARRATZU:
-				localidad = "Arratzu";
-				break;
-
-			case ARRIETA:
-				localidad = "Arrieta";
-				break;
-
-			case ARRIGORRIAGA:
-				localidad = "Arrigorriaga";
-				break;
-
-			case ARTZENTALES:
-				localidad = "Artzentales";
-				break;
-
-			case ARTZINIEGA:
-				localidad = "Artziniega";
-				break;
-
-			case AULESTI:
-				localidad = "Aulesti";
-				break;
-
-			case AXPEATXONDO:
-				localidad = "Axpe Atxondo";
-				break;
-
-			case AYALA_AIARA:
-				localidad = "Ayala/Aiara";
-				break;
-
-			case BAKIO:
-				localidad = "Bakio";
-				break;
-
-			case BALMASEDA:
-				localidad = "Balmaseda";
-				break;
-
-			case BARAKALDO:
-				localidad = "Barakaldo";
-				break;
-
-			case BARRIKA:
-				localidad = "Barrika";
-				break;
-
-			case BASAURI:
-				localidad = "Basauri";
-				break;
-
-			case BEDIA:
-				localidad = "Bedia";
-				break;
-
-			case BERANGO:
-				localidad = "Berango";
-				break;
-
-			case BERMEO:
-				localidad = "Bermeo";
-				break;
-
-			case BERRIATUA:
-				localidad = "Berriatua";
-				break;
-
-			case BERRIZ:
-				localidad = "Berriz";
-				break;
-
-			case BILBAO:
-				localidad = "Bilbao";
-				break;
-
-			case BUSTURIA:
-				localidad = "Busturia";
-				break;
-
-			case CASTROURDIALES:
-				localidad = "Castro Urdiales";
-				break;
-
-			case DERIO:
-				localidad = "Derio";
-				break;
-
-			case DIMA:
-				localidad = "Dima";
-				break;
-
-			case DURANGO:
-				localidad = "Durango";
-				break;
-
-			case EA:
-				localidad = "Ea";
-				break;
-
-			case ELANTXOBE:
-				localidad = "Elantxobe";
-				break;
-
-			case ELORRIO:
-				localidad = "Elorrio";
-				break;
-
-			case ERANDIO:
-				localidad = "Erandio";
-				break;
-
-			case EREÑO:
-				localidad = "Ereño";
-				break;
-
-			case ERMUA:
-				localidad = "Ermua";
-				break;
-
-			case ERRIGOITI:
-				localidad = "Errigoiti";
-				break;
-
-			case ETXEBARRI:
-				localidad = "Etxebarri";
-				break;
-
-			case ETXEBARRIA:
-				localidad = "Etxebarria";
-				break;
-
-			case FORUA:
-				localidad = "Forua";
-				break;
-
-			case FRUIZ:
-				localidad = "Fruiz";
-				break;
-
-			case GALDAKAO:
-				localidad = "Galdakao";
-				break;
-
-			case GALDAMES:
-				localidad = "Galdames";
-				break;
-
-			case GAMIZFIKA:
-				localidad = "Gamiz-Fika";
-				break;
-
-			case GARAI:
-				localidad = "Garai";
-				break;
-
-			case GATIKA:
-				localidad = "Gatika";
-				break;
-
-			case GAUTEGIZ:
-				localidad = "Gautegiz";
-				break;
-
-			case GAZTELUELEXABEITIA_ARTEAGA:
-				localidad = "Gaztelu-Elexabeitia o Arteaga";
-				break;
-
-			case GERNIKALUMO:
-				localidad = "Gernika-Lumo";
-				break;
-
-			case GETXO:
-				localidad = "Getxo";
-				break;
-
-			case GIZABURUAGA:
-				localidad = "Gizaburuaga";
-				break;
-
-			case GORDEXOLA:
-				localidad = "Gordexola";
-				break;
-
-			case GORLIZ:
-				localidad = "Gorliz";
-				break;
-
-			case GUEÑES:
-				localidad = "Gueñes";
-				break;
-
-			case IBARRANGELU:
-				localidad = "Ibarrangelu";
-				break;
-
-			case IGORRE:
-				localidad = "Igorre";
-				break;
-
-			case ISPASTER:
-				localidad = "Ispaster";
-				break;
-
-			case IURRETA:
-				localidad = "Iurreta";
-				break;
-
-			case IZURTZA:
-				localidad = "Izurtza";
-				break;
-
-			case KARRANTZAHARANA:
-				localidad = "Karrantza Harana";
-				break;
-
-			case KORTEZUBI:
-				localidad = "Kortezubi";
-				break;
-
-			case LANESTOSA:
-				localidad = "Lanestosa";
-				break;
-
-			case LARRABETZU:
-				localidad = "Larrabetzu";
-				break;
-
-			case LAUDIO_LLODIO:
-				localidad = "Laudio/Llodio";
-				break;
-
-			case LAUKIZ:
-				localidad = "Laukiz";
-				break;
-
-			case LEIOA:
-				localidad = "Leioa";
-				break;
-
-			case LEKEITIO:
-				localidad = "Lekeitio";
-				break;
-
-			case LEMOA:
-				localidad = "Lemoa";
-				break;
-
-			case LEMOIZ:
-				localidad = "Lemoiz";
-				break;
-
-			case LEZAMA:
-				localidad = "Lezama";
-				break;
-
-			case LOIU:
-				localidad = "Loiu";
-				break;
-
-			case MALLABIA:
-				localidad = "Mallabia";
-				break;
-
-			case MARKINAXEMEIN:
-				localidad = "Markina-Xemein";
-				break;
-
-			case MARURI:
-				localidad = "Maruri";
-				break;
-
-			case MAÑARIA:
-				localidad = "Mañaria";
-				break;
-
-			case MENDATA:
-				localidad = "Mendata";
-				break;
-
-			case MENDEXA:
-				localidad = "Mendexa";
-				break;
-
-			case MEÑAKA:
-				localidad = "Meñaka";
-				break;
-
-			case MORGA:
-				localidad = "Morga";
-				break;
-
-			case MUNDAKA:
-				localidad = "Mundaka";
-				break;
-
-			case MUNGIA:
-				localidad = "Mungia";
-				break;
-
-			case MUNITIBARARBATZEGI_GERRIKAITZ:
-				localidad = "Munitibar-Arbatzegi Gerrikaitz";
-				break;
-
-			case MURUETA:
-				localidad = "Murueta";
-				break;
-
-			case MUSKIZ:
-				localidad = "Muskiz";
-				break;
-
-			case MUXIKA:
-				localidad = "Muxika";
-				break;
-
-			case NABARNIZ:
-				localidad = "Nabarniz";
-				break;
-
-			case ONDARROA:
-				localidad = "Ondarroa";
-				break;
-
-			case ORDUÑA:
-				localidad = "Orduña";
-				break;
-
-			case OROZKO:
-				localidad = "Orozko";
-				break;
-
-			case ORTUELLA:
-				localidad = "Ortuella";
-				break;
-
-			case OTXANDIO:
-				localidad = "Otxandio";
-				break;
-
-			case PLENTZIA:
-				localidad = "Plentzia";
-				break;
-
-			case PORTUGALETE:
-				localidad = "Portugalete";
-				break;
-
-			case SANTURTZI:
-				localidad = "Santurtzi";
-				break;
-
-			case SESTAO:
-				localidad = "Sestao";
-				break;
-
-			case SONDIKA:
-				localidad = "Sondika";
-				break;
-
-			case SOPELA:
-				localidad = "Sopela";
-				break;
-
-			case SOPUERTA:
-				localidad = "Sopuerta";
-				break;
-
-			case SUKARRIETA:
-				localidad = "Sukarrieta";
-				break;
-
-			case TRAPAGARAN:
-				localidad = "Trapagaran";
-				break;
-
-			case TURTZIOZ:
-				localidad = "Turtzioz";
-				break;
-
-			case UBIDE:
-				localidad = "Ubide";
-				break;
-
-			case UGAOMIRABALLES:
-				localidad = "Ugao-Miraballes";
-				break;
-
-			case URDULIZ:
-				localidad = "Urduliz";
-				break;
-
-			case URDUÑA:
-				localidad = "Urduña";
-				break;
-
-			case USANSOLO:
-				localidad = "Usansolo";
-				break;
-
-			case ZALDIBAR:
-				localidad = "Zaldibar";
-				break;
-
-			case ZALLA:
-				localidad = "Zalla";
-				break;
-
-			case ZAMUDIO:
-				localidad = "Zamudio";
-				break;
-
-			case ZARATAMO:
-				localidad = "Zaratamo";
-				break;
-
-			case ZEANURI:
-				localidad = "Zeanuri";
-				break;
-
-			case ZEBERIO:
-				localidad = "Zeberio";
-				break;
-
-			case ZIERBENA:
-				localidad = "Zierbena";
-				break;
-
-			case ZIORTZA_BOLIBAR:
-				localidad = "Ziortza-Bolibar";
-				break;
-
-			case ZORNOTZA:
-				localidad = "Zornotza";
-				break;
-
-			default:
-				System.out.println("Tipo invalido");
-			}
+		switch (pO.getEuskera()) {
+		case A1:
+			euskera = "A1";
+			break;
+
+		case A2:
+			euskera = "A2";
+			break;
+
+		case B1:
+			euskera = "B1";
+			break;
+
+		case B2:
+			euskera = "B2";
+			break;
+
+		case C1:
+			euskera = "C1";
+			break;
+
+		case C2:
+			euskera = "C2";
+			break;
+
+		case CONOCIMIENTO_NOACREDITADO:
+			euskera = "Conocimiento, pero sin acreditar";
+			break;
+
+		default:
+			euskera = "---";
+		}
+
+		switch (pO.getIngles()) {
+		case A1:
+			ingles = "A1";
+			break;
+
+		case A2:
+			ingles = "A2";
+			break;
+
+		case B1:
+			ingles = "B1";
+			break;
+
+		case B2:
+			ingles = "B2";
+			break;
+
+		case C1:
+			ingles = "C1";
+			break;
+
+		case C2:
+			ingles = "C2";
+			break;
+
+		case CONOCIMIENTO_NOACREDITADO:
+			ingles = "Conocimiento, pero sin acreditar";
+			break;
+
+		default:
+			ingles = "---";
+		}
+
+		switch (pO.getLocalidad()) {
+		case ABADIÑO:
+			localidad = "Abadiño";
+			break;
+
+		case ABANTO_ZIERBENA:
+			localidad = "Abanto-Zierbena";
+			break;
+
+		case AJANGIZ:
+			localidad = "Ajangiz";
+			break;
+
+		case ALONSOTEGI:
+			localidad = "Alonsotegi";
+			break;
+
+		case AMOREBIETA:
+			localidad = "Amorebieta";
+			break;
+
+		case AMOROTO:
+			localidad = "Amoroto";
+			break;
+
+		case AMURRIO:
+			localidad = "Amurrio";
+			break;
+
+		case ARAKALDO:
+			localidad = "Arakaldo";
+			break;
+
+		case ARANTZAZU:
+			localidad = "Arantzazu";
+			break;
+
+		case AREATZA_BILARO:
+			localidad = "Areatza o Bilaro";
+			break;
+
+		case ARRANKUDIAGA:
+			localidad = "Arrankudiaga";
+			break;
+
+		case ARRATZU:
+			localidad = "Arratzu";
+			break;
+
+		case ARRIETA:
+			localidad = "Arrieta";
+			break;
+
+		case ARRIGORRIAGA:
+			localidad = "Arrigorriaga";
+			break;
+
+		case ARTZENTALES:
+			localidad = "Artzentales";
+			break;
+
+		case ARTZINIEGA:
+			localidad = "Artziniega";
+			break;
+
+		case AULESTI:
+			localidad = "Aulesti";
+			break;
+
+		case AXPEATXONDO:
+			localidad = "Axpe Atxondo";
+			break;
+
+		case AYALA_AIARA:
+			localidad = "Ayala/Aiara";
+			break;
+
+		case BAKIO:
+			localidad = "Bakio";
+			break;
+
+		case BALMASEDA:
+			localidad = "Balmaseda";
+			break;
+
+		case BARAKALDO:
+			localidad = "Barakaldo";
+			break;
+
+		case BARRIKA:
+			localidad = "Barrika";
+			break;
+
+		case BASAURI:
+			localidad = "Basauri";
+			break;
+
+		case BEDIA:
+			localidad = "Bedia";
+			break;
+
+		case BERANGO:
+			localidad = "Berango";
+			break;
+
+		case BERMEO:
+			localidad = "Bermeo";
+			break;
+
+		case BERRIATUA:
+			localidad = "Berriatua";
+			break;
+
+		case BERRIZ:
+			localidad = "Berriz";
+			break;
+
+		case BILBAO:
+			localidad = "Bilbao";
+			break;
+
+		case BUSTURIA:
+			localidad = "Busturia";
+			break;
+
+		case CASTROURDIALES:
+			localidad = "Castro Urdiales";
+			break;
+
+		case DERIO:
+			localidad = "Derio";
+			break;
+
+		case DIMA:
+			localidad = "Dima";
+			break;
+
+		case DURANGO:
+			localidad = "Durango";
+			break;
+
+		case EA:
+			localidad = "Ea";
+			break;
+
+		case ELANTXOBE:
+			localidad = "Elantxobe";
+			break;
+
+		case ELORRIO:
+			localidad = "Elorrio";
+			break;
+
+		case ERANDIO:
+			localidad = "Erandio";
+			break;
+
+		case EREÑO:
+			localidad = "Ereño";
+			break;
+
+		case ERMUA:
+			localidad = "Ermua";
+			break;
+
+		case ERRIGOITI:
+			localidad = "Errigoiti";
+			break;
+
+		case ETXEBARRI:
+			localidad = "Etxebarri";
+			break;
+
+		case ETXEBARRIA:
+			localidad = "Etxebarria";
+			break;
+
+		case FORUA:
+			localidad = "Forua";
+			break;
+
+		case FRUIZ:
+			localidad = "Fruiz";
+			break;
+
+		case GALDAKAO:
+			localidad = "Galdakao";
+			break;
+
+		case GALDAMES:
+			localidad = "Galdames";
+			break;
+
+		case GAMIZFIKA:
+			localidad = "Gamiz-Fika";
+			break;
+
+		case GARAI:
+			localidad = "Garai";
+			break;
+
+		case GATIKA:
+			localidad = "Gatika";
+			break;
+
+		case GAUTEGIZ:
+			localidad = "Gautegiz";
+			break;
+
+		case GAZTELUELEXABEITIA_ARTEAGA:
+			localidad = "Gaztelu-Elexabeitia o Arteaga";
+			break;
+
+		case GERNIKALUMO:
+			localidad = "Gernika-Lumo";
+			break;
+
+		case GETXO:
+			localidad = "Getxo";
+			break;
+
+		case GIZABURUAGA:
+			localidad = "Gizaburuaga";
+			break;
+
+		case GORDEXOLA:
+			localidad = "Gordexola";
+			break;
+
+		case GORLIZ:
+			localidad = "Gorliz";
+			break;
+
+		case GUEÑES:
+			localidad = "Gueñes";
+			break;
+
+		case IBARRANGELU:
+			localidad = "Ibarrangelu";
+			break;
+
+		case IGORRE:
+			localidad = "Igorre";
+			break;
+
+		case ISPASTER:
+			localidad = "Ispaster";
+			break;
+
+		case IURRETA:
+			localidad = "Iurreta";
+			break;
+
+		case IZURTZA:
+			localidad = "Izurtza";
+			break;
+
+		case KARRANTZAHARANA:
+			localidad = "Karrantza Harana";
+			break;
+
+		case KORTEZUBI:
+			localidad = "Kortezubi";
+			break;
+
+		case LANESTOSA:
+			localidad = "Lanestosa";
+			break;
+
+		case LARRABETZU:
+			localidad = "Larrabetzu";
+			break;
+
+		case LAUDIO_LLODIO:
+			localidad = "Laudio/Llodio";
+			break;
+
+		case LAUKIZ:
+			localidad = "Laukiz";
+			break;
+
+		case LEIOA:
+			localidad = "Leioa";
+			break;
+
+		case LEKEITIO:
+			localidad = "Lekeitio";
+			break;
+
+		case LEMOA:
+			localidad = "Lemoa";
+			break;
+
+		case LEMOIZ:
+			localidad = "Lemoiz";
+			break;
+
+		case LEZAMA:
+			localidad = "Lezama";
+			break;
+
+		case LOIU:
+			localidad = "Loiu";
+			break;
+
+		case MALLABIA:
+			localidad = "Mallabia";
+			break;
+
+		case MARKINAXEMEIN:
+			localidad = "Markina-Xemein";
+			break;
+
+		case MARURI:
+			localidad = "Maruri";
+			break;
+
+		case MAÑARIA:
+			localidad = "Mañaria";
+			break;
+
+		case MENDATA:
+			localidad = "Mendata";
+			break;
+
+		case MENDEXA:
+			localidad = "Mendexa";
+			break;
+
+		case MEÑAKA:
+			localidad = "Meñaka";
+			break;
+
+		case MORGA:
+			localidad = "Morga";
+			break;
+
+		case MUNDAKA:
+			localidad = "Mundaka";
+			break;
+
+		case MUNGIA:
+			localidad = "Mungia";
+			break;
+
+		case MUNITIBARARBATZEGI_GERRIKAITZ:
+			localidad = "Munitibar-Arbatzegi Gerrikaitz";
+			break;
+
+		case MURUETA:
+			localidad = "Murueta";
+			break;
+
+		case MUSKIZ:
+			localidad = "Muskiz";
+			break;
+
+		case MUXIKA:
+			localidad = "Muxika";
+			break;
+
+		case NABARNIZ:
+			localidad = "Nabarniz";
+			break;
+
+		case ONDARROA:
+			localidad = "Ondarroa";
+			break;
+
+		case ORDUÑA:
+			localidad = "Orduña";
+			break;
+
+		case OROZKO:
+			localidad = "Orozko";
+			break;
+
+		case ORTUELLA:
+			localidad = "Ortuella";
+			break;
+
+		case OTXANDIO:
+			localidad = "Otxandio";
+			break;
+
+		case PLENTZIA:
+			localidad = "Plentzia";
+			break;
+
+		case PORTUGALETE:
+			localidad = "Portugalete";
+			break;
+
+		case SANTURTZI:
+			localidad = "Santurtzi";
+			break;
+
+		case SESTAO:
+			localidad = "Sestao";
+			break;
+
+		case SONDIKA:
+			localidad = "Sondika";
+			break;
+
+		case SOPELA:
+			localidad = "Sopela";
+			break;
+
+		case SOPUERTA:
+			localidad = "Sopuerta";
+			break;
+
+		case SUKARRIETA:
+			localidad = "Sukarrieta";
+			break;
+
+		case TRAPAGARAN:
+			localidad = "Trapagaran";
+			break;
+
+		case TURTZIOZ:
+			localidad = "Turtzioz";
+			break;
+
+		case UBIDE:
+			localidad = "Ubide";
+			break;
+
+		case UGAOMIRABALLES:
+			localidad = "Ugao-Miraballes";
+			break;
+
+		case URDULIZ:
+			localidad = "Urduliz";
+			break;
+
+		case URDUÑA:
+			localidad = "Urduña";
+			break;
+
+		case USANSOLO:
+			localidad = "Usansolo";
+			break;
+
+		case ZALDIBAR:
+			localidad = "Zaldibar";
+			break;
+
+		case ZALLA:
+			localidad = "Zalla";
+			break;
+
+		case ZAMUDIO:
+			localidad = "Zamudio";
+			break;
+
+		case ZARATAMO:
+			localidad = "Zaratamo";
+			break;
+
+		case ZEANURI:
+			localidad = "Zeanuri";
+			break;
+
+		case ZEBERIO:
+			localidad = "Zeberio";
+			break;
+
+		case ZIERBENA:
+			localidad = "Zierbena";
+			break;
+
+		case ZIORTZA_BOLIBAR:
+			localidad = "Ziortza-Bolibar";
+			break;
+
+		case ZORNOTZA:
+			localidad = "Zornotza";
+			break;
+
+		default:
+			System.out.println("Tipo invalido");
 		}
 
 		switch (pO.getAccesibilidad()) {
@@ -1031,7 +1027,11 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		infoPersona.append("Formacion: " + formacion).append("\n");
 		infoPersona.append("Especialidad: " + pO.getEspecialidad()).append("\n");
 		infoPersona.append("Sector de interes: " + sectorInteres).append("\n");
-		infoPersona.append("CV Link: " + pO.getCvLink()).append("\n");
+		if (pO.getCvLink() == null) {
+			infoPersona.append("CV Link: ---").append("\n");
+		} else {
+			infoPersona.append("CV Link: " + pO.getCvLink()).append("\n");
+		}
 		infoPersona.append("Certificado de discapacidad: " + discapacidad).append("\n");
 
 		if (pO.getUltimoAñoTrabajado() != 0) {
@@ -1052,18 +1052,8 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 			infoPersona.append("Situacion actual: ---").append("\n");
 		}
 
-		if (pO.getEuskera() != null) {
-			infoPersona.append("Euskera: " + euskera).append("\n");
-		} else {
-			infoPersona.append("Euskera: ---").append("\n");
-		}
-
-		if (pO.getIngles() != null) {
-			infoPersona.append("Ingles: " + ingles).append("\n");
-		} else {
-			infoPersona.append("Ingles: ---").append("\n");
-		}
-
+		infoPersona.append("Euskera: " + euskera).append("\n");
+		infoPersona.append("Ingles: " + ingles).append("\n");
 		if (pO.getOtrosIdiomas() != null) {
 			infoPersona.append("Otros idiomas: " + pO.getOtrosIdiomas()).append("\n");
 		} else {

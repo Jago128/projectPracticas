@@ -52,8 +52,6 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		lblDatosPersona.setBounds(337, 10, 479, 28);
 		getContentPane().add(lblDatosPersona);
 
-		loadPersona();
-
 		JLabel lblApoyo = new JLabel("Apoyo:");
 		lblApoyo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblApoyo.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -62,7 +60,8 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 
 		comboBoxApoyo = new JComboBox<String>();
 		comboBoxApoyo.setEditable(true);
-		comboBoxApoyo.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Alba", "Ellen", "Selene", "Piti", "María", "Gorka", "Rocío" }));
+		comboBoxApoyo.setModel(new DefaultComboBoxModel<>(
+				new String[] { "---", "Alba", "Ellen", "Selene", "Piti", "María", "Gorka", "Rocío" }));
 		comboBoxApoyo.setSelectedIndex(0);
 		comboBoxApoyo.setBounds(129, 112, 163, 21);
 		getContentPane().add(comboBoxApoyo);
@@ -179,6 +178,8 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		chckbxEmpresaApnabi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chckbxEmpresaApnabi.setBounds(73, 383, 163, 33);
 		getContentPane().add(chckbxEmpresaApnabi);
+
+		loadPersona();
 
 		btnModificar = new JButton("Modificar");
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -625,13 +626,13 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 			System.out.println("Tipo invalido");
 		}
 
-		infoPersona.append("Nombre" + persona.getNombre());
-		infoPersona.append("Apoyo" + persona.getApoyo());
-		infoPersona.append("Formacion" + formacion);
-		infoPersona.append("Centro" + centro);
-		infoPersona.append("Fechas" + persona.getFechas());
-		infoPersona.append("Duracion" + persona.getDuracion());
-		infoPersona.append("Empresa Practicas" + persona.getEmpresaPracticas());
+		infoPersona.append("Nombre: " + persona.getNombre()).append("\n");
+		infoPersona.append("Apoyo: " + persona.getApoyo()).append("\n");
+		infoPersona.append("Formacion: " + formacion).append("\n");
+		infoPersona.append("Centro: " + centro).append("\n");
+		infoPersona.append("Fechas: " + persona.getFechas()).append("\n");
+		infoPersona.append("Duracion: " + persona.getDuracion()).append("\n");
+		infoPersona.append("Empresa Practicas: " + persona.getEmpresaPracticas()).append("\n");
 		if (persona.isEmpresaNuestra()) {
 			infoPersona.append("Empresa nuestra? Si");
 			chckbxEmpresaApnabi.setSelected(true);
@@ -647,7 +648,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 		StringBuilder infoError = new StringBuilder("Un error ha occurrido en ");
 
 		if (!comboBoxApoyo.getSelectedItem().equals("---")) {
-			check = cont.modificarApoyoPracticas(comboBoxApoyo.getItemAt(comboBoxApoyo.getSelectedIndex()),
+			check = cont.modificarApoyoPracticas((String)comboBoxApoyo.getEditor().getItem(),
 					persona.getNombre());
 			if (!check) {
 				infoError.append("Apoyo");
