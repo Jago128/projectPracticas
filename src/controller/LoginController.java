@@ -79,8 +79,8 @@ public class LoginController {
 	}
 
 	// Contactos
-	public Contacto getContacto(int empId) {
-		return dao.getContacto(empId);
+	public Map<String, Contacto> mostrarContactos() {
+		return dao.mostrarContactos();
 	}
 
 	public boolean añadirContacto(Contacto cont, int id) {

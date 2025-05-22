@@ -4,7 +4,7 @@ import enums.ResultadoFinal;
 import enums.ResultadoUltimoContacto;
 
 public class Contacto {
-	private int codContacto;
+	private String emp_Nom;
 	private String contacto1;
 	private String contacto2;
 	private String contacto3;
@@ -14,9 +14,9 @@ public class Contacto {
 	private String infoUltimo;
 	private ResultadoFinal resultadoFinal;
 	private String fechaResolucion;
-	private int codEmpresa;
 
 	public Contacto() {
+		this.emp_Nom = "";
 		this.contacto1 = "";
 		this.contacto2 = "";
 		this.contacto3 = "";
@@ -26,25 +26,12 @@ public class Contacto {
 		this.infoUltimo = "";
 		this.resultadoFinal = ResultadoFinal.UNSET;
 		this.fechaResolucion = "";
-		this.codEmpresa = 0;
 	}
 
-	public Contacto(String contacto1) {
-		this.contacto1 = contacto1;
-		this.contacto2 = "";
-		this.contacto3 = "";
-		this.contacto4 = "";
-		this.observaciones = "";
-		this.resultadoUltimoContacto = ResultadoUltimoContacto.UNSET;
-		this.infoUltimo = "";
-		this.resultadoFinal = ResultadoFinal.UNSET;
-		this.fechaResolucion = "";
-		this.codEmpresa = 0;
-	}
-
-	public Contacto(String contacto1, String contacto2, String contacto3, String contacto4, String observaciones,
+	public Contacto(String emp_Nom, String contacto1, String contacto2, String contacto3, String contacto4, String observaciones,
 			ResultadoUltimoContacto resultadoUltimoContacto, String infoUltimo, ResultadoFinal resultadoFinal,
-			String fechaResolucion, int codEmpresa) {
+			String fechaResolucion) {
+		this.emp_Nom = emp_Nom;
 		this.contacto1 = contacto1;
 		this.contacto2 = contacto2;
 		this.contacto3 = contacto3;
@@ -54,15 +41,14 @@ public class Contacto {
 		this.infoUltimo = infoUltimo;
 		this.resultadoFinal = resultadoFinal;
 		this.fechaResolucion = fechaResolucion;
-		this.codEmpresa = codEmpresa;
 	}
 
-	public int getCodContacto() {
-		return codContacto;
+	public String getEmp_Nom() {
+		return emp_Nom;
 	}
 
-	public void setCodContacto(int codContacto) {
-		this.codContacto = codContacto;
+	public void setEmp_Nom(String emp_Nom) {
+		this.emp_Nom = emp_Nom;
 	}
 
 	public String getContacto1() {
@@ -135,13 +121,5 @@ public class Contacto {
 
 	public void setFechaResolucion(String fechaResolucion) {
 		this.fechaResolucion = fechaResolucion;
-	}
-
-	public int getCodEmpresa() {
-		return codEmpresa;
-	}
-
-	public void setCodEmpresa(int codEmpresa) {
-		this.codEmpresa = codEmpresa;
 	}
 }

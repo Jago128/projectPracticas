@@ -37,7 +37,7 @@ public interface ApnabiDAO {
 	public boolean eliminarEmpresa(String nom);
 
 	// Contactos
-	public Contacto getContacto(int empId);
+	public Map<String, Contacto> mostrarContactos();
 
 	public boolean añadirContacto(Contacto cont, int id);
 

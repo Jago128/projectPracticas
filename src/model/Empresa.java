@@ -4,7 +4,6 @@ import enums.Estado;
 import enums.Sector;
 
 public class Empresa {
-	private int codEmpresa;
 	private String nom_empresa;
 	private Sector sector;
 	private String puesto;
@@ -32,14 +31,6 @@ public class Empresa {
 		this.contactoEmpresa = contactoEmpresa;
 		this.contactoApnabi = contactoApnabi;
 		this.estado = estado;
-	}
-
-	public int getCodEmpresa() {
-		return codEmpresa;
-	}
-
-	public void setCodEmpresa(int codEmpresa) {
-		this.codEmpresa = codEmpresa;
 	}
 
 	public String getNom_empresa() {

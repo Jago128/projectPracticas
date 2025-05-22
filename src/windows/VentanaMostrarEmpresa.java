@@ -16,7 +16,8 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 	// private Usuario user;
 	private JList<String> listSectores, listEmpresas, listPuestos, listDatosContacto, listContactosEmpresa,
 			listContactosApnabi, listEstados, listContacto1, listContacto2, listContacto3, listContacto4,
-			listObservaciones, listResultadoUltimoContacto, listInfoUltimo, listResultadoFinal, listFechaResolucion;
+			listObservaciones, listResultadoUltimoContacto, listInfoUltimo, listResultadoFinal, listFechaResolucion,
+			listContEmpresas;
 	private JButton btnModificarEmpresa;
 
 	public VentanaMostrarEmpresa(JDialog parent, LoginController cont, Usuario user) {
@@ -65,6 +66,11 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 		listEstados.setBackground(new Color(38, 201, 236));
 		listEstados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listEstados.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+		listContEmpresas = new JList<>();
+		listContEmpresas.setBackground(new Color(38, 201, 236));
+		listContEmpresas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listContEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		listContacto1 = new JList<>();
 		listContacto1.setBackground(new Color(38, 201, 236));
@@ -128,6 +134,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 		JPanel panelContactos = new JPanel();
 		panelContactos.setBackground(new Color(38, 201, 236));
 		panelContactos.setBounds(10, 190, 886, 174);
+		panelContactos.add(listContEmpresas);
 		panelContactos.add(listContacto1);
 		panelContactos.add(listContacto2);
 		panelContactos.add(listContacto3);
@@ -151,7 +158,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 		btnModificarEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnModificarEmpresa.setBounds(501, 361, 395, 72);
 		getContentPane().add(btnModificarEmpresa);
-		
+
 		JTextArea textAreaInfo = new JTextArea();
 		textAreaInfo.setText("Selecciona un nombre de empresa, y despues pulsa el boton\npara modificar la empresa.");
 		textAreaInfo.setLineWrap(true);
@@ -165,6 +172,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 
 	public void addEmpresas() {
 		Map<String, Empresa> empresas = cont.mostrarEmpresas();
+		Map<String, Contacto> conts = cont.mostrarContactos();
 		DefaultListModel<String> modelSectores = new DefaultListModel<>();
 		DefaultListModel<String> modelEmpresas = new DefaultListModel<>();
 		DefaultListModel<String> modelPuestos = new DefaultListModel<>();
@@ -172,6 +180,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 		DefaultListModel<String> modelContactosEmpresa = new DefaultListModel<>();
 		DefaultListModel<String> modelContactosApnabi = new DefaultListModel<>();
 		DefaultListModel<String> modelEstados = new DefaultListModel<>();
+		DefaultListModel<String> modelContEmpresas = new DefaultListModel<>();
 		DefaultListModel<String> modelContactos1 = new DefaultListModel<>();
 		DefaultListModel<String> modelContactos2 = new DefaultListModel<>();
 		DefaultListModel<String> modelContactos3 = new DefaultListModel<>();
@@ -181,9 +190,8 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 		DefaultListModel<String> modelInfoUltimo = new DefaultListModel<>();
 		DefaultListModel<String> modelResultadoFinal = new DefaultListModel<>();
 		DefaultListModel<String> modelFechaResolucion = new DefaultListModel<>();
-		Contacto con;
 
-		if (!empresas.isEmpty()) {
+		if (!empresas.isEmpty() && !conts.isEmpty()) {
 			modelSectores.addElement("Sector");
 			modelEmpresas.addElement("Empresas");
 			modelPuestos.addElement("Puestos");
@@ -191,6 +199,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 			modelContactosEmpresa.addElement("Contactos en la empresas");
 			modelContactosApnabi.addElement("Personas de contactos");
 			modelEstados.addElement("Estados");
+			modelContEmpresas.addElement("Nombre empresa");
 			modelContactos1.addElement("1. contacto");
 			modelContactos2.addElement("2. contacto");
 			modelContactos3.addElement("3. contacto");
@@ -201,111 +210,120 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 			modelResultadoFinal.addElement("Resultados finales prospeccion");
 			modelFechaResolucion.addElement("Fechas de resoluciones");
 			for (Empresa emp : empresas.values()) {
-				con = cont.getContacto(emp.getCodEmpresa());
-				switch (emp.getSector()) {
-				case AGRICULTURA_GANADERIA:
-					modelSectores.addElement("Agricultura y ganadería");
-					break;
+				if (emp.getSector() != null) {
+					switch (emp.getSector()) {
+					case AGRICULTURA_GANADERIA:
+						modelSectores.addElement("Agricultura y ganadería");
+						break;
 
-				case BIENESCONSUMO:
-					modelSectores.addElement("Bienes de consumo");
-					break;
+					case BIENESCONSUMO:
+						modelSectores.addElement("Bienes de consumo");
+						break;
 
-				case COMERCIOELECTRONICO:
-					modelSectores.addElement("Comercio electrónico");
-					break;
+					case COMERCIOELECTRONICO:
+						modelSectores.addElement("Comercio electrónico");
+						break;
 
-				case COMERCIO_ESTABLECIMIENTOS:
-					modelSectores.addElement("Comercio y establecimientos");
-					break;
+					case COMERCIO_ESTABLECIMIENTOS:
+						modelSectores.addElement("Comercio y establecimientos");
+						break;
 
-				case CONSTRUCCION:
-					modelSectores.addElement("Construcción");
-					break;
+					case CONSTRUCCION:
+						modelSectores.addElement("Construcción");
+						break;
 
-				case DEPORTE_OCIO:
-					modelSectores.addElement("Deporte y ocio");
-					break;
+					case DEPORTE_OCIO:
+						modelSectores.addElement("Deporte y ocio");
+						break;
 
-				case ENERGIA_MEDIOAMBIENTE:
-					modelSectores.addElement("Energía y medio ambiente");
-					break;
+					case ENERGIA_MEDIOAMBIENTE:
+						modelSectores.addElement("Energía y medio ambiente");
+						break;
 
-				case FINANZAS_SEGUROS_BIENESINMUEBLES:
-					modelSectores.addElement("Finanzas, seguros y bienes inmuebles");
-					break;
+					case FINANZAS_SEGUROS_BIENESINMUEBLES:
+						modelSectores.addElement("Finanzas, seguros y bienes inmuebles");
+						break;
 
-				case INTERNET:
-					modelSectores.addElement("Internet");
-					break;
+					case INTERNET:
+						modelSectores.addElement("Internet");
+						break;
 
-				case LOGISTICA_TRANSPORTE:
-					modelSectores.addElement("Logística y transporte");
-					break;
+					case LOGISTICA_TRANSPORTE:
+						modelSectores.addElement("Logística y transporte");
+						break;
 
-				case MEDIOSCOMUNICACION_MARKETING:
-					modelSectores.addElement("Medios de comunicación y marketing");
-					break;
+					case MEDIOSCOMUNICACION_MARKETING:
+						modelSectores.addElement("Medios de comunicación y marketing");
+						break;
 
-				case METALURGIA_ELECTRONICA:
-					modelSectores.addElement("Metalurgia y electrónica");
-					break;
+					case METALURGIA_ELECTRONICA:
+						modelSectores.addElement("Metalurgia y electrónica");
+						break;
 
-				case PRODUCTOSQUIMICOS_MATERIASPRIMAS:
-					modelSectores.addElement("Productos químicos y materias primas");
-					break;
+					case PRODUCTOSQUIMICOS_MATERIASPRIMAS:
+						modelSectores.addElement("Productos químicos y materias primas");
+						break;
 
-				case SALUD_INDUSTRIAFARMACEUTICA:
-					modelSectores.addElement("Salud e industria farmacéutica");
-					break;
+					case SALUD_INDUSTRIAFARMACEUTICA:
+						modelSectores.addElement("Salud e industria farmacéutica");
+						break;
 
-				case SERVICIOS:
-					modelSectores.addElement("Servicios");
-					break;
+					case SERVICIOS:
+						modelSectores.addElement("Servicios");
+						break;
 
-				case SOCIEDAD:
-					modelSectores.addElement("Sociedad");
-					break;
+					case SOCIEDAD:
+						modelSectores.addElement("Sociedad");
+						break;
 
-				case TECNOLOGIA_TELECOMUNICACIONES:
-					modelSectores.addElement("Tecnología y telecomunicaciones");
-					break;
+					case TECNOLOGIA_TELECOMUNICACIONES:
+						modelSectores.addElement("Tecnología y telecomunicaciones");
+						break;
 
-				case TURISMO_HOSTELERIA:
-					modelSectores.addElement("Turismo y hostelería");
-					break;
+					case TURISMO_HOSTELERIA:
+						modelSectores.addElement("Turismo y hostelería");
+						break;
 
-				case VIDA:
-					modelSectores.addElement("Vida");
-					break;
+					case VIDA:
+						modelSectores.addElement("Vida");
+						break;
 
-				default:
-					System.out.println("Tipo incorrecto");
+					default:
+						modelSectores.addElement("oops");
+						System.out.println("Tipo sector incorrecto");
+					}
+				} else {
+					modelSectores.addElement("---");
 				}
 
-				switch (emp.getEstado()) {
-				case INFORMADO:
-					modelEstados.addElement("Informado");
-					break;
+				if (emp.getEstado() != null) {
+					switch (emp.getEstado()) {
+					case INFORMADO:
+						modelEstados.addElement("Informado");
+						break;
 
-				case NOINTERESADO:
-					modelEstados.addElement("No interesado");
-					break;
+					case NOINTERESADO:
+						modelEstados.addElement("No interesado");
+						break;
 
-				case PLANIFICANDOINSERCIONES:
-					modelEstados.addElement("Planificando inserciones");
-					break;
+					case PLANIFICANDOINSERCIONES:
+						modelEstados.addElement("Planificando inserciones");
+						break;
 
-				case PROXIMOAÑO:
-					modelEstados.addElement("Proximo año");
-					break;
+					case PROXIMOAÑO:
+						modelEstados.addElement("Proximo año");
+						break;
 
-				case VALORANDO_INTERESADO:
-					modelEstados.addElement("Valorando/interesado");
-					break;
+					case VALORANDO_INTERESADO:
+						modelEstados.addElement("Valorando/interesado");
+						break;
 
-				default:
-					System.out.println("Tipo invalido.");
+					default:
+						System.out.println("Tipo invalido.");
+						modelEstados.addElement("Bugged out!");
+					}
+				} else {
+					modelEstados.addElement("---");
 				}
 
 				modelEmpresas.addElement(emp.getNom_empresa());
@@ -328,7 +346,8 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 				}
 
 				modelContactosApnabi.addElement(emp.getContactoApnabi());
-
+			}
+			for (Contacto con : conts.values()) {
 				if (con.getResultadoUltimoContacto() == null) {
 					modelResultadoUltimoCont.addElement("---");
 				} else {
@@ -355,6 +374,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 
 					default:
 						System.out.println("Tipo invalido.");
+						modelResultadoUltimoCont.addElement("Bugged out!");
 					}
 				}
 
@@ -387,6 +407,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 					}
 				}
 
+				modelContEmpresas.addElement(con.getEmp_Nom());
 				if (con.getContacto1() == null) {
 					modelContactos1.addElement("---");
 				} else {
@@ -429,6 +450,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 					modelFechaResolucion.addElement(con.getFechaResolucion());
 				}
 			}
+
 			listSectores.setModel(modelSectores);
 			listEmpresas.setModel(modelEmpresas);
 			listPuestos.setModel(modelPuestos);
@@ -436,6 +458,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 			listContactosEmpresa.setModel(modelContactosEmpresa);
 			listContactosApnabi.setModel(modelContactosApnabi);
 			listEstados.setModel(modelEstados);
+			// List here
 			listContacto1.setModel(modelContactos1);
 			listContacto2.setModel(modelContactos2);
 			listContacto3.setModel(modelContactos3);
