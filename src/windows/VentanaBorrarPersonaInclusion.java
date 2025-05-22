@@ -26,6 +26,7 @@ public class VentanaBorrarPersonaInclusion extends JDialog implements ActionList
 
 		setResizable(false);
 		setTitle("Borrar personas en inclusion");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 380, 380);
 		getContentPane().setLayout(null);
 

@@ -23,6 +23,7 @@ public class VentanaMenuPrincipal extends JFrame implements ActionListener {
 
 		setTitle("Bienvenido, " + user.getNombre());
 		setBounds(100, 100, 440, 340);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setResizable(false);
 		getContentPane().setLayout(null);
 

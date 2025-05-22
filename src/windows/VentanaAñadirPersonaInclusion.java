@@ -30,6 +30,7 @@ public class VentanaAñadirPersonaInclusion extends JDialog implements ActionLis
 
 		setResizable(false);
 		setTitle("Añadir personas en inclusion");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 960, 670);
 		getContentPane().setLayout(null);
 

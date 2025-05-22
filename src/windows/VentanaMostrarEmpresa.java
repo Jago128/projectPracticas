@@ -27,6 +27,7 @@ public class VentanaMostrarEmpresa extends JDialog implements ActionListener {
 
 		setResizable(false);
 		setTitle("Mostrar empresas");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 920, 480);
 		getContentPane().setLayout(null);
 

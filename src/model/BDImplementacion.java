@@ -249,12 +249,20 @@ public class BDImplementacion implements ApnabiDAO {
 				empresa = new Empresa();
 				empresa.setCodEmpresa(rs.getInt("COD_EMPRESA"));
 				empresa.setNom_empresa(rs.getString("NOM_EMPRESA"));
-				empresa.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
+				if (empresa.getSector() == null) {
+					empresa.setSector(null);
+				} else {
+					empresa.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
+				}
 				empresa.setPuesto(rs.getString("PUESTO"));
 				empresa.setDatosContacto(rs.getString("DATOSCONTACTO"));
 				empresa.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
 				empresa.setContactoApnabi(rs.getString("CONTACTOAPNABI"));
-				empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
+				if (empresa.getEstado() == null) {
+					empresa.setEstado(null);
+				} else {
+					empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
+				}
 				empresas.put(empresa.getNom_empresa(), empresa);
 			}
 			rs.close();
@@ -305,14 +313,23 @@ public class BDImplementacion implements ApnabiDAO {
 			stmt.setString(1, nom);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
+				empresa = new Empresa();
 				empresa.setCodEmpresa(rs.getInt("COD_EMPRESA"));
 				empresa.setNom_empresa(rs.getString("NOM_EMPRESA"));
-				empresa.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
+				if (empresa.getSector() == null) {
+					empresa.setSector(null);
+				} else {
+					empresa.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
+				}
 				empresa.setPuesto(rs.getString("PUESTO"));
 				empresa.setDatosContacto(rs.getString("DATOSCONTACTO"));
 				empresa.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
 				empresa.setContactoApnabi(rs.getString("CONTACTOAPNABI"));
-				empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
+				if (empresa.getEstado() == null) {
+					empresa.setEstado(null);
+				} else {
+					empresa.setEstado(Estado.valueOf(rs.getString("ESTADO").toUpperCase()));
+				}
 			}
 			rs.close();
 			stmt.close();
@@ -1117,19 +1134,49 @@ public class BDImplementacion implements ApnabiDAO {
 				pO = new PersonaOrientacion();
 				pO.setNombre(rs.getString("NOM_P"));
 				pO.setApoyo(rs.getString("APOYO"));
-				pO.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				if (pO.getFormacion() == null) {
+					pO.setFormacion(null);
+				} else {
+					pO.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				}
 				pO.setEspecialidad(rs.getString("ESPECIALIDAD"));
-				pO.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				if (pO.getSectorInteres() == null) {
+					pO.setSectorInteres(null);
+				} else {
+					pO.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				}
 				pO.setCvLink(rs.getString("CV"));
-				pO.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
+				if (pO.getCerfificadoDiscapacidad() == null) {
+					pO.setCerfificadoDiscapacidad(null);
+				} else {
+					pO.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
+				}
 				pO.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
 				pO.setInteresesPersonales(rs.getString("INTERESESPERSONALES"));
 				pO.setSituacionActual(rs.getString("SITUACIONACTUAL"));
-				pO.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
-				pO.setIngles(Ingles.valueOf(rs.getString("INGLES")));
+				if (pO.getEuskera() == null) {
+					pO.setEuskera(null);
+				} else {
+					pO.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
+				}
+				
+				if (pO.getIngles() == null) {
+					pO.setIngles(null);
+				} else {
+					pO.setIngles(Ingles.valueOf(rs.getString("INGLES")));
+				}
 				pO.setOtrosIdiomas(rs.getString("OTROSIDIOMAS"));
-				pO.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
-				pO.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				if (pO.getLocalidad() == null) {
+					pO.setLocalidad(null);
+				} else {
+					pO.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
+				}
+				
+				if (pO.getAccesibilidad() == null) {
+					pO.setAccesibilidad(null);
+				} else {
+					pO.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				}
 				pO.setObservaciones(rs.getString("OBSERVACIONES"));
 				pOs.put(pO.getNombre(), pO);
 			}
@@ -1183,20 +1230,49 @@ public class BDImplementacion implements ApnabiDAO {
 			while (rs.next()) {
 				pO.setNombre(rs.getString("NOM_P"));
 				pO.setApoyo(rs.getString("APOYO"));
-				pO.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				if (pO.getFormacion() == null) {
+					pO.setFormacion(null);
+				} else {
+					pO.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				}
 				pO.setEspecialidad(rs.getString("ESPECIALIDAD"));
-				pO.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				if (pO.getSectorInteres() == null) {
+					pO.setSectorInteres(null);
+				} else {
+					pO.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				}
 				pO.setCvLink(rs.getString("CV"));
-				pO
-						.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
+				if (pO.getCerfificadoDiscapacidad() == null) {
+					pO.setCerfificadoDiscapacidad(null);
+				} else {
+					pO.setCerfificadoDiscapacidad(Discapacidad.valueOf(rs.getString("DISCAPACIDAD").toUpperCase()));
+				}
 				pO.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
 				pO.setInteresesPersonales(rs.getString("INTERESESPERSONALES"));
 				pO.setSituacionActual(rs.getString("SITUACIONACTUAL"));
-				pO.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
-				pO.setIngles(Ingles.valueOf(rs.getString("INGLES")));
+				if (pO.getEuskera() == null) {
+					pO.setEuskera(null);
+				} else {
+					pO.setEuskera(Euskera.valueOf(rs.getString("EUSKERA").toUpperCase()));
+				}
+				
+				if (pO.getIngles() == null) {
+					pO.setIngles(null);
+				} else {
+					pO.setIngles(Ingles.valueOf(rs.getString("INGLES")));
+				}
 				pO.setOtrosIdiomas(rs.getString("OTROSIDIOMAS"));
-				pO.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
-				pO.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				if (pO.getLocalidad() == null) {
+					pO.setLocalidad(null);
+				} else {
+					pO.setLocalidad(Localidad.valueOf(rs.getString("LOCALIDAD").toUpperCase()));
+				}
+				
+				if (pO.getAccesibilidad() == null) {
+					pO.setAccesibilidad(null);
+				} else {
+					pO.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				}
 				pO.setObservaciones(rs.getString("OBSERVACIONES"));
 			}
 			rs.close();
@@ -2559,16 +2635,33 @@ public class BDImplementacion implements ApnabiDAO {
 				pI.setNombre(rs.getString("NOMBRE"));
 				pI.setApellido(rs.getString("APELLIDO"));
 				pI.setEdad(rs.getInt("EDAD"));
-				pI.setMunicipio(Localidad.valueOf(rs.getString("MUNICIPIO").toUpperCase()));
-				pI.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				if (pI.getMunicipio() == null) {
+					pI.setMunicipio(null);
+				} else {
+					pI.setMunicipio(Localidad.valueOf(rs.getString("MUNICIPIO").toUpperCase()));
+				}
+				
+				if (pI.getFormacion() == null) {
+					pI.setFormacion(null);
+				} else {
+					pI.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				}
 				pI.setEspecialidad(rs.getString("ESPECIALIDAD"));
 				pI.setOtros(rs.getString("OTROS"));
 				pI.setIdioma(rs.getString("IDIOMA"));
 				pI.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
-				pI.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				if (pI.getSectorInteres() == null) {
+					pI.setSectorInteres(null);
+				} else {
+					pI.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				}
 				pI.setInteresesPersonales(rs.getString("INTERESPERSONALES"));
 				pI.setSituacionActual(rs.getString("SITUACIONACTUAL"));
-				pI.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				if (pI.getAccesibilidad() == null) {
+					pI.setAccesibilidad(null);
+				} else {
+					pI.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				}
 				pI.setCv(rs.getString("CV"));
 				pI.setPersonaFacilitadora(rs.getString("PERSONAFACILITADORA"));
 				pIs.put(pI.getNombre(), pI);
@@ -2624,16 +2717,33 @@ public class BDImplementacion implements ApnabiDAO {
 				pI.setNombre(rs.getString("NOMBRE"));
 				pI.setApellido(rs.getString("APELLIDO"));
 				pI.setEdad(rs.getInt("EDAD"));
-				pI.setMunicipio(Localidad.valueOf(rs.getString("MUNICIPIO").toUpperCase()));
-				pI.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				if (pI.getMunicipio() == null) {
+					pI.setMunicipio(null);
+				} else {
+					pI.setMunicipio(Localidad.valueOf(rs.getString("MUNICIPIO").toUpperCase()));
+				}
+				
+				if (pI.getFormacion() == null) {
+					pI.setFormacion(null);
+				} else {
+					pI.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				}
 				pI.setEspecialidad(rs.getString("ESPECIALIDAD"));
 				pI.setOtros(rs.getString("OTROS"));
 				pI.setIdioma(rs.getString("IDIOMA"));
 				pI.setUltimoAñoTrabajado(rs.getInt("ULTIMOAÑOTRABAJADO"));
-				pI.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				if (pI.getSectorInteres() == null) {
+					pI.setSectorInteres(null);
+				} else {
+					pI.setSectorInteres(Sector.valueOf(rs.getString("SECTORINTERES").toUpperCase()));
+				}
 				pI.setInteresesPersonales(rs.getString("INTERESPERSONALES"));
 				pI.setSituacionActual(rs.getString("SITUACIONACTUAL"));
-				pI.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				if (pI.getAccesibilidad() == null) {
+					pI.setAccesibilidad(null);
+				} else {
+					pI.setAccesibilidad(Accesibilidad.valueOf(rs.getString("ACCESIBILIDAD").toUpperCase()));
+				}
 				pI.setCv(rs.getString("CV"));
 				pI.setPersonaFacilitadora(rs.getString("PERSONAFACILITADORA"));
 			}
@@ -3842,9 +3952,17 @@ public class BDImplementacion implements ApnabiDAO {
 				p = new PersonaPracticas();
 				p.setNombre(rs.getString("NOM"));
 				p.setApoyo(rs.getString("APOYO"));
-				p.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				if (p.getFormacion() == null) {
+					p.setFormacion(null);
+				} else {
+					p.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				}
 				p.setCurso(rs.getInt("CURSO"));
-				p.setCentro(CentrosFormativos.valueOf(rs.getString("CENTRO").toUpperCase()));
+				if (p.getCentro() == null) {
+					p.setCentro(null);
+				} else {
+					p.setCentro(CentrosFormativos.valueOf(rs.getString("CENTRO").toUpperCase()));
+				}
 				p.setFechas(rs.getString("FECHAS"));
 				p.setDuracion(rs.getString("DURACION"));
 				p.setEmpresaPracticas(rs.getString("EMPRESAPRACTICAS"));
@@ -3901,9 +4019,17 @@ public class BDImplementacion implements ApnabiDAO {
 			if (rs.next()) {
 				p.setNombre(rs.getString("NOM"));
 				p.setApoyo(rs.getString("APOYO"));
-				p.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				if (p.getFormacion() == null) {
+					p.setFormacion(null);
+				} else {
+					p.setFormacion(Formacion.valueOf(rs.getString("FORMACION").toUpperCase()));
+				}
 				p.setCurso(rs.getInt("CURSO"));
-				p.setCentro(CentrosFormativos.valueOf(rs.getString("CENTRO").toUpperCase()));
+				if (p.getCentro() == null) {
+					p.setCentro(null);
+				} else {
+					p.setCentro(CentrosFormativos.valueOf(rs.getString("CENTRO").toUpperCase()));
+				}
 				p.setFechas(rs.getString("FECHAS"));
 				p.setDuracion(rs.getString("DURACION"));
 				p.setEmpresaPracticas(rs.getString("EMPRESAPRACTICAS"));
@@ -5012,11 +5138,23 @@ public class BDImplementacion implements ApnabiDAO {
 				aP.setEmpresa(rs.getString("EMPRESA"));
 				aP.setPuesto(rs.getString("PUESTO"));
 				aP.setHorario(rs.getString("HORARIO"));
-				aP.setFinde(Finde.valueOf(rs.getString("FINDE").toUpperCase()));
+				if (aP.getFinde() == null) {
+					aP.setFinde(null);
+				} else {
+					aP.setFinde(Finde.valueOf(rs.getString("FINDE").toUpperCase()));
+				}
 				aP.setTurnos(rs.getBoolean("TURNOS"));
-				aP.setMin_Formacion(Formacion.valueOf(rs.getString("MIN_FORMACION").toUpperCase()));
+				if (aP.getMin_Formacion() == null) {
+					aP.setMin_Formacion(null);
+				} else {
+					aP.setMin_Formacion(Formacion.valueOf(rs.getString("MIN_FORMACION").toUpperCase()));
+				}
 				aP.setUbicacion(rs.getString("UBICACION"));
-				aP.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
+				if (aP.getSector() == null) {
+					aP.setSector(null);
+				} else {
+					aP.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
+				}
 				aP.setReq_idiomas(rs.getString("REQ_IDIOMAS"));
 				aP.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
 				aP.setCargo(rs.getString("CARGO"));
@@ -5025,8 +5163,17 @@ public class BDImplementacion implements ApnabiDAO {
 				aP.setResponsableApnabi(rs.getString("RESPONSABLEAPNABI"));
 				aP.setEsfuerzoFisico(rs.getBoolean("ESFUERZOFISICO"));
 				aP.setResistencia(rs.getBoolean("RESISTENCIA"));
-				aP.setComunicacion(Comunicacion.valueOf(rs.getString("COMUNICACION").toUpperCase()));
-				aP.setCaractersiticasSensoriales(Sensoriales.valueOf(rs.getString("SENSORIALES").toUpperCase()));
+				if (aP.getComunicacion() == null) {
+					aP.setComunicacion(null);
+				} else {
+					aP.setComunicacion(Comunicacion.valueOf(rs.getString("COMUNICACION").toUpperCase()));
+				}
+				
+				if (aP.getCaractersiticasSensoriales() == null) {
+					aP.setCaractersiticasSensoriales(null);
+				} else {
+					aP.setCaractersiticasSensoriales(Sensoriales.valueOf(rs.getString("SENSORIALES").toUpperCase()));
+				}
 				aPs.put(aP.getEmpresa(), aP);
 			}
 			rs.close();
@@ -5075,24 +5222,47 @@ public class BDImplementacion implements ApnabiDAO {
 		try {
 			stmt = con.prepareStatement(SQLSELECTANALISISPUESTO);
 			ResultSet rs = stmt.executeQuery();
-			aP.setEmpresa(rs.getString("EMPRESA"));
-			aP.setPuesto(rs.getString("PUESTO"));
-			aP.setHorario(rs.getString("HORARIO"));
-			aP.setFinde(Finde.valueOf(rs.getString("FINDE").toUpperCase()));
-			aP.setTurnos(rs.getBoolean("TURNOS"));
-			aP.setMin_Formacion(Formacion.valueOf(rs.getString("MIN_FORMACION").toUpperCase()));
-			aP.setUbicacion(rs.getString("UBICACION"));
-			aP.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
-			aP.setReq_idiomas(rs.getString("REQ_IDIOMAS"));
-			aP.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
-			aP.setCargo(rs.getString("CARGO"));
-			aP.setTelefono(rs.getString("TELEFONO"));
-			aP.setEmail(rs.getString("EMAIL"));
-			aP.setResponsableApnabi(rs.getString("RESPONSABLEAPNABI"));
-			aP.setEsfuerzoFisico(rs.getBoolean("ESFUERZOFISICO"));
-			aP.setResistencia(rs.getBoolean("RESISTENCIA"));
-			aP.setComunicacion(Comunicacion.valueOf(rs.getString("COMUNICACION").toUpperCase()));
-			aP.setCaractersiticasSensoriales(Sensoriales.valueOf(rs.getString("SENSORIALES").toUpperCase()));
+			if (rs.next()) {
+				aP.setEmpresa(rs.getString("EMPRESA"));
+				aP.setPuesto(rs.getString("PUESTO"));
+				aP.setHorario(rs.getString("HORARIO"));
+				if (aP.getFinde() == null) {
+					aP.setFinde(null);
+				} else {
+					aP.setFinde(Finde.valueOf(rs.getString("FINDE").toUpperCase()));
+				}
+				aP.setTurnos(rs.getBoolean("TURNOS"));
+				if (aP.getMin_Formacion() == null) {
+					aP.setMin_Formacion(null);
+				} else {
+					aP.setMin_Formacion(Formacion.valueOf(rs.getString("MIN_FORMACION").toUpperCase()));
+				}
+				aP.setUbicacion(rs.getString("UBICACION"));
+				if (aP.getSector() == null) {
+					aP.setSector(null);
+				} else {
+					aP.setSector(Sector.valueOf(rs.getString("SECTOR").toUpperCase()));
+				}
+				aP.setReq_idiomas(rs.getString("REQ_IDIOMAS"));
+				aP.setContactoEmpresa(rs.getString("CONTACTOEMPRESA"));
+				aP.setCargo(rs.getString("CARGO"));
+				aP.setTelefono(rs.getString("TELEFONO"));
+				aP.setEmail(rs.getString("EMAIL"));
+				aP.setResponsableApnabi(rs.getString("RESPONSABLEAPNABI"));
+				aP.setEsfuerzoFisico(rs.getBoolean("ESFUERZOFISICO"));
+				aP.setResistencia(rs.getBoolean("RESISTENCIA"));
+				if (aP.getComunicacion() == null) {
+					aP.setComunicacion(null);
+				} else {
+					aP.setComunicacion(Comunicacion.valueOf(rs.getString("COMUNICACION").toUpperCase()));
+				}
+				
+				if (aP.getCaractersiticasSensoriales() == null) {
+					aP.setCaractersiticasSensoriales(null);
+				} else {
+					aP.setCaractersiticasSensoriales(Sensoriales.valueOf(rs.getString("SENSORIALES").toUpperCase()));
+				}
+			}
 			rs.close();
 			stmt.close();
 			con.close();

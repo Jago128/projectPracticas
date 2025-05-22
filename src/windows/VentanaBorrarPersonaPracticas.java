@@ -26,6 +26,7 @@ public class VentanaBorrarPersonaPracticas extends JDialog implements ActionList
 
 		setResizable(false);
 		setTitle("Borrar personas en practicas");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 380, 390);
 		getContentPane().setLayout(null);
 

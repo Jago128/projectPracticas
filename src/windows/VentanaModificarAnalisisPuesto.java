@@ -28,6 +28,7 @@ public class VentanaModificarAnalisisPuesto extends JDialog implements ActionLis
 
 		setResizable(false);
 		setTitle("Modificar analisis de puesto");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 940, 530);
 		getContentPane().setLayout(null);
 

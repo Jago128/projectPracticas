@@ -32,6 +32,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 
 		setResizable(false);
 		setTitle("Modificar persona en orientacion y seguimiento");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 920, 810);
 		getContentPane().setLayout(null);
 

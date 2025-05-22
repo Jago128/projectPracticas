@@ -26,6 +26,7 @@ public class VentanaBorrarPersonaOrientacion extends JDialog implements ActionLi
 
 		setResizable(false);
 		setTitle("Borrar personas en orientacion y seguimiento");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 400, 380);
 		getContentPane().setLayout(null);
 

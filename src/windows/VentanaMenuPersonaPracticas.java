@@ -22,6 +22,7 @@ public class VentanaMenuPersonaPracticas extends JDialog implements ActionListen
 
 		setResizable(false);
 		setTitle("Personas orientacion y seguimiento");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 570, 230);
 		getContentPane().setLayout(null);
 		setBackground(new Color(38, 201, 236));

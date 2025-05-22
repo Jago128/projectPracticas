@@ -26,6 +26,7 @@ public class VentanaBorrarEmpresa extends JDialog implements ActionListener {
 
 		setResizable(false);
 		setTitle("Borrar empresa");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 360, 400);
 		getContentPane().setLayout(null);
 

@@ -33,6 +33,7 @@ public class VentanaAñadirEmpresa extends JDialog implements ActionListener {
 
 		setResizable(false);
 		setTitle("Añadir empresa");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 560);
 		getContentPane().setLayout(null);
 

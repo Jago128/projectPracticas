@@ -22,6 +22,7 @@ public class VentanaMenuAnalisisPuesto extends JDialog implements ActionListener
 
 		setResizable(false);
 		setTitle("Analisis de puestos");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 570, 230);
 		getContentPane().setLayout(null);
 		setBackground(new Color(38, 201, 236));

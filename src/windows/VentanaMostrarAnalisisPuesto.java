@@ -30,6 +30,7 @@ public class VentanaMostrarAnalisisPuesto extends JDialog implements ActionListe
 
 		setResizable(false);
 		setTitle("Mostrar analisis de puestos");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1090, 390);
 		getContentPane().setLayout(null);
 

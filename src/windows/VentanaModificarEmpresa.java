@@ -35,6 +35,7 @@ public class VentanaModificarEmpresa extends JDialog implements ActionListener {
 
 		setResizable(false);
 		setTitle("Modificar empresa");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 920, 600);
 		getContentPane().setLayout(null);
 

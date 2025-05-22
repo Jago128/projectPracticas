@@ -23,6 +23,7 @@ public class VentanaMenuEmpresa extends JDialog implements ActionListener {
 		setResizable(false);
 		setTitle("Empresas");
 		setBounds(100, 100, 570, 230);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		setBackground(new Color(38, 201, 236));
 		getContentPane().setBackground(new Color(38, 201, 236));

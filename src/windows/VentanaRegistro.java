@@ -23,6 +23,7 @@ public class VentanaRegistro extends JDialog implements ActionListener {
 
 		setResizable(false);
 		setTitle("Registro de nuevo usuario");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 380, 270);
 		getContentPane().setLayout(null);
 

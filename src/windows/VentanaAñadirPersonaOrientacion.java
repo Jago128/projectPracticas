@@ -30,6 +30,7 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 
 		setResizable(false);
 		setTitle("Añadir personas en orientacion y seguimiento");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 960, 650);
 		getContentPane().setLayout(null);
 

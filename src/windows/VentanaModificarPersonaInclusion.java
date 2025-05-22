@@ -33,6 +33,7 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 
 		setResizable(false);
 		setTitle("Modificar persona en inclusion");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 920, 770);
 		getContentPane().setLayout(null);
 

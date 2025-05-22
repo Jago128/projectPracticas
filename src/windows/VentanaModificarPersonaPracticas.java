@@ -28,6 +28,7 @@ public class VentanaModificarPersonaPracticas extends JDialog implements ActionL
 
 		setResizable(false);
 		setTitle("Modificar persona en practicas");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 870, 480);
 		getContentPane().setLayout(null);
 

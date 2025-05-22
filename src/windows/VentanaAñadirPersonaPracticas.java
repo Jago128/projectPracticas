@@ -27,6 +27,7 @@ public class VentanaAñadirPersonaPracticas extends JDialog implements ActionLis
 
 		setResizable(false);
 		setTitle("Añadir personas en practicas");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 780, 290);
 		getContentPane().setLayout(null);
 

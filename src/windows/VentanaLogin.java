@@ -24,6 +24,7 @@ public class VentanaLogin extends JDialog implements ActionListener {
 
 		setResizable(false);
 		setTitle("Inicio de sesion");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 410, 280);
 		getContentPane().setLayout(null);
 

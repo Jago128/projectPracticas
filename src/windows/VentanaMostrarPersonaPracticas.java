@@ -21,16 +21,17 @@ public class VentanaMostrarPersonaPracticas extends JDialog implements ActionLis
 
 	public VentanaMostrarPersonaPracticas(JDialog parent, LoginController cont, Usuario user) {
 		super(parent, true);
-		setBackground(new Color(38, 201, 236));
-		getContentPane().setBackground(new Color(38, 201, 236));
 		this.cont = cont;
 		// this.user = user;
 
 		setResizable(false);
 		setTitle("Mostrar personas en practicas");
 		setBounds(100, 100, 1080, 410);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
-
+		setBackground(new Color(38, 201, 236));
+		getContentPane().setBackground(new Color(38, 201, 236));
+		
 		listNom = new JList<>();
 		listNom.setBackground(new Color(38, 201, 236));
 		listNom.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

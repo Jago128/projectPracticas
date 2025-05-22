@@ -26,6 +26,7 @@ public class VentanaBorrarAnalisisPuesto extends JDialog implements ActionListen
 		// this.user = user;
 		setResizable(false);
 		setTitle("Borrar analisis de puesto");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 390);
 		getContentPane().setLayout(null);
 

@@ -29,6 +29,7 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 
 		setResizable(false);
 		setTitle("Mostrar personas en orientacion y seguimiento");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1080, 410);
 		getContentPane().setLayout(null);
 
