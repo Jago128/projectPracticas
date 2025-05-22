@@ -110,7 +110,12 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		getContentPane().add(lblSectorInteres);
 
 		comboBoxSectorInteres = new JComboBox<>();
-		comboBoxSectorInteres.setModel(new DefaultComboBoxModel<>(new String[] { "---" }));
+		comboBoxSectorInteres.setModel(new DefaultComboBoxModel<>(new String[] { "---", "Agricultura y Ganaderia",
+				"Bienes de Consumo", "Comercio electronico", "Comercio y establecimientos", "Construccion",
+				"Deporte y ocio", "Energia y medio ambiente", "Finanzas, Seguros y bienes inmuebles", "Internet",
+				"Logistica y Transporte", "Medios de comunicacion y marketing", "Metalurgia y electronica",
+				"Productos quimicos y materias primas", "Salud e industria farmaceutica", "Servicios", "Sociedad",
+				"Tecnologia y telecomunicaciones", "Turismo y hosteleria", "Vida" }));
 		comboBoxSectorInteres.setSelectedIndex(0);
 		comboBoxSectorInteres.setBounds(175, 192, 163, 21);
 		getContentPane().add(comboBoxSectorInteres);
@@ -268,7 +273,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 		textAreaObservaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textAreaObservaciones.setBounds(451, 455, 433, 105);
 		getContentPane().add(textAreaObservaciones);
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane(textAreaEspecialidad);
 		scrollPane_1.setBounds(25, 455, 416, 105);
 		getContentPane().add(scrollPane_1);
