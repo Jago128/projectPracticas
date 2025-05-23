@@ -893,7 +893,7 @@ public class VentanaMostrarPersonaOrientacion extends JDialog implements ActionL
 					modelLocalidad.addElement("Zierbena");
 					break;
 
-				case ZIORTZA_BOLIBAR:
+				case ZIORTZABOLIBAR:
 					modelLocalidad.addElement("Ziortza-Bolibar");
 					break;
 

@@ -871,7 +871,7 @@ public class VentanaModificarPersonaInclusion extends JDialog implements ActionL
 			municipio = "Zierbena";
 			break;
 
-		case ZIORTZA_BOLIBAR:
+		case ZIORTZABOLIBAR:
 			municipio = "Ziortza-Bolibar";
 			break;
 

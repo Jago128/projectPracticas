@@ -2064,7 +2064,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt.setString(14, "Zierbena");
 				break;
 
-			case ZIORTZA_BOLIBAR:
+			case ZIORTZABOLIBAR:
 				stmt.setString(14, "ZiortzaBolibar");
 				break;
 
@@ -3279,7 +3279,7 @@ public class BDImplementacion implements ApnabiDAO {
 				stmt.setString(4, "Zierbena");
 				break;
 
-			case ZIORTZA_BOLIBAR:
+			case ZIORTZABOLIBAR:
 				stmt.setString(4, "ZiortzaBolibar");
 				break;
 

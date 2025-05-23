@@ -789,7 +789,7 @@ public class VentanaMostrarPersonaInclusion extends JDialog implements ActionLis
 					modelMunicipio.addElement("Zierbena");
 					break;
 
-				case ZIORTZA_BOLIBAR:
+				case ZIORTZABOLIBAR:
 					modelMunicipio.addElement("Ziortza-Bolibar");
 					break;
 

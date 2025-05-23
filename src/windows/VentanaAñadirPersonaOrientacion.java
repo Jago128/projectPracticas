@@ -1058,7 +1058,7 @@ public class VentanaAñadirPersonaOrientacion extends JDialog implements ActionL
 						break;
 
 					case "Ziortza-Bolibar":
-						localidad = Localidad.ZIORTZA_BOLIBAR;
+						localidad = Localidad.ZIORTZABOLIBAR;
 						break;
 
 					case "Zornotza":

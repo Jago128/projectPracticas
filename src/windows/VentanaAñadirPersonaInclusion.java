@@ -959,7 +959,7 @@ public class VentanaAñadirPersonaInclusion extends JDialog implements ActionLis
 						break;
 
 					case "Ziortza-Bolibar":
-						municipio = Localidad.ZIORTZA_BOLIBAR;
+						municipio = Localidad.ZIORTZABOLIBAR;
 						break;
 
 					case "Zornotza":

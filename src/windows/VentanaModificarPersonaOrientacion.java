@@ -993,7 +993,7 @@ public class VentanaModificarPersonaOrientacion extends JDialog implements Actio
 			localidad = "Zierbena";
 			break;
 
-		case ZIORTZA_BOLIBAR:
+		case ZIORTZABOLIBAR:
 			localidad = "Ziortza-Bolibar";
 			break;
 
